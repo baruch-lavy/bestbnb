@@ -10,7 +10,7 @@ export function StayIndex() {
 
     return (
         <section className="stay-index">
-            <h1>Stays</h1>
+            <h1>A</h1>
             <StayList stays={stays} />
         </section>
     )
