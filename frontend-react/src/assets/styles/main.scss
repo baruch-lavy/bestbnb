@@ -10,6 +10,12 @@
 @import "basics/base";
 // @import "basics/links";
 @import "basics/forms";
+@import url('https://fonts.cdnfonts.com/css/airbnb-cereal-app');
+
+body {
+  font-family: 'Airbnb Cereal App', sans-serif;
+}
+
 
 
 // pages
@@ -17,7 +23,7 @@
 
 @import "pages/AboutUs";
 // @import "pages/HomePage";
-@import "pages/CarIndex";
+@import "pages/StayIndex";
 @import "pages/ReviewIndex";
 @import "pages/UserDetails";
 @import "pages/TaskDetails";
@@ -28,12 +34,12 @@
 @import "cmps/preview";
 
 @import "cmps/AppHeader";
-@import "cmps/AppFooter";
-@import "cmps/UserMsg";
+// @import "cmps/AppFooter";
+// @import "cmps/UserMsg";
 
 @import "cmps/CarFilter";
 @import "cmps/ReviewEdit";
 @import "cmps/ReviewList";
 @import "cmps/ReviewPreview";
-@import "cmps/StayList";
-@import "cmps/StayPreview";
+// @import "cmps/CarList";
+// @import "cmps/CarPreview";

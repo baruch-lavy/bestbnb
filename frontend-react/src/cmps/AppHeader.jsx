@@ -1,48 +1,84 @@
-import { Link, NavLink } from 'react-router-dom'
-import { useNavigate } from 'react-router'
-import { useSelector } from 'react-redux'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { logout } from '../store/actions/user.actions'
+import React, { useState } from "react";
+import { FaSearch, FaBars, FaUserCircle, FaGlobe } from "react-icons/fa";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+// import Logo from '../assets/img/airbnb-logo.svg'
 
-export function AppHeader() {
-	const user = useSelector(storeState => storeState.userModule.user)
-	const navigate = useNavigate()
+export const AppHeader = () => {
+  const [destination, setDestination] = useState("");
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [guests, setGuests] = useState(1);
 
-	async function onLogout() {
-		try {
-			await logout()
-			navigate('/')
-			showSuccessMsg(`Bye now`)
-		} catch (err) {
-			showErrorMsg('Cannot logout')
-		}
-	}
+  return (
+    <>
+      <header className="header">
+        {/* Left Section */}
+        <div className="left-section">
+        <img src="../assets/airbnb-logo.svg" alt="Airbnb Logo" className="logo" />
+          <nav className="nav-links">
+            <a href="#">Stays</a>
+            <a href="#">Experiences</a>
+          </nav>
+        </div>
 
-	return (
-		<header className="app-header full">
-			<nav>
-				<NavLink to="/" className="logo">
-					E2E Demo
-				</NavLink>
-				<NavLink to="about">About</NavLink>
-				<NavLink to="stay">Stays</NavLink>
-				<NavLink to="chat">Chat</NavLink>
-				<NavLink to="review">Review</NavLink>
+        {/* Right Section */}
+        <div className="right-section">
+          <span className="host">Airbnb your home</span>
+          <FaGlobe className="icon" />
+          <div className="profile-menu">
+            <FaBars className="menu-icon" />
+            <FaUserCircle className="user-icon" />
+          </div>
+        </div>
+      </header>
 
-                {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
-
-				{!user && <NavLink to="login" className="login-link">Login</NavLink>}
-				{user && (
-					<div className="user-info">
-						<Link to={`user/${user._id}`}>
-							{/* {user.imgUrl && <img src={user.imgUrl} />} */}
-							{user.fullname}
-						</Link>
-						{/* <span className="score">{user.score?.toLocaleString()}</span> */}
-						<button onClick={onLogout}>logout</button>
-					</div>
-				)}
-			</nav>
-		</header>
-	)
-}
+      {/* Search Bar */}
+      <div className="search-container">
+        <div className="search-bar">
+          <div className="search-section">
+            <span>Where</span>
+            <input
+              type="text"
+              placeholder="Search destinations"
+              value={destination}
+              onChange={(e) => setDestination(e.target.value)}
+            />
+          </div>
+          <div className="divider"></div>
+          <div className="search-section">
+            <span>Check in</span>
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              placeholderText="Add dates"
+            />
+          </div>
+          <div className="divider"></div>
+          <div className="search-section">
+            <span>Check out</span>
+            <DatePicker
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
+              placeholderText="Add dates"
+            />
+          </div>
+          <div className="divider"></div>
+          <div className="search-section">
+            <span>Who</span>
+            <input
+              type="number"
+              min="1"
+              placeholder="Add guests"
+              value={guests}
+              onChange={(e) => setGuests(e.target.value)}
+            />
+          </div>
+          <button className="search-btn">
+            <FaSearch />
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};

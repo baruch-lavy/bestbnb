@@ -37,7 +37,7 @@ export function ReviewEdit() {
             )}
         </select>
         <textarea name="txt" onChange={handleChange} value={reviewToEdit.txt}></textarea>
-        <button>Add</button>
+        {/* <button>Add</button> */}
     </form>
 
 }
