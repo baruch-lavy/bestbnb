@@ -11,7 +11,15 @@ export const stays = [
         price: 659,
         reviews: [{ rate: 4.92 }],
         distance: '5,462 kilometers away',
-        dates: 'Feb 25 - Mar 2'
+        dates: 'Feb 25 - Mar 2',
+        type: 'House',
+        summary: 'Fantastic duplex apartment...',
+        capacity: 8,
+        amenities: ['TV', 'Wifi', 'Kitchen', 'Smoking allowed', 'Pets allowed', 'Cooking basics'],
+        labels: ['Top of the world', 'Trending', 'Play', 'Tropical'],
+        host: {
+        },
+        likedByUsers: [],
     },
     {
         _id: 's102',
@@ -25,7 +33,15 @@ export const stays = [
         price: 447,
         reviews: [{ rate: 4.94 }],
         distance: '7,470 kilometers away',
-        dates: 'Mar 23 - 28'
+        dates: 'Mar 23 - 28',
+        type: 'House',
+        summary: 'Fantastic duplex apartment...',
+        capacity: 8,
+        amenities: ['TV', 'Wifi', 'Kitchen', 'Smoking allowed', 'Pets allowed', 'Cooking basics'],
+        labels: ['Top of the world', 'Trending', 'Play', 'Tropical'],
+        host: {
+        },
+        likedByUsers: [],
     },
     {
         _id: 's103',
@@ -39,7 +55,15 @@ export const stays = [
         price: 265,
         reviews: [{ rate: 4.84 }],
         distance: '8,127 kilometers away',
-        dates: 'Feb 16 - 21'
+        dates: 'Feb 16 - 21',
+        type: 'House',
+        summary: 'Fantastic duplex apartment...',
+        capacity: 8,
+        amenities: ['TV', 'Wifi', 'Kitchen', 'Smoking allowed', 'Pets allowed', 'Cooking basics'],
+        labels: ['Top of the world', 'Trending', 'Play', 'Tropical'],
+        host: {
+        },
+        likedByUsers: [],
     },
     {
         _id: 's104',
@@ -53,7 +77,15 @@ export const stays = [
         price: 1663,
         reviews: [{ rate: 4.97 }],
         distance: '3,383 kilometers away',
-        dates: 'Mar 12 - 17'
+        dates: 'Mar 12 - 17',
+        type: 'House',
+        summary: 'Fantastic duplex apartment...',
+        capacity: 8,
+        amenities: ['TV', 'Wifi', 'Kitchen', 'Smoking allowed', 'Pets allowed', 'Cooking basics'],
+        labels: ['Top of the world', 'Trending', 'Play', 'Tropical'],
+        host: {
+        },
+        likedByUsers: [],
     },
     {
         _id: 's105',
@@ -67,6 +99,14 @@ export const stays = [
         price: 999,
         reviews: [{ rate: 5.0 }],
         distance: '3,091 kilometers away',
-        dates: 'Mar 29 - Apr 3'
+        dates: 'Mar 29 - Apr 3',
+        type: 'House',
+        summary: 'Fantastic duplex apartment...',
+        capacity: 8,
+        amenities: ['TV', 'Wifi', 'Kitchen', 'Smoking allowed', 'Pets allowed', 'Cooking basics'],
+        labels: ['Top of the world', 'Trending', 'Play', 'Tropical'],
+        host: {
+        },
+        likedByUsers: [],
     }
 ] 
