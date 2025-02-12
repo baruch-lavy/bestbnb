@@ -40,7 +40,7 @@ export function stayReducer(state = initialState, action) {
     return newState
 }
 
-unitTestReducer()
+// unitTestReducer()
 
 function unitTestReducer() {
     var state = initialState

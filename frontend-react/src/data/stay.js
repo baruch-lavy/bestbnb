@@ -1,0 +1,72 @@
+export const stays = [
+    {
+        _id: 's101',
+        name: 'Ponta Delgada',
+        loc: {
+            country: 'Portugal',
+            city: 'Ponta Delgada',
+            address: 'Windmill St. 123',
+        },
+        imgUrls: ['/img/stays/windmill.jpg'],
+        price: 659,
+        reviews: [{ rate: 4.92 }],
+        distance: '5,462 kilometers away',
+        dates: 'Feb 25 - Mar 2'
+    },
+    {
+        _id: 's102',
+        name: 'Western Cape',
+        loc: {
+            country: 'South Africa',
+            city: 'Western Cape',
+            address: 'Farm Road 42',
+        },
+        imgUrls: ['/img/stays/airstream.jpg'],
+        price: 447,
+        reviews: [{ rate: 4.94 }],
+        distance: '7,470 kilometers away',
+        dates: 'Mar 23 - 28'
+    },
+    {
+        _id: 's103',
+        name: 'Sindun-myeon, Icheon-si',
+        loc: {
+            country: 'South Korea',
+            city: 'Sindun-myeon, Icheon-si',
+            address: 'Music Valley 55',
+        },
+        imgUrls: ['/img/stays/guitar-house.jpg'],
+        price: 265,
+        reviews: [{ rate: 4.84 }],
+        distance: '8,127 kilometers away',
+        dates: 'Feb 16 - 21'
+    },
+    {
+        _id: 's104',
+        name: 'Brälanda',
+        loc: {
+            country: 'Sweden',
+            city: 'Brälanda',
+            address: 'Nature View 78',
+        },
+        imgUrls: ['/img/stays/glass-house.jpg'],
+        price: 1663,
+        reviews: [{ rate: 4.97 }],
+        distance: '3,383 kilometers away',
+        dates: 'Mar 12 - 17'
+    },
+    {
+        _id: 's105',
+        name: 'Stege',
+        loc: {
+            country: 'Denmark',
+            city: 'Stege',
+            address: 'Forest Path 90',
+        },
+        imgUrls: ['/img/stays/modern-cabin.jpg'],
+        price: 999,
+        reviews: [{ rate: 5.0 }],
+        distance: '3,091 kilometers away',
+        dates: 'Mar 29 - Apr 3'
+    }
+] 
