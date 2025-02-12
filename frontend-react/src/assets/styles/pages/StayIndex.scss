@@ -1,0 +1,67 @@
+.stay-index {
+    padding: 20px;
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    .filter-sort-container {
+        background-color: $clr5;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+
+        h2 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .filter {
+            margin-bottom: 20px;
+
+            form {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+
+                input {
+                    padding: 8px;
+                    border: 1px solid $gray1;
+                    border-radius: 4px;
+                }
+            }
+        }
+
+        .sort {
+            .sort-options, .sort-dir {
+                display: flex;
+                gap: 15px;
+                margin-bottom: 10px;
+            }
+
+            label {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                cursor: pointer;
+
+                span {
+                    font-size: 0.9em;
+                }
+            }
+        }
+
+        button {
+            background-color: $clr1;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+    }
+} 
