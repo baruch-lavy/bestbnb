@@ -26,7 +26,7 @@ export function StayFilter({ filterBy, setFilterBy }) {
     }
 
     function clearFilter() {
-        setFilterToEdit({ ...filterToEdit, txt: '', minSpeed: '', maxPrice: '' })
+        setFilterToEdit({ ...filterToEdit, txt: '', minPrice: '', maxPrice: '' })
     }
     
     function clearSort() {
@@ -46,9 +46,9 @@ export function StayFilter({ filterBy, setFilterBy }) {
             <input
                 type="number"
                 min="0"
-                name="minSpeed"
-                value={filterToEdit.minSpeed}
-                placeholder="min. speed"
+                name="minPrice"
+                value={filterToEdit.minPrice}
+                placeholder="min. price"
                 onChange={handleChange}
                 required
             />
@@ -58,32 +58,32 @@ export function StayFilter({ filterBy, setFilterBy }) {
             <h3>Sort:</h3>
             <div className="sort-field">
                 <label>
-                    <span>Speed</span>
+                    <span>Price</span>
                     <input
                         type="radio"
                         name="sortField"
-                        value="speed"
-                        checked={filterToEdit.sortField === 'speed'}
+                        value="price"
+                        checked={filterToEdit.sortField === 'price'}
                         onChange={handleChange}
                     />
                 </label>
                 <label>
-                    <span>Vendor</span>
+                    <span>Name</span>
                     <input
                         type="radio"
                         name="sortField"
-                        value="vendor"
-                        checked={filterToEdit.sortField === 'vendor'}            
+                        value="name"
+                        checked={filterToEdit.sortField === 'name'}            
                         onChange={handleChange}
                     />
                 </label>
                 <label>
-                    <span>Owner</span>
+                    <span>Host</span>
                     <input
                         type="radio"
                         name="sortField"
-                        value="owner"
-                        checked={filterToEdit.sortField === 'owner'}                        
+                        value="host"
+                        checked={filterToEdit.sortField === 'host'}                        
                         onChange={handleChange}
                     />
                 </label>

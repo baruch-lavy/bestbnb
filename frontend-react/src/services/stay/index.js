@@ -6,17 +6,29 @@ import { stayService as local } from './stay.service.local'
 import { stayService as remote } from './stay.service.remote'
 
 function getEmptyStay() {
-	return {
-		vendor: makeId(),
-		speed: getRandomIntInclusive(80, 240),
-		msgs: [],
-	}
+    return {
+        type: 'House',
+        imgUrls: [
+            'https://loremflickr.com/200/200?random=1',
+            'https://loremflickr.com/200/200?random=2',
+            'https://loremflickr.com/200/200?random=3',
+            'https://loremflickr.com/200/200?random=4',
+            'https://loremflickr.com/200/200?random=5',
+            'https://loremflickr.com/200/200?random=6',
+        ],
+        price: getRandomIntInclusive(80, 240),
+        summary: 'Fantastic duplex apartment...',
+        capacity: getRandomIntInclusive(1, 10),
+        amenities: ['TV', 'Wifi', 'Kitchen', 'Smoking allowed', 'Pets allowed', 'Cooking basics'],
+        labels: ['Top of the world', 'Trending', 'Play', 'Tropical'],
+        msgs: [],
+    }
 }
 
 function getDefaultFilter() {
     return {
         txt: '',
-        minSpeed: '',
+        minPrice: '',
         sortField: '',
         sortDir: '',
     }

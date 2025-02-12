@@ -40,12 +40,12 @@ export function stayReducer(state = initialState, action) {
     return newState
 }
 
-unitTestReducer()
+// unitTestReducer()
 
 function unitTestReducer() {
     var state = initialState
-    const stay1 = { _id: 'b101', vendor: 'Stay ' + parseInt(Math.random() * 10), msgs: [] }
-    const stay2 = { _id: 'b102', vendor: 'Stay ' + parseInt(Math.random() * 10), msgs: [] }
+    const stay1 = { _id: 'b101', name: 'Stay ' + parseInt(Math.random() * 10), msgs: [] }
+    const stay2 = { _id: 'b102', name: 'Stay ' + parseInt(Math.random() * 10), msgs: [] }
 
     state = stayReducer(state, { type: SET_STAYS, stays: [stay1] })
     console.log('After SET_STAYS:', state)
@@ -53,7 +53,7 @@ function unitTestReducer() {
     state = stayReducer(state, { type: ADD_STAY, stay: stay2 })
     console.log('After ADD_STAY:', state)
 
-    state = stayReducer(state, { type: UPDATE_STAY, stay: { ...stay2, vendor: 'Good' } })
+    state = stayReducer(state, { type: UPDATE_STAY, stay: { ...stay2, name: 'Good' } })
     console.log('After UPDATE_STAY:', state)
 
     state = stayReducer(state, { type: REMOVE_STAY, stayId: stay2._id })

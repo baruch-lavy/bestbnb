@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { loadStay, addStayMsg } from '../store/actions/stay.actions'
+import { StayGallery } from '../cmps/StayGallery'
 
 
 export function StayDetails() {
@@ -16,6 +17,8 @@ export function StayDetails() {
     loadStay(stayId)
   }, [stayId])
 
+  console.log('stay for ditaeil', stay)
+
   async function onAddStayMsg(stayId) {
     try {
         await addStayMsg(stayId, 'bla bla ' + parseInt(Math.random()*10))
@@ -26,12 +29,14 @@ export function StayDetails() {
 
 }
 
+if (!stay) return <p>loading</p> 
   return (
     <section className="stay-details">
       <Link to="/stay">Back to list</Link>
-      <h1>Stay Details</h1>
+      <h1> {stay.name}</h1>
+       <StayGallery stay={stay}/>
       {stay && <div>
-        <h3>{stay.vendor}</h3>
+        <h3>{stay.name}</h3>
         <h4>${stay.price}</h4>
         <pre> {JSON.stringify(stay, null, 2)} </pre>
       </div>

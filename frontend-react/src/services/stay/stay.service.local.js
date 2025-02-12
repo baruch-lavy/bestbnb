@@ -17,25 +17,25 @@ window.cs = stayService
 
 async function query(filterBy = { txt: '', price: 0 }) {
     var stays = await storageService.query(STORAGE_KEY)
-    const { txt, minSpeed, maxPrice, sortField, sortDir } = filterBy
+    const { txt, minPrice, maxPrice, sortField, sortDir } = filterBy
 
     if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
-        stays = stays.filter(stay => regex.test(stay.vendor) || regex.test(stay.description))
+        stays = stays.filter(stay => regex.test(stay.name) || regex.test(stay.description))
     }
-    if (minSpeed) {
-        stays = stays.filter(stay => stay.speed >= minSpeed)
+    if (minPrice) {
+        stays = stays.filter(stay => stay.price >= minPrice)
     }
-    if(sortField === 'vendor' || sortField === 'owner'){
+    if(sortField === 'name' || sortField === 'host'){
         stays.sort((stay1, stay2) => 
             stay1[sortField].localeCompare(stay2[sortField]) * +sortDir)
     }
-    if(sortField === 'price' || sortField === 'speed'){
+    if(sortField === 'price'){
         stays.sort((stay1, stay2) => 
             (stay1[sortField] - stay2[sortField]) * +sortDir)
     }
     
-    stays = stays.map(({ _id, vendor, price, speed, owner }) => ({ _id, vendor, price, speed, owner }))
+    stays = stays.map(({ _id, name, price, host }) => ({ _id, name,  price, host }))
     return stays
 }
 
@@ -53,18 +53,38 @@ async function save(stay) {
     if (stay._id) {
         const stayToSave = {
             _id: stay._id,
+            name: stay.name,
             price: stay.price,
-            speed: stay.speed,
+            type : stay.type,
+            imgUrls : stay.imgUrls,
+            summary : stay.summary,
+            capacity : stay.capacity,
+            amenities : stay.amenities,
+            labels : stay.labels,
+            // Later, host is set by the backend
+            host : userService.getLoggedinUser(),
+            // loc : stay.loc,
+            // reviews : stay.reviews,
+            // likedByUsers: stay.likedByUsers,
+            // msgs: []
         }
         savedStay = await storageService.put(STORAGE_KEY, stayToSave)
     } else {
         const stayToSave = {
-            vendor: stay.vendor,
+            name: stay.name,
             price: stay.price,
-            speed: stay.speed,
-            // Later, owner is set by the backend
-            owner: userService.getLoggedinUser(),
-            msgs: []
+            type : stay.type,
+            imgUrls : stay.imgUrls,
+            summary : stay.summary,
+            capacity : stay.capacity,
+            amenities : stay.amenities,
+            labels : stay.labels,
+            // Later, host is set by the backend
+            host : userService.getLoggedinUser(),
+            // loc : stay.loc,
+            // reviews : stay.reviews,
+            // likedByUsers: stay.likedByUsers,
+            // msgs: []
         }
         savedStay = await storageService.post(STORAGE_KEY, stayToSave)
     }
