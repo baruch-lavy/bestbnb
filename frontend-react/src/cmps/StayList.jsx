@@ -17,8 +17,8 @@ export function StayList({ stays, onRemoveStay, onUpdateStay }) {
                 <li key={stay._id}>
                     <StayPreview stay={stay}/>
                     {shouldShowActionBtns(stay) && <div className="actions">
-                        <button onClick={() => onUpdateStay(stay)}>Edit</button>
-                        <button onClick={() => onRemoveStay(stay._id)}>x</button>
+                        {/* <button onClick={() => onUpdateStay(stay)}>Edit</button> */}
+                        {/* <button onClick={() => onRemoveStay(stay._id)}>x</button> */}
                     </div>}
                 </li>)
             }

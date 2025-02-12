@@ -18,7 +18,7 @@ export function ReviewList({ reviews, onRemoveReview }) {
                 <li key={review._id}>
                     <ReviewPreview review={review}/>
                     {shouldShowActionBtns(review) && <div className="actions">
-                        <button onClick={() => onRemoveReview(review._id)}>x</button>
+                        {/* <button onClick={() => onRemoveReview(review._id)}>x</button> */}
                     </div>}
                 </li>)
             }
