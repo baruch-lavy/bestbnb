@@ -2,10 +2,10 @@ const { DEV, VITE_LOCAL } = import.meta.env
 
 import { getRandomIntInclusive, makeId } from '../util.service'
 
-import { carService as local } from './car.service.local'
-import { carService as remote } from './car.service.remote'
+import { stayService as local } from './stay.service.local'
+import { stayService as remote } from './stay.service.remote'
 
-function getEmptyCar() {
+function getEmptyStay() {
 	return {
 		vendor: makeId(),
 		speed: getRandomIntInclusive(80, 240),
@@ -23,9 +23,9 @@ function getDefaultFilter() {
 }
 
 const service = VITE_LOCAL === 'true' ? local : remote
-export const carService = { getEmptyCar, getDefaultFilter, ...service }
+export const stayService = { getEmptyStay, getDefaultFilter, ...service }
 
 // Easy access to this service from the dev tools console
 // when using script - dev / dev:local
 
-if (DEV) window.carService = carService
+if (DEV) window.stayService = stayService
