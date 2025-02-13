@@ -36,10 +36,10 @@ export function StayDetails() {
   }
 
   if (!stay) return <p>loading</p>
-  
+
   return (
     <section className="stay-details">
-      <head>
+      <header>
         <div className="stay-header">
           <br />
           <br />
@@ -61,30 +61,33 @@ export function StayDetails() {
             ))}
           </div>
         </article>
-      </head>
+      </header>
 
       <main>
         <section>
-        {/* {stay && */}
-        <div className="stay-short-info">
-          <h3>{stay.type} in {stay.loc.city}, {stay.loc.country}</h3>
-          <h5>{stay.capacity} guests * {stay.bedrooms} bedrooms * {stay.beds} beds * {stay.baths} bath</h5>
-          <h4>★ {stay.reviews[0].rate} * {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4>
-        </div>
-
-        <div className="host-short-info">
-          <img src={stay.host.imgUrl} alt="Host" className="host-avatar" style={{ borderRadius: '50%', width: '2rem', height: '2rem', objectFit: 'cover' }} />
-          <div className="host-short-details">
-            <h4>Hosted by {stay.host.fullname}</h4>
-            <span className="superhost">Superhost * {stay.host.yearsHosting} years hosting</span>
+          {/* {stay && */}
+          <div className="stay-short-info">
+            <h3>{stay.type} in {stay.loc.city}, {stay.loc.country}</h3>
+            <h5>{stay.capacity} guests * {stay.bedrooms} bedrooms * {stay.beds} beds * {stay.baths} bath</h5>
+            <h4>★ {stay.reviews[0].rate} * {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4>
           </div>
-        </div>
-        <br />
-        <article className="stay-summary">{stay.summary}</article>
-        <br />
-        <StayAmenities amenities={stay.amenities} />
+
+          <div className="host-short-info">
+            <img src={stay.host.imgUrl} alt="Host" className="host-avatar" style={{ borderRadius: '50%', width: '2rem', height: '2rem', objectFit: 'cover' }} />
+            <div className="host-short-details">
+              <h4>Hosted by {stay.host.fullname}</h4>
+              <span className="superhost">Superhost * {stay.host.yearsHosting} years hosting</span>
+            </div>
+          </div>
+          <br />
+          <article className="stay-summary">
+            {stay.summary}
+            <button>Show more &gt;</button>
+          </article>
+          <br />
+          <StayAmenities amenities={stay.amenities} />
         </section>
-        <StayOrder />
+        <StayOrder stay={stay} />
       </main>
 
       <div className="reviw-and-map">
