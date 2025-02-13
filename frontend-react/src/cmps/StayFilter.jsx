@@ -14,18 +14,14 @@ export function StayFilter({ filterBy, setFilterBy }) {
         const category = categories.find(cat => cat.id === categoryId)
         
         if (selectedCategory === categoryId) {
-            setSelectedCategory(null)
-            setFilterToEdit(prevFilter => ({
-                ...prevFilter,
-                type: ''
-            }))
-        } else {
-            setSelectedCategory(categoryId)
-            setFilterToEdit(prevFilter => ({
-                ...prevFilter,
-                type: category.label
-            }))
+            return
         }
+        
+        setSelectedCategory(categoryId)
+        setFilterToEdit(prevFilter => ({
+            ...prevFilter,
+            type: category.label
+        }))
     }
 
     return (
