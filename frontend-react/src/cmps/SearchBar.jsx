@@ -75,31 +75,17 @@ export const SearchBar = ({setSearchData}) => {
   
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // ✅ Keep dropdown open if clicking inside any of them
+      // ✅ Check if click is INSIDE any dropdown
       if (
-<<<<<<< HEAD
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target) &&
-        datePickerRef.current &&
-        !datePickerRef.current.contains(event.target) &&
-        guestDropdownRef.current &&
-        !guestDropdownRef.current.contains(event.target)
-=======
         dropdownRef.current?.contains(event.target) ||
         datePickerRef.current?.contains(event.target) ||
         guestDropdownRef.current?.contains(event.target)
->>>>>>> header-branch
       ) {
-        return; 
+        return; // If clicking inside, do nothing
       }
-
-      handleDropdownOpen(null);
   
-      // ✅ Clicking outside closes all dropdowns
-      setIsDropdownOpen(false);
-      setIsDatePickerOpen(false);
-      setIsGuestDropdownOpen(false);
-
+      // ✅ Clicking OUTSIDE: Close all dropdowns
+      setOpenDropdown(null);
     };
   
     document.addEventListener("mousedown", handleClickOutside);
@@ -107,6 +93,7 @@ export const SearchBar = ({setSearchData}) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  
   
 
   function setIsDropdownOpen(value) {
@@ -128,11 +115,7 @@ export const SearchBar = ({setSearchData}) => {
 
   return (
     <div className="search-container">
-<<<<<<< HEAD
-      <div className={`search-bar ${isDropdownOpen ? "expanded" : ""}`}>
-=======
       <div className={`search-bar ${openDropdown ? "expanded" : ""}`}>
->>>>>>> header-branch
         {/* WHERE Section */}
         <div className="search-section where-section" ref={dropdownRef}>
           <span>Where</span>
@@ -172,11 +155,7 @@ export const SearchBar = ({setSearchData}) => {
         <div className="search-section date-section" ref={datePickerRef}>
           <div
             className="date-fields"
-<<<<<<< HEAD
-            onClick={() => setIsDatePickerOpen(true)}
-=======
             onClick={() => handleDropdownOpen("dates")}
->>>>>>> header-branch
           >
             <div className="date-input">
               <span>Check in</span>

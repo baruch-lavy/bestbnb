@@ -36,12 +36,7 @@ export const AppHeader = () => {
       <header className="header">
         {/* Left Section */}
         <div className="left-section">
-<<<<<<< HEAD
-          {/* FIXED: Logo Path Updated */}
-          <img src="/img/stays/logo.png" alt="Airbnb Logo" className="logo" />
-=======
           <img src="/assets/img/airbnb-logo.svg" alt="Airbnb Logo" className="logo" />
->>>>>>> header-branch
           <nav className="nav-links">
             <a href="#">Stays</a>
             <a href="#">Experiences</a>
