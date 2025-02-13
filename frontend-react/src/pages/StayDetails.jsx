@@ -9,6 +9,7 @@ import { StayGallery } from '../cmps/StayGallery'
 import { stays } from '../data/stay.js'
 import { StayAmenities } from '../cmps/StayAmenities.jsx'
 import { ReviewList } from '../cmps/ReviewList.jsx'
+import { StayOrder } from '../cmps/StayOrder.jsx'
 
 
 
@@ -61,8 +62,9 @@ export function StayDetails() {
           </div>
         </article>
       </head>
-      
+
       <main>
+        <section>
         {/* {stay && */}
         <div className="stay-short-info">
           <h3>{stay.type} in {stay.loc.city}, {stay.loc.country}</h3>
@@ -81,6 +83,8 @@ export function StayDetails() {
         <article className="stay-summary">{stay.summary}</article>
         <br />
         <StayAmenities amenities={stay.amenities} />
+        </section>
+        <StayOrder />
       </main>
 
       <div className="reviw-and-map">

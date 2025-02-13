@@ -11,6 +11,7 @@
         grid-template-rows: auto auto;
 
         .stay-header {
+            margin-top: 100px;
             grid-row: 1;
             display: flex;
             justify-content: space-between;
@@ -28,11 +29,11 @@
                 height: 100%;
                 grid-column: 1;
                 object-fit: cover;
-                border-radius: 30px;
+                border-top-left-radius: 1rem;
+                border-bottom-left-radius: 1rem
             }
 
             .other-images{
-                // grid-row: 1/-1;
                 grid-column: 2;
                 display: grid;
                 grid-template-columns: 1fr 1fr;
@@ -41,8 +42,14 @@
                 img{
                     width: 100%;
                     height: auto;
-                    border-radius: 8px;
                     object-fit: cover; 
+
+                    &:nth-child(2){
+                        border-top-right-radius: 1rem;
+                    }
+                    &:last-child{
+                        border-bottom-right-radius: 1rem
+                    }
                 }
             }
         }
@@ -51,8 +58,9 @@
     main {
         grid-row: 2;
         grid-column: 2;
+        // position: relative;
         display: grid;
-        // grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1.5fr 1fr;
     }
 
     .reviw-and-map {
@@ -65,4 +73,10 @@
         grid-column: 1 / -1;
         background-color: #f7f7f7;
     }
+}
+
+.order-card{
+    grid-column: 2;
+    position: sticky;
+    top: 0;
 }
