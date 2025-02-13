@@ -2,6 +2,6 @@ export function StayOrder() {
 
     return(
         <div className="order-card">
-            <span>Make order here</span>
+            <span><button>Make order here</button></span>
             </div>
     )}

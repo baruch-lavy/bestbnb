@@ -39,7 +39,7 @@ export function StayDetails() {
   
   return (
     <section className="stay-details">
-      <head>
+      <header>
         <div className="stay-header">
           <br />
           <br />
@@ -61,7 +61,7 @@ export function StayDetails() {
             ))}
           </div>
         </article>
-      </head>
+      </header>
 
       <main>
         <section>
