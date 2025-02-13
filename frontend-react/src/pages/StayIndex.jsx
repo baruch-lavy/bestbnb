@@ -1,5 +1,6 @@
 import { loadStays, addStay, updateStay, removeStay, addStayMsg } from '../store/actions/stay.actions'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { stayService } from '../services/stay/'
@@ -8,20 +9,20 @@ import { userService } from '../services/user'
 
 import { StayList } from '../cmps/StayList'
 import { StayFilter } from '../cmps/StayFilter'
-import { stays } from '../data/stay.js'
+// import { stays } from '../data/stay.js'
 
 export function StayIndex() {
-    // const [ filterBy, setFilterBy ] = useState(stayService.getDefaultFilter())
-    // const stays = useSelector(storeState => storeState.stayModule.stays)
-    //     console.log('stays', stays)
+    const [ filterBy, setFilterBy ] = useState(stayService.getDefaultFilter())
+    const stays = useSelector(storeState => storeState.stayModule.stays)
     
-    //     useEffect(() => {
-        //         loadStays(filterBy)
-        //     }, [filterBy])
+        useEffect(() => {
+                loadStays(filterBy)
+            }, [filterBy])
         
+    if (!stays) return <p>loading</p>
         return (
             <section className="stay-index">
-            {/* <StayFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
+            <StayFilter filterBy={filterBy} setFilterBy={setFilterBy} />
             <br />
             <StayList stays={stays} />
         </section>

@@ -5,10 +5,13 @@ export function StayPreview({ stay }) {
     const [currentImgIdx, setCurrentImgIdx] = useState(0)
     const [isLiked, setIsLiked] = useState(false)
 
+    if (!stay) return <p>Loading...</p>
+    
     return (
         <article className="stay-preview">
             <div className="img-container">
-                <img src={stay.imgUrls[currentImgIdx]} alt={stay.name} />
+                <img src={stay.imgUrls[+currentImgIdx]} alt={stay.name} />
+
                 <div className="img-btns">
                     <div className="guest-favorite">Guest favorite</div>
                     <button 

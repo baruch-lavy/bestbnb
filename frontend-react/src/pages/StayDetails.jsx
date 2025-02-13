@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { loadStay, addStayMsg } from '../store/actions/stay.actions'
 import { StayGallery } from '../cmps/StayGallery'
-import { stays } from '../data/stay.js'
+// import { stays } from '../data/stay.js'
 import { StayAmenities } from '../cmps/StayAmenities.jsx'
 import { ReviewList } from '../cmps/ReviewList.jsx'
 import { StayOrder } from '../cmps/StayOrder.jsx'
@@ -16,15 +16,14 @@ import { StayOrder } from '../cmps/StayOrder.jsx'
 export function StayDetails() {
 
   const { stayId } = useParams()
-  // const stay = useSelector(storeState => storeState.stayModule.stay)
-  const stay = stays[0]
+  const stay = useSelector(storeState => storeState.stayModule.stay)
+  // const stay = stays[0]
 
 
   useEffect(() => {
     loadStay(stayId)
   }, [stayId])
 
-  console.log('stay for ditaeil', stay)
 
   async function onAddStayMsg(stayId) {
     try {
