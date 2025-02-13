@@ -10,11 +10,7 @@
 @import "basics/base";
 // @import "basics/links";
 @import "basics/forms";
-@import url('https://fonts.cdnfonts.com/css/airbnb-cereal-app');
 
-body {
-  font-family: 'Airbnb Cereal App', sans-serif;
-}
 
 
 
@@ -35,6 +31,7 @@ body {
 
 @import "cmps/AppHeader";
 @import "cmps/SearchBar.scss";
+@import "cmps/StickySearchBar.scss";
 // @import "cmps/UserMsg";
 
 @import "cmps/CarFilter";
