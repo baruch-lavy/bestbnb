@@ -38,36 +38,37 @@ export function StayDetails() {
   if (!stay) return <p>loading</p>
   return (
     <section className="stay-details">
+      <head>
+        <div className="stay-header">
+          <br />
+          <br />
+          <br />
+          {/* <Link to="/stay">Back to list</Link> */}
+          <h1 className="stay-name"> {stay.name}</h1>
+          <p><span>📩 share</span><span> ❤ save</span></p>
+        </div>
+
+
+        {/* <StayGallery stay={stay} /> */}
+        <article className="mini-gallery">
+          <div className="main-image">
+            <img src={stay.imgUrls[0]} alt="Main house image" />
+          </div>
+          <div className="other-images">
+            {stay.imgUrls.slice(1, 5).map((imgUrl, index) => (
+              <img key={index} src={imgUrl} alt={`house image ${index + 1}`} />
+            ))}
+          </div>
+        </article>
+      </head>
+      
       <main>
-      <div className="stay-header">
-
-        <br />
-        <br />
-        <br />
-        {/* <Link to="/stay">Back to list</Link> */}
-        <h1 className="stay-name"> {stay.name}</h1>
-        <p><span>📩 share</span><span> ❤ save</span></p>
-      </div>
-
-
-      {/* <StayGallery stay={stay} /> */}
-      <article className="mini-gallery">
-        <div className="main-image">
-          <img src={stay.imgUrls[0]} alt="Main house image" />
+        {/* {stay && */}
+        <div className="stay-short-info">
+          <h3>{stay.type} in {stay.loc.city}, {stay.loc.country}</h3>
+          <h5>{stay.capacity} guests * {stay.bedrooms} bedrooms * {stay.beds} beds * {stay.baths} bath</h5>
+          <h4>★ {stay.reviews[0].rate} * {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4>
         </div>
-        <div className="other-images">
-          {stay.imgUrls.slice(1, 5).map((imgUrl, index) => (
-            <img key={index} src={imgUrl} alt={`house image ${index + 1}`} />
-          ))}
-        </div>
-      </article>
-
-      {/* {stay && */}
-      <div className="stay-short-info">
-        <h3>{stay.type} in {stay.loc.city}, {stay.loc.country}</h3>
-        <h5>{stay.capacity} guests * {stay.bedrooms} bedrooms * {stay.beds} beds * {stay.baths} bath</h5>
-        <h4>★ {stay.reviews[0].rate} * {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4>
-        <div />
 
         <div className="host-short-info">
           <img src={stay.host.imgUrl} alt="Host" className="host-avatar" style={{ borderRadius: '50%', width: '2rem', height: '2rem', objectFit: 'cover' }} />
@@ -80,7 +81,9 @@ export function StayDetails() {
         <article className="stay-summary">{stay.summary}</article>
         <br />
         <StayAmenities amenities={stay.amenities} />
+      </main>
 
+      <div className="reviw-and-map">
         <ReviewList reviews={stay.reviews} />
         {/* <Map/> */}
 
@@ -89,7 +92,7 @@ export function StayDetails() {
       </div>
       {/* // } */}
       {/* <button onClick={() => { onAddStayMsg(stay._id) }}>Add stay msg</button> */}
-      </main>
+
       <footer>
         this is footer
       </footer>
