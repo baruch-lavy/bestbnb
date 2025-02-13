@@ -12,15 +12,11 @@ import {
   faLandmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-export const SearchBar = () => {
+export const SearchBar = ({setSearchData}) => {
   const [destination, setDestination] = useState("");
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
-  const [isGuestDropdownOpen, setIsGuestDropdownOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("dates");
-  const [flexibleDays, setFlexibleDays] = useState(0);
+  const [openDropdown, setOpenDropdown] = useState(null); // Track which dropdown is open
 
   const [guests, setGuests] = useState({
     adults: 0,
@@ -66,27 +62,61 @@ export const SearchBar = () => {
     },
   ];
 
-  // Close dropdowns when clicking outside
+  // Close dropdowns when clicking outside OR switching between them
+  useEffect(() => {
+    // ✅ Automatically update search data when inputs change
+    setSearchData({
+      destination: destination || "Anywhere",
+      startDate: startDate,
+      endDate: endDate,
+      guests: guests.adults + guests.children > 0 ? `${guests.adults + guests.children} guests` : "Add guests",
+    });
+  }, [destination, startDate, endDate, guests, setSearchData]);
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // ✅ Keep dropdown open if clicking inside any of them
       if (
+<<<<<<< HEAD
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target) &&
         datePickerRef.current &&
         !datePickerRef.current.contains(event.target) &&
         guestDropdownRef.current &&
         !guestDropdownRef.current.contains(event.target)
+=======
+        dropdownRef.current?.contains(event.target) ||
+        datePickerRef.current?.contains(event.target) ||
+        guestDropdownRef.current?.contains(event.target)
+>>>>>>> header-branch
       ) {
-        setIsDropdownOpen(false);
-        setIsDatePickerOpen(false);
-        setIsGuestDropdownOpen(false);
+        return; 
       }
+
+      handleDropdownOpen(null);
+  
+      // ✅ Clicking outside closes all dropdowns
+      setIsDropdownOpen(false);
+      setIsDatePickerOpen(false);
+      setIsGuestDropdownOpen(false);
+
     };
+  
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  
+
+  function setIsDropdownOpen(value) {
+    setOpenDropdown(value);
+    }
+
+  // Function to open one dropdown & close others
+  const handleDropdownOpen = (dropdown) => {
+    setOpenDropdown((prev) => (prev === dropdown ? null : dropdown));
+  };
 
   // Handle guest selection
   const handleGuestChange = (type, amount) => {
@@ -98,7 +128,11 @@ export const SearchBar = () => {
 
   return (
     <div className="search-container">
+<<<<<<< HEAD
       <div className={`search-bar ${isDropdownOpen ? "expanded" : ""}`}>
+=======
+      <div className={`search-bar ${openDropdown ? "expanded" : ""}`}>
+>>>>>>> header-branch
         {/* WHERE Section */}
         <div className="search-section where-section" ref={dropdownRef}>
           <span>Where</span>
@@ -107,13 +141,20 @@ export const SearchBar = () => {
             placeholder="Search destinations"
             value={destination}
             onChange={(e) => setDestination(e.target.value)}
-            onFocus={() => setIsDropdownOpen(true)}
+            onFocus={() => handleDropdownOpen("where")}
           />
-          {isDropdownOpen && (
+          {openDropdown === "where" && (
             <div className="dropdown">
               <div className="dropdown-header">Suggested destinations</div>
               {destinations.map((dest, index) => (
-                <div key={index} className="suggestion">
+                <div
+                  key={index}
+                  className="suggestion"
+                  onClick={() => {
+                    setDestination(dest.name); // ✅ Set selected destination in input field
+                    setOpenDropdown(null); // ✅ Close the dropdown after selection
+                  }}
+                >
                   <FontAwesomeIcon icon={dest.icon} className="icon" />
                   <div>
                     <strong>{dest.name}</strong>
@@ -131,7 +172,11 @@ export const SearchBar = () => {
         <div className="search-section date-section" ref={datePickerRef}>
           <div
             className="date-fields"
+<<<<<<< HEAD
             onClick={() => setIsDatePickerOpen(true)}
+=======
+            onClick={() => handleDropdownOpen("dates")}
+>>>>>>> header-branch
           >
             <div className="date-input">
               <span>Check in</span>
@@ -154,7 +199,7 @@ export const SearchBar = () => {
             </div>
           </div>
 
-          {isDatePickerOpen && (
+          {openDropdown === "dates" && (
             <div className="date-picker-dropdown">
               <DatePicker
                 selected={startDate}
@@ -162,7 +207,7 @@ export const SearchBar = () => {
                   const [start, end] = dates;
                   setStartDate(start);
                   setEndDate(end);
-                  if (end) setTimeout(() => setIsDatePickerOpen(false), 200);
+                  if (end) setTimeout(() => setOpenDropdown(null), 200);
                 }}
                 startDate={startDate}
                 endDate={endDate}
@@ -184,9 +229,9 @@ export const SearchBar = () => {
             placeholder="Add guests"
             value={`${guests.adults + guests.children} guests`}
             readOnly
-            onClick={() => setIsGuestDropdownOpen(!isGuestDropdownOpen)}
+            onClick={() => handleDropdownOpen("who")}
           />
-          {isGuestDropdownOpen && (
+          {openDropdown === "who" && (
             <div className="guest-dropdown">
               {["adults", "children", "infants", "pets"].map((key) => (
                 <div className="guest-row" key={key}>

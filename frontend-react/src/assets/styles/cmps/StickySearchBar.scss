@@ -1,0 +1,56 @@
+.sticky-search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border-radius: 50px;
+    padding: 10px 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-family: Arial, sans-serif;
+    max-width: 500px;
+    height: 48px;
+    gap: 8px;
+  
+    .sticky-content {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      gap: 8px;
+    }
+  
+    .sticky-item {
+      font-size: 14px;
+      color: #222;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+  
+    .sticky-divider {
+      width: 1px;
+      height: 24px;
+      background: #ddd;
+    }
+  
+    .sticky-search-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ff385c;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+  
+      svg {
+        color: white;
+        font-size: 14px;
+      }
+  
+      &:hover {
+        background: #e12d50;
+      }
+    }
+  }
+  

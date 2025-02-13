@@ -1,17 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaBars, FaUserCircle, FaGlobe } from "react-icons/fa";
 import { SearchBar } from "./SearchBar";
-// import "./Header.scss"; // Import styles
+import {StickySearchBar} from "./StickySearchBar";
 
 export const AppHeader = () => {
+  const [showSticky, setShowSticky] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [searchData, setSearchData] = useState({
+    destination: "Anywhere",
+    startDate: null,
+    endDate: null,
+    guests: "Add guests",
+  });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      // console.log("Scroll Position:", scrollTop); // ✅ Debugging: Check scroll value
+      setShowSticky(scrollTop > 50);
+      // console.log("showSticky State:", scrollTop > 150); // ✅ Debugging: See if state updates
+    };
+  
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleDropdownOpen = (dropdown) => {
+    setOpenDropdown((prev) => (prev === dropdown ? null : dropdown));
+  };
+  
+
   return (
     <>
       {/* HEADER */}
       <header className="header">
         {/* Left Section */}
         <div className="left-section">
+<<<<<<< HEAD
           {/* FIXED: Logo Path Updated */}
           <img src="/img/stays/logo.png" alt="Airbnb Logo" className="logo" />
+=======
+          <img src="/assets/img/airbnb-logo.svg" alt="Airbnb Logo" className="logo" />
+>>>>>>> header-branch
           <nav className="nav-links">
             <a href="#">Stays</a>
             <a href="#">Experiences</a>
@@ -29,8 +59,23 @@ export const AppHeader = () => {
         </div>
       </header>
 
-      {/* SEARCH BAR COMPONENT */}
-      <SearchBar />
+      {/* FULL SEARCH BAR (Visible at top) */}
+      <div className={`full-search-bar ${showSticky ? "hidden" : ""}`}>
+        <SearchBar setSearchData={setSearchData}  openDropdown={openDropdown} handleDropdownOpen={handleDropdownOpen} />
+      </div>
+
+      {/* STICKY SEARCH BAR (Appears when scrolling down) */}
+      {showSticky && (
+        <div className="sticky-search-container">
+          <StickySearchBar
+            destination={searchData.destination}
+            startDate={searchData.startDate}
+            endDate={searchData.endDate}
+            guests={searchData.guests}
+            handleDropdownOpen={handleDropdownOpen}
+          />
+        </div>
+      )}
     </>
   );
 };
