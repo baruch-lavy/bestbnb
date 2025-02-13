@@ -9,7 +9,7 @@ import { StayFilter } from '../cmps/StayFilter'
 import { stays } from '../data/stay.js'
 
 export function StayIndex() {
-    const [ filterBy, setFilterBy ] = useState(stayService.getDefaultFilter())
+    // const [ filterBy, setFilterBy ] = useState(stayService.getDefaultFilter())
     // const stays = useSelector(storeState => storeState.stayModule.stays)
     //     console.log('stays', stays)
     
