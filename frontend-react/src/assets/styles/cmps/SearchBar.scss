@@ -1,0 +1,82 @@
+.search-section {
+    position: relative; // Ensures dropdown positions correctly
+  
+    input {
+      width: 200px;
+      padding: 10px;
+      border: none;
+      outline: none;
+      border-radius: 20px;
+      font-size: 14px;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+  
+      &:focus {
+        width: 300px; // Expands on focus
+        border-radius: 25px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      }
+    }
+  
+    .dropdown {
+      position: absolute;
+      top: 50px;
+      left: 0;
+      width: 350px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 15px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+      z-index: 99;
+      overflow-y: auto;
+      max-height: 250px;
+  
+      .suggestion {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+  
+        &:hover {
+          background: #f7f7f7;
+        }
+  
+        .icon {
+          width: 35px;
+          height: 35px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #ebebeb;
+          border-radius: 10px;
+        }
+  
+        .details {
+          display: flex;
+          flex-direction: column;
+  
+          .location {
+            font-weight: 600;
+          }
+  
+          .description {
+            font-size: 12px;
+            color: #717171;
+          }
+        }
+      }
+    }
+  
+    &.active .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0px);
+    }
+  }
+  
