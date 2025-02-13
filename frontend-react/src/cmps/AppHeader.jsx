@@ -36,7 +36,7 @@ export const AppHeader = () => {
       <header className="header">
         {/* Left Section */}
         <div className="left-section">
-          <img src="/assets/img/airbnb-logo.svg" alt="Airbnb Logo" className="logo" />
+          <img src="/img/stays/logo.png" alt="Airbnb Logo" className="logo" />
           <nav className="nav-links">
             <a href="#">Stays</a>
             <a href="#">Experiences</a>
