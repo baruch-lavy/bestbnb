@@ -1,62 +1,302 @@
 export const categories = [
-    { id: 1, label: 'OMG!', icon: '/img/stays/icons/1.jpg' },
-    { id: 2, label: 'Icons', icon: '/img/stays/icons/2.jpg' },
-    { id: 3, label: 'Castles', icon: '/img/stays/icons/3.jpg' },
-    { id: 4, label: 'Beachfront', icon: '/img/stays/icons/4.jpg' },
-    { id: 5, label: 'Top of the world', icon: '/img/stays/icons/5.jpg' },
-    { id: 6, label: 'Mansions', icon: '/img/stays/icons/6.jpg' },
-    { id: 7, label: 'Amazing views', icon: '/img/stays/icons/7.jpg' },
-    { id: 8, label: 'Amazing pools', icon: '/img/stays/icons/8.jpg' },
-    { id: 9, label: 'Cabins', icon: '/img/stays/icons/9.jpg' },
-    { id: 10, label: 'Countryside', icon: '/img/stays/icons/10.jpg' },
-    { id: 11, label: 'Lakefront', icon: '/img/stays/icons/11.jpg' },
-    { id: 12, label: 'Islands', icon: '/img/stays/icons/12.jpg' },
-    { id: 13, label: 'Beach', icon: '/img/stays/icons/13.jpg' },
-    { id: 14, label: 'Tiny homes', icon: '/img/stays/icons/14.jpg' },
-    { id: 15, label: 'Design', icon: '/img/stays/icons/15.jpg' },
-    { id: 16, label: 'Camping', icon: '/img/stays/icons/16.jpg' },
-    { id: 17, label: 'Arctic', icon: '/img/stays/icons/17.jpg' },
-    { id: 18, label: 'Desert', icon: '/img/stays/icons/18.jpg' },
-    { id: 19, label: 'Tropical', icon: '/img/stays/icons/19.jpg' },
-    { id: 20, label: 'Windmills', icon: '/img/stays/icons/20.jpg' },
-    { id: 21, label: 'Caves', icon: '/img/stays/icons/21.jpg' },
-    { id: 22, label: 'Skiing', icon: '/img/stays/icons/22.jpg' },
-    { id: 23, label: 'Farms', icon: '/img/stays/icons/23.jpg' },
-    { id: 24, label: 'Historical', icon: '/img/stays/icons/24.jpg' },
-    { id: 25, label: 'Vineyard', icon: '/img/stays/icons/25.jpg' },
-    { id: 26, label: 'Forest', icon: '/img/stays/icons/26.jpg' },
-    { id: 27, label: 'Mountain', icon: '/img/stays/icons/27.jpg' },
-    { id: 28, label: 'Lighthouse', icon: '/img/stays/icons/28.jpg' },
-    { id: 29, label: 'Containers', icon: '/img/stays/icons/29.jpg' },
-    { id: 30, label: 'Domes', icon: '/img/stays/icons/30.jpg' },
-    { id: 31, label: 'Boats', icon: '/img/stays/icons/31.jpg' },
-    { id: 32, label: 'Treehouses', icon: '/img/stays/icons/32.jpg' },
-    { id: 33, label: 'Luxury', icon: '/img/stays/icons/33.jpg' },
-    { id: 34, label: 'Yurts', icon: '/img/stays/icons/34.jpg' },
-    { id: 35, label: 'Golfing', icon: '/img/stays/icons/35.jpg' },
-    { id: 36, label: 'Lake', icon: '/img/stays/icons/36.jpg' },
-    { id: 37, label: 'Surfing', icon: '/img/stays/icons/37.jpg' },
-    { id: 38, label: 'A-frames', icon: '/img/stays/icons/38.jpg' },
-    { id: 39, label: 'Barns', icon: '/img/stays/icons/39.jpg' },
-    { id: 40, label: 'Towers', icon: '/img/stays/icons/40.jpg' },
-    { id: 41, label: 'Houseboats', icon: '/img/stays/icons/41.jpg' },
-    { id: 42, label: 'Chalets', icon: '/img/stays/icons/42.jpg' },
-    { id: 43, label: 'Domes', icon: '/img/stays/icons/43.jpg' },
-    { id: 44, label: 'Riads', icon: '/img/stays/icons/44.jpg' },
-    { id: 45, label: 'Trulli', icon: '/img/stays/icons/45.jpg' },
-    { id: 46, label: 'Cycladic', icon: '/img/stays/icons/46.jpg' },
-    { id: 47, label: 'Desert', icon: '/img/stays/icons/47.jpg' },
-    { id: 48, label: 'Shepherd', icon: '/img/stays/icons/48.jpg' },
-    { id: 49, label: 'Campers', icon: '/img/stays/icons/49.jpg' },
-    { id: 50, label: 'Earth homes', icon: '/img/stays/icons/50.jpg' },
-    { id: 51, label: 'Tropical', icon: '/img/stays/icons/51.jpg' },
-    { id: 52, label: 'Creative spaces', icon: '/img/stays/icons/52.jpg' },
-    { id: 53, label: 'Ryokans', icon: '/img/stays/icons/53.jpg' },
-    { id: 54, label: 'Minsus', icon: '/img/stays/icons/54.jpg' },
-    { id: 55, label: 'Casas particulares', icon: '/img/stays/icons/55.jpg' },
-    { id: 56, label: 'Hanoks', icon: '/img/stays/icons/56.jpg' },
-    { id: 57, label: 'Grand pianos', icon: '/img/stays/icons/57.jpg' },
-    { id: 58, label: 'Off-grid', icon: '/img/stays/icons/58.jpg' },
-    { id: 59, label: 'Ski-in/out', icon: '/img/stays/icons/59.jpg' },
-    { id: 60, label: 'Vineyards', icon: '/img/stays/icons/60.jpg' }
+    {
+        id: 'c1',
+        label: 'Riad',
+        icon: '/img/stays/icons/6.jpg'
+    },
+    {
+        id: 'c2',
+        label: 'Villa',
+        icon: '/img/stays/icons/2.jpg'
+    },
+    {
+        id: 'c3',
+        label: 'Cabin',
+        icon: '/img/stays/icons/3.jpg'
+    },
+    {
+        id: 'c4',
+        label: 'Cottage',
+        icon: '/img/stays/icons/4.jpg'
+    },
+    {
+        id: 'c5',
+        label: 'Penthouse',
+        icon: '/img/stays/icons/5.jpg'
+    },
+    {
+        id: 'c6',
+        label: 'Apartment',
+        icon: '/img/stays/icons/1.jpg'
+    },
+    {
+        id: 'c7',
+        label: 'Beachfront',
+        icon: '/img/stays/icons/7.jpg'
+    },
+    {
+        id: 'c8',
+        label: 'Luxury',
+        icon: '/img/stays/icons/8.jpg'
+    },
+    {
+        id: 'c9',
+        label: 'Cabins',
+        icon: '/img/stays/icons/9.jpg'
+    },
+    {
+        id: 'c10',
+        label: 'Countryside',
+        icon: '/img/stays/icons/10.jpg'
+    },
+    {
+        id: 'c11',
+        label: 'Lakefront',
+        icon: '/img/stays/icons/11.jpg'
+    },
+    {
+        id: 'c12',
+        label: 'Islands',
+        icon: '/img/stays/icons/12.jpg'
+    },
+    {
+        id: 'c13',
+        label: 'Beach',
+        icon: '/img/stays/icons/13.jpg'
+    },
+    {
+        id: 'c14',
+        label: 'Tiny homes',
+        icon: '/img/stays/icons/14.jpg'
+    },
+    {
+        id: 'c15',
+        label: 'Design',
+        icon: '/img/stays/icons/15.jpg'
+    },
+    {
+        id: 'c16',
+        label: 'Camping',
+        icon: '/img/stays/icons/16.jpg'
+    },
+    {
+        id: 'c17',
+        label: 'Arctic',
+        icon: '/img/stays/icons/17.jpg'
+    },
+    {
+        id: 'c18',
+        label: 'Desert',
+        icon: '/img/stays/icons/18.jpg'
+    },
+    {
+        id: 'c19',
+        label: 'Tropical',
+        icon: '/img/stays/icons/19.jpg'
+    },
+    {
+        id: 'c20',
+        label: 'Windmills',
+        icon: '/img/stays/icons/20.jpg'
+    },
+    {
+        id: 'c21',
+        label: 'Caves',
+        icon: '/img/stays/icons/21.jpg'
+    },
+    {
+        id: 'c22',
+        label: 'Skiing',
+        icon: '/img/stays/icons/22.jpg'
+    },
+    {
+        id: 'c23',
+        label: 'Farms',
+        icon: '/img/stays/icons/23.jpg'
+    },
+    {
+        id: 'c24',
+        label: 'Historical',
+        icon: '/img/stays/icons/24.jpg'
+    },
+    {
+        id: 'c25',
+        label: 'Vineyard',
+        icon: '/img/stays/icons/25.jpg'
+    },
+    {
+        id: 'c26',
+        label: 'Forest',
+        icon: '/img/stays/icons/26.jpg'
+    },
+    {
+        id: 'c27',
+        label: 'Mountain',
+        icon: '/img/stays/icons/27.jpg'
+    },
+    {
+        id: 'c28',
+        label: 'Lighthouse',
+        icon: '/img/stays/icons/28.jpg'
+    },
+    {
+        id: 'c29',
+        label: 'Containers',
+        icon: '/img/stays/icons/29.jpg'
+    },
+    {
+        id: 'c30',
+        label: 'Domes',
+        icon: '/img/stays/icons/30.jpg'
+    },
+    {
+        id: 'c31',
+        label: 'Boats',
+        icon: '/img/stays/icons/31.jpg'
+    },
+    {
+        id: 'c32',
+        label: 'Treehouses',
+        icon: '/img/stays/icons/32.jpg'
+    },
+    {
+        id: 'c33',
+        label: 'Luxury',
+        icon: '/img/stays/icons/33.jpg'
+    },
+    {
+        id: 'c34',
+        label: 'Yurts',
+        icon: '/img/stays/icons/34.jpg'
+    },
+    {
+        id: 'c35',
+        label: 'Golfing',
+        icon: '/img/stays/icons/35.jpg'
+    },
+    {
+        id: 'c36',
+        label: 'Lake',
+        icon: '/img/stays/icons/36.jpg'
+    },
+    {
+        id: 'c37',
+        label: 'Surfing',
+        icon: '/img/stays/icons/37.jpg'
+    },
+    {
+        id: 'c38',
+        label: 'A-frames',
+        icon: '/img/stays/icons/38.jpg'
+    },
+    {
+        id: 'c39',
+        label: 'Barns',
+        icon: '/img/stays/icons/39.jpg'
+    },
+    {
+        id: 'c40',
+        label: 'Towers',
+        icon: '/img/stays/icons/40.jpg'
+    },
+    {
+        id: 'c41',
+        label: 'Houseboats',
+        icon: '/img/stays/icons/41.jpg'
+    },
+    {
+        id: 'c42',
+        label: 'Chalets',
+        icon: '/img/stays/icons/42.jpg'
+    },
+    {
+        id: 'c43',
+        label: 'Domes',
+        icon: '/img/stays/icons/43.jpg'
+    },
+    {
+        id: 'c44',
+        label: 'Riads',
+        icon: '/img/stays/icons/44.jpg'
+    },
+    {
+        id: 'c45',
+        label: 'Trulli',
+        icon: '/img/stays/icons/45.jpg'
+    },
+    {
+        id: 'c46',
+        label: 'Cycladic',
+        icon: '/img/stays/icons/46.jpg'
+    },
+    {
+        id: 'c47',
+        label: 'Desert',
+        icon: '/img/stays/icons/47.jpg'
+    },
+    {
+        id: 'c48',
+        label: 'Shepherd',
+        icon: '/img/stays/icons/48.jpg'
+    },
+    {
+        id: 'c49',
+        label: 'Campers',
+        icon: '/img/stays/icons/49.jpg'
+    },
+    {
+        id: 'c50',
+        label: 'Earth homes',
+        icon: '/img/stays/icons/50.jpg'
+    },
+    {
+        id: 'c51',
+        label: 'Tropical',
+        icon: '/img/stays/icons/51.jpg'
+    },
+    {
+        id: 'c52',
+        label: 'Creative spaces',
+        icon: '/img/stays/icons/52.jpg'
+    },
+    {
+        id: 'c53',
+        label: 'Ryokans',
+        icon: '/img/stays/icons/53.jpg'
+    },
+    {
+        id: 'c54',
+        label: 'Minsus',
+        icon: '/img/stays/icons/54.jpg'
+    },
+    {
+        id: 'c55',
+        label: 'Casas particulares',
+        icon: '/img/stays/icons/55.jpg'
+    },
+    {
+        id: 'c56',
+        label: 'Hanoks',
+        icon: '/img/stays/icons/56.jpg'
+    },
+    {
+        id: 'c57',
+        label: 'Grand pianos',
+        icon: '/img/stays/icons/57.jpg'
+    },
+    {
+        id: 'c58',
+        label: 'Off-grid',
+        icon: '/img/stays/icons/58.jpg'
+    },
+    {
+        id: 'c59',
+        label: 'Ski-in/out',
+        icon: '/img/stays/icons/59.jpg'
+    },
+    {
+        id: 'c60',
+        label: 'Vineyards',
+        icon: '/img/stays/icons/60.jpg'
+    }
 ] 

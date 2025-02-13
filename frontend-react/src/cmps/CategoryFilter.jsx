@@ -34,15 +34,15 @@ export function CategoryFilter({ onSelectCategory, selectedCategory }) {
         const container = document.querySelector('.category-list')
         if (!container) return
 
-        // מחשב את הרוחב של פריט אחד (כולל הרווח)
+      
         const itemWidth = container.querySelector('.category-item').offsetWidth
-        const gap = 32 // הרווח שהגדרנו ב-CSS
+        const gap = 32 
         const scrollAmount = itemWidth + gap
 
-        // מחשב כמה פריטים נראים במסך
+       
         const visibleItems = Math.floor(container.offsetWidth / (itemWidth + gap))
         
-        // גולל מספר פריטים שנראים במסך
+        
         const scrollPixels = scrollAmount * visibleItems
 
         if (direction === 'left') {

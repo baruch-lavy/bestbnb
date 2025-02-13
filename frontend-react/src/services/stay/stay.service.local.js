@@ -1,10 +1,18 @@
-
 import { storageService } from '../async-storage.service'
 import { makeId } from '../util.service'
 import { userService } from '../user'
 
 const STORAGE_KEY = 'stay'
 _createStays()
+
+const categoryMapping = {
+    'OMG!': ['Luxury', 'Exclusive'],
+    'Icons': ['Modern', 'Urban'],
+    'Castles': ['Villa', 'Mansion'],
+    'Beachfront': ['Beachfront', 'Seaview'],
+    'Cabins': ['Cabin', 'Cottage'],
+    // ... add more mappings
+}
 
 export const stayService = {
     query,
@@ -16,10 +24,9 @@ export const stayService = {
 window.cs = stayService
 
 
-async function query(filterBy = { txt: '', price: 0 }) {
-
+async function query(filterBy = { txt: '', price: 0, type: '' }) {
     var stays = await storageService.query(STORAGE_KEY)
-    const { txt, minPrice, maxPrice, sortField, sortDir } = filterBy
+    const { txt, minPrice, maxPrice, sortField, sortDir, type } = filterBy
 
     if (txt) {
         const regex = new RegExp(filterBy.txt, 'i')
@@ -35,6 +42,16 @@ async function query(filterBy = { txt: '', price: 0 }) {
     if (sortField === 'price') {
         stays.sort((stay1, stay2) =>
             (stay1[sortField] - stay2[sortField]) * +sortDir)
+    }
+
+    if (type) {
+        stays = stays.filter(stay => {
+            return (
+                stay.type === type ||
+                stay.labels.includes(type) ||
+                stay.amenities.includes(type)
+            )
+        })
     }
 
     stays = stays.map
