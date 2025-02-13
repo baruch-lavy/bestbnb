@@ -1,82 +1,353 @@
+/* =============================== */
+/*         SEARCH BAR STYLES       */
+/* =============================== */
+
+.search-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 850px;
+    gap: 15px;
+    position: relative;
+    justify-content: space-between; /* Ensures sections are evenly spaced */
+}
+
+/* Expanded state */
+.search-bar.expanded {
+    border-radius: 32px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Individual Sections */
 .search-section {
-    position: relative; // Ensures dropdown positions correctly
-  
-    input {
-      width: 200px;
-      padding: 10px;
-      border: none;
-      outline: none;
-      border-radius: 20px;
-      font-size: 14px;
-      transition: all 0.3s ease-in-out;
-      cursor: pointer;
-  
-      &:focus {
-        width: 300px; // Expands on focus
-        border-radius: 25px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-      }
-    }
-  
-    .dropdown {
-      position: absolute;
-      top: 50px;
-      left: 0;
-      width: 350px;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
-      padding: 15px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-      z-index: 99;
-      overflow-y: auto;
-      max-height: 250px;
-  
-      .suggestion {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 10px;
-        border-radius: 10px;
-        cursor: pointer;
-  
-        &:hover {
-          background: #f7f7f7;
-        }
-  
-        .icon {
-          width: 35px;
-          height: 35px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: #ebebeb;
-          border-radius: 10px;
-        }
-  
-        .details {
-          display: flex;
-          flex-direction: column;
-  
-          .location {
-            font-weight: 600;
-          }
-  
-          .description {
-            font-size: 12px;
-            color: #717171;
-          }
-        }
-      }
-    }
-  
-    &.active .dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0px);
-    }
-  }
-  
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    flex: 1;
+}
+
+.search-section span {
+    font-size: 12px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 3px;
+}
+
+.search-section input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 5px 0;
+    width: 100%;
+    background: transparent;
+    text-align: left;
+}
+
+
+/* Divider between sections */
+.divider {
+    height: 40px;
+    width: 1px;
+    background: #ddd;
+    align-self: center;
+}
+
+/* =============================== */
+/*      SEARCH BUTTON FIXES        */
+/* =============================== */
+
+/* SEARCH BUTTON FIX */
+// .search-bar {
+//     display: flex;
+//     align-items: center;
+//     background: #fff;
+//     border: 1px solid #ddd;
+//     border-radius: 50px;
+//     padding: 12px 64px 12px 16px; /* Extra right padding for button */
+//     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+//     width: 850px;
+//     position: relative;
+// }
+
+/* SEARCH BUTTON */
+/* =============================== */
+/*         SEARCH BUTTON           */
+/* =============================== */
+
+/* Default round button */
+.search-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ff385c;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+/* Expanded button when search bar is focused */
+.search-bar:focus-within .search-btn {
+    width: 100px; /* Expands width */
+    border-radius: 50px; /* Rounded pill shape */
+    background: linear-gradient(to right, #ff385c, #d70466); /* Gradient effect */
+    justify-content: center;
+}
+
+/* Add space for text inside expanded button */
+.search-bar:focus-within .search-btn::after {
+    content: " Search";
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+/* Hover effect */
+.search-btn:hover {
+    background: #e03450;
+}
+
+
+/* =============================== */
+/*         WHERE DROPDOWN          */
+/* =============================== */
+
+.dropdown {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 320px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    padding: 15px;
+    z-index: 10;
+}
+
+.dropdown-header {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+.suggestion {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.suggestion:hover {
+    background: #f8f8f8;
+}
+
+.suggestion .icon {
+    font-size: 22px;
+    margin-right: 12px;
+}
+
+.suggestion div strong {
+    font-size: 14px;
+    color: #333;
+}
+
+.suggestion div p {
+    font-size: 12px;
+    color: #777;
+}
+
+/* =============================== */
+/*       DATE PICKER STYLES        */
+/* =============================== */
+
+.date-picker-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Date fields container (Side by Side) */
+.date-fields {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* Individual date input styles */
+.date-input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.date-input span {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 2px;
+}
+
+.date-input input {
+    width: 100%;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    background-color: white;
+}
+
+/* Divider between Check-in & Check-out */
+.divider {
+    width: 1px;
+    height: 40px;
+    background: #ddd;
+}
+
+/* =============================== */
+/*     DATE PICKER DROPDOWN        */
+/* =============================== */
+
+.date-picker-dropdown {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 700px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure the two calendars are properly aligned */
+.react-datepicker__month-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    gap: 20px !important;
+}
+
+/* Ensure each month is equally sized */
+.react-datepicker__month {
+    width: 48% !important;
+}
+
+/* =============================== */
+/*     WHO SECTION (GUEST PICKER)  */
+/* =============================== */
+
+.who-section {
+    position: relative;
+}
+
+.who-section input {
+    white-space: nowrap; /* Keeps it on one line */
+}
+
+/* Guest Dropdown */
+.guest-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 360px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    z-index: 10;
+}
+
+/* Individual Guest Row */
+.guest-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.guest-row:last-child {
+    border-bottom: none;
+}
+
+/* Guest Info */
+.guest-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.guest-info strong {
+    font-size: 16px;
+    color: #222;
+}
+
+.guest-desc {
+    font-size: 14px;
+    color: #777;
+    margin-top: 2px;
+}
+
+/* Guest Controls */
+.guest-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Guest Buttons */
+.guest-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    background: white;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, border 0.2s ease;
+}
+
+/* Fix button colors */
+.guest-btn:hover {
+    background: #f1f1f1;
+}
+
+.guest-btn:disabled {
+    border-color: #ccc;
+    color: #ccc;
+    cursor: not-allowed;
+}
