@@ -34,7 +34,7 @@ body {
 @import "cmps/preview";
 
 @import "cmps/AppHeader";
-// @import "cmps/AppFooter";
+@import "cmps/SearchBar.scss";
 // @import "cmps/UserMsg";
 
 @import "cmps/CarFilter";
@@ -42,5 +42,4 @@ body {
 @import "cmps/ReviewList";
 @import "cmps/ReviewPreview";
 @import "cmps/StayList";
-@import "cmps/StayPreview";
 @import "cmps/StayPreview";
