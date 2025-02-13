@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
+import { CategoryFilter } from './CategoryFilter'
+import { categories } from '../services/categories.service'
 
 export function StayFilter({ filterBy, setFilterBy }) {
     const [ filterToEdit, setFilterToEdit ] = useState(structuredClone(filterBy))
+    const [selectedCategory, setSelectedCategory] = useState(null)
 
     useEffect(() => {
         setFilterBy(filterToEdit)
@@ -25,6 +28,16 @@ export function StayFilter({ filterBy, setFilterBy }) {
         setFilterToEdit({ ...filterToEdit, [field]: value })
     }
 
+    function handleCategorySelect(categoryId) {
+        const category = categories.find(cat => cat.id === categoryId)
+        setSelectedCategory(categoryId)
+        
+        setFilterToEdit(prevFilter => ({
+            ...prevFilter,
+            category: category.label
+        }))
+    }
+
     function clearFilter() {
         setFilterToEdit({ ...filterToEdit, txt: '', minPrice: '', maxPrice: '' })
     }
@@ -42,6 +55,10 @@ export function StayFilter({ filterBy, setFilterBy }) {
                 placeholder="Free text"
                 onChange={handleChange}
                 required
+            />
+            <CategoryFilter 
+                onSelectCategory={handleCategorySelect}
+                selectedCategory={selectedCategory}
             />
             <input
                 type="number"

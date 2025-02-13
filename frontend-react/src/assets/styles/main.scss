@@ -1,42 +1,40 @@
 // Setup
-@import "setup/variables";
-@import "setup/functions";
-@import "setup/mixins";
-@import "setup/typography";
+@import "setup/variables.scss";
+@import "setup/functions.scss";
+@import "setup/mixins.scss";
+@import "setup/typography.scss";
 
 // Basics
-@import "basics/helpers";
-@import "basics/layout";
-@import "basics/base";
+@import "basics/helpers.scss";
+@import "basics/layout.scss";
+@import "basics/base.scss";
 // @import "basics/links";
-@import "basics/forms";
-
-
-
+@import "basics/forms.scss";
 
 // pages
-@import "RootCmp";
-@import "Pages/StayDetails";
-@import "pages/AboutUs";
+@import "RootCmp.scss";
+@import "Pages/StayDetails.scss";
+@import "pages/AboutUs.scss";
 // @import "pages/HomePage";
-@import "pages/StayIndex";
-@import "pages/ReviewIndex";
-@import "pages/UserDetails";
-@import "pages/TaskDetails";
-@import "pages/LoginSignup";
+@import "pages/StayIndex.scss";
+@import "pages/ReviewIndex.scss";
+@import "pages/UserDetails.scss";
+@import "pages/TaskDetails.scss";
+@import "pages/LoginSignup.scss";
 
 // Components
-@import "cmps/list";
-@import "cmps/preview";
+@import "cmps/list.scss";
+@import "cmps/preview.scss";
 
 @import "cmps/AppHeader";
 @import "cmps/SearchBar.scss";
 @import "cmps/StickySearchBar.scss";
 // @import "cmps/UserMsg";
 
-@import "cmps/CarFilter";
-@import "cmps/ReviewEdit";
-@import "cmps/ReviewList";
-@import "cmps/ReviewPreview";
-@import "cmps/StayList";
-@import "cmps/StayPreview";
+@import "cmps/CarFilter.scss";
+@import "cmps/ReviewEdit.scss";
+@import "cmps/ReviewList.scss";
+@import "cmps/ReviewPreview.scss";
+@import "cmps/StayList.scss";
+@import "cmps/StayPreview.scss";
+@import "components/_category-filter.scss";
