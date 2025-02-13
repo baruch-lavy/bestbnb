@@ -46,21 +46,32 @@ export const SearchBar = () => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        dropdownRef.current && !dropdownRef.current.contains(event.target) &&
-        datePickerRef.current && !datePickerRef.current.contains(event.target) &&
-        guestDropdownRef.current && !guestDropdownRef.current.contains(event.target)
+        dropdownRef.current?.contains(event.target) ||
+        datePickerRef.current?.contains(event.target) ||
+        guestDropdownRef.current?.contains(event.target)
       ) {
-        setIsDropdownOpen(false);
-        setIsDatePickerOpen(false);
-        setIsGuestDropdownOpen(false);
+        return; // If clicking inside any dropdown, do nothing
       }
+  
+      // Clicking outside: Close all dropdowns
+      setIsDropdownOpen(false);
+      setIsDatePickerOpen(false);
+      setIsGuestDropdownOpen(false);
     };
+  
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
+  
+  // Function to open one dropdown & close others
+  const handleDropdownOpen = (dropdown) => {
+    setIsDropdownOpen(dropdown === "where");
+    setIsDatePickerOpen(dropdown === "dates");
+    setIsGuestDropdownOpen(dropdown === "who");
+  };
+  
   // Handle guest selection
   const handleGuestChange = (type, amount) => {
     setGuests((prev) => ({
