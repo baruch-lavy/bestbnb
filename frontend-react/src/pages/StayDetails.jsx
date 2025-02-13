@@ -36,6 +36,7 @@ export function StayDetails() {
   }
 
   if (!stay) return <p>loading</p>
+  
   return (
     <section className="stay-details">
       <head>

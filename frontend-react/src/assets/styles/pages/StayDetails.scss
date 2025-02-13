@@ -3,6 +3,8 @@
     margin: 0;
     grid-template-columns: 1fr 1120px 1fr;
     grid-template-rows: repeat(4, minmax(200px, auto));
+    min-height: 100vh;
+    overflow-y: auto;
 
     head {
         grid-row: 1;
@@ -33,21 +35,22 @@
                 border-bottom-left-radius: 1rem
             }
 
-            .other-images{
+            .other-images {
                 grid-column: 2;
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
 
-                img{
+                img {
                     width: 100%;
                     height: auto;
-                    object-fit: cover; 
+                    object-fit: cover;
 
-                    &:nth-child(2){
+                    &:nth-child(2) {
                         border-top-right-radius: 1rem;
                     }
-                    &:last-child{
+
+                    &:last-child {
                         border-bottom-right-radius: 1rem
                     }
                 }
@@ -58,9 +61,9 @@
     main {
         grid-row: 2;
         grid-column: 2;
-        // position: relative;
         display: grid;
         grid-template-columns: 1.5fr 1fr;
+        min-height: 100%;
     }
 
     .reviw-and-map {
@@ -75,8 +78,20 @@
     }
 }
 
-.order-card{
+.order-card {
+    position: relative;
     grid-column: 2;
+
+    // span {
+    //     position: sticky;
+    //     top: 0;
+    //     z-index: 3;
+    // }
+}
+
+.order-card span{
     position: sticky;
+    background-color: black;
     top: 0;
+    z-index: 3;
 }
