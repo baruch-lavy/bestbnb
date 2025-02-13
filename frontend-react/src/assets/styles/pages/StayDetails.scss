@@ -1,0 +1,5 @@
+.stay-details{
+    display: grid;
+    grid-template-columns: 390px 1fr 390px;
+    grid-template-rows: repeat(6, 1fr);
+}

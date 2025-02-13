@@ -22,7 +22,7 @@ export const stays = [
               by: {
                 _id: 'u102',
                 fullname: 'user2',
-                imgUrl: 'https://loremflickr.com/200/200?random=165',
+                imgUrl: 'https://loremflickr.com/200/200?random=7',
               },
             },
             {
@@ -32,7 +32,7 @@ export const stays = [
               by: {
                 _id: 'u103',
                 fullname: 'user3',
-                imgUrl: 'https://loremflickr.com/200/200?random=166',
+                imgUrl: 'https://loremflickr.com/200/200?random=8',
               },
             },
             {
@@ -42,7 +42,7 @@ export const stays = [
               by: {
                 _id: 'u104',
                 fullname: 'user4',
-                imgUrl: 'https://loremflickr.com/200/200?random=167',
+                imgUrl: 'https://loremflickr.com/200/200?random=9',
               },
             },
             {
@@ -52,13 +52,16 @@ export const stays = [
               by: {
                 _id: 'u105',
                 fullname: 'user5',
-                imgUrl: 'https://loremflickr.com/200/200?random=168',
+                imgUrl: 'https://loremflickr.com/200/200?random=10',
               },
             },
           ],
         distance: '5,462 kilometers away',
         dates: 'Feb 25 - Mar 2',
         type: 'House',
+        bedrooms : 3,
+        beds : 2,
+        baths : 1,
         summary: 'Have fun with the whole family in this newly renovated stylish accommodation and a fantastic pool to enjoy the tranquility and views from this privileged enclave at the foot of Montjuic! \n The space \n Welcome to the perfect apartment to rent with a privileged... \n Show more > ',
         capacity: 8,
         amenities: ['TV', 'Wifi', 'Kitchen', 'Smoking allowed', 'Pets allowed', 'Cooking basics'],
@@ -66,7 +69,8 @@ export const stays = [
         host: {
             _id: 'u101',
             fullname: 'Davit Pok',
-            imgUrl: 'https://loremflickr.com/200/200?random=123',
+            imgUrl: 'https://loremflickr.com/200/200?random=11',
+            yearsHosting: 4,
         },
         likedByUsers: [],
     },
@@ -165,7 +169,7 @@ export const users = [
 	{
 		_id: 'u101',
 		fullname: 'User 1',
-		imgUrl: 'https://loremflickr.com/200/200?random=8',
+		imgUrl: 'https://loremflickr.com/200/200?random=12',
 		username: 'user1',
 		password: 'secret',
 		reviews: [
