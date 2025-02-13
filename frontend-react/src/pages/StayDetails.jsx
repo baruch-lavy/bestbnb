@@ -38,6 +38,7 @@ export function StayDetails() {
   if (!stay) return <p>loading</p>
   return (
     <section className="stay-details">
+      <main>
       <div className="stay-header">
 
         <br />
@@ -88,7 +89,10 @@ export function StayDetails() {
       </div>
       {/* // } */}
       {/* <button onClick={() => { onAddStayMsg(stay._id) }}>Add stay msg</button> */}
-
+      </main>
+      <footer>
+        this is footer
+      </footer>
     </section>
   )
 }

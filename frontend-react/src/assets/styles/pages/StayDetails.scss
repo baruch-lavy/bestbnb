@@ -1,5 +1,11 @@
 .stay-details{
     display: grid;
     grid-template-columns: 390px 1fr 390px;
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-rows: 1fr 470px;
+    main{
+        grid-row: 1;
+    }
+    footer{
+        grid-row: 2;
+    }
 }
