@@ -34,21 +34,48 @@ export const SearchBar = () => {
   const guestDropdownRef = useRef(null);
 
   const destinations = [
-    { icon: faLocationArrow, name: "Nearby", description: "Find what’s around you" },
-    { icon: faUmbrellaBeach, name: "Tel Aviv-Yafo, Israel", description: "Popular beach destination" },
-    { icon: faBuilding, name: "Bucharest, Romania", description: "For sights like Cismigiu Gardens" },
-    { icon: faLandmark, name: "Paris, France", description: "For its bustling nightlife" },
-    { icon: faBuilding, name: "Budapest, Hungary", description: "For its stunning architecture" },
-    { icon: faUtensils, name: "Istanbul, Türkiye", description: "For its top-notch dining" },
+    {
+      icon: faLocationArrow,
+      name: "Nearby",
+      description: "Find what’s around you",
+    },
+    {
+      icon: faUmbrellaBeach,
+      name: "Tel Aviv-Yafo, Israel",
+      description: "Popular beach destination",
+    },
+    {
+      icon: faBuilding,
+      name: "Bucharest, Romania",
+      description: "For sights like Cismigiu Gardens",
+    },
+    {
+      icon: faLandmark,
+      name: "Paris, France",
+      description: "For its bustling nightlife",
+    },
+    {
+      icon: faBuilding,
+      name: "Budapest, Hungary",
+      description: "For its stunning architecture",
+    },
+    {
+      icon: faUtensils,
+      name: "Istanbul, Türkiye",
+      description: "For its top-notch dining",
+    },
   ];
 
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        dropdownRef.current && !dropdownRef.current.contains(event.target) &&
-        datePickerRef.current && !datePickerRef.current.contains(event.target) &&
-        guestDropdownRef.current && !guestDropdownRef.current.contains(event.target)
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        datePickerRef.current &&
+        !datePickerRef.current.contains(event.target) &&
+        guestDropdownRef.current &&
+        !guestDropdownRef.current.contains(event.target)
       ) {
         setIsDropdownOpen(false);
         setIsDatePickerOpen(false);
@@ -72,7 +99,6 @@ export const SearchBar = () => {
   return (
     <div className="search-container">
       <div className={`search-bar ${isDropdownOpen ? "expanded" : ""}`}>
-        
         {/* WHERE Section */}
         <div className="search-section where-section" ref={dropdownRef}>
           <span>Where</span>
@@ -103,15 +129,28 @@ export const SearchBar = () => {
 
         {/* CHECK-IN & CHECK-OUT Section */}
         <div className="search-section date-section" ref={datePickerRef}>
-          <div className="date-fields" onClick={() => setIsDatePickerOpen(true)}>
+          <div
+            className="date-fields"
+            onClick={() => setIsDatePickerOpen(true)}
+          >
             <div className="date-input">
               <span>Check in</span>
-              <input type="text" placeholder="Add dates" value={startDate ? startDate.toLocaleDateString() : ""} readOnly />
+              <input
+                type="text"
+                placeholder="Add dates"
+                value={startDate ? startDate.toLocaleDateString() : ""}
+                readOnly
+              />
             </div>
             <div className="divider"></div>
             <div className="date-input">
               <span>Check out</span>
-              <input type="text" placeholder="Add dates" value={endDate ? endDate.toLocaleDateString() : ""} readOnly />
+              <input
+                type="text"
+                placeholder="Add dates"
+                value={endDate ? endDate.toLocaleDateString() : ""}
+                readOnly
+              />
             </div>
           </div>
 
@@ -152,13 +191,32 @@ export const SearchBar = () => {
               {["adults", "children", "infants", "pets"].map((key) => (
                 <div className="guest-row" key={key}>
                   <div className="guest-info">
-                    <strong>{key.charAt(0).toUpperCase() + key.slice(1)}</strong>
-                    <p>{key === "pets" ? <a href="#">Bringing a service animal?</a> : `Ages for ${key}`}</p>
+                    <strong>
+                      {key.charAt(0).toUpperCase() + key.slice(1)}
+                    </strong>
+                    <p>
+                      {key === "pets" ? (
+                        <a href="#">Bringing a service animal?</a>
+                      ) : (
+                        `Ages for ${key}`
+                      )}
+                    </p>
                   </div>
                   <div className="guest-controls">
-                    <button className="guest-btn" onClick={() => handleGuestChange(key, -1)} disabled={guests[key] === 0}>−</button>
+                    <button
+                      className="guest-btn"
+                      onClick={() => handleGuestChange(key, -1)}
+                      disabled={guests[key] === 0}
+                    >
+                      −
+                    </button>
                     <span>{guests[key]}</span>
-                    <button className="guest-btn" onClick={() => handleGuestChange(key, 1)}>+</button>
+                    <button
+                      className="guest-btn"
+                      onClick={() => handleGuestChange(key, 1)}
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
               ))}
@@ -167,7 +225,9 @@ export const SearchBar = () => {
         </div>
 
         {/* SEARCH BUTTON */}
-        <button className="search-btn"><FaSearch /></button>
+        <button className="search-btn">
+          <FaSearch />
+        </button>
       </div>
     </div>
   );
