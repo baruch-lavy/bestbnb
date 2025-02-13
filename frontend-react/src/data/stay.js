@@ -7,17 +7,70 @@ export const stays = [
             city: 'Ponta Delgada',
             address: 'Windmill St. 123',
         },
-        imgUrls: ['/img/stays/windmill.jpg'],
+        imgUrls: ['https://loremflickr.com/200/200?random=1',
+            'https://loremflickr.com/200/200?random=2',
+            'https://loremflickr.com/200/200?random=3',
+            'https://loremflickr.com/200/200?random=4',
+            'https://loremflickr.com/200/200?random=5',
+            'https://loremflickr.com/200/200?random=6',],
         price: 659,
-        reviews: [{ rate: 4.92 }],
+        reviews: [
+            {
+              id: 'madeId1',
+              txt: 'Very helpful hosts. Cooked traditional local dishes and made our stay memorable.',
+              rate: 4.92,
+              by: {
+                _id: 'u102',
+                fullname: 'user2',
+                imgUrl: 'https://loremflickr.com/200/200?random=7',
+              },
+            },
+            {
+              id: 'madeId2',
+              txt: 'The apartment was spotless, and the location was perfect for exploring the city.',
+              rate: 4.85,
+              by: {
+                _id: 'u103',
+                fullname: 'user3',
+                imgUrl: 'https://loremflickr.com/200/200?random=8',
+              },
+            },
+            {
+              id: 'madeId3',
+              txt: 'Amazing stay! The host was friendly and gave us great recommendations for places to visit.',
+              rate: 4.75,
+              by: {
+                _id: 'u104',
+                fullname: 'user4',
+                imgUrl: 'https://loremflickr.com/200/200?random=9',
+              },
+            },
+            {
+              id: 'madeId4',
+              txt: 'Great hosts, and the apartment exceeded our expectations. Highly recommended!',
+              rate: 5.0,
+              by: {
+                _id: 'u105',
+                fullname: 'user5',
+                imgUrl: 'https://loremflickr.com/200/200?random=10',
+              },
+            },
+          ],
         distance: '5,462 kilometers away',
         dates: 'Feb 25 - Mar 2',
         type: 'House',
-        summary: 'Fantastic duplex apartment...',
+        bedrooms : 3,
+        beds : 2,
+        baths : 1,
+        summary: 'Have fun with the whole family in this newly renovated stylish accommodation and a fantastic pool to enjoy the tranquility and views from this privileged enclave at the foot of Montjuic! \n The space \n Welcome to the perfect apartment to rent with a privileged... \n Show more > ',
         capacity: 8,
         amenities: ['TV', 'Wifi', 'Kitchen', 'Smoking allowed', 'Pets allowed', 'Cooking basics'],
         labels: ['Top of the world', 'Trending', 'Play', 'Tropical'],
         host: {
+            _id: 'u101',
+            fullname: 'Davit Pok',
+            imgUrl: 'https://loremflickr.com/200/200?random=11',
+            yearsHosting: 4,
         },
         likedByUsers: [],
     },
@@ -110,3 +163,33 @@ export const stays = [
         likedByUsers: [],
     }
 ] 
+
+
+export const users = [
+	{
+		_id: 'u101',
+		fullname: 'User 1',
+		imgUrl: 'https://loremflickr.com/200/200?random=12',
+		username: 'user1',
+		password: 'secret',
+		reviews: [
+			{
+				id: 'madeId',
+				txt: 'Quiet guest...',
+				rate: 4,
+				by: {
+					_id: 'u102',
+					fullname: 'user2',
+					imgUrl: '/img/img2.jpg',
+				},
+			},
+		],
+	},
+	{
+		_id: 'u102',
+		fullname: 'User 2',
+		imgUrl: '/img/img2.jpg',
+		username: 'user2',
+		password: 'secret',
+	},
+]
