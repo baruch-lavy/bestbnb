@@ -5,14 +5,14 @@ import { userService } from '../user'
 const STORAGE_KEY = 'stay'
 _createStays()
 
-const categoryMapping = {
-    'OMG!': ['Luxury', 'Exclusive'],
-    'Icons': ['Modern', 'Urban'],
-    'Castles': ['Villa', 'Mansion'],
-    'Beachfront': ['Beachfront', 'Seaview'],
-    'Cabins': ['Cabin', 'Cottage'],
-    // ... add more mappings
-}
+// const categoryMapping = {
+//     'OMG!': ['Luxury', 'Exclusive'],
+//     'Icons': ['Modern', 'Urban'],
+//     'Castles': ['Villa', 'Mansion'],
+//     'Beachfront': ['Beachfront', 'Seaview'],
+//     'Cabins': ['Cabin', 'Cottage'],
+//     // ... add more mappings
+// }
 
 export const stayService = {
     query,
@@ -54,8 +54,7 @@ async function query(filterBy = { txt: '', price: 0, type: '' }) {
         })
     }
 
-    stays = stays.map
-        (({
+    stays = stays.map(({
             _id,
             name,
             loc,
@@ -73,7 +72,8 @@ async function query(filterBy = { txt: '', price: 0, type: '' }) {
             amenities,
             labels,
             host,
-            likedByUsers }) =>
+            likedByUsers,
+            isFavorite }) =>
 
         ({
             _id,
@@ -93,7 +93,8 @@ async function query(filterBy = { txt: '', price: 0, type: '' }) {
             amenities,
             labels,
             host,
-            likedByUsers
+            likedByUsers,
+            isFavorite
         }))
 
     return stays
@@ -171,7 +172,6 @@ function _createStays() {
     if (!stays || !stays.length) {
         let stays = [
             {
-
                 _id: 's102',
                 name: 'Lisbon Retreat',
                 loc: {
@@ -225,6 +225,7 @@ function _createStays() {
                     imgUrl: 'https://loremflickr.com/200/200?random=19',
                     yearsHosting: 5,
                 },
+                isFavorite: true,
                 likedByUsers: [],
             },
             {
@@ -270,6 +271,7 @@ function _createStays() {
                     imgUrl: 'https://loremflickr.com/200/200?random=25',
                     yearsHosting: 6,
                 },
+                isFavorite: false,
                 likedByUsers: [],
             },
             {
@@ -314,6 +316,7 @@ function _createStays() {
                     imgUrl: 'https://loremflickr.com/200/200?random=30',
                     yearsHosting: 7,
                 },
+                isFavorite: true,
                 likedByUsers: [],
             },
             {
@@ -358,6 +361,7 @@ function _createStays() {
                     imgUrl: 'https://loremflickr.com/200/200?random=35',
                     yearsHosting: 3,
                 },
+                isFavorite: false,
                 likedByUsers: [],
             },
             {
@@ -402,6 +406,7 @@ function _createStays() {
                     imgUrl: 'https://loremflickr.com/200/200?random=40',
                     yearsHosting: 6,
                 },
+                isFavorite: true,
                 likedByUsers: [],
             },
             {
@@ -446,6 +451,7 @@ function _createStays() {
                     imgUrl: 'https://loremflickr.com/200/200?random=45',
                     yearsHosting: 3,
                 },
+                isFavorite: false,
                 likedByUsers: [],
             },
             {
@@ -490,6 +496,7 @@ function _createStays() {
                     imgUrl: 'https://loremflickr.com/200/200?random=50',
                     yearsHosting: 8,
                 },
+                isFavorite: true,
                 likedByUsers: [],
             },
             {
@@ -534,6 +541,7 @@ function _createStays() {
                     imgUrl: 'https://loremflickr.com/200/200?random=55',
                     yearsHosting: 5,
                 },
+                isFavorite: false,
                 likedByUsers: [],
             },
             {
@@ -578,6 +586,7 @@ function _createStays() {
                     imgUrl: 'https://loremflickr.com/200/200?random=60',
                     yearsHosting: 7,
                 },
+                isFavorite: true,
                 likedByUsers: [],
             },
             {
@@ -622,6 +631,7 @@ function _createStays() {
                     imgUrl: 'https://loremflickr.com/200/200?random=65',
                     yearsHosting: 5,
                 },
+                isFavorite: false,
                 likedByUsers: [],
             },
             {
@@ -666,6 +676,7 @@ function _createStays() {
                     imgUrl: 'https://loremflickr.com/200/200?random=70',
                     yearsHosting: 6,
                 },
+                isFavorite: true,
                 likedByUsers: [],
             },
             {
@@ -710,8 +721,410 @@ function _createStays() {
                     imgUrl: 'https://loremflickr.com/200/200?random=75',
                     yearsHosting: 4,
                 },
+                isFavorite: false,
                 likedByUsers: [],
             },
+            {
+                _id: 's114',
+                name: 'Santorini Cliffside Villa',
+                loc: {
+                    country: 'Greece',
+                    city: 'Santorini',
+                    address: 'Oia Sunset Blvd. 3',
+                },
+                imgUrls: [
+                    'https://loremflickr.com/200/200?random=76',
+                    'https://loremflickr.com/200/200?random=77',
+                    'https://loremflickr.com/200/200?random=78',
+                ],
+                price: 1050,
+                reviews: [
+                    {
+                        id: 'review14',
+                        txt: 'Unforgettable sunsets and crystal-clear waters!',
+                        rate: 4.97,
+                        by: {
+                            _id: 'u114',
+                            fullname: 'user19',
+                            imgUrl: 'https://loremflickr.com/200/200?random=79',
+                        },
+                    },
+                ],
+                distance: '6,300 kilometers away',
+                dates: 'Sep 12 - Sep 19',
+                type: 'Villa',
+                bedrooms: 3,
+                beds: 3,
+                baths: 2,
+                summary: 'A luxurious whitewashed villa perched on a cliff, offering breathtaking views of the Aegean Sea.',
+                capacity: 5,
+                amenities: ['Infinity pool', 'Sea view', 'Private terrace', 'Sun loungers'],
+                labels: ['Romantic', 'Seaside', 'Luxury'],
+                host: {
+                    _id: 'u114',
+                    fullname: 'Maria Papadopoulos',
+                    imgUrl: 'https://loremflickr.com/200/200?random=80',
+                    yearsHosting: 8,
+                },
+                isFavorite: true,
+                likedByUsers: [],
+            },
+            {
+                _id: 's115',
+                name: 'Swiss Alps Chalet',
+                loc: {
+                    country: 'Switzerland',
+                    city: 'Zermatt',
+                    address: 'Matterhorn View 8',
+                },
+                imgUrls: [
+                    'https://loremflickr.com/200/200?random=81',
+                    'https://loremflickr.com/200/200?random=82',
+                    'https://loremflickr.com/200/200?random=83',
+                ],
+                price: 1120,
+                reviews: [
+                    {
+                        id: 'review15',
+                        txt: 'Perfect for ski lovers and mountain adventurers!',
+                        rate: 4.91,
+                        by: {
+                            _id: 'u115',
+                            fullname: 'user20',
+                            imgUrl: 'https://loremflickr.com/200/200?random=84',
+                        },
+                    },
+                ],
+                distance: '7,200 kilometers away',
+                dates: 'Feb 1 - Feb 8',
+                type: 'Chalet',
+                bedrooms: 4,
+                beds: 6,
+                baths: 3,
+                summary: 'A cozy wooden chalet nestled in the Swiss Alps, with a fireplace and a stunning view of the Matterhorn.',
+                capacity: 8,
+                amenities: ['Ski-in/Ski-out', 'Fireplace', 'Sauna', 'Mountain view'],
+                labels: ['Adventure', 'Cozy', 'Scenic'],
+                host: {
+                    _id: 'u115',
+                    fullname: 'Hans Meier',
+                    imgUrl: 'https://loremflickr.com/200/200?random=85',
+                    yearsHosting: 10,
+                },
+                isFavorite: false,
+                likedByUsers: [],
+            },
+            {
+                _id: 's116',
+                name: 'New York Loft',
+                loc: {
+                    country: 'USA',
+                    city: 'New York',
+                    address: 'Brooklyn Heights 22',
+                },
+                imgUrls: [
+                    'https://loremflickr.com/200/200?random=86',
+                    'https://loremflickr.com/200/200?random=87',
+                    'https://loremflickr.com/200/200?random=88',
+                ],
+                price: 880,
+                reviews: [
+                    {
+                        id: 'review16',
+                        txt: 'A stylish industrial loft in the heart of Brooklyn!',
+                        rate: 4.88,
+                        by: {
+                            _id: 'u116',
+                            fullname: 'user21',
+                            imgUrl: 'https://loremflickr.com/200/200?random=89',
+                        },
+                    },
+                ],
+                distance: '2,500 kilometers away',
+                dates: 'Mar 15 - Mar 22',
+                type: 'Loft',
+                bedrooms: 1,
+                beds: 1,
+                baths: 1,
+                summary: 'A modern and stylish loft in Brooklyn with an open-plan design and an artistic vibe.',
+                capacity: 2,
+                amenities: ['Exposed brick', 'Rooftop access', 'High-speed Wifi', 'Smart TV'],
+                labels: ['Urban', 'Trendy', 'Minimalist'],
+                host: {
+                    _id: 'u116',
+                    fullname: 'Jessica Turner',
+                    imgUrl: 'https://loremflickr.com/200/200?random=90',
+                    yearsHosting: 3,
+                },
+                isFavorite: false,
+                likedByUsers: [],
+            },
+            {
+                _id: 's117',
+                name: 'Dubai Marina Penthouse',
+                loc: {
+                    country: 'UAE',
+                    city: 'Dubai',
+                    address: 'Palm Jumeirah 18',
+                },
+                imgUrls: [
+                    'https://loremflickr.com/200/200?random=91',
+                    'https://loremflickr.com/200/200?random=92',
+                    'https://loremflickr.com/200/200?random=93',
+                ],
+                price: 1300,
+                reviews: [
+                    {
+                        id: 'review17',
+                        txt: 'Extravagant, luxurious, and worth every penny!',
+                        rate: 5.0,
+                        by: {
+                            _id: 'u117',
+                            fullname: 'user22',
+                            imgUrl: 'https://loremflickr.com/200/200?random=94',
+                        },
+                    },
+                ],
+                distance: '4,500 kilometers away',
+                dates: 'May 10 - May 17',
+                type: 'Penthouse',
+                bedrooms: 3,
+                beds: 3,
+                baths: 3,
+                summary: 'A high-end penthouse in Dubai Marina with floor-to-ceiling windows and a private infinity pool.',
+                capacity: 6,
+                amenities: ['Infinity pool', 'Smart home system', 'Ocean view', 'Gym'],
+                labels: ['Luxury', 'Seaside', 'Exclusive'],
+                host: {
+                    _id: 'u117',
+                    fullname: 'Omar Khalid',
+                    imgUrl: 'https://loremflickr.com/200/200?random=95',
+                    yearsHosting: 9,
+                },
+                isFavorite: true,
+                likedByUsers: [],
+            },
+            {
+                _id: 's118',
+                name: 'Parisian Eiffel View Apartment',
+                loc: {
+                    country: 'France',
+                    city: 'Paris',
+                    address: 'Champs-Élysées 12',
+                },
+                imgUrls: [
+                    'https://loremflickr.com/200/200?random=96',
+                    'https://loremflickr.com/200/200?random=97',
+                    'https://loremflickr.com/200/200?random=98',
+                ],
+                price: 970,
+                reviews: [
+                    {
+                        id: 'review18',
+                        txt: 'Amazing location with a direct view of the Eiffel Tower!',
+                        rate: 4.9,
+                        by: {
+                            _id: 'u118',
+                            fullname: 'user23',
+                            imgUrl: 'https://loremflickr.com/200/200?random=99',
+                        },
+                    },
+                ],
+                distance: '3,400 kilometers away',
+                dates: 'Jun 10 - Jun 17',
+                type: 'Apartment',
+                bedrooms: 2,
+                beds: 2,
+                baths: 1,
+                summary: 'A charming apartment in the heart of Paris with breathtaking views of the Eiffel Tower.',
+                capacity: 4,
+                amenities: ['Balcony', 'Smart TV', 'Fully equipped kitchen', 'WiFi'],
+                labels: ['Romantic', 'Urban', 'Scenic'],
+                host: {
+                    _id: 'u118',
+                    fullname: 'Sophie Dubois',
+                    imgUrl: 'https://loremflickr.com/200/200?random=100',
+                    yearsHosting: 5,
+                },
+                likedByUsers: [],
+            },
+            {
+                _id: 's119',
+                name: 'Tokyo Skyline Penthouse',
+                loc: {
+                    country: 'Japan',
+                    city: 'Tokyo',
+                    address: 'Shibuya Crossing 5',
+                },
+                imgUrls: [
+                    'https://loremflickr.com/200/200?random=101',
+                    'https://loremflickr.com/200/200?random=102',
+                    'https://loremflickr.com/200/200?random=103',
+                ],
+                price: 1200,
+                reviews: [
+                    {
+                        id: 'review19',
+                        txt: 'Futuristic design with an unbeatable cityscape view!',
+                        rate: 4.92,
+                        by: {
+                            _id: 'u119',
+                            fullname: 'user24',
+                            imgUrl: 'https://loremflickr.com/200/200?random=104',
+                        },
+                    },
+                ],
+                distance: '9,000 kilometers away',
+                dates: 'Jul 20 - Jul 27',
+                type: 'Penthouse',
+                bedrooms: 3,
+                beds: 3,
+                baths: 2,
+                summary: 'A luxurious penthouse with panoramic city views and a high-tech interior.',
+                capacity: 6,
+                amenities: ['Jacuzzi', 'Smart home system', 'City view', 'Private bar'],
+                labels: ['Modern', 'Luxury', 'Tech-savvy'],
+                host: {
+                    _id: 'u119',
+                    fullname: 'Kenji Tanaka',
+                    imgUrl: 'https://loremflickr.com/200/200?random=105',
+                    yearsHosting: 6,
+                },
+                likedByUsers: [],
+            },
+            {
+                _id: 's120',
+                name: 'Venetian Grand Canal View',
+                loc: {
+                    country: 'Italy',
+                    city: 'Venice',
+                    address: 'Rialto Bridge 10',
+                },
+                imgUrls: [
+                    'https://loremflickr.com/200/200?random=106',
+                    'https://loremflickr.com/200/200?random=107',
+                    'https://loremflickr.com/200/200?random=108',
+                ],
+                price: 890,
+                reviews: [
+                    {
+                        id: 'review20',
+                        txt: 'Magical experience by the canals of Venice!',
+                        rate: 4.85,
+                        by: {
+                            _id: 'u120',
+                            fullname: 'user25',
+                            imgUrl: 'https://loremflickr.com/200/200?random=109',
+                        },
+                    },
+                ],
+                distance: '2,500 kilometers away',
+                dates: 'Sep 5 - Sep 12',
+                type: 'Apartment',
+                bedrooms: 2,
+                beds: 2,
+                baths: 1,
+                summary: 'A traditional Venetian home with breathtaking canal views.',
+                capacity: 4,
+                amenities: ['Boat access', 'Historical charm', 'WiFi', 'Kitchen'],
+                labels: ['Romantic', 'Historic', 'Scenic'],
+                host: {
+                    _id: 'u120',
+                    fullname: 'Giovanni Rossi',
+                    imgUrl: 'https://loremflickr.com/200/200?random=110',
+                    yearsHosting: 7,
+                },
+                likedByUsers: [],
+            },
+            {
+                _id: 's121',
+                name: 'Santorini Sunset Villa',
+                loc: {
+                    country: 'Greece',
+                    city: 'Santorini',
+                    address: 'Oia Cliffside 3',
+                },
+                imgUrls: [
+                    'https://loremflickr.com/200/200?random=111',
+                    'https://loremflickr.com/200/200?random=112',
+                    'https://loremflickr.com/200/200?random=113',
+                ],
+                price: 1200,
+                reviews: [
+                    {
+                        id: 'review21',
+                        txt: 'The most stunning sunset Ive ever seen!',
+                        rate: 4.98,
+                        by: {
+                            _id: 'u121',
+                            fullname: 'user26',
+                            imgUrl: 'https://loremflickr.com/200/200?random=114',
+                        },
+                    },
+                ],
+                distance: '3,100 kilometers away',
+                dates: 'Oct 1 - Oct 8',
+                type: 'Villa',
+                bedrooms: 3,
+                beds: 3,
+                baths: 2,
+                summary: 'A luxurious Greek villa with breathtaking sunset views over the Aegean Sea.',
+                capacity: 6,
+                amenities: ['Infinity pool', 'Ocean view', 'Outdoor lounge', 'Kitchen'],
+                labels: ['Luxury', 'Romantic', 'Seaside'],
+                host: {
+                    _id: 'u121',
+                    fullname: 'Elena Papadopoulos',
+                    imgUrl: 'https://loremflickr.com/200/200?random=115',
+                    yearsHosting: 5,
+                },
+                likedByUsers: [],
+            },
+            {
+                _id: 's122',
+                name: 'Swiss Alps Chalet',
+                loc: {
+                    country: 'Switzerland',
+                    city: 'Zermatt',
+                    address: 'Matterhorn Rd. 15',
+                },
+                imgUrls: [
+                    'https://loremflickr.com/200/200?random=116',
+                    'https://loremflickr.com/200/200?random=117',
+                    'https://loremflickr.com/200/200?random=118',
+                ],
+                price: 1500,
+                reviews: [
+                    {
+                        id: 'review22',
+                        txt: 'A perfect getaway in the mountains!',
+                        rate: 4.93,
+                        by: {
+                            _id: 'u122',
+                            fullname: 'user27',
+                            imgUrl: 'https://loremflickr.com/200/200?random=119',
+                        },
+                    },
+                ],
+                distance: '2,800 kilometers away',
+                dates: 'Dec 20 - Dec 27',
+                type: 'Chalet',
+                bedrooms: 4,
+                beds: 4,
+                baths: 3,
+                summary: 'A cozy Swiss chalet with direct access to ski slopes and mountain views.',
+                capacity: 8,
+                amenities: ['Fireplace', 'Ski-in/Ski-out', 'Hot tub', 'Mountain view'],
+                labels: ['Ski retreat', 'Luxury', 'Scenic'],
+                host: {
+                    _id: 'u122',
+                    fullname: 'Luca Müller',
+                    imgUrl: 'https://loremflickr.com/200/200?random=120',
+                    yearsHosting: 8,
+                },
+                likedByUsers: [],
+            },
+        
         ]
         console.log(stays)
         storageService.saveToStorage(STORAGE_KEY, stays)

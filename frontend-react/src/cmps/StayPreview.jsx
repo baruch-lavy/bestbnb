@@ -13,7 +13,9 @@ export function StayPreview({ stay }) {
                 <img src={stay.imgUrls[+currentImgIdx]} alt={stay.name} />
 
                 <div className="img-btns">
-                    <div className="guest-favorite">Guest favorite</div>
+                    {stay.isFavorite && (
+                        <div className="guest-favorite">Guest favorite</div>
+                    )}
                     <button 
                         className={`btn-like ${isLiked ? 'active' : ''}`}
                         onClick={() => setIsLiked(prev => !prev)}>
