@@ -58,17 +58,21 @@ export function StayPreview({ stay }) {
         }
     }
 
-    if (!stay) return <p>Loading...</p>
+    if (!stay) return <Loader />
     
     return (
         <>
             <article className="stay-preview">
                 <div className="img-container">
-                    <img src={stay.imgUrls[0]} alt={stay.name} />
-
+                    <Link to={`/stay/${stay._id}`} target="_blank">
+                        <img src={stay.imgUrls[0]} alt={stay.name} />
+                    </Link>
+                    
                     <div className="img-btns">
                         {stay.isFavorite && (
-                            <div className="guest-favorite">Guest favorite</div>
+                            <Link to={`/stay/${stay._id}`} target="_blank">
+                                <div className="guest-favorite">Guest favorite</div>
+                            </Link>
                         )}
                         <button 
                             className="btn-like"

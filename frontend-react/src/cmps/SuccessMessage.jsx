@@ -13,7 +13,7 @@ export function SuccessMessage({ message, onClose, imgUrl, onExited }) {
         setIsExiting(true)
         setTimeout(() => {
             onClose()
-        }, 300) // משך האנימציה
+        }, 300) 
     }
 
     return (
