@@ -20,9 +20,9 @@
 
         .img-btns {
             position: absolute;
-            top: 16px;
-            left: 16px;
-            right: 16px;
+            top: 10px;
+            left: 10px;
+            right: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -30,7 +30,7 @@
 
             .guest-favorite {
                 background-color: white;
-                padding: 4px 8px;
+                padding: 17px 17px;
                 border-radius: 20px;
                 font-size: 0.8em;
                 cursor: pointer;
@@ -38,6 +38,7 @@
                 display: flex;
                 align-items: center;
                 font-weight: bold;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
             }
 
             .btn-like {
@@ -72,7 +73,9 @@
 
                     &.active {
                         fill: #FF385C;
-                        stroke: none;
+                        stroke: white;
+                        stroke-width: 2;
+                        filter: drop-shadow(0 0 1px rgba(0,0,0,0.2));
                     }
                 }
             }
