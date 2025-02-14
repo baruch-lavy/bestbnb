@@ -89,7 +89,7 @@
     // }
 }
 
-.order-card span button{
+.order-card span button {
     height: 100px;
     padding: 30px;
     position: sticky;
@@ -97,4 +97,71 @@
     top: 30px;
     z-index: 3;
     margin: 10px 0;
+}
+
+// .reserve-btn{
+//   border: none;
+//   color: white;
+//   padding: 15px 32px;
+//   text-align: center;
+//   text-decoration: none;
+//   display: inline-block;
+//   font-size: 16px;
+//   cursor: pointer;
+//   border-radius: 4px;
+//   position: relative;
+
+//   &::before{
+//     content: "";
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   background-color: #66bb6a; /* צבע בהיר יותר */
+//   transition: 0.3s;
+//   opacity: 0;
+//   }
+
+//   &:hover::before{
+//     opacity: 1;
+//     transition: opacity 0.2s;
+//   }
+// }
+
+// body {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     height: 100vh;
+// }
+
+.reserve-btn {
+    color: white;
+    position: relative;
+    border: none;
+    padding: 10px 15px;
+    background: #3984ff;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    overflow: hidden;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: calc(var(--y, 0) * 1px - 50px);
+        left: calc(var(--x, 0) * 1px - 50px);
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(white, #3984ff00 80%);
+
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+
+    &:hover::after {
+        opacity: 0.4;
+    }
 }

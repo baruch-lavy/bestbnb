@@ -15,6 +15,14 @@ export function StayOrder({ stay }) {
     const cleanFee = 0.095
     const airbnbFee = 0.13
 
+
+    const handleMouseMove = (e) => {
+        const button = e.currentTarget;
+        const { x, y } = button.getBoundingClientRect();
+        button.style.setProperty("--x", e.clientX - x);
+        button.style.setProperty("--y", e.clientY - y);
+    };
+
     return (
         <div className="d">
             <h2 className="e">${stay.price}<span> night</span></h2>
@@ -57,7 +65,9 @@ export function StayOrder({ stay }) {
             </div>
 
             {/* Reserve Button */}
-            <button className="tion">
+            <button
+             className="reserve-btn"
+             onMouseMove={handleMouseMove}>
                 Reserve
             </button>
 
