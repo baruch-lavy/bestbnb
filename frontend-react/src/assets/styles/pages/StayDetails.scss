@@ -141,8 +141,9 @@
     color: white;
     position: relative;
     border: none;
-    padding: 10px 15px;
-    background: #3984ff;
+    height: 3rem;
+    width: 200px;
+    background: linear-gradient(to right, #ff385c, #d70466); 
     border-radius: 10px;
     font-weight: bold;
     cursor: pointer;
@@ -151,11 +152,11 @@
     &::after {
         content: "";
         position: absolute;
-        top: calc(var(--y, 0) * 1px - 50px);
-        left: calc(var(--x, 0) * 1px - 50px);
-        width: 100px;
-        height: 100px;
-        background: radial-gradient(white, #3984ff00 80%);
+        top: calc(var(--y, 0) * 1px - 100px);
+        left: calc(var(--x, 0) * 1px - 100px);
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(rgba(199, 230, 21, 0.726), #3984ff00 80%);
 
         opacity: 0;
         transition: opacity 0.2s;
