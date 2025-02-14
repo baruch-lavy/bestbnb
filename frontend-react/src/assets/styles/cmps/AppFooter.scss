@@ -1,26 +1,84 @@
-.app-footer{
+.app-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border-top: 1px solid #dddddd;
+    padding: 2px 90px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    font-size: 15px;
+    color: #222222;
 
-    min-height: 3.5rem;
+    .footer-left {
+        display: flex;
+        gap: 6px;
+        align-items: center;
 
-    padding: rem(10px) 1rem;
-    background-color: $clr4;
+        p, a {
+            margin: 0;
+            color: rgb(34, 34, 34);
+            text-decoration: none;
+            font-size: 15px;
+            line-height: 18px;
 
-    p {
-        margin: 0;
-    }
-    
-    span {
-        font-size: .8em;
-        
-        &.local-services {
-            color: $clr1;
+            &:hover {
+                text-decoration: underline;
+            }
         }
-        
-        &.remote-services {
-            color: $clr5;
+    }
+
+    .footer-right {
+        display: flex;
+        align-items: center;
+
+        .dollar-icon {
+            font-size: 1.5em;
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+            background: none;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            color: rgb(34, 34, 34);
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 22px;
+
+            &:hover {
+                text-decoration: underline;
+            }
+
+            .globe-icon {
+                width: 16px;
+                height: 16px;
+                margin-right: 2px;
+            }
+
+            .chevron-icon {
+                width: 12px;
+                height: 12px;
+                margin-left: 2px;
+            }
+        }
+
+        .support-btn {
+            font-weight: 600;
+            padding-right: 8px;
         }
     }
+
+    .dot-separator {
+        color: rgb(113, 113, 113);
+    }
+}
+
+main {
+    margin-bottom: 82px;
 }
