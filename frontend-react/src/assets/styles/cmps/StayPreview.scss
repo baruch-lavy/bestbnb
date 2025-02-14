@@ -20,7 +20,7 @@
 
         .img-btns {
             position: absolute;
-            top: 0;
+            top: 16px;
             left: 16px;
             right: 16px;
             display: flex;
@@ -31,21 +31,49 @@
             .guest-favorite {
                 background-color: white;
                 padding: 4px 8px;
-                border-radius: 4px;
+                border-radius: 20px;
                 font-size: 0.8em;
                 cursor: pointer;
+                height: 28px;
+                display: flex;
+                align-items: center;
+                font-weight: bold;
             }
 
             .btn-like {
+                margin-left: auto;
                 background: none;
                 border: none;
-                color: white;
-                font-size: 24px;
+                width: 32px;
+                height: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 cursor: pointer;
-                text-shadow: 0 0 4px rgba(0,0,0,0.4);
+                transition: transform 0.2s;
+                padding: 0;
                 
-                &.active {
-                    color: $clr1;
+                &:hover {
+                    transform: scale(1.1);
+                }
+
+                &:active {
+                    transform: scale(0.95);
+                }
+
+                svg {
+                    display: block;
+                    fill: rgba(0, 0, 0, 0.5);
+                    height: 24px;
+                    width: 24px;
+                    stroke: white;
+                    stroke-width: 2;
+                    overflow: visible;
+
+                    &.active {
+                        fill: #FF385C;
+                        stroke: none;
+                    }
                 }
             }
         }
