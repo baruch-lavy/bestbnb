@@ -2,6 +2,14 @@ import { stayService } from '../../services/stay'
 import { store } from '../store'
 import { ADD_STAY, REMOVE_STAY, SET_STAYS, SET_STAY, UPDATE_STAY, ADD_STAY_MSG } from '../reducers/stay.reducer'
 
+export const SET_SEARCH_DATA = "SET_SEARCH_DATA";
+
+export const setSearchData = (data) => ({
+  type: SET_SEARCH_DATA,
+  payload: data,
+});
+
+
 export async function loadStays(filterBy) {
     try {
         const stays = await stayService.query(filterBy)

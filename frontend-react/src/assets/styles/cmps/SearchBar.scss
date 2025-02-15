@@ -372,3 +372,8 @@
     color: #ccc;
     cursor: not-allowed;
 }
+
+.dropdown {
+    display: block !important; /* Force visibility */
+    opacity: 1 !important;
+  }

@@ -1,7 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useSelector, useDispatch } from "react-redux";
+import { setSearchData } from "../store/actions/stay.actions"; // Redux action
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,18 +14,13 @@ import {
   faLandmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-export const SearchBar = ({setSearchData}) => {
-  const [destination, setDestination] = useState("");
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [openDropdown, setOpenDropdown] = useState(null); // Track which dropdown is open
-
-  const [guests, setGuests] = useState({
-    adults: 0,
-    children: 0,
-    infants: 0,
-    pets: 0,
-  });
+export const SearchBar = ({
+  openDropdown,
+  handleDropdownOpen,
+  handleSearch,
+}) => {
+  const dispatch = useDispatch();
+  const search = useSelector((state) => state.search || {}); // Ensure state exists
 
   const dropdownRef = useRef(null);
   const datePickerRef = useRef(null);
@@ -62,17 +59,7 @@ export const SearchBar = ({setSearchData}) => {
     },
   ];
 
-  // Close dropdowns when clicking outside OR switching between them
-  useEffect(() => {
-    // ✅ Automatically update search data when inputs change
-    setSearchData({
-      destination: destination || "Anywhere",
-      startDate: startDate,
-      endDate: endDate,
-      guests: guests.adults + guests.children > 0 ? `${guests.adults + guests.children} guests` : "Add guests",
-    });
-  }, [destination, startDate, endDate, guests, setSearchData]);
-  
+  // ✅ Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       // ✅ Check if click is INSIDE any dropdown
@@ -81,13 +68,11 @@ export const SearchBar = ({setSearchData}) => {
         datePickerRef.current?.contains(event.target) ||
         guestDropdownRef.current?.contains(event.target)
       ) {
-        return; // If clicking inside, do nothing
+        return;
       }
-  
-      // ✅ Clicking OUTSIDE: Close all dropdowns
-      setOpenDropdown(null);
+      handleDropdownOpen(null);
     };
-  
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -96,21 +81,17 @@ export const SearchBar = ({setSearchData}) => {
   
   
 
-  function setIsDropdownOpen(value) {
-    setOpenDropdown(value);
-    }
-
-  // Function to open one dropdown & close others
-  const handleDropdownOpen = (dropdown) => {
-    setOpenDropdown((prev) => (prev === dropdown ? null : dropdown));
-  };
-
-  // Handle guest selection
+  // ✅ Handle guest selection
   const handleGuestChange = (type, amount) => {
-    setGuests((prev) => ({
-      ...prev,
-      [type]: Math.max(0, prev[type] + amount),
-    }));
+    dispatch(
+      setSearchData({
+        ...search,
+        guests: {
+          ...search.guests,
+          [type]: Math.max(0, (search.guests?.[type] || 0) + amount),
+        },
+      })
+    );
   };
 
   return (
@@ -122,8 +103,15 @@ export const SearchBar = ({setSearchData}) => {
           <input
             type="text"
             placeholder="Search destinations"
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
+            value={search.destination || ""}
+            onChange={(e) =>
+              dispatch(
+                setSearchData({
+                  ...search,
+                  destination: e.target.value,
+                })
+              )
+            }
             onFocus={() => handleDropdownOpen("where")}
           />
           {openDropdown === "where" && (
@@ -134,8 +122,13 @@ export const SearchBar = ({setSearchData}) => {
                   key={index}
                   className="suggestion"
                   onClick={() => {
-                    setDestination(dest.name); // ✅ Set selected destination in input field
-                    setOpenDropdown(null); // ✅ Close the dropdown after selection
+                    dispatch(
+                      setSearchData({
+                        ...search,
+                        destination: dest.name,
+                      })
+                    );
+                    handleDropdownOpen(null);
                   }}
                 >
                   <FontAwesomeIcon icon={dest.icon} className="icon" />
@@ -162,7 +155,11 @@ export const SearchBar = ({setSearchData}) => {
               <input
                 type="text"
                 placeholder="Add dates"
-                value={startDate ? startDate.toLocaleDateString() : ""}
+                value={
+                  search.startDate
+                    ? new Date(search.startDate).toLocaleDateString()
+                    : ""
+                }
                 readOnly
               />
             </div>
@@ -172,7 +169,11 @@ export const SearchBar = ({setSearchData}) => {
               <input
                 type="text"
                 placeholder="Add dates"
-                value={endDate ? endDate.toLocaleDateString() : ""}
+                value={
+                  search.endDate
+                    ? new Date(search.endDate).toLocaleDateString()
+                    : ""
+                }
                 readOnly
               />
             </div>
@@ -181,15 +182,24 @@ export const SearchBar = ({setSearchData}) => {
           {openDropdown === "dates" && (
             <div className="date-picker-dropdown">
               <DatePicker
-                selected={startDate}
+                selected={search.startDate ? new Date(search.startDate) : null}
                 onChange={(dates) => {
                   const [start, end] = dates;
-                  setStartDate(start);
-                  setEndDate(end);
-                  if (end) setTimeout(() => setOpenDropdown(null), 200);
+
+                  // Ensure that `endDate` is not erased if still selecting dates
+                  dispatch(
+                    setSearchData({
+                      ...search,
+                      startDate: start,
+                      endDate: end || search.endDate, // Keep the existing `endDate` if `null`
+                    })
+                  );
+
+                  // Only close the dropdown when both dates are selected
+                  if (end) setTimeout(() => handleDropdownOpen(null), 200);
                 }}
-                startDate={startDate}
-                endDate={endDate}
+                startDate={search.startDate ? new Date(search.startDate) : null}
+                endDate={search.endDate ? new Date(search.endDate) : null}
                 selectsRange
                 monthsShown={2}
                 inline
@@ -206,7 +216,9 @@ export const SearchBar = ({setSearchData}) => {
           <input
             type="text"
             placeholder="Add guests"
-            value={`${guests.adults + guests.children} guests`}
+            value={`${
+              (search.guests?.adults || 0) + (search.guests?.children || 0)
+            } guests`}
             readOnly
             onClick={() => handleDropdownOpen("who")}
           />
@@ -230,11 +242,11 @@ export const SearchBar = ({setSearchData}) => {
                     <button
                       className="guest-btn"
                       onClick={() => handleGuestChange(key, -1)}
-                      disabled={guests[key] === 0}
+                      disabled={search.guests?.[key] === 0}
                     >
                       −
                     </button>
-                    <span>{guests[key]}</span>
+                    <span>{search.guests?.[key] || 0}</span>
                     <button
                       className="guest-btn"
                       onClick={() => handleGuestChange(key, 1)}
@@ -249,7 +261,7 @@ export const SearchBar = ({setSearchData}) => {
         </div>
 
         {/* SEARCH BUTTON */}
-        <button className="search-btn">
+        <button className="search-btn" onClick={handleSearch}>
           <FaSearch />
         </button>
       </div>
