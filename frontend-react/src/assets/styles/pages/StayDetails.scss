@@ -64,7 +64,143 @@
         display: grid;
         grid-template-columns: 1.5fr 1fr;
         min-height: 100%;
+
+        section {
+            display: flex;
+            flex-direction: column;
+            color: #222222;
+
+            &>* {
+                border-bottom: 0.5px solid #22222238;
+
+            }
+
+            .stay-short-info {
+                padding: rem(32px) 0;
+
+                .info-header {
+                    font-size: rem(22px);
+                    line-height: rem(26px);
+                    margin-bottom: rem(4px);
+                }
+
+                .info {
+                    font-size: rem(16px);
+                    font-weight: 100;
+                    line-height: rem(20px);
+                    margin: 0;
+                }
+
+                .rate {
+                    font-size: rem(17px);
+                    line-height: rem(20px);
+                    margin: rem(8px) 0 0 0;
+                }
+
+            }
+
+            .host-short-info {
+                display: flex;
+                gap: 24px;
+                padding: rem(24px) 0;
+
+
+                img {
+                    height: rem(40px) !important;
+                    width: rem(40px) !important;
+                }
+
+                .host-short-details {
+
+                    h4 {
+                        font-size: rem(16px);
+                        line-height: rem(20px);
+                        margin: 0;
+                    }
+
+                    .superhost {
+                        color: #6a6a6a;
+                        font-size: rem(14px);
+                        line-height: rem(18px);
+                        margin: 0;
+                    }
+                }
+
+
+
+            }
+
+            .stay-summary {
+                padding: rem(32px) 0 rem(48px);
+
+                p {
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 6;
+                    display: box;
+                    box-orient: vertical;
+                    line-clamp: 6;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+
+                    font-size: rem(16px);
+                    line-height: rem(24px);
+                }
+
+                .show-more-summary {
+                    color: inherit;
+                    background-color: transparent;
+                    font-size: rem(16px);
+                    line-height: rem(20px);
+                    font-weight: bold;
+                    padding: 0;
+                    margin: 0;
+
+                    text-decoration: underline;
+                }
+            }
+
+            .amenities {
+                padding: rem(48px) 0;
+
+                h3 {
+                    font-size: rem(22px);
+                    line-height: rem(26px);
+
+                    margin: 0;
+                    padding-bottom: rem(24px);
+                }
+
+                ul {
+                    margin: 0;
+
+                    li {
+                        font-size: rem(16px);
+                        line-height: rem(20px);
+                        padding-bottom: rem(16px);
+                    }
+                }
+
+                button {
+                    color: inherit;
+                    background-color: transparent;
+                    font-size: rem(16px);
+                    line-height: rem(20px);
+                    font-weight: bold;
+
+                    padding: rem(13px) rem(23px);
+                    margin: rem(24px) 0 0 0;
+                    border: rem(1px) solid #222222;
+                    border-radius: 0.6rem;
+                }
+
+            }
+
+
+        }
     }
+
+
 
     .reviw-and-map {
         grid-row: 3;
@@ -149,7 +285,7 @@
     border: none;
     height: 3rem;
     width: 200px;
-    background: linear-gradient(to right, #ff385c, #d70466); 
+    background: linear-gradient(to right, #ff385c, #d70466);
     border-radius: 10px;
     font-weight: bold;
     cursor: pointer;
@@ -170,5 +306,24 @@
 
     &:hover::after {
         opacity: 0.4;
+    }
+}
+
+
+.skeleton-loader {
+    width: 220px;
+    height: 220px;
+    background: linear-gradient(90deg, #ddd 25%, #eee 50%, #ddd 75%);
+    background-size: 200% 100%;
+    animation: shimmer-loading 1.5s infinite linear;
+}
+
+@keyframes shimmer-loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
     }
 }

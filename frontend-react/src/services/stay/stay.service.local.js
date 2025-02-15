@@ -215,7 +215,27 @@ function _createStays() {
                 bedrooms: 2,
                 beds: 2,
                 baths: 1,
-                summary: 'Stay in a stylish apartment in the heart of Lisbon, close to amazing restaurants and cafes. ',
+                summary: `This exquisitely renovated Oceanfront penthouse features designer bedrooms with spectacular views, a brand new chef's kitchen with a modern decor, a sunny living room with custom lighting, spa-inspired luxury bathrooms with rainfall shower heads and body jets, LED mood lighting shower niches, and unobstructed beach and ocean views that simply can't be beaten. Every detail is designed to give guests a stylish and sophisticated place to relax while offering all of the upscale amenities you'd expec
+                The space
+                ☆☆ BEDROOMS ☆☆
+                This home has two designer bedrooms, both complete with luxury mattresses, beach-inspired decor, decorative light fixtures, and handcrafted furniture. The primary suite has spectacular beach and ocean views from the large picture window and sliders, a 40" TCL Fire TV, and a nicely appointed ensuite bathroom. This room also has a swivel chair by the picture window, perfect for sipping coffee and taking in the incredible view - It's the perfect retreat! The guest bedroom features bay views, two queen beds, a center nightstand, 6-drawer dresser, and a 40" TCL Fire TV.
+                
+                ☆☆ KITCHEN ☆☆
+                Every detail of the newly renovated designer kitchen has been designed with comfort, convenience, and style in mind, and the open concept design makes it easy for multiple people to move throughout the space. The newly-renovated kitchen is stocked with all the essentials and ready for you to enjoy. Here you'll find a sprawling peninsula with a waterfall edge island, new LG stainless-steel appliances, a sleek marble pattern quartz countertops with a full backsplash and undermount lighting, two-tone soft-close shaker cabinets, and unobstructed views of the water through the living and dining space. Brew coffee in the your choice of standard drip and K-cup coffee makers, pop bread into the toaster, or throw some fruit into the blender for a healthy and quick breakfast on the go. While there are many restaurants to choose from in Ocean City, on nights when you want to just cook at home, this kitchen offers the space and appliances you need so you can cook as you do at home.
+                
+                ☆☆ DINING & LIVING ROOM ☆☆
+                The dining room features a coastal theme and comfortable seating for 6, complimented by bar seating for 3. The open concept effortlessly transitions into the living room, a space that fills with sunshine in the morning and will quickly become your family's favorite hangout spot. Complete with high-end furniture, beach-inspired decor, a stylish entertainment center, and a massive flat-screen TV, this living room has it all. Sleek and dimmable cove lighting creates the perfect ambiance for cocktail hour or movie night. And while the 65" 4K LED HDTV (with Amazon Prime Video, Apple TV, Disney+, HBO Max, Hulu, and Netflix) is perfect for movie night, it can be hard to focus on a movie or a show when you have such breathtaking views of the beach and ocean right outside!
+                
+                ☆☆OUTDOOR SPACE ☆☆
+                One of the things you’ll love about this incredible retreat is the way you can see the water from almost every room in the house. Push open the sliding glass doors from the living room and step out onto your own private balcony. This shady space features comfortable outdoor lounge furniture with seating for 5 and jaw dropping views of the beach. Take a family photo, draw inspiration from a breathtaking sunrise, enjoy cocktails with cotton-candy skies at sunset, or enjoy a cup of coffee in the morning while taking in the view.
+                
+                ★☆ Book Today & Enjoy the Luxurious Beach Vacation You Deserve In Ocean City! ☆★
+                Guest access
+                As a guest here, you have access to the entire home. You can use all of the rooms and all the amenities, including the full-sized washer and dryer, Wi-Fi, kitchen and bathroom essentials, and helpful information about the local area. From here you're just minutes from local grocery stores, beach boutiques, spas, salons, waterfront restaurants, and Ocean City's vibrant nightlife scene.
+                
+                You’ll also have exclusive access to resort amenities, including the indoor heated pool, hot-tub, sun-bathing deck, and direct beach access. You will be assigned two parking spaces and given a unique door code for access.
+                Registration number
+                83207`,
                 capacity: 4,
                 amenities: ['Air conditioning', 'Wifi', 'Kitchen', 'Washer', 'Balcony'],
                 labels: ['City life', 'Cozy', 'Modern'],
