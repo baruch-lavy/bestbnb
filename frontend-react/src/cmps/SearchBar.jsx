@@ -3,7 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useSelector, useDispatch } from "react-redux";
-import { setSearchData } from "../store/actions/stay.actions"; // Import Redux action
+import { setSearchData } from "../store/actions/stay.actions"; // Redux action
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -31,7 +31,7 @@ export const SearchBar = ({ openDropdown, handleDropdownOpen, handleSearch }) =>
     { icon: faUtensils, name: "Istanbul, Türkiye", description: "For its top-notch dining" },
   ];
 
-  // Close dropdowns when clicking outside
+  // ✅ Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -50,7 +50,7 @@ export const SearchBar = ({ openDropdown, handleDropdownOpen, handleSearch }) =>
     };
   }, [handleDropdownOpen]);
 
-  // Handle guest selection
+  // ✅ Handle guest selection
   const handleGuestChange = (type, amount) => {
     dispatch(
       setSearchData({
