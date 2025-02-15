@@ -24,7 +24,8 @@ export function StayOrder({ stay }) {
     };
 
     return (
-        <div className="d">
+        <div className="order-section">
+            <div className="order-card">
             <h2 className="e">${stay.price}<span> night</span></h2>
 
             {/* Check-in & Check-out Dates */}
@@ -83,6 +84,7 @@ export function StayOrder({ stay }) {
             </div>
             <div>
                 <span>Total</span><span>${parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee))}</span>
+            </div>
             </div>
         </div>
     );
