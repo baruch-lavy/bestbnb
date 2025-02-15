@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { categories } from '../services/categories.service'
 import { FiSliders } from 'react-icons/fi'
+import { FilterModal } from './FilterModal'
 
 export function CategoryFilter({ onSelectCategory, selectedCategory }) {
     const [showLeftButton, setShowLeftButton] = useState(false)
     const [showRightButton, setShowRightButton] = useState(true)
+    const [isFilterModalOpen, setIsFilterModalOpen] = useState(false)
 
     const checkScroll = () => {
         const container = document.querySelector('.category-list')
@@ -60,47 +62,56 @@ export function CategoryFilter({ onSelectCategory, selectedCategory }) {
     }
 
     return (
-        <div className="filter-container"> 
-            <button className="filters-btn">
+        <div className="filter-container">
+            <button 
+                className="filters-btn"
+                onClick={() => setIsFilterModalOpen(true)}
+            >
                 <img src="/img/stays/icons/filter-icon.svg" alt="icon-filter" />
                 Filters
             </button>
-        <div className="category-filter">
-            {showLeftButton && (
-                <button 
-                className="scroll-btn left" 
-                onClick={() => scroll('left')}
-                aria-label="Scroll left"
-                >
-                    ❮
-                </button>
-            )}
-            
-            <div className="category-list">
-                {categories.map(category => (
-                    <div 
-                    key={category.id}
-                    className={`category-item ${selectedCategory === category.id ? 'selected' : ''}`}
-                    onClick={() => onSelectCategory(category.id)}
-                    >
-                        <div className="content">
-                            <img src={category.icon} alt={category.label} />
-                            <span>{category.label}</span>
-                        </div>
-                    </div>
-                ))}
-            </div>
 
-            {showRightButton && (
-                <button 
-                className="scroll-btn right" 
-                onClick={() => scroll('right')}
-                aria-label="Scroll right"
-                >
-                    ❯
-                </button>
-            )}
+            <FilterModal 
+                isOpen={isFilterModalOpen}
+                onClose={() => setIsFilterModalOpen(false)}
+            />
+
+            <div className="category-filter">
+                {showLeftButton && (
+                    <button 
+                    className="scroll-btn left" 
+                    onClick={() => scroll('left')}
+                    aria-label="Scroll left"
+                    >
+                        ❮
+                    </button>
+                )}
+                
+                <div className="category-list">
+                    {categories.map(category => (
+                        <div 
+                        key={category.id}
+                        className={`category-item ${selectedCategory === category.id ? 'selected' : ''}`}
+                        onClick={() => onSelectCategory(category.id)}
+                        >
+                            <div className="content">
+                                <img src={category.icon} alt={category.label} />
+                                <span>{category.label}</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {showRightButton && (
+                    <button 
+                    className="scroll-btn right" 
+                    onClick={() => scroll('right')}
+                    aria-label="Scroll right"
+                    >
+                        ❯
+                    </button>
+                )}
+            </div>
         </div>
-    </div>
     )
 } 
