@@ -1,0 +1,421 @@
+.filter-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease-in-out;
+
+    .filter-modal-content {
+        background: white;
+        width: 568px;
+        height: 820px;
+        border-radius: 50px;
+        position: relative;
+        margin-top: 40px;
+        overflow-y: auto;
+        animation: slideDown 0.3s ease-out;
+
+        &::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
+
+        .filter-modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1;
+            text-align: center;
+
+            .close-btn {
+                position: absolute;
+                left: 20px;
+                top: 42%;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 8px;
+                border-radius: 50%;
+                color: #222;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:hover {
+                    background-color: #f7f7f7;
+                }
+            }
+
+            h2 {
+                margin: 0;
+                font-size: 16px;
+                font-weight: 600;
+            }
+        }
+
+        .filter-modal-body {
+            padding: 24px 24px 48px;
+
+            section {
+                margin-bottom: 48px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                h3 {
+                    font-size: 19px;
+                    font-weight: 600;
+                    color: #000000e5;
+                }
+
+                .subtitle {
+                    color: #000000;
+                    font-size: 14px;
+                    margin: -16px 0 24px;
+                }
+            }
+
+            .type-buttons {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                border: 1px solid #ddd;
+                border-radius: 20px;
+
+                .type-btn.room {
+                    border-right: 1px solid #ddd;
+                    border-left: 1px solid #ddd;
+                }
+
+                .type-btn {
+                    padding: 12px;
+                    background: white;
+                    cursor: pointer;
+                    transition: border-color 0.2s;
+
+                    span {
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: black;
+                    }
+
+                    &:hover {
+                        background: #f7f7f7;
+                        border-radius: 15px;
+                    }
+
+                    &.active {
+                        background: #f7f7f7;
+                        border: 2px solid #222;
+                        border-radius: 15px;
+                    }
+                }
+            }
+
+            .price-graph {
+                margin: 40px 0;
+                padding: 0 12px;
+                height: 96px;
+                display: flex;
+                align-items: flex-end;
+
+                .graph-bars {
+                    display: flex;
+                    align-items: flex-end;
+                    gap: 2px;
+                    width: 100%;
+                    height: 100%;
+
+                    .bar {
+                        flex: 1;
+                        background: #ff0248;
+                        border-radius: 2px;
+                        transition: opacity 0.2s;
+                    }
+                }
+            }
+
+            .price-inputs {
+                display: flex;
+                justify-content: space-between;
+
+                    label {
+                        display: block;
+                        margin-bottom: 8px;
+                        font-size: 14px;
+                        font-weight: 600;
+                        text-align: center;
+                    }
+
+                    .input-wrapper {
+                        position: relative;
+                        
+                        .currency {
+                            position: absolute;
+                            left: 35px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            color: #222;
+                            font-size: 15px;
+                        }
+                        
+                        input {
+                            width: 100px;
+                            padding: 12px 12px 12px 24px;
+                            border: 1px solid #ddd;
+                            border-radius: 40px;
+                            font-size: 14px;
+                            text-align: center;
+                            font-weight: 600;
+
+                            &:focus {
+                                outline: none;
+                                border-color: #222;
+                            }
+                        }
+                    }
+                
+
+                .price-separator {
+                    margin-bottom: 12px;
+                    color: #ddd;
+                    font-weight: 600;
+                }
+            }
+
+            .rooms-inputs {
+                .input-group {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 10px;
+
+                    .group-header {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        gap: 4px;
+
+                        label {
+                            font-size: 16px;
+                            color: #222222;
+                            font-weight: 400;
+                        }
+                    }
+
+                    .counter-controls {
+                        display: flex;
+                        align-items: center;
+                        gap: 16px;
+
+                        .counter-btn {
+                            width: 32px;
+                            height: 32px;
+                            border: 1px solid #b0b0b0;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background: white;
+                            cursor: pointer;
+                            padding: 0;
+                            transition: border-color 0.2s;
+
+                            &.minus {
+                                svg {
+                                    width: 18px;
+                                    stroke: #222222;
+                                    stroke-width: 2;
+                                }
+
+                                &.disabled {
+                                    border-color: #ebebeb;
+                                    cursor: not-allowed;
+
+                                    svg {
+                                        stroke: #ebebeb;
+                                    }
+                                }
+                            }
+
+                            &.plus {
+                                svg {
+                                    width: 12px;
+                                    height: 12px;
+                                    stroke: #222222;
+                                    stroke-width: 2;
+                                }
+                            }
+
+                            &:not(.disabled):hover {
+                                border-color: #222222;
+                            }
+                        }
+
+                        .value-display {
+                            min-width: 40px;
+                            text-align: center;
+                            font-size: 16px;
+                            color: #222222;
+                        }
+                    }
+                }
+            }
+        }
+
+        .filter-modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            bottom: 0;
+            background: white;
+
+            .clear-btn {
+                background: none;
+                border: none;
+                text-decoration: underline;
+                cursor: pointer;
+                font-weight: 600;
+                font-size: 16px;
+                padding: 8px;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+
+            .show-places-btn {
+                background: #222;
+                color: white;
+                border: none;
+                padding: 14px 24px;
+                border-radius: 8px;
+                font-weight: 600;
+                font-size: 16px;
+                cursor: pointer;
+                transition: transform 0.1s;
+
+                &:hover {
+                    transform: scale(1.02);
+                }
+
+                &:active {
+                    transform: scale(0.98);
+                }
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.amenities {
+    margin: 32px 0;
+    padding: 0 8px;
+
+    h3 {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 24px;
+        color: #222222;
+    }
+
+    .amenities-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-bottom: 24px;
+
+        .amenity-btn {
+            display: flex;
+            align-items: center;
+            padding: 14px;
+            border: 1px solid rgb(221, 221, 221);
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            // width: 100%;
+            text-align: left;
+            transition: border-color 0.2s;
+
+            &:hover {
+                border-color: #222;
+            }
+
+            .amenity-icon {
+                width: 24px;
+                height: 24px;
+                margin-right: 16px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .amenity-label {
+                font-size: 16px;
+                color: #222;
+            }
+        }
+    }
+
+    .show-more-btn {
+        background: none;
+        border: none;
+        padding: 8px 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: #222;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: underline;
+
+        &:hover {
+            color: #000;
+        }
+
+        svg {
+            width: 12px;
+            height: 12px;
+            fill: currentColor;
+            transition: transform 0.2s;
+        }
+
+        &.expanded svg {
+            transform: rotate(180deg);
+        }
+    }
+}
