@@ -78,8 +78,6 @@ export const SearchBar = ({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  
-  
 
   // ✅ Handle guest selection
   const handleGuestChange = (type, amount) => {
@@ -186,16 +184,19 @@ export const SearchBar = ({
                 onChange={(dates) => {
                   const [start, end] = dates;
 
-                  // Ensure that `endDate` is not erased if still selecting dates
+                  // Preserve the existing `endDate` if it's undefined
+                  const updatedEndDate =
+                    end !== undefined ? end : search.endDate;
+
                   dispatch(
                     setSearchData({
                       ...search,
                       startDate: start,
-                      endDate: end || search.endDate, // Keep the existing `endDate` if `null`
+                      endDate: updatedEndDate, // ✅ Prevents `endDate` from resetting to null
                     })
                   );
 
-                  // Only close the dropdown when both dates are selected
+                  // Close the dropdown only when both dates are selected
                   if (end) setTimeout(() => handleDropdownOpen(null), 200);
                 }}
                 startDate={search.startDate ? new Date(search.startDate) : null}
