@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -17,7 +17,7 @@ export function StayDetails() {
 
   const { stayId } = useParams()
   const stay = useSelector(storeState => storeState.stayModule.stay)
-  // const stay = stays[0]
+  const [isImgLoading, setImgLoading] = useState(true)
 
 
   useEffect(() => {
@@ -25,6 +25,9 @@ export function StayDetails() {
   }, [stayId])
 
 
+  function handleImageLoad() {
+    setImgLoading(false)
+  }
   async function onAddStayMsg(stayId) {
     try {
       await addStayMsg(stayId, 'bla bla ' + parseInt(Math.random() * 10))
@@ -52,7 +55,11 @@ export function StayDetails() {
 
         {/* <StayGallery stay={stay} /> */}
         <article className="mini-gallery">
-          <div className="main-image">
+
+          {isImgLoading && <div className="skeleton-loader"></div>}
+          <div className="main-image"
+            onLoad={handleImageLoad}
+            style={{ display: isImgLoading ? 'none' : 'block' }}>
             <img src={stay.imgUrls[0]} alt="Main house image" />
           </div>
           <div className="other-images">
@@ -67,9 +74,9 @@ export function StayDetails() {
         <section>
           {/* {stay && */}
           <div className="stay-short-info">
-            <h3>{stay.type} in {stay.loc.city}, {stay.loc.country}</h3>
-            <h5>{stay.capacity} guests * {stay.bedrooms} bedrooms * {stay.beds} beds * {stay.baths} bath</h5>
-            <h4>★ {stay.reviews[0].rate} * {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4>
+            <h3 className="info-header">{stay.type} in {stay.loc.city}, {stay.loc.country}</h3>
+            <h5 className="info">{stay.capacity} guests * {stay.bedrooms} bedrooms * {stay.beds} beds * {stay.baths} bath</h5>
+            <h4 className="rate">★ {stay.reviews[0].rate} * {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4>
           </div>
 
           <div className="host-short-info">
@@ -79,12 +86,10 @@ export function StayDetails() {
               <span className="superhost">Superhost * {stay.host.yearsHosting} years hosting</span>
             </div>
           </div>
-          <br />
           <article className="stay-summary">
-            {stay.summary}
-            <button>Show more &gt;</button>
+            <p>{stay.summary}</p>
+            <button className="show-more-summary">Show more &gt;</button>
           </article>
-          <br />
           <StayAmenities amenities={stay.amenities} />
         </section>
         <StayOrder stay={stay} />
