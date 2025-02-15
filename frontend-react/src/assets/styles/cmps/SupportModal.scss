@@ -1,0 +1,95 @@
+.support-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+
+    &.open {
+        opacity: 1;
+    }
+
+    .support-modal {
+        background: white;
+        width: 100%;
+        max-height: 80vh;
+        border-radius: 12px 12px 0 0;
+        padding: 50px 90px 60px 150px;
+        position: relative;
+        transform: translateY(100%);
+        animation: slideUp 0.3s forwards;
+
+        .close-btn {
+            position: absolute;
+            top: 3px;
+            left: 10px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #222;
+            border-radius: 50%;
+        }
+
+        .close-btn:hover {
+            background: rgb(235, 233, 233);
+        }
+
+        .modal-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 0;
+            overflow-y: auto;
+            max-height: calc(80vh - 100px);
+            padding: 0;
+            line-height: 1.4;
+
+            .modal-section {
+                h3 {
+                    font-size: 14px;
+                    font-weight: 600;
+                    margin-bottom: 8px;
+                    color: #222;
+                }
+
+                ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+
+                    li {
+                        margin-bottom: 4px;
+
+                        a {
+                            color: #222;
+                            text-decoration: none;
+                            font-size: 14.5px;
+                            line-height: 16px;
+                            
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+} 
