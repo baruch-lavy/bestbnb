@@ -23,24 +23,23 @@
 @import "pages/LoginSignup.scss";
 
 // Components
-@import "cmps/list.scss";
-@import "cmps/preview.scss";
+// @import "cmps/list.scss";
+// @import "cmps/preview.scss";
 
-@import "cmps/AppHeader";
+@import "cmps/AppHeader.scss";
 @import "cmps/SearchBar.scss";
 @import "cmps/AppFooter.scss";
 @import "cmps/SupportModal.scss";
 @import "cmps/StickySearchBar.scss";
 // @import "cmps/UserMsg";
 
-@import "cmps/CarFilter.scss";
 @import "cmps/ReviewEdit.scss";
 @import "cmps/ReviewList.scss";
 @import "cmps/ReviewPreview.scss";
 @import "cmps/StayList.scss";
 @import "cmps/StayPreview.scss";
-@import "cmps/_category-filter.scss";
-@import "cmps/_success-message.scss";
-@import "cmps/_wishlist-modal.scss";
+@import "cmps/CategoryFilter.scss";
+@import "cmps/SuccessMessage.scss";
+@import "cmps/WishlistModal.scss";
 
 
