@@ -3,15 +3,12 @@ import { Link } from 'react-router-dom'
 export function StayAmenities({ amenities }) {
     console.log(amenities)
     return <article className="amenities">
-        <header>
-            {/* <Link to={`/stay/${stay._id}`}>{'<'}</Link> */}
-            <h3>What this place offers</h3>
-        </header>
+        <h3>What this place offers</h3>
         <ul className="amenities-lines">
             {amenities.map(amenity =>
                 <li key={amenity}>
                     <div className="amenity">
-                    {amenity}
+                        {amenity}
                     </div>
                 </li>)
             }

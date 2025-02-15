@@ -1,10 +1,4 @@
 
-//     return(
-//         <div className="order-card">
-//             <span><button>Make order here</button></span>
-//             </div>
-//     )}
-
 import React, { useState } from "react";
 
 export function StayOrder({ stay }) {
@@ -16,12 +10,12 @@ export function StayOrder({ stay }) {
     const airbnbFee = 0.13
 
 
-    const handleMouseMove = (e) => {
+    function handleMouseMove(e){
         const button = e.currentTarget;
         const { x, y } = button.getBoundingClientRect();
         button.style.setProperty("--x", e.clientX - x);
         button.style.setProperty("--y", e.clientY - y);
-    };
+    }
 
     return (
         <div className="order-section">
