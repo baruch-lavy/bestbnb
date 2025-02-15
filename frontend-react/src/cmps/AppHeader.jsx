@@ -1,32 +1,51 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaUserCircle, FaGlobe } from "react-icons/fa";
-import { SearchBar } from "./SearchBar";
-import {StickySearchBar} from "./StickySearchBar";
+import { useSelector, useDispatch } from "react-redux";
+import { setSearchData } from "../store/actions/stay.actions.js"; // Import Redux action
+import { SearchBar } from "./SearchBar.jsx";
+import { StickySearchBar } from "./StickySearchBar.jsx";
 
 export const AppHeader = () => {
   const [showSticky, setShowSticky] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [searchData, setSearchData] = useState({
-    destination: "Anywhere",
-    startDate: null,
-    endDate: null,
-    guests: "Add guests",
-  });
+  const dispatch = useDispatch();
+  const searchData = useSelector((state) => state.search); // Redux state
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      // console.log("Scroll Position:", scrollTop); // ✅ Debugging: Check scroll value
-      setShowSticky(scrollTop > 50);
-      // console.log("showSticky State:", scrollTop > 150); // ✅ Debugging: See if state updates
+      setShowSticky(window.scrollY > 50); // Show sticky bar when scrolling
     };
-  
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // ✅ Lifted up state for dropdown handling
   const handleDropdownOpen = (dropdown) => {
     setOpenDropdown((prev) => (prev === dropdown ? null : dropdown));
+
+    // ✅ Update Redux state to trigger re-render
+    dispatch(setSearchData({ ...searchData }));
+  };
+
+  // ✅ Handle Search Action
+  const handleSearch = () => {
+    console.log("Searching with:", searchData); // Debugging
+  
+    // ✅ Ensure guests is an object and extract total guests
+    const guests = searchData.guests || { adults: 0, children: 0 };
+    const totalGuests = (guests.adults || 0) + (guests.children || 0);
+  
+    // ✅ Build correct query parameters
+    const queryParams = new URLSearchParams({
+      destination: searchData.destination || "Anywhere",
+      startDate: searchData.startDate ? searchData.startDate.toISOString() : "",
+      endDate: searchData.endDate ? searchData.endDate.toISOString() : "",
+      guests: totalGuests.toString(), // Ensure it's a string for the URL
+    }).toString();
+  
+    // ✅ Redirect to search results page with correct parameters
+    window.location.href = `/search-results?${queryParams}`;
   };
   
 
@@ -34,7 +53,6 @@ export const AppHeader = () => {
     <>
       {/* HEADER */}
       <header className="header">
-        {/* Left Section */}
         <div className="left-section">
           <img src="/assets/img/airbnb-logo.svg" alt="Airbnb Logo" className="logo" />
           <nav className="nav-links">
@@ -43,7 +61,6 @@ export const AppHeader = () => {
           </nav>
         </div>
 
-        {/* Right Section */}
         <div className="right-section">
           <span className="host">Airbnb your home</span>
           <FaGlobe className="icon" />
@@ -54,20 +71,21 @@ export const AppHeader = () => {
         </div>
       </header>
 
-      {/* FULL SEARCH BAR (Visible at top) */}
+      {/* FULL SEARCH BAR */}
       <div className={`full-search-bar ${showSticky ? "hidden" : ""}`}>
-        <SearchBar setSearchData={setSearchData}  openDropdown={openDropdown} handleDropdownOpen={handleDropdownOpen} />
+        <SearchBar
+          setSearchData={(data) => dispatch(setSearchData(data))} // ✅ Use Redux
+          openDropdown={openDropdown}
+          handleDropdownOpen={handleDropdownOpen} // ✅ Pass function to SearchBar
+          handleSearch={handleSearch} // ✅ Pass function to SearchBar
+        />
       </div>
 
-      {/* STICKY SEARCH BAR (Appears when scrolling down) */}
+      {/* STICKY SEARCH BAR */}
       {showSticky && (
         <div className="sticky-search-container">
           <StickySearchBar
-            destination={searchData.destination}
-            startDate={searchData.startDate}
-            endDate={searchData.endDate}
-            guests={searchData.guests}
-            handleDropdownOpen={handleDropdownOpen}
+            handleDropdownOpen={handleDropdownOpen} // ✅ Pass function to StickySearchBar
           />
         </div>
       )}

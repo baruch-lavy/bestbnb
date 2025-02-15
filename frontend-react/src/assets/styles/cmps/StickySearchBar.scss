@@ -1,56 +1,70 @@
 .sticky-search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-radius: 50px;
+  padding: 12px 20px; // Increased padding for better spacing
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); // More realistic shadow
+  font-family: Arial, sans-serif;
+  max-width: 500px;
+  height: 50px; // Slightly increased height to match Airbnb's proportions
+  gap: 10px;
+  border: 1px solid #ddd; // Light border for better contrast
+  transition: all 0.3s ease-in-out; // Smooth transitions
+
+  .sticky-content {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background: white;
-    border-radius: 50px;
-    padding: 10px 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    font-family: Arial, sans-serif;
-    max-width: 500px;
-    height: 48px;
-    gap: 8px;
-  
-    .sticky-content {
-      display: flex;
-      align-items: center;
-      flex: 1;
-      gap: 8px;
-    }
-  
-    .sticky-item {
-      font-size: 14px;
-      color: #222;
-      white-space: nowrap;
-      font-weight: 500;
-    }
-  
-    .sticky-divider {
-      width: 1px;
-      height: 24px;
-      background: #ddd;
-    }
-  
-    .sticky-search-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #ff385c;
-      border: none;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      cursor: pointer;
-      transition: background 0.2s ease;
-  
-      svg {
-        color: white;
-        font-size: 14px;
-      }
-  
-      &:hover {
-        background: #e12d50;
-      }
+    flex: 1;
+    gap: 12px;
+  }
+
+  .sticky-item {
+    font-size: 14px;
+    color: #222;
+    white-space: nowrap;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: #ff385c; // Airbnb red when hovering
     }
   }
-  
+
+  .sticky-divider {
+    width: 1px;
+    height: 24px;
+    background: #ddd;
+  }
+
+  .sticky-search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ff385c;
+    border: none;
+    border-radius: 50%;
+    width: 36px; // Slightly larger for better proportions
+    height: 36px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease-in-out;
+
+    svg {
+      color: white;
+      font-size: 16px;
+    }
+
+    &:hover {
+      background: #e12d50;
+      transform: scale(1.05); // Slight pop effect on hover
+    }
+
+    &:active {
+      transform: scale(0.95); // Click effect
+    }
+  }
+}
+
+

@@ -1,7 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useSelector, useDispatch } from "react-redux";
+import { setSearchData } from "../store/actions/stay.actions"; // Import Redux action
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,109 +14,53 @@ import {
   faLandmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-export const SearchBar = ({setSearchData}) => {
-  const [destination, setDestination] = useState("");
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [openDropdown, setOpenDropdown] = useState(null); // Track which dropdown is open
-
-  const [guests, setGuests] = useState({
-    adults: 0,
-    children: 0,
-    infants: 0,
-    pets: 0,
-  });
+export const SearchBar = ({ openDropdown, handleDropdownOpen, handleSearch }) => {
+  const dispatch = useDispatch();
+  const search = useSelector((state) => state.search || {}); // Ensure search object exists
 
   const dropdownRef = useRef(null);
   const datePickerRef = useRef(null);
   const guestDropdownRef = useRef(null);
 
   const destinations = [
-    {
-      icon: faLocationArrow,
-      name: "Nearby",
-      description: "Find what’s around you",
-    },
-    {
-      icon: faUmbrellaBeach,
-      name: "Tel Aviv-Yafo, Israel",
-      description: "Popular beach destination",
-    },
-    {
-      icon: faBuilding,
-      name: "Bucharest, Romania",
-      description: "For sights like Cismigiu Gardens",
-    },
-    {
-      icon: faLandmark,
-      name: "Paris, France",
-      description: "For its bustling nightlife",
-    },
-    {
-      icon: faBuilding,
-      name: "Budapest, Hungary",
-      description: "For its stunning architecture",
-    },
-    {
-      icon: faUtensils,
-      name: "Istanbul, Türkiye",
-      description: "For its top-notch dining",
-    },
+    { icon: faLocationArrow, name: "Nearby", description: "Find what’s around you" },
+    { icon: faUmbrellaBeach, name: "Tel Aviv-Yafo, Israel", description: "Popular beach destination" },
+    { icon: faBuilding, name: "Bucharest, Romania", description: "For sights like Cismigiu Gardens" },
+    { icon: faLandmark, name: "Paris, France", description: "For its bustling nightlife" },
+    { icon: faBuilding, name: "Budapest, Hungary", description: "For its stunning architecture" },
+    { icon: faUtensils, name: "Istanbul, Türkiye", description: "For its top-notch dining" },
   ];
 
-  // Close dropdowns when clicking outside OR switching between them
-  useEffect(() => {
-    // ✅ Automatically update search data when inputs change
-    setSearchData({
-      destination: destination || "Anywhere",
-      startDate: startDate,
-      endDate: endDate,
-      guests: guests.adults + guests.children > 0 ? `${guests.adults + guests.children} guests` : "Add guests",
-    });
-  }, [destination, startDate, endDate, guests, setSearchData]);
-  
+  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // ✅ Keep dropdown open if clicking inside any of them
       if (
         dropdownRef.current?.contains(event.target) ||
         datePickerRef.current?.contains(event.target) ||
         guestDropdownRef.current?.contains(event.target)
       ) {
-        return; 
+        return;
       }
-
       handleDropdownOpen(null);
-  
-      // ✅ Clicking outside closes all dropdowns
-      setIsDropdownOpen(false);
-      setIsDatePickerOpen(false);
-      setIsGuestDropdownOpen(false);
-
     };
-  
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
-  
-
-  function setIsDropdownOpen(value) {
-    setOpenDropdown(value);
-    }
-
-  // Function to open one dropdown & close others
-  const handleDropdownOpen = (dropdown) => {
-    setOpenDropdown((prev) => (prev === dropdown ? null : dropdown));
-  };
+  }, [handleDropdownOpen]);
 
   // Handle guest selection
   const handleGuestChange = (type, amount) => {
-    setGuests((prev) => ({
-      ...prev,
-      [type]: Math.max(0, prev[type] + amount),
-    }));
+    dispatch(
+      setSearchData({
+        ...search,
+        guests: {
+          ...search.guests,
+          [type]: Math.max(0, (search.guests?.[type] || 0) + amount),
+        },
+      })
+    );
   };
 
   return (
@@ -126,8 +72,8 @@ export const SearchBar = ({setSearchData}) => {
           <input
             type="text"
             placeholder="Search destinations"
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
+            value={search.destination || ""}
+            onChange={(e) => dispatch(setSearchData({ ...search, destination: e.target.value }))}
             onFocus={() => handleDropdownOpen("where")}
           />
           {openDropdown === "where" && (
@@ -138,8 +84,8 @@ export const SearchBar = ({setSearchData}) => {
                   key={index}
                   className="suggestion"
                   onClick={() => {
-                    setDestination(dest.name); // ✅ Set selected destination in input field
-                    setOpenDropdown(null); // ✅ Close the dropdown after selection
+                    dispatch(setSearchData({ ...search, destination: dest.name }));
+                    handleDropdownOpen(null);
                   }}
                 >
                   <FontAwesomeIcon icon={dest.icon} className="icon" />
@@ -157,16 +103,13 @@ export const SearchBar = ({setSearchData}) => {
 
         {/* CHECK-IN & CHECK-OUT Section */}
         <div className="search-section date-section" ref={datePickerRef}>
-          <div
-            className="date-fields"
-            onClick={() => handleDropdownOpen("dates")}
-          >
+          <div className="date-fields" onClick={() => handleDropdownOpen("dates")}>
             <div className="date-input">
               <span>Check in</span>
               <input
                 type="text"
                 placeholder="Add dates"
-                value={startDate ? startDate.toLocaleDateString() : ""}
+                value={search.startDate ? new Date(search.startDate).toLocaleDateString() : ""}
                 readOnly
               />
             </div>
@@ -176,7 +119,7 @@ export const SearchBar = ({setSearchData}) => {
               <input
                 type="text"
                 placeholder="Add dates"
-                value={endDate ? endDate.toLocaleDateString() : ""}
+                value={search.endDate ? new Date(search.endDate).toLocaleDateString() : ""}
                 readOnly
               />
             </div>
@@ -185,15 +128,14 @@ export const SearchBar = ({setSearchData}) => {
           {openDropdown === "dates" && (
             <div className="date-picker-dropdown">
               <DatePicker
-                selected={startDate}
+                selected={search.startDate ? new Date(search.startDate) : null}
                 onChange={(dates) => {
                   const [start, end] = dates;
-                  setStartDate(start);
-                  setEndDate(end);
-                  if (end) setTimeout(() => setOpenDropdown(null), 200);
+                  dispatch(setSearchData({ ...search, startDate: start, endDate: end }));
+                  if (end) setTimeout(() => handleDropdownOpen(null), 200);
                 }}
-                startDate={startDate}
-                endDate={endDate}
+                startDate={search.startDate ? new Date(search.startDate) : null}
+                endDate={search.endDate ? new Date(search.endDate) : null}
                 selectsRange
                 monthsShown={2}
                 inline
@@ -210,7 +152,7 @@ export const SearchBar = ({setSearchData}) => {
           <input
             type="text"
             placeholder="Add guests"
-            value={`${guests.adults + guests.children} guests`}
+            value={`${(search.guests?.adults || 0) + (search.guests?.children || 0)} guests`}
             readOnly
             onClick={() => handleDropdownOpen("who")}
           />
@@ -219,32 +161,19 @@ export const SearchBar = ({setSearchData}) => {
               {["adults", "children", "infants", "pets"].map((key) => (
                 <div className="guest-row" key={key}>
                   <div className="guest-info">
-                    <strong>
-                      {key.charAt(0).toUpperCase() + key.slice(1)}
-                    </strong>
-                    <p>
-                      {key === "pets" ? (
-                        <a href="#">Bringing a service animal?</a>
-                      ) : (
-                        `Ages for ${key}`
-                      )}
-                    </p>
+                    <strong>{key.charAt(0).toUpperCase() + key.slice(1)}</strong>
+                    <p>{key === "pets" ? <a href="#">Bringing a service animal?</a> : `Ages for ${key}`}</p>
                   </div>
                   <div className="guest-controls">
                     <button
                       className="guest-btn"
                       onClick={() => handleGuestChange(key, -1)}
-                      disabled={guests[key] === 0}
+                      disabled={search.guests?.[key] === 0}
                     >
                       −
                     </button>
-                    <span>{guests[key]}</span>
-                    <button
-                      className="guest-btn"
-                      onClick={() => handleGuestChange(key, 1)}
-                    >
-                      +
-                    </button>
+                    <span>{search.guests?.[key] || 0}</span>
+                    <button className="guest-btn" onClick={() => handleGuestChange(key, 1)}>+</button>
                   </div>
                 </div>
               ))}
@@ -253,7 +182,7 @@ export const SearchBar = ({setSearchData}) => {
         </div>
 
         {/* SEARCH BUTTON */}
-        <button className="search-btn">
+        <button className="search-btn" onClick={handleSearch}>
           <FaSearch />
         </button>
       </div>
