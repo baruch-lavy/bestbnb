@@ -1,106 +1,112 @@
-import { useState, useEffect } from 'react'
-import { categories } from '../services/categories.service'
-import { FiSliders } from 'react-icons/fi'
+import { useState, useEffect, useRef } from "react";
+import { categories } from "../services/categories.service";
+import { FiSliders } from "react-icons/fi";
+import { FilterModal } from "./FilterModal";
 
 export function CategoryFilter({ onSelectCategory, selectedCategory }) {
-    const [showLeftButton, setShowLeftButton] = useState(false)
-    const [showRightButton, setShowRightButton] = useState(true)
+  const [showLeftButton, setShowLeftButton] = useState(false);
+  const [showRightButton, setShowRightButton] = useState(true);
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
-    const checkScroll = () => {
-        const container = document.querySelector('.category-list')
-        if (!container) return
+  const containerRef = useRef(null);
 
-        setShowLeftButton(container.scrollLeft > 0)
-        
-        const isAtEnd = container.scrollLeft + container.offsetWidth >= container.scrollWidth
-        setShowRightButton(!isAtEnd)
+  // ✅ Updates visibility of left/right scroll buttons
+  const checkScroll = () => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    setShowLeftButton(container.scrollLeft > 0);
+    setShowRightButton(
+      container.scrollLeft + container.offsetWidth < container.scrollWidth
+    );
+  };
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener("scroll", checkScroll);
+      checkScroll(); // Initial check
     }
 
-    useEffect(() => {
-        const container = document.querySelector('.category-list')
-        if (container) {
-            container.addEventListener('scroll', checkScroll)
+    return () => {
+      if (container) {
+        container.removeEventListener("scroll", checkScroll);
+      }
+    };
+  }, []);
 
-            checkScroll()
-        }
+  const scroll = (direction) => {
+    const container = containerRef.current;
+    if (!container) return;
 
-        return () => {
-            if (container) {
-                container.removeEventListener('scroll', checkScroll)
-            }
-        }
-    }, [])
+    const item = container.querySelector(".category-item");
+    if (!item) return;
 
-    const scroll = (direction) => {
-        const container = document.querySelector('.category-list')
-        if (!container) return
+    const itemWidth = item.offsetWidth;
+    const gap = 32; // Assuming a 32px gap
+    const scrollAmount = itemWidth + gap;
 
-      
-        const itemWidth = container.querySelector('.category-item').offsetWidth
-        const gap = 32 
-        const scrollAmount = itemWidth + gap
+    // ✅ Scroll by full viewport width of items
+    const visibleItems = Math.floor(container.offsetWidth / (itemWidth + gap));
+    const scrollPixels = scrollAmount * visibleItems;
 
-       
-        const visibleItems = Math.floor(container.offsetWidth / (itemWidth + gap))
-        
-        
-        const scrollPixels = scrollAmount * visibleItems
+    container.scrollBy({
+      left: direction === "left" ? -scrollPixels : scrollPixels,
+      behavior: "smooth",
+    });
+  };
 
-        if (direction === 'left') {
-            container.scrollBy({ 
-                left: -scrollPixels, 
-                behavior: 'smooth' 
-            })
-        } else {
-            container.scrollBy({ 
-                left: scrollPixels, 
-                behavior: 'smooth' 
-            })
-        }
-    }
+  return (
+    <div className="filter-container">
+      {/* Filters Button */}
+      <button className="filters-btn" onClick={() => setIsFilterModalOpen(true)}>
+        <img src="/img/stays/icons/filter-icon.svg" alt="icon-filter" />
+        Filters
+      </button>
 
-    return (
-        <div className="filter-container"> 
-            <button className="filters-btn">
-                <img src="/img/stays/icons/filter-icon.svg" alt="icon-filter" />
-                Filters
-            </button>
-        <div className="category-filter">
-            {showLeftButton && (
-                <button 
-                className="scroll-btn left" 
-                onClick={() => scroll('left')}
-                aria-label="Scroll left"
-                >
-                    ❮
-                </button>
-            )}
-            
-            <div className="category-list">
-                {categories.map(category => (
-                    <div 
-                    key={category.id}
-                    className={`category-item ${selectedCategory === category.id ? 'selected' : ''}`}
-                    onClick={() => onSelectCategory(category.id)}
-                    >
-                        <div className="content">
-                            <img src={category.icon} alt={category.label} />
-                            <span>{category.label}</span>
-                        </div>
-                    </div>
-                ))}
+      {/* Filters Modal */}
+      <FilterModal isOpen={isFilterModalOpen} onClose={() => setIsFilterModalOpen(false)} />
+
+      {/* Category List */}
+      <div className="category-filter">
+        {/* Left Scroll Button */}
+        {showLeftButton && (
+          <button
+            className="scroll-btn left"
+            onClick={() => scroll("left")}
+            aria-label="Scroll left"
+          >
+            ❮
+          </button>
+        )}
+
+        {/* Category Items */}
+        <div className="category-list" ref={containerRef}>
+          {categories.map((category) => (
+            <div
+              key={category.id}
+              className={`category-item ${selectedCategory === category.id ? "selected" : ""}`}
+              onClick={() => onSelectCategory(category.id)}
+            >
+              <div className="content">
+                <img src={category.icon} alt={category.label} />
+                <span>{category.label}</span>
+              </div>
             </div>
-
-            {showRightButton && (
-                <button 
-                className="scroll-btn right" 
-                onClick={() => scroll('right')}
-                aria-label="Scroll right"
-                >
-                    ❯
-                </button>
-            )}
+          ))}
         </div>
+
+        {/* Right Scroll Button */}
+        {showRightButton && (
+          <button
+            className="scroll-btn right"
+            onClick={() => scroll("right")}
+            aria-label="Scroll right"
+          >
+            ❯
+          </button>
+        )}
+      </div>
     </div>
-    )
-} 
+  );
+}
