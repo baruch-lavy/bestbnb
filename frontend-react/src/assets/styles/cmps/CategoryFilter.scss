@@ -1,7 +1,7 @@
 .filter-container {
     display: flex;
     flex-direction: row-reverse;
-    
+
     .filters-btn {
         height: 48px;
         width: 92px;
@@ -37,10 +37,9 @@
 
     .category-filter {
         position: relative;
-        width: 85%;
+        width: 92%;
         margin-right: auto;
         padding: 20px 0 0;
-        border-top: 1px solid #DDDDDD;
         margin-top: 5.4em;
 
         .category-list {
