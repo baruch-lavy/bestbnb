@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { categories } from '../services/categories.service'
+import { FiSliders } from 'react-icons/fi'
 
 export function CategoryFilter({ onSelectCategory, selectedCategory }) {
     const [showLeftButton, setShowLeftButton] = useState(false)
@@ -59,12 +60,17 @@ export function CategoryFilter({ onSelectCategory, selectedCategory }) {
     }
 
     return (
+        <div className="filter-container"> 
+            <button className="filters-btn">
+                <img src="/img/stays/icons/filter-icon.svg" alt="icon-filter" />
+                Filters
+            </button>
         <div className="category-filter">
             {showLeftButton && (
                 <button 
-                    className="scroll-btn left" 
-                    onClick={() => scroll('left')}
-                    aria-label="Scroll left"
+                className="scroll-btn left" 
+                onClick={() => scroll('left')}
+                aria-label="Scroll left"
                 >
                     ❮
                 </button>
@@ -73,9 +79,9 @@ export function CategoryFilter({ onSelectCategory, selectedCategory }) {
             <div className="category-list">
                 {categories.map(category => (
                     <div 
-                        key={category.id}
-                        className={`category-item ${selectedCategory === category.id ? 'selected' : ''}`}
-                        onClick={() => onSelectCategory(category.id)}
+                    key={category.id}
+                    className={`category-item ${selectedCategory === category.id ? 'selected' : ''}`}
+                    onClick={() => onSelectCategory(category.id)}
                     >
                         <div className="content">
                             <img src={category.icon} alt={category.label} />
@@ -87,13 +93,14 @@ export function CategoryFilter({ onSelectCategory, selectedCategory }) {
 
             {showRightButton && (
                 <button 
-                    className="scroll-btn right" 
-                    onClick={() => scroll('right')}
-                    aria-label="Scroll right"
+                className="scroll-btn right" 
+                onClick={() => scroll('right')}
+                aria-label="Scroll right"
                 >
                     ❯
                 </button>
             )}
         </div>
+    </div>
     )
 } 
