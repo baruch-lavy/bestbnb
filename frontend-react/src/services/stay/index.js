@@ -28,9 +28,14 @@ function getEmptyStay() {
 function getDefaultFilter() {
     return {
         txt: '',
-        minPrice: '',
-        sortField: '',
-        sortDir: '',
+        minPrice: 0,
+        maxPrice: Infinity,
+        destination: '',
+        guests: 1,
+        startDate: null,
+        endDate: null,
+        // sortField: '',
+        // sortDir: '',
     }
 }
 
