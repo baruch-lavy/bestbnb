@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaUserCircle, FaGlobe } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { setSearchData, loadStays } from "../store/actions/stay.actions.js"; // ✅ Import Redux actions
+import { setSearchData, loadStays } from "../store/actions/stay.actions.js";
 import { SearchBar } from "./SearchBar.jsx";
 import { StickySearchBar } from "./StickySearchBar.jsx";
 
@@ -9,9 +9,9 @@ export const AppHeader = () => {
   const [showSticky, setShowSticky] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const dispatch = useDispatch();
-  const searchData = useSelector((state) => state.search); // ✅ Get Redux search state
+  const searchData = useSelector((state) => state.search);
 
-  // ✅ Extract search parameters from URL when navigating
+  // ✅ Sync Redux with URL params when the page loads
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const filterBy = {
@@ -22,23 +22,23 @@ export const AppHeader = () => {
     };
 
     console.log("🚀 Syncing Redux with URL search parameters:", filterBy);
-    dispatch(setSearchData(filterBy)); // ✅ Update Redux state with URL params
+    dispatch(setSearchData(filterBy));
   }, [dispatch]);
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowSticky(window.scrollY > 50); // Show sticky bar when scrolling
+      setShowSticky(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ✅ Lifted up state for dropdown handling
+  // ✅ Handle dropdown toggling
   const handleDropdownOpen = (dropdown) => {
     setOpenDropdown((prev) => (prev === dropdown ? null : dropdown));
   };
 
-  // ✅ Handle Search Action
+  // ✅ Handle Search (Automatic Navigation)
   const handleSearch = () => {
     const filterBy = {
       destination: searchData.destination || "Anywhere",
@@ -48,11 +48,15 @@ export const AppHeader = () => {
     };
 
     console.log("🚀 Searching with filter:", filterBy);
-    dispatch(loadStays(filterBy)); // ✅ Fetch stays based on search
+    dispatch(loadStays(filterBy));
 
-    // ✅ Update URL with new search parameters (keeps page in sync)
-    const newSearchParams = new URLSearchParams(filterBy);
-    window.history.pushState({}, "", `/search-results?${newSearchParams.toString()}`);
+    // ✅ Navigate automatically after search
+    window.location.href = `/search-results?${new URLSearchParams(filterBy).toString()}`;
+  };
+
+  // ✅ Manual Navigation via "Stays" Button
+  const handleNavigateToStays = () => {
+    window.location.href = `/search-results?${new URLSearchParams(searchData).toString()}`;
   };
 
   return (
@@ -62,7 +66,7 @@ export const AppHeader = () => {
         <div className="left-section">
           <img src="/img/stays/logo.png" alt="Airbnb Logo" className="logo" />
           <nav className="nav-links">
-            <a href="#">Stays</a>
+            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigateToStays(); }}>Stays</a> {/* ✅ Clicking navigates to results */}
             <a href="#">Experiences</a>
           </nav>
         </div>
@@ -82,7 +86,7 @@ export const AppHeader = () => {
         <SearchBar
           openDropdown={openDropdown}
           handleDropdownOpen={handleDropdownOpen}
-          handleSearch={handleSearch} // ✅ Pass function to SearchBar
+          handleSearch={handleSearch} // ✅ Clicking search navigates automatically
         />
       </div>
 
@@ -90,9 +94,9 @@ export const AppHeader = () => {
       {showSticky && (
         <div className="sticky-search-container">
           <StickySearchBar
-            openDropdown={openDropdown} // ✅ Track which dropdown is open
-            handleDropdownOpen={handleDropdownOpen} // ✅ Control dropdown opening
-            handleSearch={handleSearch} // ✅ Allow searching
+            openDropdown={openDropdown}
+            handleDropdownOpen={handleDropdownOpen}
+            handleSearch={handleSearch} // ✅ Clicking search navigates automatically
           />
         </div>
       )}
