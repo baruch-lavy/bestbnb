@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { StayPreview } from "./StayPreview.jsx";
+import { CategoryFilter } from "./CategoryFilter.jsx";
 
 export function StayList() {
     const stays = useSelector((state) => state.stayModule.stays); // ✅ Get stays from Redux
@@ -14,9 +15,10 @@ export function StayList() {
             </div>
         );
     }
-
+    
     return (
         <ul className="stay-list">
+            < CategoryFilter />
             {stays.map((stay) => (
                 <li key={stay._id}>
                     <StayPreview stay={stay} />
