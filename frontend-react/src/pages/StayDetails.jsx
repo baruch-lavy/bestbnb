@@ -47,16 +47,22 @@ export function StayDetails() {
     <section className="stay-details">
       <header>
         <div className="stay-header">
-          <br />
-          <br />
-          <br />
-          {/* <Link to="/stay">Back to list</Link> */}
           <h1 className="stay-name"> {stay.name}</h1>
-          <p><span>📩 share</span><span> ❤ save</span></p>
+          <div>
+             <button className="show-more-summary"
+              // onClick={() => setIsSummaryModalOpen(true)}
+              >
+                <img src="/img/stays/asset23.svg" alt="" /><span>Share</span> 
+            </button>
+             <button className="show-more-summary"
+              // onClick={() => setIsSummaryModalOpen(true)}
+              >
+              <img src="/img/stays/asset23.svg" alt="" /><span>Save</span>
+            </button>
+            {/* 📩<span> share</span>❤<span>  save</span> */}
+            </div>
         </div>
-
-
-        {/* <StayGallery stay={stay} /> */}
+        <Link to="/stay/gallery/:id">
         <article className="mini-gallery">
 
           {isImgLoading && <div className="skeleton-loader"></div>}
@@ -71,6 +77,7 @@ export function StayDetails() {
             ))}
           </div>
         </article>
+        </Link>
       </header>
 
       <main>
