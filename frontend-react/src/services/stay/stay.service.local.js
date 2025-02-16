@@ -15,28 +15,52 @@ export const stayService = {
 window.cs = stayService
 
 
-async function query(filterBy = { txt: '', price: 0 }) {
-    var stays = await storageService.query(STORAGE_KEY)
-    const { txt, minPrice, maxPrice, sortField, sortDir } = filterBy
+async function query(filterBy = { txt: '', minPrice: 0, maxPrice: Infinity, destination: '', guests: 1, startDate: null, endDate: null }) {
+    var stays = await storageService.query(STORAGE_KEY);
+    console.log("🚀 ~ file: stay.service.local.js ~ line 19 ~ query ~ stays", stays);
 
+    const { txt, minPrice, maxPrice, destination, guests, startDate, endDate } = filterBy;
+
+    if (!stays || stays.length === 0) return [];
+
+    // ✅ Destination Filtering (Fix: use `loc.country` instead of `location`)
+    if (destination) {
+        const regex = new RegExp(destination, 'i');
+        stays = stays.filter(stay => regex.test(stay.loc?.country || '') || regex.test(stay.name));
+    }
+
+    // ✅ Text Filtering (Fix: Check Name & Description)
     if (txt) {
-        const regex = new RegExp(filterBy.txt, 'i')
-        stays = stays.filter(stay => regex.test(stay.name) || regex.test(stay.description))
+        const regex = new RegExp(txt, 'i');
+        stays = stays.filter(stay => regex.test(stay.name));
     }
-    if (minPrice) {
-        stays = stays.filter(stay => stay.price >= minPrice)
+
+    // ✅ Price Filtering
+    stays = stays.filter(stay => stay.price >= minPrice && stay.price <= maxPrice);
+
+    // ✅ Guest Filtering (Fix: Check `capacity` field if available)
+    if (guests) {
+        stays = stays.filter(stay => stay.capacity >= guests);
     }
-    if(sortField === 'name' || sortField === 'host'){
-        stays.sort((stay1, stay2) => 
-            stay1[sortField].localeCompare(stay2[sortField]) * +sortDir)
+
+    // ✅ FIXED: Date Filtering (Convert `dates` string to actual dates)
+    if (startDate && endDate) {
+        const searchStart = new Date(startDate).getTime();
+        const searchEnd = new Date(endDate).getTime();
+
+        stays = stays.filter(stay => {
+            if (!stay.dates) return true; // ✅ Keep stays without date info
+
+            const [startStr, endStr] = stay.dates.split(" - "); // ✅ Extract the start and end from "Feb 25 - Mar 2"
+            const stayStart = new Date(`${startStr} 2024`).getTime(); // ✅ Convert to timestamp
+            const stayEnd = new Date(`${endStr} 2024`).getTime();
+
+            return searchStart >= stayStart && searchEnd <= stayEnd;
+        });
     }
-    if(sortField === 'price'){
-        stays.sort((stay1, stay2) => 
-            (stay1[sortField] - stay2[sortField]) * +sortDir)
-    }
-    
-    stays = stays.map(({ _id, name, price, host }) => ({ _id, name,  price, host }))
-    return stays
+
+    console.log("🚀 ~ file: stay.service.local.js ~ query() returning stays:", stays);
+    return stays;
 }
 
 function getById(stayId) {

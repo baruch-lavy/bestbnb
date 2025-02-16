@@ -1,24 +1,47 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { loadStays } from "../store/actions/stay.actions.js";
 
 export const SearchResults = () => {
-  const location = useLocation();
-  const [stays, setStays] = useState([]);
+  const dispatch = useDispatch();
+  const stays = useSelector((state) => state.stayModule.stays);
 
+  // ✅ Extract search parameters from the URL
+  const searchParams = new URLSearchParams(window.location.search);
+  const [searchValues, setSearchValues] = useState({
+    destination: searchParams.get("destination") || "",
+    startDate: searchParams.get("startDate") || "",
+    endDate: searchParams.get("endDate") || "",
+    guests: Number(searchParams.get("guests")) || 1,
+  });
+
+  // ✅ Fetch stays on page load
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    console.log("Fetching stays for:", Object.fromEntries(params));
-
-    fetch(`/api/stays?${params.toString()}`)
-      .then((res) => res.json())
-      .then((data) => setStays(data))
-      .catch((err) => console.error("Error fetching stays:", err));
-  }, [location.search]);
+    if (stays.length === 0) {
+      console.log("🚀 Fetching stays with filter:", searchValues);
+      dispatch(loadStays(searchValues));
+    }
+  }, [stays.length, dispatch, searchValues]);
 
   return (
-    <div>
+    <div className="search-results">
       <h2>Search Results</h2>
-      {stays.length > 0 ? stays.map((stay) => <div key={stay.id}>{stay.name}</div>) : <p>No stays found.</p>}
+
+      {/* ✅ Display Stays */}
+      {stays.length === 0 ? (
+        <p>No stays match your search criteria.</p>
+      ) : (
+        <div className="stays-list">
+          {stays.map((stay) => (
+            <div key={stay._id} className="stay-card">
+              <img src={stay.imgUrls?.[0]} alt={stay.name} />
+              <h3>{stay.name}</h3>
+              <p>{stay.loc?.country || "Unknown Location"}</p>
+              <p>${stay.price} per night</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
