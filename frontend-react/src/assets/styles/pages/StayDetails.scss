@@ -136,7 +136,6 @@
                 }
 
             }
-
             .host-short-info {
                 display: flex;
                 gap: 24px;
@@ -270,6 +269,48 @@
         grid-row: 4;
         grid-column: 1 / -1;
         background-color: #f7f7f7;
+    }
+
+    .details-footer {
+        grid-column: 1 / 4;
+        padding: 37px 150px 60px 370px;
+        border-top: 1px solid #ddd;
+        margin-top: 40px;
+
+        .support-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+
+            h3 {
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 16px;
+                color: #222;
+            }
+
+            .support-links {
+                ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                li {
+                    margin-bottom: 12px;
+                }
+
+                a {
+                    color: #222;
+                    text-decoration: none;
+                    font-size: 14px;
+                    
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -416,6 +457,11 @@
     }
 }
 
+.details-page .app-footer {
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+}
 
 .skeleton-loader {
     width: 220px;
