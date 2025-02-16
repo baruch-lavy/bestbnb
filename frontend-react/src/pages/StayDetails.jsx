@@ -21,12 +21,20 @@ export function StayDetails() {
   const stay = useSelector(storeState => storeState.stayModule.stay)
   const [isImgLoading, setImgLoading] = useState(true)
   const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false)
+  
+  useEffect(() => {
+    document.body.classList.add('details-page')
 
+    return () => {
+        document.body.classList.remove('details-page')
+    }
+}, [])
 
   useEffect(() => {
     loadStay(stayId)
   }, [stayId])
 
+  
 
   function handleImageLoad() {
     setImgLoading(false)
@@ -48,7 +56,7 @@ export function StayDetails() {
       <header>
         <div className="stay-header">
           <h1 className="stay-name"> {stay.name}</h1>
-          <div>
+          <div className="stay-header-btns">
             <button className="show-more-summary"
             // onClick={() => setIsSummaryModalOpen(true)}
             >

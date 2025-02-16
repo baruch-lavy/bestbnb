@@ -11,6 +11,7 @@ export const AppHeader = () => {
   const dispatch = useDispatch();
   const searchData = useSelector((state) => state.search);
 
+
   // ✅ Sync Redux with URL params when the page loads
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);

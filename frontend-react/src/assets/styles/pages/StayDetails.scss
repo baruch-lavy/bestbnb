@@ -25,27 +25,34 @@
 
             }
 
+            .stay-header-btns {
 
-            .show-more-summary {
                 display: flex;
                 align-items: center;
                 gap: 5px;
 
-                color: inherit;
-                background-color: transparent;
-                font-size: rem(16px);
-                line-height: rem(20px);
-                font-weight: bold;
-                padding: 0;
-                margin: 0;
-
-                text-decoration: underline;
-
-                img {
-                    height: rem(12px);
-                    width: rem(12px);
-
+                        .show-more-summary {
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                
+                        color: inherit;
+                        background-color: transparent;
+                        font-size: rem(16px);
+                        line-height: rem(20px);
+                        font-weight: bold;
+                        padding: 0;
+                        margin: 0;
+                
+                        text-decoration: underline;
+                
+                        img {
+                        height: rem(12px);
+                        width: rem(12px);
+                
+                    }
                 }
+
             }
 
 
