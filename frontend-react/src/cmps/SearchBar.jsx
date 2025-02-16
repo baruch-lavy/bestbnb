@@ -184,26 +184,26 @@ export const SearchBar = ({
                 onChange={(dates) => {
                   const [start, end] = dates;
 
-                  // Preserve the existing `endDate` if it's undefined
-                  const updatedEndDate =
-                    end !== undefined ? end : search.endDate;
-
                   dispatch(
                     setSearchData({
                       ...search,
                       startDate: start,
-                      endDate: updatedEndDate, // ✅ Prevents `endDate` from resetting to null
+                      endDate: end || search.endDate, // ✅ Ensure endDate is preserved when not selected
                     })
                   );
 
-                  // Close the dropdown only when both dates are selected
-                  if (end) setTimeout(() => handleDropdownOpen(null), 200);
+                  // Close dropdown only when both dates are selected
+                  if (end) {
+                    setTimeout(() => handleDropdownOpen(null), 200);
+                    console.log("Updated Search State:", search);
+                  }
                 }}
                 startDate={search.startDate ? new Date(search.startDate) : null}
                 endDate={search.endDate ? new Date(search.endDate) : null}
                 selectsRange
                 monthsShown={2}
                 inline
+                
               />
             </div>
           )}

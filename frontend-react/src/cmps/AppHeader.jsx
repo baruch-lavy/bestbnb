@@ -28,25 +28,24 @@ export const AppHeader = () => {
     dispatch(setSearchData({ ...searchData }));
   };
 
-  // ✅ Handle Search Action
-  const handleSearch = () => {
-    console.log("Searching with:", searchData); // Debugging
+
   
-    // ✅ Ensure guests is an object and extract total guests
-    const guests = searchData.guests || { adults: 0, children: 0 };
+  const handleSearch = () => {
+    const updatedSearch = useSelector((state) => state.search); // Get fresh Redux state
+  
+    const guests = updatedSearch.guests || { adults: 0, children: 0 };
     const totalGuests = (guests.adults || 0) + (guests.children || 0);
   
-    // ✅ Build correct query parameters
     const queryParams = new URLSearchParams({
-      destination: searchData.destination || "Anywhere",
-      startDate: searchData.startDate ? searchData.startDate.toISOString() : "",
-      endDate: searchData.endDate ? searchData.endDate.toISOString() : "",
-      guests: totalGuests.toString(), // Ensure it's a string for the URL
+      destination: updatedSearch.destination || "Anywhere",
+      startDate: updatedSearch.startDate ? updatedSearch.startDate.toISOString() : "",
+      endDate: updatedSearch.endDate ? updatedSearch.endDate.toISOString() : "",
+      guests: totalGuests.toString(),
     }).toString();
   
-    // ✅ Redirect to search results page with correct parameters
     window.location.href = `/search-results?${queryParams}`;
   };
+  
   
 
   return (
