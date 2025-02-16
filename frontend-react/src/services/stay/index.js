@@ -25,13 +25,13 @@ function getEmptyStay() {
     }
 }
 
-function getDefaultFilter() {
+export function getDefaultFilter() {
     return {
         txt: '',
         minPrice: 0,
         maxPrice: Infinity,
         destination: '',
-        guests: 1,
+        guests: 0,
         startDate: null,
         endDate: null,
         // sortField: '',

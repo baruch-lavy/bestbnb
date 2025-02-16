@@ -1,32 +1,45 @@
 .stay-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 24px;
-    padding: 0 20px;
-    margin-top: 0;
-    
-    li {
-        list-style: none;
-        height: 100%;
-    }
-}
-
-.no-stays-message {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); // ✅ Responsive grid
+    gap: 20px;
     justify-content: center;
-    height: 50vh;
-    text-align: center;
+    padding: 20px;
+  }
+  
+  .stay-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    text-align: left;
     
-    h2 {
-        color: #222;
-        font-size: 22px;
-        margin-bottom: 8px;
+    &:hover {
+      transform: scale(1.02); // ✅ Slight zoom effect
     }
-    
+  
+    img {
+      width: 100%; // ✅ Fix image width
+      height: 200px; // ✅ Set fixed height to avoid stretching
+      object-fit: cover; // ✅ Crop image nicely
+      border-bottom: 1px solid #ddd;
+    }
+  
+    h3 {
+      font-size: 18px;
+      margin: 10px;
+    }
+  
     p {
-        color: #717171;
-        font-size: 16px;
+      color: #717171;
+      font-size: 14px;
+      margin: 5px 10px;
     }
-} 
+  
+    .stay-price {
+      font-weight: bold;
+      color: black;
+      margin: 10px;
+    }
+  }
+  

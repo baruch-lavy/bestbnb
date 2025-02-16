@@ -377,3 +377,11 @@
     display: block !important; /* Force visibility */
     opacity: 1 !important;
   }
+
+  .search-container {
+    position: relative; // ✅ Prevent overlapping other elements
+    z-index: 10; // ✅ Ensure it stays on top
+    background: white;
+    padding: 10px;
+  }
+  

@@ -19,7 +19,8 @@ export const stayService = {
     getById,
     save,
     remove,
-    addStayMsg
+    addStayMsg,
+    
 }
 window.cs = stayService
 
