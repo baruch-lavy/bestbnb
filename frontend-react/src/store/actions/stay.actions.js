@@ -9,6 +9,16 @@ export const setSearchData = (data) => ({
   payload: data,
 });
 
+// export async function loadStays(filterBy) {
+//   try {
+//       const stays = await stayService.query(filterBy)
+//       store.dispatch(getCmdSetStays(stays))
+//   } catch (err) {
+//       console.log('Cannot load stays', err)
+//       throw err
+//   }
+// }
+
 export function loadStays(filterBy = {}) {
     return async (dispatch) => {
       try {
