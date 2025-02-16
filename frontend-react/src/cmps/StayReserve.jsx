@@ -83,18 +83,18 @@ export function StayReserve({ stay }) {
                 {/* </Link> */}
 
                 {/* {checkIn && checkOut && */}
-                <div class="reservation-footer flex">
+                <div className="reservation-footer flex">
                     <span>You won't be charged yet</span>
-                    <div class="footer-price-nigts flex">
+                    <div className="footer-price-nigts flex">
                         <span>${stay.price} X {stayLength} nights</span><span>${stay.price * stayLength}</span>
                     </div>
-                    <div class="footer-price-clean-fee flex">
+                    <div className="footer-price-clean-fee flex">
                         <span>Cleaning fee</span><span>${parseInt(stay.price * stayLength * cleanFee)}</span>
                     </div>
-                    <div class="footer-price-airbnb-fee flex">
+                    <div className="footer-price-airbnb-fee flex">
                         <span>Airbnb service fee</span><span>${parseInt(stay.price * stayLength * airbnbFee)}</span>
                     </div>
-                    <div class="footer-price-total flex">
+                    <div className="footer-price-total flex">
                         <span>Total</span><span>${parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee))}</span>
                     </div>
                 </div>

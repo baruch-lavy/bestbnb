@@ -4,7 +4,7 @@
     grid-template-columns: 1fr 1120px 1fr;
     grid-template-rows: repeat(4, minmax(200px, auto));
     min-height: 100vh;
-    overflow-y: auto;
+    // overflow-y: auto;
 
     header {
         grid-row: 1;
@@ -281,7 +281,7 @@
         border: 1px solid rgb(221, 221, 221);
         border-radius: rem(12px);
         box-shadow: 0px 5px 18px #cfcfcfb7;
-        margin: 10px 10px 10px 0;
+        margin: 20px 10px 10px 0;
 
         z-index: 2 !important;
         // top: var(--navigation-bar-offset, 80px) !important;
