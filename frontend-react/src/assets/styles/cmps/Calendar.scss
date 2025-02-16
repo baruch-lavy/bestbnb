@@ -1,0 +1,29 @@
+
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 20px;
+  }
+  
+  .calendar {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .react-datepicker__input-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .react-datepicker-wrapper {
+    display: inline-block;
+  }
+  
+  button.react-datepicker__today {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    cursor: pointer;
+  }

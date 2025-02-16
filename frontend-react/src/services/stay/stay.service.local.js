@@ -237,7 +237,7 @@ function _createStays() {
                 Registration number
                 83207`,
                 capacity: 4,
-                amenities: ['Air conditioning', 'Wifi', 'Kitchen', 'Washer', 'Balcony'],
+                amenities:   ['Wifi', 'Free parking on premises', 'BBQ grill: gas', 'TV', 'Smoke alarm', 'Indoor fireplace: wood-burning', 'Central air conditioning'],
                 labels: ['City life', 'Cozy', 'Modern'],
                 host: {
                     _id: 'u102',
@@ -283,7 +283,7 @@ function _createStays() {
                 baths: 2,
                 summary: 'Experience the Mediterranean lifestyle in this stunning seaside villa. ',
                 capacity: 6,
-                amenities: ['TV', 'Pool', 'Kitchen', 'Beachfront'],
+                amenities: ['Private pool', 'Wifi', 'EV charger', 'Self check-in', 'Carbon monoxide alarm', 'TV', 'Long term stays allowed'],
                 labels: ['Seaview', 'Luxury', 'Private'],
                 host: {
                     _id: 'u103',
@@ -328,7 +328,7 @@ function _createStays() {
                 baths: 2,
                 summary: 'Cozy and warm wooden cabin with breathtaking mountain views. ',
                 capacity: 5,
-                amenities: ['Fireplace', 'Wifi', 'Sauna', 'Mountain view'],
+                amenities: ['Iron', 'Central heating', 'Free washer – In building', 'Hair dryer', 'Private entrance', 'Private hot tub', 'Crib - always at the listing'],
                 labels: ['Nature', 'Peaceful', 'Scenic'],
                 host: {
                     _id: 'u104',
@@ -373,7 +373,7 @@ function _createStays() {
                 baths: 1,
                 summary: 'A quiet cottage surrounded by vineyards, perfect for a relaxing stay. ',
                 capacity: 4,
-                amenities: ['Garden', 'Wifi', 'Kitchen', 'Pet-friendly'],
+                amenities:  ['Bay view', 'Private pool', 'Private entrance', 'EV charger', 'Iron', 'BBQ grill: gas', 'Wifi'],
                 labels: ['Rustic', 'Cozy', 'Nature'],
                 host: {
                     _id: 'u105',
@@ -418,7 +418,7 @@ function _createStays() {
                 baths: 1,
                 summary: 'Stay in a charming cabin with a view of the beautiful Banff lakes. Perfect for a nature retreat! ',
                 capacity: 5,
-                amenities: ['Fireplace', 'Mountain view', 'Wifi', 'Kayak rental'],
+                amenities:   ['Smoke alarm', 'Central air conditioning', 'Wifi', 'Private hot tub', 'Private pool', 'Crib - always at the listing', 'Carbon monoxide alarm'],
                 labels: ['Nature', 'Relaxing', 'Scenic'],
                 host: {
                     _id: 'u106',
@@ -463,7 +463,7 @@ function _createStays() {
                 baths: 1,
                 summary: 'Experience Tokyo from a high-rise loft in the heart of Shibuya. Stunning skyline views! ',
                 capacity: 2,
-                amenities: ['Air conditioning', 'Smart TV', 'High-speed Wifi', 'Balcony'],
+                amenities:   ['TV', 'Self check-in', 'Iron', 'Private entrance', 'Wifi', 'Free parking on premises', 'Long term stays allowed'],
                 labels: ['Urban', 'Modern', 'Luxury'],
                 host: {
                     _id: 'u107',
