@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { loadStay, addStayMsg } from '../store/actions/stay.actions'
 import { StayGallery } from '../cmps/StayGallery'
-// import { stays } from '../data/stay.js'
 import { StayAmenities } from '../cmps/StayAmenities.jsx'
 import { ReviewList } from '../cmps/ReviewList.jsx'
-import { StayOrder } from '../cmps/StayOrder.jsx'
+
 import { Calendar } from '../cmps/Calendar.jsx'
 import { SummaryModal } from '../cmps/SummaryModal.jsx'
+import { StayReserve } from '../cmps/StayReserve.jsx'
 
 
 
@@ -104,7 +104,7 @@ export function StayDetails() {
           <StayAmenities amenities={stay.amenities} />
           <Calendar />
         </section>
-        <StayOrder stay={stay} />
+        <StayReserve stay={stay} />
       </main>
 
       <div className="reviw-and-map">

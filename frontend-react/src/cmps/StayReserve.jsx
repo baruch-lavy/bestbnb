@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 
-export function StayOrder({ stay }) {
+export function StayReserve({ stay }) {
     const [checkIn, setCheckIn] = useState("");
     const [checkOut, setCheckOut] = useState("");
     const [guests, setGuests] = useState(1);
@@ -60,11 +60,13 @@ export function StayOrder({ stay }) {
             </div>
 
             {/* Reserve Button */}
+            {/* <Link to={`/stay/${stay._id}`}> */}
             <button
              className="reserve-btn"
              onMouseMove={handleMouseMove}>
                 Reserve
             </button>
+            {/* </Link> */}
 
             <p>You won't be charged yet</p>
             <div>
