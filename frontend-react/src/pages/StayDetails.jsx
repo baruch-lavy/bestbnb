@@ -22,20 +22,20 @@ export function StayDetails() {
   const stay = useSelector(storeState => storeState.stayModule.stay)
   const [isImgLoading, setImgLoading] = useState(true)
   const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false)
-  
+
   useEffect(() => {
     document.body.classList.add('details-page')
 
     return () => {
-        document.body.classList.remove('details-page')
+      document.body.classList.remove('details-page')
     }
-}, [])
+  }, [])
 
   useEffect(() => {
     loadStay(stayId)
   }, [stayId])
 
-  
+
 
   function handleImageLoad() {
     setImgLoading(false)
@@ -120,9 +120,7 @@ export function StayDetails() {
           <StayAmenities amenities={stay.amenities} />
           <Calendar />
         </section>
-        {/* <div className="reserve-companent"> */}
-          <StayReserve stay={stay} />
-        {/* </div> */}
+        <StayReserve stay={stay} />
       </main>
 
       <div className="reviw-and-map">

@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import { Link } from 'react-router-dom'
 
 export function StayReserve({ stay }) {
     const [checkIn, setCheckIn] = useState("");
@@ -95,13 +96,13 @@ export function StayReserve({ stay }) {
                     </section> */}
 
                 {/* Reserve Button */}
-                {/* <Link to={`/stay/confirmation/${stay._id}`}> */}
+                <Link to={`/stay/confirmation/${stay._id}`}>
                 <button
                     className="reserve-btn"
                     onMouseMove={handleMouseMove}>
                     Reserve
                 </button>
-                {/* </Link> */}
+                </Link>
 
                 {/* {checkIn && checkOut && */}
                 <div className="reservation-footer flex">
@@ -125,4 +126,3 @@ export function StayReserve({ stay }) {
     );
 };
 
-// export default ReservationCard;
