@@ -1,28 +1,27 @@
 import { loadStays, addStay, updateStay, removeStay, addStayMsg } from '../store/actions/stay.actions'
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { stayService } from '../services/stay/'
 import { userService } from '../services/user'
-
 
 import { StayList } from '../cmps/StayList'
 import { StayFilter } from '../cmps/StayFilter'
 // import { stays } from '../data/stay.js'
 
 export function StayIndex() {
-    const [ filterBy, setFilterBy ] = useState(stayService.getDefaultFilter())
-    const stays = useSelector(storeState => storeState.stayModule.stays)
-    
-        useEffect(() => {
-                loadStays(filterBy)
-            }, [filterBy])
-        
-    if (!stays) return <p>loading</p>
-        return (
-            <section className="stay-index">
-            <StayFilter filterBy={filterBy} setFilterBy={setFilterBy} />
+    const dispatch = useDispatch();
+    const stays = useSelector(storeState => storeState.stayModule.stays); // ✅ Get stays from Redux
+
+    // ✅ Load stays when the component mounts
+    useEffect(() => {
+        dispatch(loadStays()); // ✅ Fetch stays on mount
+    }, [dispatch]);
+
+    return (
+        <section className="stay-index">
+            {/* <StayFilter filterBy={filterBy} setFilterBy={setFilterBy} /> */}
             <br />
             <StayList stays={stays} />
         </section>
@@ -61,5 +60,3 @@ export function StayIndex() {
 //             showErrorMsg('Cannot update stay')
 //         }        
 //     }
-
-// }
