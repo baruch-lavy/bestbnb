@@ -146,20 +146,20 @@ function _createStays() {
         let stays = [
             {
                 _id: 's102',
-                name: 'Lisbon Retreat',
+                name: '770 Estearn Parkway, NY',
                 loc: {
-                    country: 'Portugal',
-                    city: 'Lisbon',
-                    address: 'Rua Nova do Carvalho 45',
+                    country: 'New York',
+                    city: 'Brooklyn',
+                    address: '770 Estearn Parkway, NY',
                 },
                 imgUrls: [
-                    'https://loremflickr.com/200/200?random=12',
-                    'https://loremflickr.com/200/200?random=13',
-                    'https://loremflickr.com/200/200?random=14',
-                    'https://loremflickr.com/200/200?random=15',
-                    'https://loremflickr.com/200/200?random=16',
+                    'https://res.cloudinary.com/dv2brrhll/image/upload/v1739732913/021A6444_1_gtbnm5.jpg',
+                    'https://res.cloudinary.com/dv2brrhll/image/upload/v1739732907/20211219_161809_1_oponwr.jpg',
+                    'https://res.cloudinary.com/dv2brrhll/image/upload/v1739732903/20220505_061253_1_dwvknr.jpg',
+                    'https://res.cloudinary.com/dv2brrhll/image/upload/v1739732483/770Rabbi_snxxb2.jpg',
+                    'https://res.cloudinary.com/dv2brrhll/image/upload/v1739732482/5c2b06ad10d6a_1546323629_news_main_gallery_n08woy.jpg',
                 ],
-                price: 720,
+                price: 770,
                 reviews: [
                     {
                         id: 'review1',
@@ -230,9 +230,10 @@ function _createStays() {
                     address: 'Passeig de Gracia 78',
                 },
                 imgUrls: [
-                    'https://loremflickr.com/200/200?random=20',
+                    'https://res.cloudinary.com/dv2brrhll/image/upload/v1739217297/pexels-pixabay-264907_hku2xd.jpg',
                     'https://loremflickr.com/200/200?random=21',
                     'https://loremflickr.com/200/200?random=22',
+                    'https://loremflickr.com/200/200?random=23',
                     'https://loremflickr.com/200/200?random=23',
                 ],
                 price: 850,
@@ -276,8 +277,10 @@ function _createStays() {
                     address: 'Matterhorn St. 9',
                 },
                 imgUrls: [
-                    'https://loremflickr.com/200/200?random=26',
+                    'https://res.cloudinary.com/dv2brrhll/image/upload/v1739217297/pexels-mikebirdy-381228_t6soa8.jpg',
                     'https://loremflickr.com/200/200?random=27',
+                    'https://loremflickr.com/200/200?random=28',
+                    'https://loremflickr.com/200/200?random=28',
                     'https://loremflickr.com/200/200?random=28',
                 ],
                 price: 950,
@@ -321,8 +324,10 @@ function _createStays() {
                     address: 'Château St. 7',
                 },
                 imgUrls: [
-                    'https://loremflickr.com/200/200?random=31',
+                    'https://res.cloudinary.com/dv2brrhll/image/upload/v1739217296/pexels-pixabay-209728_xmpzs9.jpg',
                     'https://loremflickr.com/200/200?random=32',
+                    'https://loremflickr.com/200/200?random=33',
+                    'https://loremflickr.com/200/200?random=33',
                     'https://loremflickr.com/200/200?random=33',
                 ],
                 price: 780,
@@ -369,6 +374,8 @@ function _createStays() {
                     'https://loremflickr.com/200/200?random=36',
                     'https://loremflickr.com/200/200?random=37',
                     'https://loremflickr.com/200/200?random=38',
+                    'https://loremflickr.com/200/200?random=38',
+                    'https://loremflickr.com/200/200?random=38',
                 ],
                 price: 820,
                 reviews: [
@@ -413,6 +420,8 @@ function _createStays() {
                 imgUrls: [
                     'https://loremflickr.com/200/200?random=41',
                     'https://loremflickr.com/200/200?random=42',
+                    'https://loremflickr.com/200/200?random=43',
+                    'https://loremflickr.com/200/200?random=43',
                     'https://loremflickr.com/200/200?random=43',
                 ],
                 price: 950,
@@ -459,6 +468,8 @@ function _createStays() {
                     'https://loremflickr.com/200/200?random=46',
                     'https://loremflickr.com/200/200?random=47',
                     'https://loremflickr.com/200/200?random=48',
+                    'https://loremflickr.com/200/200?random=48',
+                    'https://loremflickr.com/200/200?random=48',
                 ],
                 price: 1050,
                 reviews: [
@@ -504,6 +515,8 @@ function _createStays() {
                     'https://loremflickr.com/200/200?random=51',
                     'https://loremflickr.com/200/200?random=52',
                     'https://loremflickr.com/200/200?random=53',
+                    'https://loremflickr.com/200/200?random=53',
+                    'https://loremflickr.com/200/200?random=53',
                 ],
                 price: 720,
                 reviews: [
@@ -548,6 +561,8 @@ function _createStays() {
                 imgUrls: [
                     'https://loremflickr.com/200/200?random=56',
                     'https://loremflickr.com/200/200?random=57',
+                    'https://loremflickr.com/200/200?random=58',
+                    'https://loremflickr.com/200/200?random=58',
                     'https://loremflickr.com/200/200?random=58',
                 ],
                 price: 990,
