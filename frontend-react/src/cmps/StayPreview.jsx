@@ -93,7 +93,7 @@ export function StayPreview({ stay }) {
                 </div>
 
                 <div className="info">
-                    <div className="header">
+                    <div className="header-stay">
                         <h3>{stay.loc.city}, {stay.loc.country}</h3>
                         <div className="rating">★ {stay.reviews[0]?.rate || 'New'}</div>
                     </div>
