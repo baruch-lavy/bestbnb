@@ -15,18 +15,27 @@ import { StayReserve } from '../cmps/StayReserve.jsx'
 
 
 
+
 export function StayDetails() {
 
   const { stayId } = useParams()
   const stay = useSelector(storeState => storeState.stayModule.stay)
   const [isImgLoading, setImgLoading] = useState(true)
   const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false)
+  
+  useEffect(() => {
+    document.body.classList.add('details-page')
 
+    return () => {
+        document.body.classList.remove('details-page')
+    }
+}, [])
 
   useEffect(() => {
     loadStay(stayId)
   }, [stayId])
 
+  
 
   function handleImageLoad() {
     setImgLoading(false)
@@ -48,7 +57,7 @@ export function StayDetails() {
       <header>
         <div className="stay-header">
           <h1 className="stay-name"> {stay.name}</h1>
-          <div>
+          <div className="stay-header-btns">
             <button className="show-more-summary"
             // onClick={() => setIsSummaryModalOpen(true)}
             >
@@ -123,8 +132,46 @@ export function StayDetails() {
       {/* // } */}
       {/* <button onClick={() => { onAddStayMsg(stay._id) }}>Add stay msg</button> */}
 
-      <footer>
-        this is footer
+      <footer className="details-footer">
+        <div className="support-content">
+          <div className="support-links">
+            <h3>Support</h3>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">AirCover</a></li>
+              <li><a href="#">Anti-discrimination</a></li>
+              <li><a href="#">Disability support</a></li>
+              <li><a href="#">Cancellation options</a></li>
+              <li><a href="#">Report neighborhood concern</a></li>
+            </ul>
+          </div>
+
+          <div className="support-links">
+            <h3>Hosting</h3>
+            <ul>
+              <li><a href="#">Bestbnb your home</a></li>
+              <li><a href="#">AirCover for Hosts</a></li>
+              <li><a href="#">Hosting resources</a></li>
+              <li><a href="#">Community forum</a></li>
+              <li><a href="#">Hosting responsibly</a></li>
+              <li><a href="#">Bestbnb-friendly apartments</a></li>
+              <li><a href="#">Join a free Hosting class</a></li>
+              <li><a href="#">Find a co-host</a></li>
+            </ul>
+          </div>
+
+          <div className="support-links">
+            <h3>Bestbnb</h3>
+            <ul>
+              <li><a href="#">Newsroom</a></li>
+              <li><a href="#">New features</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Investors</a></li>
+              <li><a href="#">Gift cards</a></li>
+              <li><a href="#">Bestbnb.org emergency stays</a></li>
+            </ul>
+          </div>
+        </div>
       </footer>
     </section>
   )
