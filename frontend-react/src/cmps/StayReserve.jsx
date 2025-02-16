@@ -66,7 +66,7 @@ export function StayReserve({ stay }) {
                         >
                             {[...Array(5).keys()].map((num) => (
                                 <option key={num + 1} value={num + 1}>
-                                    {num + 1} {num + 1 === 1 ? "Guest" : "Guests"}
+                                    {num + 1} {num + 1 === 1 ? "guest" : "guests"}
                                 </option>
                             ))}
                         </select>
