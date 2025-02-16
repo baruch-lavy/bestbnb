@@ -61,12 +61,12 @@ export function StayDetails() {
             <button className="show-more-summary"
             // onClick={() => setIsSummaryModalOpen(true)}
             >
-              <img src="/img/stays/asset23.svg" alt="" /><span>Share</span>
+              <img src="/img/stays/share.svg" alt="" /><span>Share</span>
             </button>
             <button className="show-more-summary"
             // onClick={() => setIsSummaryModalOpen(true)}
             >
-              <img src="/img/stays/asset23.svg" alt="" /><span>Save</span>
+              <img src="/img/stays/heart.svg" alt="" /><span>Save</span>
             </button>
             {/* 📩<span> share</span>❤<span>  save</span> */}
           </div>

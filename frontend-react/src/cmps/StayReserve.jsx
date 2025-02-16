@@ -92,7 +92,7 @@ export function StayReserve({ stay }) {
                         <span>Cleaning fee</span><span>${parseInt(stay.price * stayLength * cleanFee)}</span>
                     </div>
                     <div className="footer-price-airbnb-fee flex">
-                        <span>Airbnb service fee</span><span>${parseInt(stay.price * stayLength * airbnbFee)}</span>
+                        <span>Bestbnb service fee</span><span>${parseInt(stay.price * stayLength * airbnbFee)}</span>
                     </div>
                     <div className="footer-price-total flex">
                         <span>Total</span><span>${parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee))}</span>
