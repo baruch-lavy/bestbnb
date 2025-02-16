@@ -17,13 +17,15 @@ export function StayList() {
     }
     
     return (
-        <ul className="stay-list">
+        <div>
             < CategoryFilter />
+        <ul className="stay-list">
             {stays.map((stay) => (
                 <li key={stay._id}>
                     <StayPreview stay={stay} />
                 </li>
             ))}
         </ul>
-    );
+    </div>
+    )
 }

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { CategoryFilter } from './CategoryFilter'
 import { categories } from '../services/categories.service'
 
+
 export function StayFilter({ filterBy, setFilterBy }) {
     const [filterToEdit, setFilterToEdit] = useState(structuredClone(filterBy))
     const [selectedCategory, setSelectedCategory] = useState(null)
