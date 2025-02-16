@@ -49,34 +49,34 @@ export function StayDetails() {
         <div className="stay-header">
           <h1 className="stay-name"> {stay.name}</h1>
           <div>
-             <button className="show-more-summary"
-              // onClick={() => setIsSummaryModalOpen(true)}
-              >
-                <img src="/img/stays/asset23.svg" alt="" /><span>Share</span> 
+            <button className="show-more-summary"
+            // onClick={() => setIsSummaryModalOpen(true)}
+            >
+              <img src="/img/stays/asset23.svg" alt="" /><span>Share</span>
             </button>
-             <button className="show-more-summary"
-              // onClick={() => setIsSummaryModalOpen(true)}
-              >
+            <button className="show-more-summary"
+            // onClick={() => setIsSummaryModalOpen(true)}
+            >
               <img src="/img/stays/asset23.svg" alt="" /><span>Save</span>
             </button>
             {/* 📩<span> share</span>❤<span>  save</span> */}
-            </div>
+          </div>
         </div>
         <Link to="/stay/gallery/:id">
-        <article className="mini-gallery">
+          <article className="mini-gallery">
 
-          {isImgLoading && <div className="skeleton-loader"></div>}
-          <div className="main-image"
-            onLoad={handleImageLoad}
-            style={{ display: isImgLoading ? 'none' : 'block' }}>
-            <img src={stay.imgUrls[0]} alt="Main house image" />
-          </div>
-          <div className="other-images">
-            {stay.imgUrls.slice(1, 5).map((imgUrl, index) => (
-              <img key={index} src={imgUrl} alt={`house image ${index + 1}`} />
-            ))}
-          </div>
-        </article>
+            {isImgLoading && <div className="skeleton-loader"></div>}
+            <div className="main-image"
+              onLoad={handleImageLoad}
+              style={{ display: isImgLoading ? 'none' : 'block' }}>
+              <img src={stay.imgUrls[0]} alt="Main house image" />
+            </div>
+            <div className="other-images">
+              {stay.imgUrls.slice(1, 5).map((imgUrl, index) => (
+                <img key={index} src={imgUrl} alt={`house image ${index + 1}`} />
+              ))}
+            </div>
+          </article>
         </Link>
       </header>
 
@@ -111,7 +111,9 @@ export function StayDetails() {
           <StayAmenities amenities={stay.amenities} />
           <Calendar />
         </section>
-        <StayReserve stay={stay} />
+        {/* <div className="reserve-companent"> */}
+          <StayReserve stay={stay} />
+        {/* </div> */}
       </main>
 
       <div className="reviw-and-map">

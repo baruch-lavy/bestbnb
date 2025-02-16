@@ -10,7 +10,7 @@ export function StayReserve({ stay }) {
     const airbnbFee = 0.13
 
 
-    function handleMouseMove(e){
+    function handleMouseMove(e) {
         const button = e.currentTarget;
         const { x, y } = button.getBoundingClientRect();
         button.style.setProperty("--x", e.clientX - x);
@@ -20,67 +20,85 @@ export function StayReserve({ stay }) {
     return (
         <div className="order-section">
             <div className="order-card">
-            <h2 className="e">${stay.price}<span> night</span></h2>
+                {/* {(checkIn && checkOut) ? */}
+                    <h2 className="order-price">${stay.price}<span> night</span></h2>
+                    {/* : <h2 className="order-price">Add dates for prices</h2>} */}
 
-            {/* Check-in & Check-out Dates */}
-            <div className="mb-4">
-                <label className="s">CHECK-IN</label>
-                <input
-                    type="date"
-                    value={checkIn}
-                    onChange={(e) => setCheckIn(e.target.value)}
-                    className="d"
-                />
-            </div>
+                {/* Check-in & Check-out Dates */}
+                <div className="form-reservation">
+                    {/* <div className="reservation-dates-container"> */}
+                        <div className="reservation-dates-in">
+                            <label className="reservation-dates-label">CHECK-IN</label>
+                            <input
+                                placeholder="Add date"
+                                value="16/3/2025"
+                                // {checkIn}
+                                // type="date"
+                                // onChange={(e) => setCheckIn(e.target.value)}
+                                className="date-input"
+                            />
+                        </div>
 
-            <div className="mb-4">
-                <label className="KJH">CHECK-OUT</label>
-                <input
-                    type="date"
-                    value={checkOut}
-                    onChange={(e) => setCheckOut(e.target.value)}
-                    className="w"
-                />
-            </div>
 
-            {/* Guest Selection */}
-            <div className="mb-4">
-                <label className="blo">GUESTS</label>
-                <select
-                    value={guests}
-                    onChange={(e) => setGuests(Number(e.target.value))}
-                    className="w-fu"
-                >
-                    {[...Array(5).keys()].map((num) => (
-                        <option key={num + 1} value={num + 1}>
-                            {num + 1} {num + 1 === 1 ? "Guest" : "Guests"}
-                        </option>
-                    ))}
-                </select>
-            </div>
+                        <div className="reservation-dates-out">
+                            <label className="reservation-dates-label">CHECK-OUT</label>
+                            <input
+                                placeholder="Add date"
+                                value="19/3/2025"
+                                // {checkOut}
+                                // type="date"
+                                // onChange={(e) => setCheckOut(e.target.value)}
+                                className="date-input"
+                            />
+                        </div>
+                    {/* </div> */}
 
-            {/* Reserve Button */}
-            {/* <Link to={`/stay/${stay._id}`}> */}
-            <button
-             className="reserve-btn"
-             onMouseMove={handleMouseMove}>
-                Reserve
-            </button>
-            {/* </Link> */}
+                    {/* Guest Selection */}
+                    <div className="reservation-guests">
+                        <label className="reservation-guests-label">GUESTS</label>
+                        <select
+                            placeholder="1 guest"
+                            name="guests"
+                            value="1 guest"
+                            // {guests}
+                            // onChange={(e) => setGuests(Number(e.target.value))}
+                            className="guests"
+                        >
+                            {[...Array(5).keys()].map((num) => (
+                                <option key={num + 1} value={num + 1}>
+                                    {num + 1} {num + 1 === 1 ? "Guest" : "Guests"}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
 
-            <p>You won't be charged yet</p>
-            <div>
-                <span>${stay.price} X {stayLength} nights</span><span>${stay.price * stayLength}</span>
-            </div>
-            <div>
-                <span>Cleaning fee</span><span>${parseInt(stay.price * stayLength * cleanFee)}</span>
-            </div>
-            <div>
-                <span>Airbnb service fee</span><span>${parseInt(stay.price * stayLength * airbnbFee)}</span>
-            </div>
-            <div>
-                <span>Total</span><span>${parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee))}</span>
-            </div>
+                {/* Reserve Button */}
+                {/* <Link to={`/stay/confirmation/${stay._id}`}> */}
+                <button
+                    className="reserve-btn"
+                    onMouseMove={handleMouseMove}>
+                    Reserve
+                </button>
+                {/* </Link> */}
+
+                {/* {checkIn && checkOut && */}
+                <div class="reservation-footer flex">
+                    <span>You won't be charged yet</span>
+                    <div class="footer-price-nigts flex">
+                        <span>${stay.price} X {stayLength} nights</span><span>${stay.price * stayLength}</span>
+                    </div>
+                    <div class="footer-price-clean-fee flex">
+                        <span>Cleaning fee</span><span>${parseInt(stay.price * stayLength * cleanFee)}</span>
+                    </div>
+                    <div class="footer-price-airbnb-fee flex">
+                        <span>Airbnb service fee</span><span>${parseInt(stay.price * stayLength * airbnbFee)}</span>
+                    </div>
+                    <div class="footer-price-total flex">
+                        <span>Total</span><span>${parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee))}</span>
+                    </div>
+                </div>
+                {/* } */}
             </div>
         </div>
     );
