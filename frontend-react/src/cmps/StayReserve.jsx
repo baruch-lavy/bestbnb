@@ -73,6 +73,27 @@ export function StayReserve({ stay }) {
                     </div>
                 </div>
 
+                {/* <section className="rooms-and-beds">
+                        <h3>Rooms and beds</h3>
+                        <div className="rooms-inputs">
+                            <CounterGroup 
+                                label="Bedrooms"
+                                value={bedrooms}
+                                setValue={setBedrooms}
+                            />
+                            <CounterGroup 
+                                label="Beds"
+                                value={beds}
+                                setValue={setBeds}
+                            />
+                            <CounterGroup 
+                                label="Bathrooms"
+                                value={bathrooms}
+                                setValue={setBathrooms}
+                            />
+                        </div>
+                    </section> */}
+
                 {/* Reserve Button */}
                 {/* <Link to={`/stay/confirmation/${stay._id}`}> */}
                 <button

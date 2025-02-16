@@ -13,6 +13,132 @@
     font-size: 15px;
     color: #222222;
 
+    padding-left: 0px;
+    margin-left: 0px;
+
+    &.details-footer {
+        position: relative;
+        padding: 37px 80px 20px;
+        display: flex;
+        flex-direction: column;
+        background: #f7f7f7;
+        
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 253px;
+
+            .footer-section {
+                h3 {
+                    font-size: 14px;
+                    font-weight: 600;
+                    margin-bottom: 16px;
+                    color: rgb(34, 34, 34);
+                }
+
+                ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+
+                    li {
+                        margin-bottom: 12px;
+
+                        a {
+                            color: rgb(34, 34, 34);
+                            text-decoration: none;
+                            font-size: 14px;
+                            line-height: 18px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-top: 24px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 253px;
+
+            .footer-bottom-left {
+                display: flex;
+                gap: 6px;
+                align-items: center;
+
+                p, a {
+                    margin: 0;
+                    color: rgb(34, 34, 34);
+                    text-decoration: none;
+                    font-size: 15px;
+                    line-height: 18px;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                .dot-separator {
+                    color: rgb(113, 113, 113);
+                }
+            }
+
+            .footer-bottom-right {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+
+                button {
+                    display: flex;
+                    align-items: center;
+                    background: none;
+                    border: none;
+                    padding: 8px 12px;
+                    cursor: pointer;
+                    color: rgb(34, 34, 34);
+                    font-size: 13px;
+                    font-weight: 600;
+                    border-radius: 22px;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                .language-btn {
+                    .globe-icon {
+                        width: 16px;
+                        height: 16px;
+                        margin-right: 2px;
+                    }
+                }
+
+                .currency-btn {
+                    .dollar-icon {
+                        font-size: 1.5em;
+                        margin-right: 4px;
+                    }
+                }
+
+                a {
+                    display: flex;
+                    align-items: center;
+
+                    img {
+                        width: 18px;
+                        height: 18px;
+                    }
+                }
+            }
+        }
+    }
+
     .footer-left {
         display: flex;
         gap: 6px;
@@ -77,6 +203,8 @@
             .dollar-icon {
                 font-size: 1.5em;
                 margin-right: 4px;
+                padding-left: 0px;
+                margin-left: 0px;
             }
         }
     }
