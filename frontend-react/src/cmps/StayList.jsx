@@ -1,6 +1,7 @@
 import { StayPreview } from './StayPreview.jsx'
 
 export function StayList({ stays }) {
+    console.log('🚀 ~ file: StayList.jsx ~ line 5 ~ StayList ~ stays', stays)
     if (!stays?.length) {
         return (
             <div className="no-stays-message">

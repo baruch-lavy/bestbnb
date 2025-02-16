@@ -10,6 +10,7 @@ export const setSearchData = (data) => ({
 });
 
 export function loadStays(filterBy = {}) {
+    console.log("🚀 ~ file: stay.actions.js ~ line 33 ~ loadStays ~ filterBy", filterBy)
     return async (dispatch) => {
       try {
         const allStays = await stayService.query();
