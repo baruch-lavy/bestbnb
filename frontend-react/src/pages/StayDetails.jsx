@@ -10,6 +10,8 @@ import { StayGallery } from '../cmps/StayGallery'
 import { StayAmenities } from '../cmps/StayAmenities.jsx'
 import { ReviewList } from '../cmps/ReviewList.jsx'
 import { StayOrder } from '../cmps/StayOrder.jsx'
+import { Calendar } from '../cmps/Calendar.jsx'
+import { SummaryModal } from '../cmps/SummaryModal.jsx'
 
 
 
@@ -18,6 +20,7 @@ export function StayDetails() {
   const { stayId } = useParams()
   const stay = useSelector(storeState => storeState.stayModule.stay)
   const [isImgLoading, setImgLoading] = useState(true)
+  const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false)
 
 
   useEffect(() => {
@@ -88,9 +91,18 @@ export function StayDetails() {
           </div>
           <article className="stay-summary">
             <p>{stay.summary}</p>
-            <button className="show-more-summary">Show more &gt;</button>
+            <button className="show-more-summary"
+              onClick={() => setIsSummaryModalOpen(true)}>
+              Show more  <img src="/img/stays/asset23.svg" alt="" />
+            </button>
+            <SummaryModal
+              isOpen={isSummaryModalOpen}
+              onClose={() => setIsSummaryModalOpen(false)}
+              summary={stay.summary}
+            />
           </article>
           <StayAmenities amenities={stay.amenities} />
+          <Calendar />
         </section>
         <StayOrder stay={stay} />
       </main>
@@ -98,9 +110,6 @@ export function StayDetails() {
       <div className="reviw-and-map">
         <ReviewList reviews={stay.reviews} />
         {/* <Map/> */}
-
-        <h4>${stay.price}</h4>
-        {/* <pre> {JSON.stringify(stay, null, 2)} </pre> */}
       </div>
       {/* // } */}
       {/* <button onClick={() => { onAddStayMsg(stay._id) }}>Add stay msg</button> */}

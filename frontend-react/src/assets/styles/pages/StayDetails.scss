@@ -148,6 +148,10 @@
                 }
 
                 .show-more-summary {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+
                     color: inherit;
                     background-color: transparent;
                     font-size: rem(16px);
@@ -157,11 +161,18 @@
                     margin: 0;
 
                     text-decoration: underline;
+
+                    img {
+                        height: rem(12px);
+                        width: rem(12px);
+                     
+                    }
                 }
             }
 
             .amenities {
                 padding: rem(48px) 0;
+                margin: 0;
 
                 h3 {
                     font-size: rem(22px);
@@ -178,6 +189,16 @@
                         font-size: rem(16px);
                         line-height: rem(20px);
                         padding-bottom: rem(16px);
+
+                        .amenity {
+                            display: flex;
+                            gap: rem(16px);
+
+                            img {
+                                height: rem(24px);
+                                width: rem(24px);
+                            }
+                        }
                     }
                 }
 
@@ -327,3 +348,5 @@
         background-position: -200% 0;
     }
 }
+
+

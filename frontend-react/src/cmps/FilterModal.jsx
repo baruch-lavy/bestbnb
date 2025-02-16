@@ -1,9 +1,28 @@
 import { useState } from 'react'
 
+const amenities = [
+    { id: 'wifi', label: 'Wifi', icon: 'asset1.svg' },
+    { id: 'kitchen', label: 'Kitchen', icon: 'kitchen.svg' },
+    { id: 'washer', label: 'Washer', icon: 'washer.svg' },
+    { id: 'dryer', label: 'Dryer', icon: 'dryer.svg' },
+    { id: 'air', label: 'Air conditioning', icon: 'air.svg' },
+    { id: 'heating', label: 'Heating', icon: 'heating.svg' },
+]
+
+const moreAmenities = [
+    { id: 'pool', label: 'Pool', icon: 'pool.svg' },
+    { id: 'hot-tub', label: 'Hot tub', icon: 'hot-tub.svg' },
+    { id: 'parking', label: 'Free parking', icon: 'parking.svg' },
+    { id: 'gym', label: 'Gym', icon: 'gym.svg' },
+    { id: 'breakfast', label: 'Breakfast', icon: 'breakfast.svg' },
+    { id: 'pets', label: 'Pets allowed', icon: 'pets.svg' },
+]
+
 export function FilterModal({ isOpen, onClose }) {
     const [bedrooms, setBedrooms] = useState(0)
     const [beds, setBeds] = useState(0)
     const [bathrooms, setBathrooms] = useState(0)
+    const [isAmenitiesExpanded, setIsAmenitiesExpanded] = useState(false)
 
     const handleIncrement = (setter, value) => {
         setter(value + 1)
@@ -107,7 +126,7 @@ export function FilterModal({ isOpen, onClose }) {
                             <div className="price-input">
                                 <label>Maximum</label>
                                 <div className="input-wrapper">
-                                    <span className="currency">$860</span>
+                                    <span className="currency">$130</span>
                                     <input type="text" />
                                 </div>
                             </div>
@@ -133,6 +152,43 @@ export function FilterModal({ isOpen, onClose }) {
                                 setValue={setBathrooms}
                             />
                         </div>
+                    </section>
+
+                    <section className="amenities">
+                        <h3>Amenities</h3>
+                        <div className="amenities-grid">
+                            {amenities.map(amenity => (
+                                <button key={amenity.id} className="amenity-btn">
+                                    <span className="amenity-icon">
+                                        <img src={`/img/stays/amenities/${amenity.icon}`} alt={amenity.label} />
+                                    </span>
+                                    <span className="amenity-label">{amenity.label}</span>
+                                </button>
+                            ))}
+                        </div>
+
+                        {isAmenitiesExpanded && (
+                            <div className="amenities-grid">
+                                {moreAmenities.map(amenity => (
+                                    <button key={amenity.id} className="amenity-btn">
+                                        <span className="amenity-icon">
+                                            <img src={`/img/stays/amenities/${amenity.icon}`} alt={amenity.label} />
+                                        </span>
+                                        <span className="amenity-label">{amenity.label}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+
+                        <button 
+                            className={`show-more-btn ${isAmenitiesExpanded ? 'expanded' : ''}`}
+                            onClick={() => setIsAmenitiesExpanded(!isAmenitiesExpanded)}
+                        >
+                            {isAmenitiesExpanded ? 'Show less' : 'Show more'}
+                            <svg viewBox="0 0 18 18">
+                                <path d="M16.29 4.3a1 1 0 1 1 1.41 1.42l-8 8a1 1 0 0 1-1.41 0l-8-8a1 1 0 1 1 1.41-1.42L9 11.6l7.29-7.3z"/>
+                            </svg>
+                        </button>
                     </section>
                 </div>
 
