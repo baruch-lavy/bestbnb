@@ -52,7 +52,7 @@ export function AppFooter() {
 
 				<div className="footer-bottom">
 					<div className="footer-bottom-left">
-						<p>© 2025 Bestbnb, Inc.</p>
+						<p className="footer-copyright">© 2025 Bestbnb, Inc.</p>
 						<span className="dot-separator">·</span>
 						<a href="#">Terms</a>
 						<span className="dot-separator">·</span>
@@ -85,7 +85,7 @@ export function AppFooter() {
 	return (
 		<footer className="app-footer">
 			<div className="footer-left">
-				<p>© 2025 Bestbnb, Inc.</p>
+				<p className="footer-copyright">© 2025 Bestbnb, Inc.</p>
 				<span className="dot-separator">·</span>
 				<a href="#">Terms</a>
 				<span className="dot-separator">·</span>

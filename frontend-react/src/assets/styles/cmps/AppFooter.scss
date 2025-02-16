@@ -5,16 +5,13 @@
     right: 0;
     background-color: #fff;
     border-top: 1px solid #dddddd;
-    padding: 2px 90px;
+    padding: 2px 90px 2px 55px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
     font-size: 15px;
     color: #222222;
-
-    padding-left: 0px;
-    margin-left: 0px;
 
     &.details-footer {
         position: relative;
@@ -87,6 +84,10 @@
                 .dot-separator {
                     color: rgb(113, 113, 113);
                 }
+
+                .footer-copyright:hover {
+                    text-decoration: none;
+                }
             }
 
             .footer-bottom-right {
@@ -144,6 +145,7 @@
         gap: 6px;
         align-items: center;
 
+        
         p, a {
             margin: 0;
             color: rgb(34, 34, 34);
@@ -151,12 +153,18 @@
             font-size: 15px;
             line-height: 18px;
 
+            
             &:hover {
                 text-decoration: underline;
             }
+
+        }
+
+        .footer-copyright:hover {
+            text-decoration: none;
         }
     }
-
+    
     .footer-right {
         display: flex;
         align-items: center;
