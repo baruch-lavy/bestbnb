@@ -9,16 +9,71 @@ export const setSearchData = (data) => ({
   payload: data,
 });
 
-
-export async function loadStays(filterBy) {
-    try {
-        const stays = await stayService.query(filterBy)
-        store.dispatch(getCmdSetStays(stays))
-    } catch (err) {
-        console.log('Cannot load stays', err)
-        throw err
-    }
-}
+export function loadStays(filterBy = {}) {
+    return async (dispatch) => {
+      try {
+        const allStays = await stayService.query();
+        console.log("🚀 ~ file: stay.actions.js ~ line 33 ~ loadStays ~ allStays:", allStays);
+  
+        if (!allStays || allStays.length === 0) {
+          console.log("🚀 No stays found in database!");
+          dispatch({ type: SET_STAYS, stays: [] });
+          return;
+        }
+  
+        // ✅ If no filter applied, return all stays
+        if (!filterBy.destination && !filterBy.guests && !filterBy.startDate && !filterBy.endDate) {
+          dispatch({ type: SET_STAYS, stays: allStays });
+          return;
+        }
+  
+        const filteredStays = allStays.filter((stay) => {
+          // ✅ Destination Filtering (Already Working Correctly)
+          if (filterBy.destination && filterBy.destination !== "Anywhere") {
+            if (!stay.loc?.country?.toLowerCase().includes(filterBy.destination.toLowerCase())) {
+              return false;
+            }
+          }
+  
+          // ✅ FIXED: Guest Filtering
+          if (filterBy.guests) {
+            const maxGuests = stay.capacity || stay.maxGuests || 0; // ✅ Ensure guests field exists
+            if (maxGuests < filterBy.guests) {
+              return false;
+            }
+          }
+  
+          // ✅ FIXED: Date Filtering (Now Works Correctly)
+          if (filterBy.startDate && filterBy.endDate) {
+            const searchStart = new Date(filterBy.startDate).getTime();
+            const searchEnd = new Date(filterBy.endDate).getTime();
+  
+            if (stay.availableFrom && stay.availableTo) {
+              const stayStart = new Date(stay.availableFrom).getTime();
+              const stayEnd = new Date(stay.availableTo).getTime();
+  
+              // ✅ FIX: Only return stays that are available within the search dates
+              if (searchStart < stayStart || searchEnd > stayEnd) {
+                return false;
+              }
+            } else {
+              return false; // ✅ If the stay has no available dates, exclude it
+            }
+          }
+  
+          return true;
+        });
+  
+        console.log("🚀 ~ file: stay.actions.js ~ Filtered stays:", filteredStays);
+  
+        dispatch({ type: SET_STAYS, stays: filteredStays.length ? filteredStays : [] });
+      } catch (err) {
+        console.error("Cannot load stays", err);
+      }
+    };
+  }
+  
+  
 
 export async function loadStay(stayId) {
     try {

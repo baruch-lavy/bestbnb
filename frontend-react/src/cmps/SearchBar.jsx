@@ -64,32 +64,31 @@ export const SearchBar = ({
     const handleClickOutside = (event) => {
       // ✅ Check if click is INSIDE any dropdown
       if (
-        dropdownRef.current?.contains(event.target) ||
+        dropdownRef.current?.contains(event.target) || // ✅ Allow clicks inside SearchBar
         datePickerRef.current?.contains(event.target) ||
-        guestDropdownRef.current?.contains(event.target)
+        guestDropdownRef.current?.contains(event.target) ||
+        document.querySelector(".sticky-search-bar")?.contains(event.target) // ✅ Allow clicks inside StickySearchBar
       ) {
-        return;
+        return; // ✅ Do not close dropdowns if clicking inside StickySearchBar
       }
       handleDropdownOpen(null);
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-  
-  
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [handleDropdownOpen]);
 
   // ✅ Handle guest selection
   const handleGuestChange = (type, amount) => {
+    const updatedGuests = {
+      ...search.guests,
+      [type]: Math.max(0, (search.guests?.[type] || 0) + amount),
+    };
+
     dispatch(
       setSearchData({
         ...search,
-        guests: {
-          ...search.guests,
-          [type]: Math.max(0, (search.guests?.[type] || 0) + amount),
-        },
+        guests: { ...updatedGuests }, // ✅ Ensuring new object reference
       })
     );
   };
@@ -104,14 +103,10 @@ export const SearchBar = ({
             type="text"
             placeholder="Search destinations"
             value={search.destination || ""}
-            onChange={(e) =>
-              dispatch(
-                setSearchData({
-                  ...search,
-                  destination: e.target.value,
-                })
-              )
-            }
+            onChange={(e) => {
+              const updatedSearch = { ...search, destination: e.target.value };
+              dispatch(setSearchData(updatedSearch));
+            }}
             onFocus={() => handleDropdownOpen("where")}
           />
           {openDropdown === "where" && (
@@ -186,16 +181,14 @@ export const SearchBar = ({
                 onChange={(dates) => {
                   const [start, end] = dates;
 
-                  // Ensure that `endDate` is not erased if still selecting dates
                   dispatch(
                     setSearchData({
                       ...search,
-                      startDate: start,
-                      endDate: end || search.endDate, // Keep the existing `endDate` if `null`
+                      startDate: start || null,
+                      endDate: end || null, // ✅ Explicitly set `null` to trigger Redux update
                     })
                   );
 
-                  // Only close the dropdown when both dates are selected
                   if (end) setTimeout(() => handleDropdownOpen(null), 200);
                 }}
                 startDate={search.startDate ? new Date(search.startDate) : null}
@@ -203,6 +196,7 @@ export const SearchBar = ({
                 selectsRange
                 monthsShown={2}
                 inline
+                
               />
             </div>
           )}
