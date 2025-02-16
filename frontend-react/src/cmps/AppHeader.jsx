@@ -62,14 +62,25 @@ export const AppHeader = () => {
   return (
     <>
       {/* HEADER */}
-      <header className="header">
+      <header className={`header ${showSticky ? "sticky-header" : ""}`}>
         <div className="left-section">
           <img src="/assets/img/airbnb-logo.svg" alt="Airbnb Logo" className="logo" />
           <nav className="nav-links">
-            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigateToStays(); }}>Stays</a> {/* ✅ Clicking navigates to results */}
+            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigateToStays(); }}>Stays</a>
             <a href="#">Experiences</a>
           </nav>
         </div>
+
+        {/* ✅ Sticky Search Bar is Now Inside the Header */}
+        {showSticky && (
+          <div className="sticky-search-wrapper">
+            <StickySearchBar
+              openDropdown={openDropdown}
+              handleDropdownOpen={handleDropdownOpen}
+              handleSearch={handleSearch}
+            />
+          </div>
+        )}
 
         <div className="right-section">
           <span className="host">Airbnb your home</span>
@@ -86,20 +97,9 @@ export const AppHeader = () => {
         <SearchBar
           openDropdown={openDropdown}
           handleDropdownOpen={handleDropdownOpen}
-          handleSearch={handleSearch} // ✅ Clicking search navigates automatically
+          handleSearch={handleSearch}
         />
       </div>
-
-      {/* STICKY SEARCH BAR */}
-      {showSticky && (
-        <div className="sticky-search-container">
-          <StickySearchBar
-            openDropdown={openDropdown}
-            handleDropdownOpen={handleDropdownOpen}
-            handleSearch={handleSearch} // ✅ Clicking search navigates automatically
-          />
-        </div>
-      )}
     </>
   );
 };

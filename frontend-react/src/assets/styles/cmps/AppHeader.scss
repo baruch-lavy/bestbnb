@@ -18,6 +18,7 @@ body {
   padding: 16px 40px;
   border-bottom: 1px solid $border-color;
   background: white;
+  position: relative; // ✅ Ensure sticky search bar is positioned inside
 
   /** LEFT SECTION **/
   .left-section {
@@ -91,9 +92,20 @@ body {
       }
     }
   }
+
+  /** STICKY SEARCH BAR - POSITIONED IN THE CENTER **/
+  .sticky-search-wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    z-index: 999;
+  }
 }
 
-/** SEARCH BAR **/
+/** FULL SEARCH BAR **/
 .search-container {
   position: absolute;
   top: 80px;
@@ -165,50 +177,7 @@ body {
   }
 }
 
-/** RESPONSIVE DESIGN **/
-@media (max-width: 1024px) {
-  .header {
-    padding: 12px 20px;
-  }
-
-  .search-container {
-    width: 90%;
-  }
-}
-
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    align-items: center;
-
-    .left-section {
-      margin-bottom: 10px;
-    }
-
-    .search-container {
-      position: static;
-      transform: none;
-      width: 100%;
-      padding: 0 20px;
-    }
-
-    .search-bar {
-      width: 100%;
-      justify-content: space-between;
-    }
-  }
-}
-
-
-
-
-
-.full-search-bar.hidden {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-}
-
+/** STICKY SEARCH BAR **/
 .sticky-search-container {
   position: fixed;
   top: 0;
@@ -230,4 +199,52 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+/** RESPONSIVE DESIGN **/
+@media (max-width: 1024px) {
+  .header {
+    padding: 12px 20px;
+  }
+
+  .search-container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+
+    .left-section {
+      margin-bottom: 10px;
+    }
+
+    .sticky-search-wrapper {
+      position: static;
+      transform: none;
+      width: 100%;
+      padding: 0 20px;
+    }
+
+    .search-container {
+      position: static;
+      transform: none;
+      width: 100%;
+      padding: 0 20px;
+    }
+
+    .search-bar {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+}
+
+/** HIDE FULL SEARCH BAR WHEN SCROLLING **/
+.full-search-bar.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
