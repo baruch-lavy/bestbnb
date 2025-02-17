@@ -8,7 +8,7 @@ import { loadStay, addStayMsg } from '../store/actions/stay.actions'
 import { StayGallery } from '../cmps/StayGallery'
 import { StayAmenities } from '../cmps/StayAmenities.jsx'
 import { ReviewList } from '../cmps/ReviewList.jsx'
-
+import { Map } from '../cmps/Map.jsx'
 import { Calendar } from '../cmps/Calendar.jsx'
 import { SummaryModal } from '../cmps/SummaryModal.jsx'
 import { StayReserve } from '../cmps/StayReserve.jsx'
@@ -124,8 +124,8 @@ export function StayDetails() {
       </main>
 
       <div className="reviw-and-map">
-        {/* <ReviewList reviews={stay.reviews} /> */}
-        {/* <Map/> */}
+        <ReviewList reviews={stay.reviews} />
+        <Map />
       </div>
       {/* // } */}
       {/* <button onClick={() => { onAddStayMsg(stay._id) }}>Add stay msg</button> */}
