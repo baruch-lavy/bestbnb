@@ -24,7 +24,7 @@ export function Calendar(){
   };
 
   return (
-    <div className="calendar-container">
+    <div className="details-calendar-container">
       <h3>9 nights in Taylors Island</h3>
       <h6>Mar 16, 2025 - May 23, 2025</h6>
 
