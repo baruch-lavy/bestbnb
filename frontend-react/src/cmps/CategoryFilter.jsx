@@ -23,10 +23,15 @@ export function CategoryFilter({ onSelectCategory, selectedCategory }) {
     const container = containerRef.current;
     if (!container) return;
 
-    setShowLeftButton(container.scrollLeft > 0);
-    setShowRightButton(
-      container.scrollLeft + container.offsetWidth < container.scrollWidth
-    );
+    const isScrolledStart = container.scrollLeft > 0;
+    const isScrolledEnd = container.scrollLeft + container.offsetWidth >= container.scrollWidth - 1;
+
+    setShowLeftButton(isScrolledStart);
+    setShowRightButton(!isScrolledEnd);
+
+    // עדכון מחלקות הצל
+    container.parentElement.classList.toggle('scrolled-start', isScrolledStart);
+    container.parentElement.classList.toggle('scrolled-end', isScrolledEnd);
   };
 
   useEffect(() => {

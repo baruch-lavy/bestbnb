@@ -20,7 +20,7 @@
         color: #222222;
         line-height: 20.02px;
         transition: all 0.2s ease-in-out;
-        z-index: 1 ;
+        z-index: 1;
 
         &:hover {
             border: 1px solid #222222;
@@ -148,7 +148,7 @@
         }
 
         &:active {
-            transform: translateY(-50%) scale(0.96);
+            transform: translateY(-50%) scale(0.95);
         }
 
         &.left {
@@ -169,10 +169,13 @@
         height: 100%;
         z-index: 1;
         pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s;
     }
 
     &::before {
         left: 0;
+        opacity: 0;
         background: linear-gradient(to right, 
             rgba(255,255,255,1) 0%,
             rgba(255,255,255,1) 30%,
@@ -182,11 +185,20 @@
 
     &::after {
         right: 0;
+        opacity: 1;
         background: linear-gradient(to left, 
             rgba(255,255,255,1) 0%,
             rgba(255,255,255,1) 30%,
             rgba(255,255,255,0) 100%
-        )
+        );
     }
-  } 
+
+    &.scrolled-start::before {
+        opacity: 1;
+    }
+
+    &.scrolled-end::after {
+        opacity: 0;
+    }
+}
 }
