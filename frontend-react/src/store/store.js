@@ -24,7 +24,4 @@ export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(t
 
 // ✅ Debugging (Optional)
 store.subscribe(() => {
-  console.log("**** Store state changed: ****");
-  console.log("storeState:\n", store.getState());
-  console.log("*******************************");
 });

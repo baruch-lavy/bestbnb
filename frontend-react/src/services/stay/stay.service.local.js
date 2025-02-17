@@ -25,11 +25,10 @@ export const stayService = {
 window.cs = stayService
 
 
-async function query(filterBy = { txt: '', minPrice: 0, maxPrice: Infinity, destination: '', guests: 1, startDate: null, endDate: null }) {
+async function query(filterBy = { txt: '', minPrice: 0, maxPrice: Infinity, destination: '', guests: 1, startDate: null, endDate: null, category: null }) {
     var stays = await storageService.query(STORAGE_KEY);
-    console.log("🚀 ~ file: stay.service.local.js ~ line 19 ~ query ~ stays", stays);
 
-    const { txt, minPrice, maxPrice, destination, guests, startDate, endDate } = filterBy;
+    const { txt, minPrice, maxPrice, destination, guests, startDate, endDate, category } = filterBy;
 
     if (!stays || stays.length === 0) return [];
 
@@ -69,7 +68,14 @@ async function query(filterBy = { txt: '', minPrice: 0, maxPrice: Infinity, dest
         });
     }
 
-    console.log("🚀 ~ file: stay.service.local.js ~ query() returning stays:", stays);
+    // Add category filtering
+    if (category) {
+        stays = stays.filter(stay => {
+            return stay.type.toLowerCase() === category.toLowerCase() ||
+                   stay.labels.some(label => label.toLowerCase() === category.toLowerCase());
+        });
+    }
+
     return stays;
 }
 
@@ -200,13 +206,13 @@ function _createStays() {
                 The dining room features a coastal theme and comfortable seating for 6, complimented by bar seating for 3. The open concept effortlessly transitions into the living room, a space that fills with sunshine in the morning and will quickly become your family's favorite hangout spot. Complete with high-end furniture, beach-inspired decor, a stylish entertainment center, and a massive flat-screen TV, this living room has it all. Sleek and dimmable cove lighting creates the perfect ambiance for cocktail hour or movie night. And while the 65" 4K LED HDTV (with Amazon Prime Video, Apple TV, Disney+, HBO Max, Hulu, and Netflix) is perfect for movie night, it can be hard to focus on a movie or a show when you have such breathtaking views of the beach and ocean right outside!
                 
                 ☆☆OUTDOOR SPACE ☆☆
-                One of the things you’ll love about this incredible retreat is the way you can see the water from almost every room in the house. Push open the sliding glass doors from the living room and step out onto your own private balcony. This shady space features comfortable outdoor lounge furniture with seating for 5 and jaw dropping views of the beach. Take a family photo, draw inspiration from a breathtaking sunrise, enjoy cocktails with cotton-candy skies at sunset, or enjoy a cup of coffee in the morning while taking in the view.
+                One of the things you'll love about this incredible retreat is the way you can see the water from almost every room in the house. Push open the sliding glass doors from the living room and step out onto your own private balcony. This shady space features comfortable outdoor lounge furniture with seating for 5 and jaw dropping views of the beach. Take a family photo, draw inspiration from a breathtaking sunrise, enjoy cocktails with cotton-candy skies at sunset, or enjoy a cup of coffee in the morning while taking in the view.
                 
                 ★☆ Book Today & Enjoy the Luxurious Beach Vacation You Deserve In Ocean City! ☆★
                 Guest access
                 As a guest here, you have access to the entire home. You can use all of the rooms and all the amenities, including the full-sized washer and dryer, Wi-Fi, kitchen and bathroom essentials, and helpful information about the local area. From here you're just minutes from local grocery stores, beach boutiques, spas, salons, waterfront restaurants, and Ocean City's vibrant nightlife scene.
                 
-                You’ll also have exclusive access to resort amenities, including the indoor heated pool, hot-tub, sun-bathing deck, and direct beach access. You will be assigned two parking spaces and given a unique door code for access.
+                You'll also have exclusive access to resort amenities, including the indoor heated pool, hot-tub, sun-bathing deck, and direct beach access. You will be assigned two parking spaces and given a unique door code for access.
                 Registration number
                 83207`,
                 capacity: 4,
@@ -1134,7 +1140,7 @@ function _createStays() {
             },
         
         ]
-        console.log(stays)
+        // console.log(stays)
         storageService.saveToStorage(STORAGE_KEY, stays)
     }
 }

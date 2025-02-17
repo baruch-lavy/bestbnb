@@ -2,7 +2,6 @@ import { gAmenities } from '../services/amenities.service'
 
 export function StayAmenities({ amenities }) {
     // Optionally log the amenities array
-    console.log(amenities)
 
     return (
         <article className="amenities">
