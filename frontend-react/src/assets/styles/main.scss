@@ -11,6 +11,7 @@
 // @import "basics/links";
 @import "basics/forms.scss";
 
+@import "RootCmp.scss";
 // pages
 @import "Pages/StayDetails.scss";
 @import "pages/AboutUs.scss";
@@ -27,7 +28,6 @@
 // @import "cmps/preview.scss";
 
 @import "cmps/AppHeader.scss";
-@import "cmps/SearchBar.scss";
 @import "cmps/AppFooter.scss";
 @import "cmps/SupportModal.scss";
 @import "cmps/StickySearchBar.scss";
@@ -47,4 +47,4 @@
 
 
 
-@import "RootCmp.scss";
+@import "cmps/SearchBar.scss";

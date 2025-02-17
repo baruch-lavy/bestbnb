@@ -7,6 +7,8 @@
     display: flex;
     justify-content: center;
     padding: 20px 0;
+    position: relative;
+    z-index: 1000;
 }
 
 .search-bar {
@@ -510,3 +512,15 @@
 }
 
 
+.dropdown,
+.guest-dropdown,
+.date-picker-dropdown {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    z-index: 9999 !important;  // 🔥 Force highest priority
+}
