@@ -18,7 +18,7 @@ import { ConfirmationReserve } from './cmps/ConfirmationReserve.jsx'
 import { LoginSignup } from './pages/LoginSignup.jsx'
 import { Login } from './pages/Login.jsx'
 import { Signup } from './pages/Signup.jsx'
-import { SearchResults } from "./pages/SearchResults.jsx";
+import { SearchResults } from './pages/SearchResults.jsx';
 
 export function RootCmp() {
     return (

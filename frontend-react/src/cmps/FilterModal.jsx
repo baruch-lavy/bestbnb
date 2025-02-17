@@ -39,7 +39,7 @@ export function FilterModal({ isOpen, onClose }) {
             </div>
             <div className="counter-controls">
                 <button 
-                    className={`counter-btn minus ${value === 0 ? 'disabled' : ''}`}
+                    className={`counter-btn minus ${value === 0 ? "disabled" : ""}`}
                     onClick={() => handleDecrement(setValue, value)}
                     disabled={value === 0}
                 >
@@ -74,7 +74,7 @@ export function FilterModal({ isOpen, onClose }) {
             <div className="filter-modal-content" onClick={e => e.stopPropagation()}>
                 <header className="filter-modal-header">
                     <button className="close-btn" onClick={onClose}>
-                        <svg viewBox="0 0 32 32" style={{display: 'block', fill: 'none', height: '16px', width: '16px', stroke: 'currentcolor', strokeWidth: 3}}>
+                        <svg viewBox="0 0 32 32" style={{display: "block", fill: "none", height: "16px", width: "16px", stroke: "currentcolor", strokeWidth: 3}}>
                             <path d="m6 6 20 20M26 6 6 26"></path>
                         </svg>
                     </button>
@@ -181,7 +181,7 @@ export function FilterModal({ isOpen, onClose }) {
                         )}
 
                         <button 
-                            className={`show-more-btn ${isAmenitiesExpanded ? 'expanded' : ''}`}
+                            className={`show-more-btn ${isAmenitiesExpanded ? "expanded" : ""}`}
                             onClick={() => setIsAmenitiesExpanded(!isAmenitiesExpanded)}
                         >
                             {isAmenitiesExpanded ? 'Show less' : 'Show more'}
