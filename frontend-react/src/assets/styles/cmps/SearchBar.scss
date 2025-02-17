@@ -3,178 +3,158 @@
 /* =============================== */
 
 .search-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 20px 0;
-    position: relative;
-    z-index: 1000;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 0 20px ;
+  position: relative;
+  z-index: 1000;
 }
 
 .search-bar {
-    display: flex;
-    align-items: center;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 50px;
-    padding: 12px 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    width: 850px;
-    gap: 15px;
-    position: relative;
-    justify-content: space-between; /* Ensures sections are evenly spaced */
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 40px; // ✅ Adjusted for a perfect match
+//   padding: 10px 14px; // ✅ Reduced padding for correct height
+  width: 850px; // ✅ Adjust width to match the image
+  height: 66px; // ✅ Ensure correct height
+  gap: 12px; // ✅ Proper spacing
+  position: relative;
+  justify-content: space-between; // ✅ Ensures even spacing
+  box-shadow: none; // ❌ Remove unwanted shadow
 }
 
 /* Expanded state */
 .search-bar.expanded {
-    border-radius: 32px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+//   border-radius: 32px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Individual Sections */
 .search-section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    position: relative;
-    flex: 1;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   position: relative;
+//   flex: 1;
 }
 
-.search-section:hover {
-    background: rgba(200, 200, 200, 0.2); /* Light gray with slight transparency */
-    border-radius: 12px; /* Subtle rounded edges instead of an extreme oval */
-    transition: background 0.2s ease-in-out; /* Smooth transition */
-}
+// .search-section:hover {
+//     background: rgba(200, 200, 200, 0.2); /* Light gray with slight transparency */
+//     border-radius: 12px; /* Subtle rounded edges instead of an extreme oval */
+//     transition: background 0.2s ease-in-out; /* Smooth transition */
+// }
 
 .search-section span {
-    font-size: 12px;
-    font-weight: bold;
-    color: #222;
-    margin-bottom: 3px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 3px;
 }
 
 .search-section input {
-    border: none;
-    outline: none;
-    font-size: 16px;
-    padding: 5px 0;
-    width: 100%;
-    background: transparent;
-    text-align: left;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 5px 0;
+  width: 100%;
+  background: transparent;
+  text-align: left;
 }
 
 
-/* Divider between sections */
-.divider {
-    height: 40px;
-    width: 1px;
-    background: #ddd;
-    align-self: center;
-}
-
-/* =============================== */
-/*      SEARCH BUTTON FIXES        */
-/* =============================== */
-
-/* SEARCH BUTTON FIX */
-// .search-bar {
-//     display: flex;
-//     align-items: center;
-//     background: #fff;
-//     border: 1px solid #ddd;
-//     border-radius: 50px;
-//     padding: 12px 64px 12px 16px; /* Extra right padding for button */
-//     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-//     width: 850px;
-//     position: relative;
-// }
-
-/* SEARCH BUTTON */
 /* =============================== */
 /*         SEARCH BUTTON           */
 /* =============================== */
 
 /* Default round button */
 .search-btn {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #ff385c;
-    color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
+  position: absolute;
+  right: 10px;
+  top: 45%;
+  transform: translateY(-50%); // ✅ Ensures perfect vertical centering
+  background: #ff385c;
+  color: white;
+  border: none;
+  width: 44px; // ✅ Slightly increased for better alignment
+  height: 44px; // ✅ Matches width for a perfect circle
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  margin-bottom: 0; // ❌ Removed as it was pushing the button down
 }
 
 /* Expanded button when search bar is focused */
 .search-bar:focus-within .search-btn {
-    width: 100px; /* Expands width */
-    border-radius: 50px; /* Rounded pill shape */
-    background: linear-gradient(to right, #ff385c, #d70466); /* Gradient effect */
-    justify-content: center;
+  width: 90px; /* Expands width */
+  border-radius: 50px; /* Rounded pill shape */
+  // background: linear-gradient(to right, #ff385c, #d70466); /* Gradient effect */
+  justify-content: center;
+  padding: 10 16px; /* Adds padding for text */
+  transition: all 0.3s ease;
 }
 
 /* Add space for text inside expanded button */
 .search-bar:focus-within .search-btn::after {
-    content: " Search";
-    font-size: 16px;
-    color: white;
-    font-weight: bold;
-    margin-left: 8px;
+  content: " Search";
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  margin-left: 8px;
 }
 
 /* Hover effect */
 .search-btn:hover {
-    background: #e03450;
+  background: #e03450;
 }
-
 
 /* =============================== */
 /*      "WHERE" SEARCH SECTION     */
 /* =============================== */
 
 .where-section {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    position: relative;
-    padding: 8px 16px;
-    border-radius: 50px;
-    transition: background 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  padding: 8px 16px;
+  border-radius: 50px;
+  transition: background 0.2s ease-in-out;
+  height: 66px;  // ✅ Centers text inside the section
 
-    span {
-        font-size: 12px;
-        font-weight: 600;
-        color: #222;
+    &:hover,
+    &:focus-within {
+        background: #ebebeb; // ✅ Airbnb's actual hover color
+        border-radius: 50px;
+        transition: background 0.2s ease-in-out;
     }
 
-    input {
-        border: none;
-        outline: none;
-        font-size: 16px;
-        padding-top: 2px;
-        background: transparent;
-        width: 100%;
-        color: #717171;
-        font-weight: 400;
-    }
 
-    /* Hover & Focus States */
-      /* 🔥 Fix Hover & Focus Background */
-      &:hover,
-      &:focus-within {
-          background: #ebebeb; /* ✅ Solid Light Gray */
-          border-radius: 40px; /* ✅ More rounded to match the container */
-          transition: background 0.2s ease-in-out;
-      }
-  
+
+  span {
+    font-size: 12px;
+    font-weight: 600;
+    color: #222;
+    padding-left: 8px;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding-top: 2px;
+    background: transparent;
+    width: 100%;
+    color: #717171;
+    font-weight: 400;
+    padding: 7px;
+  }
 }
 
 /* =============================== */
@@ -182,24 +162,24 @@
 /* =============================== */
 
 .dropdown {
-    position: absolute;
-    top: 50px;
-    left: 0;
-    width: 350px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
-    padding: 16px;
-    z-index: 1050;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 350px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  z-index: 1050;
 }
 
 .dropdown-header {
-    font-size: 14px;
-    font-weight: bold;
-    color: #222;
-    margin-bottom: 10px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #eee;
+  font-size: 14px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
 }
 
 /* =============================== */
@@ -207,187 +187,78 @@
 /* =============================== */
 
 .suggestion {
-    display: flex;
-    align-items: center;
-    padding: 12px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
 
-    &:hover {
-        background: #f8f8f8;
+  &:hover {
+    background: #f8f8f8;
+  }
+
+  .icon {
+    font-size: 22px;
+    margin-right: 12px;
+  }
+
+  div {
+    strong {
+      font-size: 14px;
+      color: #333;
     }
 
-    .icon {
-        font-size: 22px;
-        margin-right: 12px;
+    p {
+      font-size: 12px;
+      color: #777;
     }
-
-    div {
-        strong {
-            font-size: 14px;
-            color: #333;
-        }
-
-        p {
-            font-size: 12px;
-            color: #777;
-        }
-    }
+  }
 }
 
 /* =============================== */
 /*        DATE PICKER STYLES       */
 /* =============================== */
-
 .date-section {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    position: relative;
-    padding: 8px 16px;
-    border-radius: 50px;
-    transition: background 0.2s ease-in-out;
-
-    &:hover,
-    &:focus-within {
-        background: #ebebeb; /* ✅ Airbnb’s light gray hover */
-        border-radius: 40px;
-        transition: background 0.2s ease-in-out;
-    }
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  padding: 8px 16px;
+  border-radius: 50px;
+  transition: background 0.2s ease-in-out;
 }
 
+/* ✅ Default state for date fields */
 .date-fields {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    width: 100%;
-    padding: 6px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 100%;
+  padding: 6px 0;
+  border-radius: 50px;
+  transition: background 0.2s ease-in-out;
 }
 
-/* ✅ Styling individual date inputs */
+/* ✅ Styling for each date input */
 .date-input {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    flex: 1;
-    padding: 4px 12px;
-    transition: background 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  padding: 8px 16px;
+  transition: background 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border-radius: 50px;
 
-    &:hover {
-        background: rgba(200, 200, 200, 0.2);
-        border-radius: 50px;
-    }
-
-    span {
-        font-size: 12px;
-        font-weight: 600;
-        color: #222;
-    }
-
-    input {
-        border: none;
-        outline: none;
-        font-size: 16px;
-        padding: 2px 0;
-        background: transparent;
-        width: 100%;
-        text-align: left;
-        color: #717171;
-        font-weight: 400;
-    }
-}
-
-/* ✅ Fixing Divider (should be subtle) */
-.divider {
-    width: 1px;
-    height: 32px;
-    background: #ddd;
-}
-
-/* =============================== */
-/*     DATE PICKER DROPDOWN        */
-/* =============================== */
-
-.date-picker-dropdown {
-    position: absolute;
-    top: 50px;
-    left: 0;
-    width: 740px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-    padding: 20px;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-}
-
-/* 🔥 Styling for Month Navigation */
-.react-datepicker__header {
-    background: transparent;
-    border: none;
-    padding: 8px 12px;
-    text-align: center;
-}
-
-/* ✅ Make month titles look correct */
-.react-datepicker__current-month {
-    font-size: 16px;
-    font-weight: 600;
-    color: #222;
-}
-
-/* ✅ Style the navigation arrows */
-.react-datepicker__navigation {
-    top: 16px;
-    width: 32px;
-    height: 32px;
-}
-
-/* ✅ Fix Days Layout */
-.react-datepicker__month-container {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    width: 100% !important;
-    gap: 24px;
-}
-
-/* ✅ Ensuring each month is equally sized */
-.react-datepicker__month {
-    width: 48% !important;
-}
-
-/* =============================== */
-/*         WHO SECTION             */
-/* =============================== */
-
-.who-section {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    position: relative;
-    padding: 8px 16px;
-    border-radius: 50px;
-    transition: background 0.2s ease-in-out;
-
-    &:hover,
-    &:focus-within {
-        background: #ebebeb; /* ✅ Airbnb’s hover color */
-        border-radius: 40px;
-        transition: background 0.2s ease-in-out;
-    }
-}
-
-.who-section span {
+  span {
     font-size: 12px;
     font-weight: 600;
     color: #222;
-}
+    transition: color 0.2s ease-in-out;
+  }
 
-.who-section input {
+  input {
     border: none;
     outline: none;
     font-size: 16px;
@@ -397,29 +268,137 @@
     text-align: left;
     color: #717171;
     font-weight: 400;
+  }
+}
+
+/* ✅ Hover effect for the whole date field */
+.date-fields:hover {
+  background: #ebebeb; // ✅ Airbnb's actual hover color
+  border-radius: 50px;
+}
+
+/* ✅ Fixing Divider (should be subtle) */
+.divider {
+  width: 1px;
+  height: 32px;
+  background: #ddd;
+}
+
+/* =============================== */
+/*     DATE PICKER DROPDOWN        */
+/* =============================== */
+
+.date-picker-dropdown {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 740px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🔥 Styling for Month Navigation */
+.react-datepicker__header {
+  background: transparent;
+  border: none;
+  padding: 8px 12px;
+  text-align: center;
+}
+
+/* ✅ Make month titles look correct */
+.react-datepicker__current-month {
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+}
+
+/* ✅ Style the navigation arrows */
+.react-datepicker__navigation {
+  top: 16px;
+  width: 32px;
+  height: 32px;
+}
+
+/* ✅ Fix Days Layout */
+.react-datepicker__month-container {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  gap: 24px;
+}
+
+/* ✅ Ensuring each month is equally sized */
+.react-datepicker__month {
+  width: 48% !important;
+}
+
+/* =============================== */
+/*         WHO SECTION             */
+/* =============================== */
+
+.who-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  padding: 8px 16px;
+  border-radius: 50px;
+  transition: background 0.2s ease-in-out;
+  height: 66px; // ✅ Ensures it takes full height of search bar
+
+  &:hover,
+  &:focus-within {
+    background: #ebebeb; /* ✅ Airbnb’s hover color */
+    border-radius: 50px;
+    transition: background 0.2s ease-in-out;
+  }
+}
+
+.who-section span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+}
+
+.who-section input {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 2px 0;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  color: #717171;
+  font-weight: 400;
 }
 
 /* 🔍 Search Button inside "Who" Section */
 .who-section .search-btn {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #ff385c;
-    color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ff385c;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
 
-    &:hover {
-        background: #e03450;
-    }
+  &:hover {
+    background: #e03450;
+  }
 }
 
 /* =============================== */
@@ -427,100 +406,99 @@
 /* =============================== */
 
 .guest-dropdown {
-    position: absolute;
-    top: 50px;
-    right: 0;
-    width: 360px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-    padding: 20px;
-    z-index: 10;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: 360px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  z-index: 10;
 }
 
 /* ✅ Guest Row (Adults, Children, Infants, Pets) */
 .guest-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 0;
-    border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #ddd;
 
-    &:last-child {
-        border-bottom: none;
-    }
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 /* ✅ Guest Labels */
 .guest-info {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .guest-info strong {
-    font-size: 16px;
-    color: #222;
+  font-size: 16px;
+  color: #222;
 }
 
 .guest-info p {
-    font-size: 14px;
-    color: #717171;
-    margin-top: 2px;
+  font-size: 14px;
+  color: #717171;
+  margin-top: 2px;
 }
 
 /* ✅ Guest Controls */
 .guest-controls {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 /* ✅ Buttons for Adding/Removing Guests */
 .guest-btn {
-    width: 32px;
-    height: 32px;
-    border: 1px solid #ddd;
-    border-radius: 50%;
-    background: white;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.2s ease, border 0.2s ease;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  background: white;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, border 0.2s ease;
 
-    &:hover {
-        background: #f1f1f1;
-    }
+  &:hover {
+    background: #f1f1f1;
+  }
 
-    &:disabled {
-        border-color: #ccc;
-        color: #ccc;
-        cursor: not-allowed;
-    }
+  &:disabled {
+    border-color: #ccc;
+    color: #ccc;
+    cursor: not-allowed;
+  }
 }
 
 /* ✅ Pets section with clickable link */
 .guest-info a {
-    color: #717171;
-    text-decoration: underline;
-    font-size: 14px;
+  color: #717171;
+  text-decoration: underline;
+  font-size: 14px;
 
-    &:hover {
-        color: #222;
-    }
+  &:hover {
+    color: #222;
+  }
 }
-
 
 .dropdown,
 .guest-dropdown,
 .date-picker-dropdown {
-    position: absolute;
-    top: 50px;
-    left: 0;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-    padding: 20px;
-    z-index: 9999 !important;  // 🔥 Force highest priority
+  position: absolute;
+  top: 50px;
+  left: 0;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  z-index: 9999 !important; // 🔥 Force highest priority
 }

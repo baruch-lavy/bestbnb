@@ -1,7 +1,26 @@
-.details-calendar-container{
+.details-calendar-container {
   padding: rem(48px) 0;
 }
 
+.rdp-root {
+  --rdp-accent-color: #222222;
+  /* Change the accent color to indigo. */
+  --rdp-accent-background-color: #F7F7F7;
+  // /* Change the accent background color. */
+  --rdp-disabled-opacity: 0.9;
+  --rdp-outside-opacity: 0;
+  background: rgb(255, 255, 255) !important;
+  // border-radius: 16px !important;
+  // box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px !important;
+  // display: inline-block !important;
+  // padding: 24px 32px 16px !important;
+  // position: absolute !important;
+  // top: -24px !important;
+  // right: -32px !important;
+  // width: 661px !important;
+  // z-index: 1 !important;
+  // min-height: 460px !important;
+}
 
 // .calendar-container {
 //     display: flex;
@@ -9,21 +28,21 @@
 //     align-items: start;
 //     margin-top: 20px;
 //   }
-  
+
 //   .calendar {
 //     display: flex;
 //     gap: 10px;
 //   }
-  
+
 //   .react-datepicker__input-container {
 //     display: flex;
 //     align-items: center;
 //   }
-  
+
 //   .react-datepicker-wrapper {
 //     display: inline-block;
 //   }
-  
+
 //   button.react-datepicker__today {
 //     background-color: #fff;
 //     color: #000;

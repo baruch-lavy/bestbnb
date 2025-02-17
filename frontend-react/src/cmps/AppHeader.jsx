@@ -69,7 +69,7 @@ export const AppHeader = () => {
           <img src="/img/stays/logo.png" alt="Airbnb Logo" className="logo" />
         </a>  
           <nav className="nav-links">
-            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigateToStays(); }}>Stays</a>
+            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigateToStays(); }}>Homes</a>
             <a href="#">Experiences</a>
           </nav>
         </div>

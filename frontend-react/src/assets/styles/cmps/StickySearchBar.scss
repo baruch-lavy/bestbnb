@@ -26,10 +26,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 40px;
-  border-bottom: 1px solid #ddd;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  height: 70px;
+  padding: 16px 80px;
+  // border-bottom: 1px solid #ddd;
+  // box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  height: 80px;
 }
 
 .details-page .header {
@@ -50,8 +50,8 @@
   padding: 12px 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   font-family: "Airbnb Cereal", Arial, sans-serif;
-  max-width: 600px;
-  height: 56px;
+  max-width:450px;
+  height: 51px;
   gap: 12px;
   border: 1px solid #ddd;
   transition: all 0.3s ease-in-out;
@@ -79,9 +79,9 @@
 
   /* ✅ Dividers between sections */
   .sticky-divider {
-      width: 1px;
+      // width: 1px;
       height: 24px;
-      background: #ddd;
+      // background: #ddd;
   }
 
   /* ✅ Search Button */
