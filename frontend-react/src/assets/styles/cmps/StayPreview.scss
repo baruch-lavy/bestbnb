@@ -13,9 +13,17 @@
         overflow: hidden;
         margin-bottom: 12px;
 
-        a {
-            display: block;
+        .images-wrapper {
+            position: relative;
+            width: 100%;
             height: 100%;
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        a {
+            flex: 0 0 100%;
+            display: block;
         }
 
         img {
@@ -25,11 +33,74 @@
             cursor: pointer;
         }
 
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid #DDDDDD;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+            opacity: 0;
+            transition: all 0.2s;
+            z-index: 3;
+            color: #222222;
+
+            &.prev {
+                left: 8px;
+            }
+
+            &.next {
+                right: 8px;
+            }
+
+            &:hover {
+                transform: translateY(-50%) scale(1.04);
+                background-color: white;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.28);
+            }
+        }
+
+        .dots-container {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 3;
+
+            .dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: rgba(255,255,255,0.5);
+                transition: all 0.2s;
+
+                &.active {
+                    background: white;
+                }
+            }
+        }
+
+        &:hover {
+            .nav-btn {
+                opacity: 1;
+            }
+        }
+
         .img-btns {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
+            top: 4px;
+            left: 12px;
+            right: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -37,26 +108,30 @@
 
             a {
                 text-decoration: none;
-                color: inherit;
+                color: #222222;
+                flex: 0 0 auto;
                 
                 .guest-favorite {
                     background-color: white;
-                    padding: 17px 17px;
-                    border-radius: 20px;
-                    font-size: 0.8em;
+                    padding: 8px 12px;
+                    border-radius: 22px;
+                    font-size: 14px;
+                    height: 30px;
+                    width: 117px;
                     cursor: pointer;
-                    height: 28px;
                     display: flex;
                     align-items: center;
-                    font-weight: bold;
-                    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+                    font-weight: 600;
+                    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+                    white-space: nowrap;
+                    margin-right: auto;
                 }
             }
 
             .btn-like {
-                margin-left: auto;
                 background: none;
                 border: none;
+                padding: 8px;
                 width: 32px;
                 height: 32px;
                 display: flex;
@@ -64,14 +139,10 @@
                 justify-content: center;
                 cursor: pointer;
                 transition: transform 0.2s;
-                padding: 0;
+                margin-left: auto;
                 
                 &:hover {
                     transform: scale(1.1);
-                }
-
-                &:active {
-                    transform: scale(0.95);
                 }
 
                 svg {
@@ -87,7 +158,6 @@
                         fill: #FF385C;
                         stroke: white;
                         stroke-width: 2;
-                        filter: drop-shadow(0 0 1px rgba(0,0,0,0.2));
                     }
                 }
             }

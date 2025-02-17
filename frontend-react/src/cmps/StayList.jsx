@@ -3,11 +3,13 @@ import { useSelector } from "react-redux";
 import { StayPreview } from "./StayPreview.jsx";
 import { CategoryFilter } from "./CategoryFilter.jsx";
 import { categories } from "../services/categories.service";
+import { Loader } from './Loader'
 
 export function StayList() {
     const allStays = useSelector((state) => state.stayModule.stays);
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const [filteredStays, setFilteredStays] = useState(allStays);
+    const [filteredStays, setFilteredStays] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     const categoryMappings = {
         'Villa': ['villa', 'mansion'],
@@ -105,8 +107,22 @@ export function StayList() {
     };
 
     useEffect(() => {
+        setIsLoading(true);
         setFilteredStays(allStays);
+        setIsLoading(false);
     }, [allStays]);
+
+    if (isLoading) {
+        return (
+            <div className="stay-index">
+                <CategoryFilter 
+                    onSelectCategory={handleCategorySelect}
+                    selectedCategory={selectedCategory}
+                />
+                <Loader />
+            </div>
+        );
+    }
 
     if (!filteredStays?.length) {
         return (
@@ -117,7 +133,7 @@ export function StayList() {
                 />
                 <div className="no-stays-message">
                     <h2>No stays found</h2>
-                    <p>Try adjusting your search criteria</p>
+                    <p>Try adjusting your search criteria or removing some filters</p>
                 </div>
             </div>
         );
@@ -143,5 +159,5 @@ export function StayList() {
                 </ul>
             </div>
         </div>
-    )
+    );
 }
