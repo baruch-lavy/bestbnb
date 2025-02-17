@@ -27,33 +27,28 @@ export function loadStays(filterBy = {}) {
     try {
       // ✅ Merge `filterBy` with `getDefaultFilter()` to ensure all fields exist
       const fullFilter = { ...getDefaultFilter(), ...filterBy };
-      console.log("🚀 ~ Final filter applied:", fullFilter);
 
       // ✅ Fetch all stays
       const allStays = await stayService.query();
-      console.log("🚀 ~ Fetched stays:", allStays);
 
       if (!allStays || allStays.length === 0) {
-        console.log("🚀 No stays found in database!");
         dispatch({ type: SET_STAYS, stays: [] });
         return;
       }
 
       // ✅ If no filter is applied, return all stays
       if (!fullFilter.destination && !fullFilter.guests && !fullFilter.startDate && !fullFilter.endDate) {
-        console.log("🚀 No filters applied, returning all stays.");
         dispatch({ type: SET_STAYS, stays: allStays });
         return;
       }
 
       // ✅ Filter stays based on the applied filters
       const filteredStays = allStays.filter((stay) => {
-        console.log("Checking stay:", stay.name);
 
         // ✅ Destination Filtering
         if (fullFilter.destination && fullFilter.destination !== "Anywhere") {
           if (!stay.loc?.country?.toLowerCase().includes(fullFilter.destination.toLowerCase())) {
-            console.log(`❌ Skipping ${stay.name} (Destination doesn't match)`);
+            // console.log(`❌ Skipping ${stay.name} (Destination doesn't match)`);
             return false;
           }
         }
@@ -62,7 +57,7 @@ export function loadStays(filterBy = {}) {
         if (fullFilter.guests) {
           const maxGuests = stay.capacity || stay.maxGuests || 0; 
           if (maxGuests < fullFilter.guests) {
-            console.log(`❌ Skipping ${stay.name} (Not enough guest capacity)`);
+            // console.log(`❌ Skipping ${stay.name} (Not enough guest capacity)`);
             return false;
           }
         }
@@ -77,20 +72,20 @@ export function loadStays(filterBy = {}) {
             const stayEnd = new Date(stay.availableTo).getTime();
 
             if (searchStart < stayStart || searchEnd > stayEnd) {
-              console.log(`❌ Skipping ${stay.name} (Not available in selected dates)`);
+              // console.log(`❌ Skipping ${stay.name} (Not available in selected dates)`);
               return false;
             }
           } else {
-            console.log(`❌ Skipping ${stay.name} (No available dates info)`);
+            // console.log(`❌ Skipping ${stay.name} (No available dates info)`);
             return false; 
           }
         }
 
-        console.log(`✅ Keeping ${stay.name}`);
+        // console.log(`✅ Keeping ${stay.name}`);
         return true;
       });
 
-      console.log("🚀 ~ Filtered stays:", filteredStays);
+      // console.log("🚀 ~ Filtered stays:", filteredStays);
 
       // ✅ Dispatch filtered stays or empty array if none found
       dispatch({ type: SET_STAYS, stays: filteredStays.length ? filteredStays : [] });

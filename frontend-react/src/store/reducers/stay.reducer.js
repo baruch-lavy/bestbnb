@@ -18,7 +18,6 @@ const initialState = {
 };
 
 export const searchReducer = (state = initialState, action) => {
-  console.log("searchReducer - action:", action);
   switch (action.type) {
     case SET_SEARCH_DATA:
       return { ...state, ...action.payload };
@@ -77,24 +76,24 @@ function unitTestReducer() {
   };
 
   state = stayReducer(state, { type: SET_STAYS, stays: [stay1] });
-  console.log("After SET_STAYS:", state);
+  // console.log("After SET_STAYS:", state);
 
   state = stayReducer(state, { type: ADD_STAY, stay: stay2 });
-  console.log("After ADD_STAY:", state);
+  // console.log("After ADD_STAY:", state);
 
   state = stayReducer(state, {
     type: UPDATE_STAY,
     stay: { ...stay2, name: "Good" },
   });
-  console.log("After UPDATE_STAY:", state);
+  // console.log("After UPDATE_STAY:", state);
 
   state = stayReducer(state, { type: REMOVE_STAY, stayId: stay2._id });
-  console.log("After REMOVE_STAY:", state);
+  // console.log("After REMOVE_STAY:", state);
 
   const msg = { id: "m" + parseInt(Math.random() * 100), txt: "Some msg" };
   state = stayReducer(state, { type: ADD_STAY_MSG, stayId: stay1._id, msg });
-  console.log("After ADD_STAY_MSG:", state);
+  // console.log("After ADD_STAY_MSG:", state);
 
   state = stayReducer(state, { type: REMOVE_STAY, stayId: stay1._id });
-  console.log("After REMOVE_STAY:", state);
+  // console.log("After REMOVE_STAY:", state);
 }

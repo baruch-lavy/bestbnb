@@ -22,7 +22,6 @@ export const AppHeader = () => {
       guests: Number(searchParams.get("guests")) || 1,
     };
 
-    console.log("🚀 Syncing Redux with URL search parameters:", filterBy);
     dispatch(setSearchData(filterBy));
   }, [dispatch]);
 
@@ -48,9 +47,6 @@ export const AppHeader = () => {
         guests: searchData.guests || 1,
     };
 
-    console.log("🚀 Filtering stays with:", filterBy);
-
-    // ✅ Dispatch action to filter stays (No navigation)
     dispatch(loadStays(filterBy));
 
     // ✅ Update URL parameters without page reload
@@ -69,7 +65,9 @@ export const AppHeader = () => {
       {/* HEADER */}
       <header className={`header ${showSticky ? "sticky-header" : ""}`}>
         <div className="left-section">
+        <a href="/stay">
           <img src="/img/stays/logo.png" alt="Airbnb Logo" className="logo" />
+        </a>  
           <nav className="nav-links">
             <a href="#" onClick={(e) => { e.preventDefault(); handleNavigateToStays(); }}>Stays</a>
             <a href="#">Experiences</a>

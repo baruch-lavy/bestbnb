@@ -20,7 +20,6 @@ export const SearchResults = () => {
   // ✅ Fetch stays on page load
   useEffect(() => {
     if (stays.length === 0) {
-      console.log("🚀 Fetching stays with filter:", searchValues);
       dispatch(loadStays(searchValues));
     }
   }, [stays.length, dispatch, searchValues]);

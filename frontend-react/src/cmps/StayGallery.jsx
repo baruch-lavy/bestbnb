@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 
 export function StayGallery({ stay }) {
-    console.log(stay)
 
     return <article className="gallery">
         <header>
