@@ -87,14 +87,21 @@ export function StayList() {
             const summary = stay.summary?.toLowerCase() || '';
 
             return relevantTerms.some(term => 
-                stayType.includes(term) ||
+                stayType?.includes(term) ||
                 stayLabels.some(label => label.includes(term)) ||
                 amenities.some(amenity => amenity.includes(term)) ||
                 summary.includes(term)
             );
         });
 
-        setFilteredStays(filtered);
+        const remainder = filtered.length % 6;
+        if (remainder !== 0) {
+            const paddingNeeded = 6 - remainder;
+            const padding = Array(paddingNeeded).fill(null);
+            setFilteredStays([...filtered, ...padding]);
+        } else {
+            setFilteredStays(filtered);
+        }
     };
 
     useEffect(() => {
@@ -124,10 +131,14 @@ export function StayList() {
             />
             <div className="stay-list-container">
                 <ul className="stay-list clean-list">
-                    {filteredStays.map((stay) => (
-                        <li key={stay._id}>
-                            <StayPreview stay={stay} />
-                        </li>
+                    {filteredStays.map((stay, index) => (
+                        stay ? (
+                            <li key={stay._id || index}>
+                                <StayPreview stay={stay} />
+                            </li>
+                        ) : (
+                            <li key={`empty-${index}`} className="empty-stay"></li>
+                        )
                     ))}
                 </ul>
             </div>
