@@ -13,7 +13,7 @@
         grid-template-rows: auto auto;
 
         .stay-header {
-            margin-top: 100px;
+            margin-top: 100px; //header should be changed
             grid-row: 1;
             display: flex;
             justify-content: space-between;
@@ -61,7 +61,8 @@
         .mini-gallery {
             grid-row: 2;
             display: grid;
-            grid-template-columns: 2fr 2fr;
+            // grid-template-columns: 2fr 2fr;
+            grid-template-columns: repeat(2, minmax(200px, 1fr));
             gap: 10px;
 
             .main-image img {
@@ -70,19 +71,23 @@
                 grid-column: 1;
                 object-fit: cover;
                 border-top-left-radius: 1rem;
-                border-bottom-left-radius: 1rem
+                border-bottom-left-radius: 1rem;
+                aspect-ratio: 1;
             }
 
             .other-images {
                 grid-column: 2;
                 display: grid;
-                grid-template-columns: 1fr 1fr;
+                // grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(2, minmax(200px, 1fr));
                 gap: 10px;
 
                 img {
                     width: 100%;
-                    height: auto;
+                    height: 100%;
+                    // height: auto;
                     object-fit: cover;
+                    aspect-ratio: 1;
 
                     &:nth-child(2) {
                         border-top-right-radius: 1rem;
