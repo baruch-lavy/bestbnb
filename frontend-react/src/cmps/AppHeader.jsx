@@ -66,8 +66,15 @@ export const AppHeader = () => {
       <header className={`header ${showSticky ? "sticky-header" : ""}`}>
         <div className="left-section">
         <a href="/stay">
-          <img src="/img/stays/logo.png" alt="Airbnb Logo" className="logo" />
-        </a>  
+        <div className="logo-wrapper">
+          <img 
+            src="/img/stays/bestbnb-logo.svg"
+            alt="Bestbnb Logo"
+            className="logo" 
+          />
+          <span className="logo-text">bestbnb</span>
+        </div>   
+        </a>
           <nav className="nav-links">
             <a href="#" onClick={(e) => { e.preventDefault(); handleNavigateToStays(); }}>Homes</a>
             <a href="#">Experiences</a>
