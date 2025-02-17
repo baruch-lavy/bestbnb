@@ -1,0 +1,115 @@
+.confirmation-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(247, 247, 247);
+
+    .confirmation-content {
+        background-color: white;
+        border-radius: 12px;
+        padding: 32px;
+        width: 512px;
+        text-align: center;
+        box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+
+        .success-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 24px;
+
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 26px;
+            color: rgb(34, 34, 34);
+        }
+
+        .confirmation-message {
+            font-size: 16px;
+            line-height: 20px;
+            color: rgb(34, 34, 34);
+            margin-bottom: 24px;
+        }
+
+        .trip-details {
+            border-top: 1px solid rgb(235, 235, 235);
+            border-bottom: 1px solid rgb(235, 235, 235);
+            margin: 24px 0;
+
+            .details-row {
+                display: flex;
+                padding: 24px 0;
+                gap: 16px;
+
+                .detail-item {
+                    flex: 1;
+                    text-align: left;
+
+                    h3 {
+                        font-size: 16px;
+                        line-height: 20px;
+                        font-weight: 600;
+                        margin-bottom: 8px;
+                        color: rgb(34, 34, 34);
+                    }
+
+                    p {
+                        font-size: 14px;
+                        line-height: 18px;
+                        color: rgb(113, 113, 113);
+                        margin: 0;
+                    }
+                }
+            }
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            button {
+                width: 100%;
+                min-height: 48px;
+                padding: 14px 24px;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: transform 0.1s ease;
+
+                &:active {
+                    transform: scale(0.96);
+                }
+            }
+
+            .primary-btn {
+                background-color: rgb(255, 56, 92);
+                border: none;
+                color: white;
+
+                &:hover {
+                    background-color: rgb(247, 49, 85);
+                }
+            }
+
+            .secondary-btn {
+                background-color: white;
+                color: rgb(34, 34, 34);
+                border: 1px solid rgb(34, 34, 34);
+
+                &:hover {
+                    background-color: rgb(247, 247, 247);
+                }
+            }
+        }
+    }
+} 
