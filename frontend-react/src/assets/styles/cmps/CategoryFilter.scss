@@ -52,6 +52,8 @@
             width: 200px;
             pointer-events: none;
             z-index: 2;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         &::before {
@@ -72,6 +74,7 @@
                 rgba(255, 255, 255, 0.7) 30%,
                 rgba(255, 255, 255, 0) 100%
             );
+            opacity: 1;
         }
 
         .category-list {
@@ -151,16 +154,12 @@
             }
         }
 
-        &.scrolled-start {
-            .category-list::before {
-                opacity: 1;
-            }
+        &.scrolled-start::before {
+            opacity: 1;
         }
 
-        &.scrolled-end {
-            .category-list::after {
-                opacity: 0;
-            }
+        &.scrolled-end::after {
+            opacity: 0;
         }
 
         .scroll-btn {
