@@ -15,6 +15,7 @@ import { StayReserve } from '../cmps/StayReserve.jsx'
 
 
 
+
 export function StayDetails() {
 
   const { stayId } = useParams()
@@ -22,10 +23,18 @@ export function StayDetails() {
   const [isImgLoading, setImgLoading] = useState(true)
   const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false)
 
+  useEffect(() => {
+    document.body.classList.add('details-page')
+
+    return () => {
+      document.body.classList.remove('details-page')
+    }
+  }, [])
 
   useEffect(() => {
     loadStay(stayId)
   }, [stayId])
+
 
 
   function handleImageLoad() {
@@ -48,16 +57,16 @@ export function StayDetails() {
       <header>
         <div className="stay-header">
           <h1 className="stay-name"> {stay.name}</h1>
-          <div>
+          <div className="stay-header-btns">
             <button className="show-more-summary"
             // onClick={() => setIsSummaryModalOpen(true)}
             >
-              <img src="/img/stays/asset23.svg" alt="" /><span>Share</span>
+              <img src="/img/stays/share.svg" alt="" /><span>Share</span>
             </button>
             <button className="show-more-summary"
             // onClick={() => setIsSummaryModalOpen(true)}
             >
-              <img src="/img/stays/asset23.svg" alt="" /><span>Save</span>
+              <img src="/img/stays/heart.svg" alt="" /><span>Save</span>
             </button>
             {/* 📩<span> share</span>❤<span>  save</span> */}
           </div>
@@ -111,21 +120,16 @@ export function StayDetails() {
           <StayAmenities amenities={stay.amenities} />
           <Calendar />
         </section>
-        {/* <div className="reserve-companent"> */}
-          <StayReserve stay={stay} />
-        {/* </div> */}
+        <StayReserve stay={stay} />
       </main>
 
       <div className="reviw-and-map">
-        <ReviewList reviews={stay.reviews} />
+        {/* <ReviewList reviews={stay.reviews} /> */}
         {/* <Map/> */}
       </div>
       {/* // } */}
       {/* <button onClick={() => { onAddStayMsg(stay._id) }}>Add stay msg</button> */}
 
-      <footer>
-        this is footer
-      </footer>
     </section>
   )
 }

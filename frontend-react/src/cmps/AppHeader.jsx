@@ -11,6 +11,7 @@ export const AppHeader = () => {
   const dispatch = useDispatch();
   const searchData = useSelector((state) => state.search);
 
+
   // ✅ Sync Redux with URL params when the page loads
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
@@ -83,7 +84,7 @@ export const AppHeader = () => {
         )}
 
         <div className="right-section">
-          <span className="host">Airbnb your home</span>
+          <span className="host">Bestbnb your home</span>
           <FaGlobe className="icon" />
           <div className="profile-menu">
             <FaBars className="menu-icon" />

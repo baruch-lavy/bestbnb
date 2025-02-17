@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import { Link } from 'react-router-dom'
 
 export function StayReserve({ stay }) {
     const [checkIn, setCheckIn] = useState("");
@@ -66,35 +67,56 @@ export function StayReserve({ stay }) {
                         >
                             {[...Array(5).keys()].map((num) => (
                                 <option key={num + 1} value={num + 1}>
-                                    {num + 1} {num + 1 === 1 ? "Guest" : "Guests"}
+                                    {num + 1} {num + 1 === 1 ? "guest" : "guests"}
                                 </option>
                             ))}
                         </select>
                     </div>
                 </div>
 
+                {/* <section className="rooms-and-beds">
+                        <h3>Rooms and beds</h3>
+                        <div className="rooms-inputs">
+                            <CounterGroup 
+                                label="Bedrooms"
+                                value={bedrooms}
+                                setValue={setBedrooms}
+                            />
+                            <CounterGroup 
+                                label="Beds"
+                                value={beds}
+                                setValue={setBeds}
+                            />
+                            <CounterGroup 
+                                label="Bathrooms"
+                                value={bathrooms}
+                                setValue={setBathrooms}
+                            />
+                        </div>
+                    </section> */}
+
                 {/* Reserve Button */}
-                {/* <Link to={`/stay/confirmation/${stay._id}`}> */}
+                <Link to={`/stay/confirmation/${stay._id}`}>
                 <button
                     className="reserve-btn"
                     onMouseMove={handleMouseMove}>
                     Reserve
                 </button>
-                {/* </Link> */}
+                </Link>
 
                 {/* {checkIn && checkOut && */}
-                <div class="reservation-footer flex">
+                <div className="reservation-footer flex">
                     <span>You won't be charged yet</span>
-                    <div class="footer-price-nigts flex">
+                    <div className="footer-price-nigts flex">
                         <span>${stay.price} X {stayLength} nights</span><span>${stay.price * stayLength}</span>
                     </div>
-                    <div class="footer-price-clean-fee flex">
+                    <div className="footer-price-clean-fee flex">
                         <span>Cleaning fee</span><span>${parseInt(stay.price * stayLength * cleanFee)}</span>
                     </div>
-                    <div class="footer-price-airbnb-fee flex">
-                        <span>Airbnb service fee</span><span>${parseInt(stay.price * stayLength * airbnbFee)}</span>
+                    <div className="footer-price-airbnb-fee flex">
+                        <span>Bestbnb service fee</span><span>${parseInt(stay.price * stayLength * airbnbFee)}</span>
                     </div>
-                    <div class="footer-price-total flex">
+                    <div className="footer-price-total flex">
                         <span>Total</span><span>${parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee))}</span>
                     </div>
                 </div>
@@ -104,4 +126,3 @@ export function StayReserve({ stay }) {
     );
 };
 
-// export default ReservationCard;

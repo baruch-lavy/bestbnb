@@ -4,7 +4,7 @@
     grid-template-columns: 1fr 1120px 1fr;
     grid-template-rows: repeat(4, minmax(200px, auto));
     min-height: 100vh;
-    overflow-y: auto;
+    // overflow-y: auto;
 
     header {
         grid-row: 1;
@@ -25,27 +25,34 @@
 
             }
 
+            .stay-header-btns {
 
-            .show-more-summary {
                 display: flex;
                 align-items: center;
                 gap: 5px;
 
-                color: inherit;
-                background-color: transparent;
-                font-size: rem(16px);
-                line-height: rem(20px);
-                font-weight: bold;
-                padding: 0;
-                margin: 0;
-
-                text-decoration: underline;
-
-                img {
-                    height: rem(12px);
-                    width: rem(12px);
-
+                        .show-more-summary {
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                
+                        color: inherit;
+                        background-color: transparent;
+                        font-size: rem(14px);
+                        line-height: rem(18px);
+                        // font-weight: bold;
+                        padding: 0;
+                        margin: 0;
+                
+                        text-decoration: underline;
+                
+                        img {
+                        height: rem(16px);
+                        width: rem(16px);
+                
+                    }
                 }
+
             }
 
 
@@ -93,7 +100,7 @@
         grid-row: 2;
         grid-column: 2;
         display: grid;
-        grid-template-columns: 1.4fr 1fr;
+        grid-template-columns: 1.45fr 1fr;
         min-height: 100%;
 
         section {
@@ -129,7 +136,6 @@
                 }
 
             }
-
             .host-short-info {
                 display: flex;
                 gap: 24px;
@@ -264,166 +270,46 @@
         grid-column: 1 / -1;
         background-color: #f7f7f7;
     }
-}
 
-.order-section {
-    grid-column: 2;
-    margin-left: rem(93px);
-    // position: relative !important;
-    // margin-right: 0% !important;
+    .details-footer {
+        grid-column: 1 / 4;
+        padding: 37px 150px 60px 370px;
+        border-top: 1px solid #ddd;
+        margin-top: 40px;
 
-    .order-card {
-        position: -webkit-sticky !important;
-        position: sticky !important;
-        top: 32px;
-        padding: rem(24px);
-
-        border: 1px solid rgb(221, 221, 221);
-        border-radius: rem(12px);
-        box-shadow: 0px 5px 18px #cfcfcfb7;
-        margin: 10px 10px 10px 0;
-
-        z-index: 2 !important;
-        // top: var(--navigation-bar-offset, 80px) !important;
-        // width: 100% !important;
-        // display: inline-block !important;
-        // padding-right: 1px !important;
-
-        .order-price {
-            font-size: rem(22px);
-            line-height: rem(26px);
-            margin-bottom: rem(24px);
-
-            span {
-                font-size: rem(16px);
-                line-height: rem(20px);
-            }
-        }
-
-        .form-reservation {
+        .support-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows:  rem(56px), rem(56px);
-            border: 0.5px solid #222222;
-            border-radius: rem(8px);
-            margin-bottom: rem(8px);
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
 
-
-            input{
-                border: 0;
+            h3 {
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 16px;
+                color: #222;
             }
 
-            .reservation-dates-in {
-                grid-row: 1;
-                grid-column: 1;
-            }
+            .support-links {
+                ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
 
-            .reservation-dates-out {
-                grid-row: 1;
-                grid-column: 2 !important;
-            }
+                li {
+                    margin-bottom: 12px;
+                }
 
-            .reservation-guests{
-                grid-row: 2;
-                grid-column: 1 /-1;
-            }
-
-            .reservation-dates-label,
-            .reservation-guests-label {
-                font-size: rem(10px);
-                line-height: rem(16px);
-                font-weight: bold;
-            }
-        }
-
-        .reservation-footer {
-            flex-direction: column;
-
-            &>span {
-                font-size: rem(14px);
-                line-height: rem(18px);
-                margin-top: rem(16px);
-                text-align: center;
-            }
-
-            > :last-child {
-                font-weight: bold;
-                padding-top: rem(25px);
-                border-top: 0.5px solid #3a39392f;
-            }
-
-            .footer-price-airbnb-fee {
-                padding-bottom: rem(24px);
-            }
-
-            &>*:not(:first-child) {
-                justify-content: space-between;
-                font-size: rem(16px);
-                line-height: rem(20px);
-                margin-top: rem(16px);
-
-                &:not(:last-child) :first-child {
-                    text-decoration: underline;
+                a {
+                    color: #222;
+                    text-decoration: none;
+                    font-size: 14px;
+                    
+                    &:hover {
+                        text-decoration: underline;
+                    }
                 }
             }
         }
-    }
-}
-
-.reserve-btn {
-    font-size: rem(16px);
-    line-height: rem(20px);
-    color: white;
-    position: relative;
-    border: none;
-    height: rem(48px);
-    width: 100%;
-    background: linear-gradient(to right, #ff385c, #d70466);
-    border-radius: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    overflow: hidden;
-    padding: 0;
-    margin: 0;
-
-    // &:hover {
-    //     background: #e91578;
-    //     transition:  1s;
-    // }
-
-    &::after {
-        content: "";
-        position: absolute;
-        top: calc(var(--y, 0) * 1px - 100px);
-        left: calc(var(--x, 0) * 1px - 100px);
-        width: 200px;
-        height: 200px;
-        background: radial-gradient(rgba(199, 230, 21, 0.726), #3984ff00 80%);
-
-        opacity: 0;
-        transition: opacity 0.2s;
-    }
-
-    &:hover::after {
-        opacity: 0.4;
-    }
-}
-
-
-.skeleton-loader {
-    width: 220px;
-    height: 220px;
-    background: linear-gradient(90deg, #ddd 25%, #eee 50%, #ddd 75%);
-    background-size: 200% 100%;
-    animation: shimmer-loading 1.5s infinite linear;
-}
-
-@keyframes shimmer-loading {
-    0% {
-        background-position: 200% 0;
-    }
-
-    100% {
-        background-position: -200% 0;
     }
 }

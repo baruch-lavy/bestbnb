@@ -11,7 +11,7 @@ export function ReviewPreview({ review }) {
              <img src={by.imgUrl} alt="" style={{ borderRadius: '50%', width: '2rem', height: '2rem', objectFit: 'cover' }}
              /></Link>
              {by.fullname}
-             <br />4 years on Airbnb
+             <br />4 years on Bestbnb
              </p>
         <p className="review-txt">{review.txt}</p>
     </article>

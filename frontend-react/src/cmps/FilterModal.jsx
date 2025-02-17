@@ -126,7 +126,7 @@ export function FilterModal({ isOpen, onClose }) {
                             <div className="price-input">
                                 <label>Maximum</label>
                                 <div className="input-wrapper">
-                                    <span className="currency">$130</span>
+                                    <span className="currency">$860</span>
                                     <input type="text" />
                                 </div>
                             </div>
