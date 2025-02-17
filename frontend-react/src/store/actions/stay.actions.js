@@ -76,7 +76,7 @@ export function loadStays(filterBy = {}) {
               return false;
             }
           } else {
-            // console.log(`❌ Skipping ${stay.name} (No available dates info)`);
+            // console.log(`2❌ Skipping ${stay.name} (No available dates info)`);
             return false; 
           }
         }

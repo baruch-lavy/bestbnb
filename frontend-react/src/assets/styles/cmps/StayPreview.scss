@@ -177,6 +177,7 @@
             align-items: center;
             margin: 0;
             padding: 0;
+            height: 19px;
 
             h3 {
                 margin: 0;
@@ -194,12 +195,15 @@
             margin: 0;
             color: $clr3;
             font-size: 0.9em;
+            width: 185px;
+            height: 18px;
         }
-
+        
         .price {
             color: $clr2;
             font-weight: 600;
-            margin: 0;
+            margin-top: 7px;
+            height: 18px;
 
             span {
                 font-weight: 400;
