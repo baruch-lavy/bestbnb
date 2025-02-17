@@ -1,7 +1,24 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { WishlistModal } from './WishlistModal'
 import { SuccessMessage } from './SuccessMessage'
+
+function generateRandomData(stay) {
+    const rating = (Math.random() * (5 - 4) + 4).toFixed(2)
+    
+    const distance = Math.floor(Math.random() * 14000 + 1000)
+    
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    const randomMonth = months[Math.floor(Math.random() * months.length)]
+    const randomDay = Math.floor(Math.random() * 20 + 1)
+    const dates = `${randomMonth} ${randomDay} - ${randomMonth} ${randomDay + 7}`
+
+    return {
+        rate: rating,
+        distance: `${distance.toLocaleString()}`,
+        dates
+    }
+}
 
 export function StayPreview({ stay }) {
   
@@ -10,6 +27,8 @@ export function StayPreview({ stay }) {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [showSuccess, setShowSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState('')
+
+    const randomData = useMemo(() => generateRandomData(stay), [stay._id])
 
     const handleModalClose = () => {
         setIsModalOpen(false)
@@ -133,10 +152,10 @@ export function StayPreview({ stay }) {
                 <div className="info">
                     <div className="header-stay">
                         <h3>{stay.loc.city}, {stay.loc.country}</h3>
-                        <div className="rating">★ {stay.reviews[0]?.rate || 'New'}</div>
+                        <div className="rating">★ {randomData.rate}</div>
                     </div>
-                    <p className="distance">{stay.distance}</p>
-                    <p className="dates">{stay.dates}</p>
+                    <p className="distance">{randomData.distance} kilometers away</p>
+                    <p className="dates">{randomData.dates}</p>
                     <p className="price">${stay.price} <span>night</span></p>
                 </div>
             </article>
