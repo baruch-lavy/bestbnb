@@ -1,9 +1,9 @@
 // Calendar.js
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import { DayPicker } from "react-day-picker";
-import "react-datepicker/dist/react-datepicker.css";
-import "react-day-picker/style.css";
+import { DayPicker } from 'react-day-picker';
+import 'react-datepicker/dist/react-datepicker.css';
+import 'react-day-picker/style.css';
 
 export function Calendar(){
   const [startDate, setStartDate] = useState(null);
@@ -24,7 +24,7 @@ export function Calendar(){
   };
 
   return (
-    <div className="calendar-container">
+    <div className="details-calendar-container">
       <h3>9 nights in Taylors Island</h3>
       <h6>Mar 16, 2025 - May 23, 2025</h6>
 

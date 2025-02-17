@@ -8,10 +8,10 @@ import { loadStay, addStayMsg } from '../store/actions/stay.actions'
 import { StayGallery } from '../cmps/StayGallery'
 import { StayAmenities } from '../cmps/StayAmenities.jsx'
 import { ReviewList } from '../cmps/ReviewList.jsx'
-
+import { Map } from '../cmps/Map.jsx'
 import { Calendar } from '../cmps/Calendar.jsx'
 import { SummaryModal } from '../cmps/SummaryModal.jsx'
-import { StayReserve } from '../cmps/StayReserve.jsx'
+import { StayOrder } from '../cmps/StayOrder.jsx'
 
 
 
@@ -68,7 +68,6 @@ export function StayDetails() {
             >
               <img src="/img/stays/heart.svg" alt="" /><span>Save</span>
             </button>
-            {/* 📩<span> share</span>❤<span>  save</span> */}
           </div>
         </div>
         <Link to="/stay/gallery/:id">
@@ -94,15 +93,15 @@ export function StayDetails() {
           {/* {stay && */}
           <div className="stay-short-info">
             <h3 className="info-header">{stay.type} in {stay.loc.city}, {stay.loc.country}</h3>
-            <h5 className="info">{stay.capacity} guests * {stay.bedrooms} bedrooms * {stay.beds} beds * {stay.baths} bath</h5>
-            <h4 className="rate">★ {stay.reviews[0].rate} * {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4>
+            <h5 className="info">{stay.capacity} guests · {stay.bedrooms} bedrooms · {stay.beds} beds · {stay.baths} bath</h5>
+            <h4 className="rate">★ {stay.reviews[0].rate} · {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4>
           </div>
 
           <div className="host-short-info">
             <img src={stay.host.imgUrl} alt="Host" className="host-avatar" style={{ borderRadius: '50%', width: '2rem', height: '2rem', objectFit: 'cover' }} />
             <div className="host-short-details">
               <h4>Hosted by {stay.host.fullname}</h4>
-              <span className="superhost">Superhost * {stay.host.yearsHosting} years hosting</span>
+              <span className="superhost">Superhost · {stay.host.yearsHosting} years hosting</span>
             </div>
           </div>
           <article className="stay-summary">
@@ -120,12 +119,12 @@ export function StayDetails() {
           <StayAmenities amenities={stay.amenities} />
           <Calendar />
         </section>
-        <StayReserve stay={stay} />
+        <StayOrder stay={stay} />
       </main>
 
       <div className="reviw-and-map">
-        {/* <ReviewList reviews={stay.reviews} /> */}
-        {/* <Map/> */}
+        <ReviewList reviews={stay.reviews} />
+        <Map />
       </div>
       {/* // } */}
       {/* <button onClick={() => { onAddStayMsg(stay._id) }}>Add stay msg</button> */}

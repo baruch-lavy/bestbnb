@@ -5,7 +5,7 @@ import GoogleMapReact from 'google-map-react'
 function Marker() {
   return (
     <div className="branch-img">
-      <img src="https://loremflickr.com/200/200?random=6" />
+      <img src="https://loremflickr.com/20/20?random=6" />
     </div>
   )
 }
