@@ -10,6 +10,14 @@ export function CategoryFilter({ onSelectCategory, selectedCategory }) {
 
   const containerRef = useRef(null);
 
+  const handleCategoryClick = (categoryId) => {
+    if (selectedCategory === categoryId) {
+      onSelectCategory(null); // Deselect if clicking the same category
+    } else {
+      onSelectCategory(categoryId);
+    }
+  };
+
   // ✅ Updates visibility of left/right scroll buttons
   const checkScroll = () => {
     const container = containerRef.current;
@@ -86,7 +94,9 @@ export function CategoryFilter({ onSelectCategory, selectedCategory }) {
             <div
               key={category.id}
               className={`category-item ${selectedCategory === category.id ? "selected" : ""}`}
-              onClick={() => onSelectCategory(category.id)}
+              onClick={() => handleCategoryClick(category.id)}
+              role="button"
+              tabIndex={0}
             >
               <div className="content">
                 <img src={category.icon} alt={category.label} />

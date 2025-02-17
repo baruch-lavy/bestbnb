@@ -22,7 +22,6 @@ export const AppHeader = () => {
       guests: Number(searchParams.get("guests")) || 1,
     };
 
-    console.log("🚀 Syncing Redux with URL search parameters:", filterBy);
     dispatch(setSearchData(filterBy));
   }, [dispatch]);
 
@@ -48,7 +47,6 @@ export const AppHeader = () => {
       guests: searchData.guests || 1,
     };
 
-    console.log("🚀 Searching with filter:", filterBy);
     dispatch(loadStays(filterBy));
 
     // ✅ Navigate automatically after search

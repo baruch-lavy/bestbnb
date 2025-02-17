@@ -5,7 +5,6 @@ import { SuccessMessage } from './SuccessMessage'
 
 export function StayPreview({ stay }) {
   
-    console.log(stay)
     const [currentImgIdx, setCurrentImgIdx] = useState(0)
     const [isLiked, setIsLiked] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
