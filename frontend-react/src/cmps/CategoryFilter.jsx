@@ -11,11 +11,7 @@ export function CategoryFilter({ onSelectCategory, selectedCategory }) {
   const containerRef = useRef(null);
 
   const handleCategoryClick = (categoryId) => {
-    if (selectedCategory === categoryId) {
-      onSelectCategory(null); // Deselect if clicking the same category
-    } else {
-      onSelectCategory(categoryId);
-    }
+    onSelectCategory(categoryId);
   };
 
   // ✅ Updates visibility of left/right scroll buttons
@@ -29,7 +25,7 @@ export function CategoryFilter({ onSelectCategory, selectedCategory }) {
     setShowLeftButton(isScrolledStart);
     setShowRightButton(!isScrolledEnd);
 
-    // עדכון מחלקות הצל
+    // עדכון מחלקות הצל על האלמנט המכיל
     container.parentElement.classList.toggle('scrolled-start', isScrolledStart);
     container.parentElement.classList.toggle('scrolled-end', isScrolledEnd);
   };

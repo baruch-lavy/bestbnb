@@ -1,15 +1,58 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect ,useRef } from "react";
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { setSearchData, loadStays } from "../store/actions/stay.actions.js";
 
 export function StayReserve({ stay }) {
+    const searchData = useSelector((state) => state.search);
+    const [openDropdown, setOpenDropdown] = useState(null);
+
+    const dropdownRef = useRef(null);
+    const datePickerRef = useRef(null);
+    const guestDropdownRef = useRef(null);
+
+
     const [checkIn, setCheckIn] = useState("");
     const [checkOut, setCheckOut] = useState("");
     const [guests, setGuests] = useState(1);
+    const dispatch = useDispatch();
     const stayLength = 5
     const cleanFee = 0.095
     const airbnbFee = 0.13
 
+    useEffect(() => {
+        const searchParams = new URLSearchParams(window.location.search);
+        const filterBy = {
+            destination: searchParams.get("destination") || "Anywhere",
+            startDate: searchParams.get("startDate") || "",
+            endDate: searchParams.get("endDate") || "",
+            guests: Number(searchParams.get("guests")) || 1,
+        };
+
+        console.log("🚀 Syncing Redux with URL search parameters:", filterBy);
+        dispatch(setSearchData(filterBy));
+    }, [dispatch]);
+
+    console.log('searchData', searchData.guests)
+
+    const handleDropdownOpen = (dropdown) => {
+        setOpenDropdown((prev) => (prev === dropdown ? null : dropdown));
+    };
+
+     const handleGuestChange = (type, amount) => {
+        const updatedGuests = {
+          ...search.guests,
+          [type]: Math.max(0, (search.guests?.[type] || 0) + amount),
+        };
+    
+        dispatch(
+          setSearchData({
+            ...search,
+            guests: { ...updatedGuests }, // ✅ Ensuring new object reference
+          })
+        );
+      };
 
     function handleMouseMove(e) {
         const button = e.currentTarget;
@@ -22,55 +65,90 @@ export function StayReserve({ stay }) {
         <div className="order-section">
             <div className="order-card">
                 {/* {(checkIn && checkOut) ? */}
-                    <h2 className="order-price">${stay.price}<span> night</span></h2>
-                    {/* : <h2 className="order-price">Add dates for prices</h2>} */}
+                <h2 className="order-price">${stay.price}<span> night</span></h2>
+                {/* : <h2 className="order-price">Add dates for prices</h2>} */}
 
                 {/* Check-in & Check-out Dates */}
                 <div className="form-reservation">
                     {/* <div className="reservation-dates-container"> */}
-                        <div className="reservation-dates-in">
-                            <label className="reservation-dates-label">CHECK-IN</label>
-                            <input
-                                placeholder="Add date"
-                                value="16/3/2025"
-                                // {checkIn}
-                                // type="date"
-                                // onChange={(e) => setCheckIn(e.target.value)}
-                                className="date-input"
-                            />
-                        </div>
+                    <div className="reservation-dates-in">
+                        <label className="reservation-dates-label">CHECK-IN</label>
+                        <input
+                            type="text"
+                            placeholder="Add dates"
+                            value={
+                                searchData.startDate
+                                    ? new Date(searchData.startDate).toLocaleDateString()
+                                    : ""
+                            }
+                            readOnly
+                        />
+                    </div>
 
 
-                        <div className="reservation-dates-out">
-                            <label className="reservation-dates-label">CHECK-OUT</label>
-                            <input
-                                placeholder="Add date"
-                                value="19/3/2025"
-                                // {checkOut}
-                                // type="date"
-                                // onChange={(e) => setCheckOut(e.target.value)}
-                                className="date-input"
-                            />
-                        </div>
+                    <div className="reservation-dates-out">
+                        <label className="reservation-dates-label">CHECK-OUT</label>
+                        <input
+                            type="text"
+                            placeholder="Add dates"
+                            value={
+                                searchData.endDate
+                                    ? new Date(searchData.endDate).toLocaleDateString()
+                                    : ""
+                            }
+                            readOnly
+                        />
+                    </div>
                     {/* </div> */}
 
                     {/* Guest Selection */}
                     <div className="reservation-guests">
                         <label className="reservation-guests-label">GUESTS</label>
-                        <select
+                        <input
                             placeholder="1 guest"
                             name="guests"
-                            value="1 guest"
-                            // {guests}
-                            // onChange={(e) => setGuests(Number(e.target.value))}
-                            className="guests"
-                        >
-                            {[...Array(5).keys()].map((num) => (
-                                <option key={num + 1} value={num + 1}>
-                                    {num + 1} {num + 1 === 1 ? "guest" : "guests"}
-                                </option>
-                            ))}
-                        </select>
+                            // value={`${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0)
+                            value={`${(searchData.guests || 1)
+                                } guests`}
+                            readOnly
+                            onClick={() => handleDropdownOpen("who")}
+                        />
+                        {openDropdown === "who" && (
+                            <div className="guest-dropdown">
+                                {["adults", "children", "infants", "pets"].map((key) => (
+                                    <div className="guest-row" key={key}>
+                                        <div className="guest-info">
+                                            <strong>
+                                                {key.charAt(0).toUpperCase() + key.slice(1)}
+                                            </strong>
+                                            <p>
+                                                {key === "pets" ? (
+                                                    <a href="#">Bringing a service animal?</a>
+                                                ) : (
+                                                    `Ages for ${key}`
+                                                )}
+                                            </p>
+                                        </div>
+                                        <div className="guest-controls">
+                                            <button
+                                                className="guest-btn"
+                                                onClick={() => handleGuestChange(key, -1)}
+                                                disabled={searchData.guests?.[key] === 0}
+                                            >
+                                                −
+                                            </button>
+                                            <span>{searchData.guests?.[key] || 0}</span>
+                                            <button
+                                                className="guest-btn"
+                                                onClick={() => handleGuestChange(key, 1)}
+                                            >
+                                                +
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
 
@@ -97,11 +175,11 @@ export function StayReserve({ stay }) {
 
                 {/* Reserve Button */}
                 <Link to={`/stay/confirmation/${stay._id}`}>
-                <button
-                    className="reserve-btn"
-                    onMouseMove={handleMouseMove}>
-                    Reserve
-                </button>
+                    <button
+                        className="reserve-btn"
+                        onMouseMove={handleMouseMove}>
+                        Reserve
+                    </button>
                 </Link>
 
                 {/* {checkIn && checkOut && */}
