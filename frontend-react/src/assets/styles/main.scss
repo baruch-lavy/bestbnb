@@ -11,30 +11,26 @@
 // @import "basics/links";
 @import "basics/forms.scss";
 
-// pages
 @import "RootCmp.scss";
+// pages
 @import "Pages/StayDetails.scss";
 @import "pages/AboutUs.scss";
 // @import "pages/HomePage";
-@import "pages/StayIndex.scss";
-@import "pages/ReviewIndex.scss";
-@import "pages/UserDetails.scss";
-@import "pages/TaskDetails.scss";
-@import "pages/LoginSignup.scss";
-@import "pages/SearchResults.scss";
-
-
+@import "pages/StayIndex";
+@import "pages/ReviewIndex";
+@import "pages/UserDetails";
+@import "pages/TaskDetails";
+@import "pages/LoginSignup";
+@import "pages/SearchResults";
 
 // Components
 // @import "cmps/list.scss";
 // @import "cmps/preview.scss";
 
 @import "cmps/AppHeader.scss";
-@import "cmps/SearchBar.scss";
 @import "cmps/AppFooter.scss";
 @import "cmps/SupportModal.scss";
 @import "cmps/StickySearchBar.scss";
-@import "cmps/Calendar.scss";
 // @import "cmps/UserMsg";
 
 @import "cmps/StayReserve.scss";
@@ -52,3 +48,5 @@
 
 
 
+
+@import "cmps/SearchBar.scss";

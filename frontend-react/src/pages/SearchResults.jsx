@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadStays } from "../store/actions/stay.actions.js";
+import { StayPreview } from "../cmps/StayPreview.jsx"; // ✅ Import StayPreview
+import "../assets/styles/pages/SearchResults.scss";
 
 export const SearchResults = () => {
   const dispatch = useDispatch();
@@ -32,12 +34,7 @@ export const SearchResults = () => {
       ) : (
         <div className="stays-list">
           {stays.map((stay) => (
-            <div key={stay._id} className="stay-card">
-              <img src={stay.imgUrls?.[0]} alt={stay.name} />
-              <h3>{stay.name}</h3>
-              <p>{stay.loc?.country || "Unknown Location"}</p>
-              <p>${stay.price} per night</p>
-            </div>
+            <StayPreview key={stay._id} stay={stay} /> // ✅ Use StayPreview
           ))}
         </div>
       )}

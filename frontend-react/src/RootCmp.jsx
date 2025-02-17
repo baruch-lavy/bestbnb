@@ -23,7 +23,7 @@ import { SearchResults } from "./pages/SearchResults.jsx";
 export function RootCmp() {
     return (
         <div className="main-container">
-            <AppHeader />
+            <AppHeader className="app" />
             <UserMsg />
 
             <main>
