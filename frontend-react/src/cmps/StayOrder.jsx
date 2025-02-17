@@ -8,14 +8,11 @@ export function StayOrder({ stay }) {
     const searchData = useSelector((state) => state.search);
     const [openDropdown, setOpenDropdown] = useState(null);
 
+    console.log('searchData', searchData)
     const dropdownRef = useRef(null);
     const datePickerRef = useRef(null);
     const guestDropdownRef = useRef(null);
 
-
-    const [checkIn, setCheckIn] = useState("");
-    const [checkOut, setCheckOut] = useState("");
-    const [guests, setGuests] = useState(1);
     const dispatch = useDispatch();
     const stayLength = 5
     const cleanFee = 0.095
@@ -64,9 +61,7 @@ export function StayOrder({ stay }) {
     return (
         <div className="order-section">
             <div className="order-card">
-                {/* {(checkIn && checkOut) ? */}
                 <h2 className="order-price">${stay.price}<span> night</span></h2>
-                {/* : <h2 className="order-price">Add dates for prices</h2>} */}
 
                 {/* Check-in & Check-out Dates */}
                 <div className="form-order">
@@ -107,8 +102,7 @@ export function StayOrder({ stay }) {
                         <input
                             placeholder="1 guest"
                             name="guests"
-                            // value={`${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0)
-                            value={`${(searchData.guests || 1)
+                            value={((searchData.guests?.adults || 0) + (searchData.guests?.children || 0)) <= 1 ? "1 guest" : `${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0)
                                 } guests`}
                             readOnly
                             onClick={() => handleDropdownOpen("who")}
