@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from "react"
-import { categories } from "../services/categories.service"
-import { FiSliders } from "react-icons/fi"
-import { FilterModal } from "./FilterModal"
+import { useState, useEffect, useRef } from 'react'
+import { categories } from '../services/categories.service'
+import { FiSliders } from 'react-icons/fi'
+import { FilterModal } from './FilterModal'
 
 export function CategoryFilter({ onSelectCategory, selectedCategory }) {
   const [showLeftButton, setShowLeftButton] = useState(false)
@@ -31,13 +31,13 @@ export function CategoryFilter({ onSelectCategory, selectedCategory }) {
   useEffect(() => {
     const container = containerRef.current;
     if (container) {
-      container.addEventListener("scroll", checkScroll);
+      container.addEventListener('scroll', checkScroll);
       checkScroll(); // Initial check
     }
 
     return () => {
       if (container) {
-        container.removeEventListener("scroll", checkScroll);
+        container.removeEventListener('scroll', checkScroll);
       }
     };
   }, []);
@@ -46,7 +46,7 @@ export function CategoryFilter({ onSelectCategory, selectedCategory }) {
     const container = containerRef.current;
     if (!container) return;
 
-    const item = container.querySelector(".category-item");
+    const item = container.querySelector('.category-item');
     if (!item) return;
 
     const itemWidth = item.offsetWidth;

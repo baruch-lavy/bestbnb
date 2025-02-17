@@ -1,0 +1,176 @@
+
+.order-section {
+    grid-column: 2;
+    margin-left: rem(93px);
+
+    .order-card {
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        top: 32px;
+        padding: rem(24px);
+
+        border: 1px solid rgb(221, 221, 221);
+        border-radius: rem(12px);
+        box-shadow: 0px 5px 18px #cfcfcfb7;
+        margin: rem(32px) 0px rem(48px) 0;
+
+        z-index: 2 !important;
+
+        .order-price {
+            font-size: rem(22px);
+            line-height: rem(26px);
+            margin-bottom: rem(24px);
+
+            span {
+                font-size: rem(16px);
+                line-height: rem(20px);
+            }
+        }
+
+        .form-order {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows:  rem(56px), rem(56px);
+            border: 0.2px solid #2222228a;
+            border-radius: rem(8px);
+            margin-bottom: rem(16px);
+
+
+            input, select{
+                font-family: inherit;
+                font-size: rem(14px);
+                border: 0;
+                width: rem(75px);
+            }
+
+            .order-dates-in {
+                grid-row: 1;
+                grid-column: 1;
+                padding: rem(7px) rem(12px) ;
+                border-right:  0.2px solid #2222228a;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .order-dates-out {
+                grid-row: 1;
+                grid-column: 2 !important;
+                padding: rem(7px) rem(12px) ;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .order-guests{
+                grid-row: 2;
+                grid-column: 1 /-1;
+                border-top:  0.2px solid #2222228a;
+                padding: rem(7px) rem(12px) ;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .order-dates-label,
+            .order-guests-label {
+                font-size: rem(10px);
+                line-height: rem(16px);
+                font-weight: bold;
+            }
+        }
+
+        .order-footer {
+            flex-direction: column;
+
+            &>span {
+                font-size: rem(14px);
+                line-height: rem(18px);
+                margin-top: rem(16px);
+                text-align: center;
+            }
+
+            > :last-child {
+                font-weight: bold;
+                padding-top: rem(24px);
+                margin-top: rem(24px);
+                border-top: 0.5px solid #3a39392f;
+            }
+
+            .footer-price-airbnb-fee {
+                padding-bottom: rem(8px);
+            }
+
+            &>*:not(:first-child) {
+                justify-content: space-between;
+                font-size: rem(16px);
+                line-height: rem(20px);
+                margin-top: rem(16px);
+
+                &:not(:last-child) :first-child {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+.reserve-btn {
+    font-size: rem(16px);
+    line-height: rem(20px);
+    color: white;
+    position: relative;
+    border: none;
+    height: rem(48px);
+    width: 100%;
+    background: linear-gradient(to right, #ff385c, #d70466);
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+
+    // &:hover {
+    //     background: #e91578;
+    //     transition:  1s;
+    // }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: calc(var(--y, 0) * 1px - 100px);
+        left: calc(var(--x, 0) * 1px - 100px);
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(rgba(199, 230, 21, 0.726), #3984ff00 80%);
+
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+
+    &:hover::after {
+        opacity: 0.4;
+    }
+}
+
+.details-page .app-footer {
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+}
+
+.skeleton-loader {
+    width: 220px;
+    height: 220px;
+    background: linear-gradient(90deg, #ddd 25%, #eee 50%, #ddd 75%);
+    background-size: 200% 100%;
+    animation: shimmer-loading 1.5s infinite linear;
+}
+
+@keyframes shimmer-loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}

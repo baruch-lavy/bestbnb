@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { setSearchData, loadStays } from "../store/actions/stay.actions.js";
 
-export function StayReserve({ stay }) {
+export function StayOrder({ stay }) {
     const searchData = useSelector((state) => state.search);
     const [openDropdown, setOpenDropdown] = useState(null);
 
@@ -69,10 +69,10 @@ export function StayReserve({ stay }) {
                 {/* : <h2 className="order-price">Add dates for prices</h2>} */}
 
                 {/* Check-in & Check-out Dates */}
-                <div className="form-reservation">
-                    {/* <div className="reservation-dates-container"> */}
-                    <div className="reservation-dates-in">
-                        <label className="reservation-dates-label">CHECK-IN</label>
+                <div className="form-order">
+                    {/* <div className="order-dates-container"> */}
+                    <div className="order-dates-in">
+                        <label className="order-dates-label">CHECK-IN</label>
                         <input
                             type="text"
                             placeholder="Add dates"
@@ -86,8 +86,8 @@ export function StayReserve({ stay }) {
                     </div>
 
 
-                    <div className="reservation-dates-out">
-                        <label className="reservation-dates-label">CHECK-OUT</label>
+                    <div className="order-dates-out">
+                        <label className="order-dates-label">CHECK-OUT</label>
                         <input
                             type="text"
                             placeholder="Add dates"
@@ -102,8 +102,8 @@ export function StayReserve({ stay }) {
                     {/* </div> */}
 
                     {/* Guest Selection */}
-                    <div className="reservation-guests">
-                        <label className="reservation-guests-label">GUESTS</label>
+                    <div className="order-guests">
+                        <label className="order-guests-label">GUESTS</label>
                         <input
                             placeholder="1 guest"
                             name="guests"
@@ -183,19 +183,19 @@ export function StayReserve({ stay }) {
                 </Link>
 
                 {/* {checkIn && checkOut && */}
-                <div className="reservation-footer flex">
+                <div className="order-footer flex">
                     <span>You won't be charged yet</span>
                     <div className="footer-price-nigts flex">
-                        <span>${stay.price} X {stayLength} nights</span><span>${stay.price * stayLength}</span>
+                        <span>${stay.price} X {stayLength} nights</span><span>${(stay.price * stayLength).toLocaleString()}</span>
                     </div>
                     <div className="footer-price-clean-fee flex">
-                        <span>Cleaning fee</span><span>${parseInt(stay.price * stayLength * cleanFee)}</span>
+                        <span>Cleaning fee</span><span>${parseInt(stay.price * stayLength * cleanFee).toLocaleString()}</span>
                     </div>
                     <div className="footer-price-airbnb-fee flex">
-                        <span>Bestbnb service fee</span><span>${parseInt(stay.price * stayLength * airbnbFee)}</span>
+                        <span>Bestbnb service fee</span><span>${parseInt(stay.price * stayLength * airbnbFee).toLocaleString()}</span>
                     </div>
                     <div className="footer-price-total flex">
-                        <span>Total</span><span>${parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee))}</span>
+                        <span>Total</span><span>${parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee)).toLocaleString()}</span>
                     </div>
                 </div>
                 {/* } */}
