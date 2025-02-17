@@ -11,11 +11,7 @@ export function CategoryFilter({ onSelectCategory, selectedCategory }) {
   const containerRef = useRef(null);
 
   const handleCategoryClick = (categoryId) => {
-    if (selectedCategory === categoryId) {
-      onSelectCategory(null); // Deselect if clicking the same category
-    } else {
-      onSelectCategory(categoryId);
-    }
+    onSelectCategory(categoryId);
   };
 
   // ✅ Updates visibility of left/right scroll buttons
