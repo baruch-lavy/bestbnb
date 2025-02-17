@@ -7,6 +7,8 @@
     display: flex;
     justify-content: center;
     padding: 20px 0;
+    position: relative;
+    z-index: 1000;
 }
 
 .search-bar {
@@ -135,115 +137,172 @@
 
 
 /* =============================== */
-/*         WHERE DROPDOWN          */
+/*      "WHERE" SEARCH SECTION     */
+/* =============================== */
+
+.where-section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    position: relative;
+    padding: 8px 16px;
+    border-radius: 50px;
+    transition: background 0.2s ease-in-out;
+
+    span {
+        font-size: 12px;
+        font-weight: 600;
+        color: #222;
+    }
+
+    input {
+        border: none;
+        outline: none;
+        font-size: 16px;
+        padding-top: 2px;
+        background: transparent;
+        width: 100%;
+        color: #717171;
+        font-weight: 400;
+    }
+
+    /* Hover & Focus States */
+      /* 🔥 Fix Hover & Focus Background */
+      &:hover,
+      &:focus-within {
+          background: #ebebeb; /* ✅ Solid Light Gray */
+          border-radius: 40px; /* ✅ More rounded to match the container */
+          transition: background 0.2s ease-in-out;
+      }
+  
+}
+
+/* =============================== */
+/*      "WHERE" DROPDOWN MENU      */
 /* =============================== */
 
 .dropdown {
     position: absolute;
     top: 50px;
     left: 0;
-    width: 320px;
+    width: 350px;
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-    padding: 15px;
-    z-index: 10;
+    border-radius: 16px;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
+    padding: 16px;
+    z-index: 1050;
 }
 
 .dropdown-header {
     font-size: 14px;
     font-weight: bold;
-    color: #555;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    color: #222;
     margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
 }
+
+/* =============================== */
+/*     DESTINATION SUGGESTIONS     */
+/* =============================== */
 
 .suggestion {
     display: flex;
     align-items: center;
     padding: 12px;
-    border-radius: 8px;
+    border-radius: 12px;
     cursor: pointer;
-    transition: background 0.2s ease;
-}
+    transition: background 0.2s ease-in-out;
 
-.suggestion:hover {
-    background: #f8f8f8;
-}
+    &:hover {
+        background: #f8f8f8;
+    }
 
-.suggestion .icon {
-    font-size: 22px;
-    margin-right: 12px;
-}
+    .icon {
+        font-size: 22px;
+        margin-right: 12px;
+    }
 
-.suggestion div strong {
-    font-size: 14px;
-    color: #333;
-}
+    div {
+        strong {
+            font-size: 14px;
+            color: #333;
+        }
 
-.suggestion div p {
-    font-size: 12px;
-    color: #777;
+        p {
+            font-size: 12px;
+            color: #777;
+        }
+    }
 }
 
 /* =============================== */
-/*       DATE PICKER STYLES        */
+/*        DATE PICKER STYLES       */
 /* =============================== */
 
-.date-picker-wrapper {
+.date-section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     position: relative;
-    width: 100%;
+    padding: 8px 16px;
+    border-radius: 50px;
+    transition: background 0.2s ease-in-out;
+
+    &:hover,
+    &:focus-within {
+        background: #ebebeb; /* ✅ Airbnb’s light gray hover */
+        border-radius: 40px;
+        transition: background 0.2s ease-in-out;
+    }
 }
 
-/* Date fields container (Side by Side) */
 .date-fields {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
-    width: 100%;
     cursor: pointer;
+    width: 100%;
+    padding: 6px 0;
 }
 
-/* Individual date input styles */
+/* ✅ Styling individual date inputs */
 .date-input {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     flex: 1;
+    padding: 4px 12px;
+    transition: background 0.2s ease-in-out;
+
+    &:hover {
+        background: rgba(200, 200, 200, 0.2);
+        border-radius: 50px;
+    }
+
+    span {
+        font-size: 12px;
+        font-weight: 600;
+        color: #222;
+    }
+
+    input {
+        border: none;
+        outline: none;
+        font-size: 16px;
+        padding: 2px 0;
+        background: transparent;
+        width: 100%;
+        text-align: left;
+        color: #717171;
+        font-weight: 400;
+    }
 }
 
-.date-input:hover {
-    background: rgba(200, 200, 200, 0.2); /* Light gray with slight transparency */
-    border-radius: 12px; /* Subtle rounded edges instead of an extreme oval */
-    transition: background 0.2s ease-in-out; /* Smooth transition */
-}
-
-
-
-.date-input span {
-    font-size: 12px;
-    color: #888;
-    margin-bottom: 2px;
-    margin-left: 34%;
-}
-
-.date-input input {
-    width: 100%;
-    border: none;
-    padding: 10px;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-    background-color: white;
-}
-
-/* Divider between Check-in & Check-out */
+/* ✅ Fixing Divider (should be subtle) */
 .divider {
     width: 1px;
-    height: 40px;
+    height: 32px;
     background: #ddd;
 }
 
@@ -255,7 +314,7 @@
     position: absolute;
     top: 50px;
     left: 0;
-    width: 700px;
+    width: 740px;
     background: white;
     border-radius: 16px;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
@@ -265,39 +324,108 @@
     flex-direction: column;
 }
 
-/* Ensure the two calendars are properly aligned */
+/* 🔥 Styling for Month Navigation */
+.react-datepicker__header {
+    background: transparent;
+    border: none;
+    padding: 8px 12px;
+    text-align: center;
+}
+
+/* ✅ Make month titles look correct */
+.react-datepicker__current-month {
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+}
+
+/* ✅ Style the navigation arrows */
+.react-datepicker__navigation {
+    top: 16px;
+    width: 32px;
+    height: 32px;
+}
+
+/* ✅ Fix Days Layout */
 .react-datepicker__month-container {
     display: flex !important;
     flex-direction: row !important;
     justify-content: space-between !important;
     width: 100% !important;
-    gap: 20px !important;
+    gap: 24px;
 }
 
-/* Ensure each month is equally sized */
+/* ✅ Ensuring each month is equally sized */
 .react-datepicker__month {
     width: 48% !important;
 }
 
 /* =============================== */
-/*     WHO SECTION (GUEST PICKER)  */
+/*         WHO SECTION             */
 /* =============================== */
 
 .who-section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     position: relative;
+    padding: 8px 16px;
+    border-radius: 50px;
+    transition: background 0.2s ease-in-out;
+
+    &:hover,
+    &:focus-within {
+        background: #ebebeb; /* ✅ Airbnb’s hover color */
+        border-radius: 40px;
+        transition: background 0.2s ease-in-out;
+    }
 }
 
-.who-section:hover {
-    background: rgba(200, 200, 200, 0.2); /* Light gray with slight transparency */
-    border-radius: 12px; /* Subtle rounded edges instead of an extreme oval */
-    transition: background 0.2s ease-in-out; /* Smooth transition */
+.who-section span {
+    font-size: 12px;
+    font-weight: 600;
+    color: #222;
 }
 
 .who-section input {
-    white-space: nowrap; /* Keeps it on one line */
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 2px 0;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    color: #717171;
+    font-weight: 400;
 }
 
-/* Guest Dropdown */
+/* 🔍 Search Button inside "Who" Section */
+.who-section .search-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ff385c;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: #e03450;
+    }
+}
+
+/* =============================== */
+/*     GUEST DROPDOWN STYLES       */
+/* =============================== */
+
 .guest-dropdown {
     position: absolute;
     top: 50px;
@@ -310,20 +438,20 @@
     z-index: 10;
 }
 
-/* Individual Guest Row */
+/* ✅ Guest Row (Adults, Children, Infants, Pets) */
 .guest-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 0;
+    padding: 16px 0;
     border-bottom: 1px solid #ddd;
+
+    &:last-child {
+        border-bottom: none;
+    }
 }
 
-.guest-row:last-child {
-    border-bottom: none;
-}
-
-/* Guest Info */
+/* ✅ Guest Labels */
 .guest-info {
     display: flex;
     flex-direction: column;
@@ -334,54 +462,65 @@
     color: #222;
 }
 
-.guest-desc {
+.guest-info p {
     font-size: 14px;
-    color: #777;
+    color: #717171;
     margin-top: 2px;
 }
 
-/* Guest Controls */
+/* ✅ Guest Controls */
 .guest-controls {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
 }
 
-/* Guest Buttons */
+/* ✅ Buttons for Adding/Removing Guests */
 .guest-btn {
     width: 32px;
     height: 32px;
     border: 1px solid #ddd;
     border-radius: 50%;
     background: white;
-    font-size: 20px;
+    font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: background 0.2s ease, border 0.2s ease;
+
+    &:hover {
+        background: #f1f1f1;
+    }
+
+    &:disabled {
+        border-color: #ccc;
+        color: #ccc;
+        cursor: not-allowed;
+    }
 }
 
-/* Fix button colors */
-.guest-btn:hover {
-    background: #f1f1f1;
+/* ✅ Pets section with clickable link */
+.guest-info a {
+    color: #717171;
+    text-decoration: underline;
+    font-size: 14px;
+
+    &:hover {
+        color: #222;
+    }
 }
 
-.guest-btn:disabled {
-    border-color: #ccc;
-    color: #ccc;
-    cursor: not-allowed;
-}
 
-.dropdown {
-    display: block !important; /* Force visibility */
-    opacity: 1 !important;
-  }
-
-  .search-container {
-    position: relative; // ✅ Prevent overlapping other elements
-    z-index: 10; // ✅ Ensure it stays on top
+.dropdown,
+.guest-dropdown,
+.date-picker-dropdown {
+    position: absolute;
+    top: 50px;
+    left: 0;
     background: white;
-    padding: 10px;
-  }
-  
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    z-index: 9999 !important;  // 🔥 Force highest priority
+}

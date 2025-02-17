@@ -41,17 +41,19 @@ export const AppHeader = () => {
   // ✅ Handle Search (Automatic Navigation)
   const handleSearch = () => {
     const filterBy = {
-      destination: searchData.destination || "Anywhere",
-      startDate: searchData.startDate ? searchData.startDate : "",
-      endDate: searchData.endDate ? searchData.endDate : "",
-      guests: searchData.guests || 1,
+        destination: searchData.destination || "Anywhere",
+        startDate: searchData.startDate ? searchData.startDate : "",
+        endDate: searchData.endDate ? searchData.endDate : "",
+        guests: searchData.guests || 1,
     };
 
     dispatch(loadStays(filterBy));
 
-    // ✅ Navigate automatically after search
-    window.location.href = `/search-results?${new URLSearchParams(filterBy).toString()}`;
-  };
+    // ✅ Update URL parameters without page reload
+    const newUrl = `${window.location.pathname}?${new URLSearchParams(filterBy).toString()}`;
+    window.history.pushState({}, "", newUrl);
+};
+
 
   // ✅ Manual Navigation via "Stays" Button
   const handleNavigateToStays = () => {

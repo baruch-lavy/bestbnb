@@ -59,16 +59,55 @@ export function StayPreview({ stay }) {
         }
     }
 
+    const nextImage = (ev) => {
+        ev.preventDefault()
+        ev.stopPropagation()
+        if (currentImgIdx < stay.imgUrls.length - 1) {
+            setCurrentImgIdx(prev => prev + 1)
+        }
+    }
+
+    const prevImage = (ev) => {
+        ev.preventDefault()
+        ev.stopPropagation()
+        if (currentImgIdx > 0) {
+            setCurrentImgIdx(prev => prev - 1)
+        }
+    }
+
     if (!stay) return <Loader />
     
     return (
         <>
             <article className="stay-preview">
                 <div className="img-container">
-                    <Link to={`/stay/${stay._id}`} target="_blank">
-                        <img src={stay.imgUrls[0]} alt={stay.name} />
-                    </Link>
-                    
+                    <div 
+                        className="images-wrapper" 
+                        style={{ transform: `translateX(-${currentImgIdx * 100}%)` }}
+                    >
+                        {stay.imgUrls.map((url, idx) => (
+                            <Link key={idx} to={`/stay/${stay._id}`} target="_blank">
+                                <img src={url} alt={stay.name} />
+                            </Link>
+                        ))}
+                    </div>
+
+                    {currentImgIdx > 0 && (
+                        <button className="nav-btn prev" onClick={prevImage}>❮</button>
+                    )}
+                    {currentImgIdx < stay.imgUrls.length - 1 && (
+                        <button className="nav-btn next" onClick={nextImage}>❯</button>
+                    )}
+
+                    <div className="dots-container">
+                        {stay.imgUrls.map((_, idx) => (
+                            <span 
+                                key={idx} 
+                                className={`dot ${idx === currentImgIdx ? 'active' : ''}`}
+                            />
+                        ))}
+                    </div>
+
                     <div className="img-btns">
                         {stay.isFavorite && (
                             <Link to={`/stay/${stay._id}`} target="_blank">
