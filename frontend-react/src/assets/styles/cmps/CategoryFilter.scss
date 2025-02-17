@@ -49,9 +49,42 @@
             gap: 32px;
             -ms-overflow-style: none;
             scrollbar-width: none;
+            position: relative;
 
             &::-webkit-scrollbar {
-            display: none;
+                display: none;
+            }
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                width: 88px;
+                height: 100%;
+                z-index: 1;
+                pointer-events: none;
+                transition: opacity 0.3s;
+            }
+
+            &::before {
+                left: 0;
+                opacity: 0;
+                background: linear-gradient(to right, 
+                    rgba(255,255,255,1) 0%,
+                    rgba(255,255,255,1) 30%,
+                    rgba(255,255,255,0) 100%
+                );
+            }
+
+            &::after {
+                right: 0;
+                opacity: 1;
+                background: linear-gradient(to left, 
+                    rgba(255,255,255,1) 0%,
+                    rgba(255,255,255,1) 30%,
+                    rgba(255,255,255,0) 100%
+                );
             }
         }
 
@@ -118,6 +151,18 @@
                 }
             }
         }
+
+        &.scrolled-start {
+            .category-list::before {
+                opacity: 1;
+            }
+        }
+
+        &.scrolled-end {
+            .category-list::after {
+                opacity: 0;
+            }
+        }
     }
 
     .scroll-btn {
@@ -154,46 +199,5 @@
         &.right {
             right: 8px;
         }
-    }
-
-    &::before,
-    &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        width: 88px;
-        height: 100%;
-        z-index: 1;
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.3s;
-    }
-
-    &::before {
-        left: 0;
-        opacity: 0;
-        background: linear-gradient(to right, 
-            rgba(255,255,255,1) 0%,
-            rgba(255,255,255,1) 30%,
-            rgba(255,255,255,0) 100%
-        );
-    }
-
-    &::after {
-        right: 0;
-        opacity: 1;
-        background: linear-gradient(to left, 
-            rgba(255,255,255,1) 0%,
-            rgba(255,255,255,1) 30%,
-            rgba(255,255,255,0) 100%
-        );
-    }
-
-    &.scrolled-start::before {
-        opacity: 1;
-    }
-
-    &.scrolled-end::after {
-        opacity: 0;
     }
 }

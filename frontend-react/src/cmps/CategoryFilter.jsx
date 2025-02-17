@@ -25,7 +25,7 @@ export function CategoryFilter({ onSelectCategory, selectedCategory }) {
     setShowLeftButton(isScrolledStart);
     setShowRightButton(!isScrolledEnd);
 
-    // עדכון מחלקות הצל
+    // עדכון מחלקות הצל על האלמנט המכיל
     container.parentElement.classList.toggle('scrolled-start', isScrolledStart);
     container.parentElement.classList.toggle('scrolled-end', isScrolledEnd);
   };
