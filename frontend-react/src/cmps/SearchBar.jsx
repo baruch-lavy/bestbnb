@@ -210,9 +210,11 @@ export const SearchBar = ({
           <input
             type="text"
             placeholder="Add guests"
-            value={`${
-              (search.guests?.adults || 0) + (search.guests?.children || 0)
-            } guests`}
+            value={
+              (search.guests?.adults || 0) + (search.guests?.children || 0) > 0
+                ? `${(search.guests?.adults || 0) + (search.guests?.children || 0)} guests`
+                : "Add guests"
+            }            
             readOnly
             onClick={() => handleDropdownOpen("who")}
           />

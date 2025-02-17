@@ -19,7 +19,7 @@
   border: 1px solid #ddd;
   border-radius: 40px; // ✅ Adjusted for a perfect match
 //   padding: 10px 14px; // ✅ Reduced padding for correct height
-  width: 780px; // ✅ Adjust width to match the image
+  width: 850px; // ✅ Adjust width to match the image
   height: 66px; // ✅ Ensure correct height
   gap: 12px; // ✅ Proper spacing
   position: relative;
@@ -141,7 +141,7 @@
     font-size: 12px;
     font-weight: 600;
     color: #222;
-    padding-left: 5px;
+    padding-left: 8px;
   }
 
   input {
@@ -153,7 +153,7 @@
     width: 100%;
     color: #717171;
     font-weight: 400;
-    padding: 3px;
+    padding: 7px;
   }
 }
 
