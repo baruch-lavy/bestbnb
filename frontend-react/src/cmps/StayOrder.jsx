@@ -1,13 +1,13 @@
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { setSearchData, loadStays } from "../store/actions/stay.actions.js";
 
 export function StayOrder({ stay }) {
     const location = useLocation() // ✅ Get current query params from URL
-    const searchData = useSelector((state) => state.search);
-    const [openDropdown, setOpenDropdown] = useState(null);
+    const searchData = useSelector((state) => state.search)
+    const [openDropdown, setOpenDropdown] = useState(null)
 
     console.log('searchData', searchData)
     const dropdownRef = useRef(null);

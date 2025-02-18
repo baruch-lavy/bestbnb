@@ -1,4 +1,9 @@
-export function bookOrder() {
+import { useSelector } from 'react-redux'
+
+export function BookOrder() {
+    const searchData = useSelector((state) => state.search)
+    console.log('searchData', searchData)
+
     return (
         <section className="book-order-container">
             <div className="book-order-content">
