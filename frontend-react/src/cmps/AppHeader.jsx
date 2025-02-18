@@ -4,13 +4,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSearchData, loadStays } from "../store/actions/stay.actions.js";
 import { SearchBar } from "./SearchBar.jsx";
 import { StickySearchBar } from "./StickySearchBar.jsx";
+import { useLocation } from "react-router-dom"; // ✅ Import useLocation
 
 export const AppHeader = () => {
-  const [showSticky, setShowSticky] = useState(false);
+  const location = useLocation(); // ✅ Get current page URL
+  const isDetailsPage = /^\/stay\/[^/]+$/.test(location.pathname); // ✅ Match /stay/:stayId
+
+  const [showSticky, setShowSticky] = useState(isDetailsPage);
+  const [forceExpand, setForceExpand] = useState(false); // ✅ Track if manually expanded
   const [openDropdown, setOpenDropdown] = useState(null);
   const dispatch = useDispatch();
   const searchData = useSelector((state) => state.search);
-
 
   // ✅ Sync Redux with URL params when the page loads
   useEffect(() => {
@@ -25,26 +29,47 @@ export const AppHeader = () => {
     dispatch(setSearchData(filterBy));
   }, [dispatch]);
 
+  // ✅ Toggle sticky header based on scroll (only if NOT manually expanded or on details page)
   useEffect(() => {
-    const handleScroll = () => {
-      setShowSticky(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    if (!isDetailsPage && !forceExpand) {
+      const handleScroll = () => {
+        setShowSticky(window.scrollY > 50);
+      };
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
+  }, [isDetailsPage, forceExpand]);
 
-  // ✅ Handle dropdown toggling
-  const handleDropdownOpen = (dropdown) => {
-    setOpenDropdown((prev) => (prev === dropdown ? null : dropdown));
+  // ✅ Toggle between sticky & full search mode
+  const handleStickyClick = () => {
+    setForceExpand(true); // ✅ Expand full search
+    setShowSticky(false); // ✅ Hide sticky version
   };
 
-  // ✅ Handle Search (Automatic Navigation)
+  // ✅ Collapse back to sticky mode when clicking outside
+  useEffect(() => {
+    if (forceExpand) {
+      const handleClickOutside = (event) => {
+        if (
+          !document.querySelector(".full-search-bar")?.contains(event.target) &&
+          !document.querySelector(".header")?.contains(event.target)
+        ) {
+          setForceExpand(false); // ✅ Return to sticky mode
+          setShowSticky(true);
+        }
+      };
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [forceExpand]);
+
+  // ✅ Ensure Search Also Closes Expanded Mode & Returns to Sticky
   const handleSearch = () => {
     const filterBy = {
-        destination: searchData.destination || "Anywhere",
-        startDate: searchData.startDate ? searchData.startDate : "",
-        endDate: searchData.endDate ? searchData.endDate : "",
-        guests: searchData.guests || 1,
+      destination: searchData.destination || "Anywhere",
+      startDate: searchData.startDate ? searchData.startDate : "",
+      endDate: searchData.endDate ? searchData.endDate : "",
+      guests: searchData.guests || 1,
     };
 
     dispatch(loadStays(filterBy));
@@ -52,18 +77,28 @@ export const AppHeader = () => {
     // ✅ Update URL parameters without page reload
     const newUrl = `${window.location.pathname}?${new URLSearchParams(filterBy).toString()}`;
     window.history.pushState({}, "", newUrl);
-};
 
+    // ✅ Collapse back to sticky after search
+    setForceExpand(false);
+    setShowSticky(true);
+  };
 
   // ✅ Manual Navigation via "Stays" Button
   const handleNavigateToStays = () => {
     window.location.href = `/search-results?${new URLSearchParams(searchData).toString()}`;
   };
 
+
+  // ✅ Toggle Dropdown Open/Close
+  const handleDropdownOpen = (dropdown) => {
+    if (openDropdown === dropdown) setOpenDropdown(null);
+    else setOpenDropdown(dropdown);
+  };
+
   return (
     <>
       {/* HEADER */}
-      <header className={`header ${showSticky ? "sticky-header" : ""}`}>
+      <header className={`header ${showSticky ? "sticky-header" : ""} ${isDetailsPage ? "details-header" : ""}`}>
         <div className="left-section">
         <a href="/stay">
         <div className="logo-wrapper">
@@ -81,13 +116,13 @@ export const AppHeader = () => {
           </nav>
         </div>
 
-        {/* ✅ Sticky Search Bar is Now Inside the Header */}
-        {showSticky && (
-          <div className="sticky-search-wrapper">
+        {/* ✅ Sticky Search Bar - Click to Expand */}
+        {showSticky && !forceExpand && (
+          <div className="sticky-search-wrapper" onClick={handleStickyClick}>
             <StickySearchBar
               openDropdown={openDropdown}
               handleDropdownOpen={handleDropdownOpen}
-              handleSearch={handleSearch}
+              handleSearch={handleSearch} // ✅ Search now returns to sticky mode
             />
           </div>
         )}
@@ -102,12 +137,12 @@ export const AppHeader = () => {
         </div>
       </header>
 
-      {/* FULL SEARCH BAR */}
-      <div className={`full-search-bar ${showSticky ? "hidden" : ""}`}>
+      {/* ✅ Full Search Bar - Shows When Expanded */}
+      <div className={`full-search-bar ${showSticky && !forceExpand ? "hidden" : ""}`}>
         <SearchBar
           openDropdown={openDropdown}
           handleDropdownOpen={handleDropdownOpen}
-          handleSearch={handleSearch}
+          handleSearch={handleSearch} // ✅ Search now returns to sticky mode
         />
       </div>
     </>

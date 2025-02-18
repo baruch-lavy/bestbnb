@@ -52,8 +52,7 @@ body {
       position: absolute;
       left: 50%;
       transform: translateX(-50%); // ✅ Centers exactly in the middle
-    
-    
+
       a {
         text-decoration: none;
         color: $text-color;
@@ -134,8 +133,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   width: 700px;
-  border-bottom: 1px solid #DDDDDD;
-
+  border-bottom: 1px solid #dddddd;
 }
 
 .search-bar {
@@ -156,7 +154,6 @@ body {
   .search-section {
     // display: flex;
     flex-direction: column;
- 
 
     span {
       font-size: 12px;
