@@ -4,13 +4,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSearchData, loadStays } from "../store/actions/stay.actions.js";
 import { SearchBar } from "./SearchBar.jsx";
 import { StickySearchBar } from "./StickySearchBar.jsx";
+import { useLocation } from "react-router-dom"; // ✅ Import useLocation
 
 export const AppHeader = () => {
-  const [showSticky, setShowSticky] = useState(false);
+  const location = useLocation(); // ✅ Get current page URL
+  const isDetailsPage = /^\/stay\/[^/]+$/.test(location.pathname); // ✅ Match /stay/:stayId
+
+  const [showSticky, setShowSticky] = useState(isDetailsPage); // ✅ Force sticky on details page
   const [openDropdown, setOpenDropdown] = useState(null);
   const dispatch = useDispatch();
   const searchData = useSelector((state) => state.search);
-
 
   // ✅ Sync Redux with URL params when the page loads
   useEffect(() => {
@@ -25,13 +28,16 @@ export const AppHeader = () => {
     dispatch(setSearchData(filterBy));
   }, [dispatch]);
 
+  // ✅ Toggle sticky header based on scroll (only if NOT on the details page)
   useEffect(() => {
-    const handleScroll = () => {
-      setShowSticky(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    if (!isDetailsPage) {
+      const handleScroll = () => {
+        setShowSticky(window.scrollY > 50);
+      };
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
+  }, [isDetailsPage]);
 
   // ✅ Handle dropdown toggling
   const handleDropdownOpen = (dropdown) => {
@@ -41,10 +47,10 @@ export const AppHeader = () => {
   // ✅ Handle Search (Automatic Navigation)
   const handleSearch = () => {
     const filterBy = {
-        destination: searchData.destination || "Anywhere",
-        startDate: searchData.startDate ? searchData.startDate : "",
-        endDate: searchData.endDate ? searchData.endDate : "",
-        guests: searchData.guests || 1,
+      destination: searchData.destination || "Anywhere",
+      startDate: searchData.startDate ? searchData.startDate : "",
+      endDate: searchData.endDate ? searchData.endDate : "",
+      guests: searchData.guests || 1,
     };
 
     dispatch(loadStays(filterBy));
@@ -52,8 +58,7 @@ export const AppHeader = () => {
     // ✅ Update URL parameters without page reload
     const newUrl = `${window.location.pathname}?${new URLSearchParams(filterBy).toString()}`;
     window.history.pushState({}, "", newUrl);
-};
-
+  };
 
   // ✅ Manual Navigation via "Stays" Button
   const handleNavigateToStays = () => {
@@ -63,11 +68,12 @@ export const AppHeader = () => {
   return (
     <>
       {/* HEADER */}
-      <header className={`header ${showSticky ? "sticky-header" : ""}`}>
+      <header className={`header ${showSticky ? "sticky-header" : ""} ${isDetailsPage ? "details-header" : ""}`}>
+
         <div className="left-section">
-        <a href="/stay">
-          <img src="/img/stays/logo.png" alt="Airbnb Logo" className="logo" />
-        </a>  
+          <a href="/stay">
+            <img src="/img/stays/logo.png" alt="Airbnb Logo" className="logo" />
+          </a>
           <nav className="nav-links">
             <a href="#" onClick={(e) => { e.preventDefault(); handleNavigateToStays(); }}>Homes</a>
             <a href="#">Experiences</a>
