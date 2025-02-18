@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -21,6 +21,7 @@ export const SearchBar = ({
 }) => {
   const dispatch = useDispatch();
   const search = useSelector((state) => state.search || {}); // Ensure state exists
+  const [isTyping, setIsTyping] = useState(false); // ✅ Track if user started typing
 
   const dropdownRef = useRef(null);
   const datePickerRef = useRef(null);
@@ -101,13 +102,29 @@ export const SearchBar = ({
           <span>Where</span>
           <input
             type="text"
-            placeholder="Search destinations"
-            value={search.destination || ""}
+            placeholder={
+              !isTyping &&
+              (!search.destination || search.destination === "Anywhere")
+                ? "Search destinations"
+                : ""
+            }
+            value={
+              search.destination === "Anywhere" && !isTyping
+                ? ""
+                : search.destination
+            }
             onChange={(e) => {
+              setIsTyping(true); // ✅ User is typing
               const updatedSearch = { ...search, destination: e.target.value };
               dispatch(setSearchData(updatedSearch));
             }}
-            onFocus={() => handleDropdownOpen("where")}
+            onBlur={() => {
+              if (!search.destination.trim()) {
+                setIsTyping(false); // ✅ Reset if input is empty
+                dispatch(setSearchData({ ...search, destination: "Anywhere" })); // ✅ Restore "Anywhere"
+              }
+            }}
+          onFocus={() => handleDropdownOpen("where")}
           />
           {openDropdown === "where" && (
             <div className="dropdown">
@@ -196,7 +213,6 @@ export const SearchBar = ({
                 selectsRange
                 monthsShown={2}
                 inline
-                
               />
             </div>
           )}
@@ -212,9 +228,12 @@ export const SearchBar = ({
             placeholder="Add guests"
             value={
               (search.guests?.adults || 0) + (search.guests?.children || 0) > 0
-                ? `${(search.guests?.adults || 0) + (search.guests?.children || 0)} guests`
+                ? `${
+                    (search.guests?.adults || 0) +
+                    (search.guests?.children || 0)
+                  } guests`
                 : "Add guests"
-            }            
+            }
             readOnly
             onClick={() => handleDropdownOpen("who")}
           />

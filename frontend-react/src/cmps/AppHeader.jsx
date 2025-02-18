@@ -70,21 +70,22 @@ export const AppHeader = () => {
   const handleSearch = () => {
     const filterBy = {
       destination: searchData.destination || "Anywhere",
-      startDate: searchData.startDate ? searchData.startDate : "",
-      endDate: searchData.endDate ? searchData.endDate : "",
-      guests: searchData.guests || 1,
+      startDate: searchData.startDate || "",
+      endDate: searchData.endDate || "",
+      guests: encodeURIComponent(JSON.stringify(searchData.guests || { adults: 1, children: 0 })), // ✅ Fix object issue
     };
-
+  
     dispatch(loadStays(filterBy));
-
+  
     // ✅ Update URL parameters without page reload
     const newUrl = `${window.location.pathname}?${new URLSearchParams(filterBy).toString()}`;
     window.history.pushState({}, "", newUrl);
-
+  
     // ✅ Collapse back to sticky after search
     setForceExpand(false);
     setShowSticky(true);
   };
+  
 
   // ✅ Manual Navigation via "Stays" Button
   const handleNavigateToStays = () => {
