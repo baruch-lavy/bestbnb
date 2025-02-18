@@ -31,7 +31,7 @@ export function StayOrder({ stay }) {
         dispatch(setSearchData(filterBy));
     }, [dispatch]);
 
-    console.log('searchData', searchData.guests)
+    console.log('searchData', searchData)
 
     const handleDropdownOpen = (dropdown) => {
         setOpenDropdown((prev) => (prev === dropdown ? null : dropdown));

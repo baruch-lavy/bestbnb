@@ -18,23 +18,23 @@ window.cs = orderService
 
 async function query(filterBy = { txt: '', price: 0 }) {
     var orders = await storageService.query(STORAGE_KEY)
-    const { txt, minSpeed, maxPrice, sortField, sortDir } = filterBy
+    // const { txt, minSpeed, maxPrice, sortField, sortDir } = filterBy
 
-    if (txt) {
-        const regex = new RegExp(filterBy.txt, 'i')
-        orders = orders.filter(order => regex.test(order.vendor) || regex.test(order.description))
-    }
-    if (minSpeed) {
-        orders = orders.filter(order => order.speed >= minSpeed)
-    }
-    if (sortField === 'vendor' || sortField === 'owner') {
-        orders.sort((order1, order2) =>
-            order1[sortField].localeCompare(order2[sortField]) * +sortDir)
-    }
-    if (sortField === 'price' || sortField === 'speed') {
-        orders.sort((order1, order2) =>
-            (order1[sortField] - order2[sortField]) * +sortDir)
-    }
+    // if (txt) {
+    //     const regex = new RegExp(filterBy.txt, 'i')
+    //     orders = orders.filter(order => regex.test(order.vendor) || regex.test(order.description))
+    // }
+    // if (minSpeed) {
+    //     orders = orders.filter(order => order.speed >= minSpeed)
+    // }
+    // if (sortField === 'vendor' || sortField === 'owner') {
+    //     orders.sort((order1, order2) =>
+    //         order1[sortField].localeCompare(order2[sortField]) * +sortDir)
+    // }
+    // if (sortField === 'price' || sortField === 'speed') {
+    //     orders.sort((order1, order2) =>
+    //         (order1[sortField] - order2[sortField]) * +sortDir)
+    // }
 
     orders = orders.map(({ _id, vendor, price, speed, owner }) => ({ _id, vendor, price, speed, owner }))
     return orders

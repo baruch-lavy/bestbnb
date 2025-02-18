@@ -9,6 +9,7 @@ import { UserModal } from './UserModal';
 
 export const AppHeader = () => {
   const location = useLocation(); // ✅ Get current page URL
+  const [searchParams] = useSearchParams();
   const isDetailsPage = /^\/stay\/[^/]+$/.test(location.pathname); // ✅ Match /stay/:stayId
 
   const [showSticky, setShowSticky] = useState(isDetailsPage);
@@ -29,7 +30,7 @@ export const AppHeader = () => {
     };
 
     dispatch(setSearchData(filterBy));
-  }, [dispatch]);
+  }, [dispatch , searchParams]);
 
   // ✅ Toggle sticky header based on scroll (only if NOT manually expanded or on details page)
   useEffect(() => {
