@@ -4,10 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSearchData, loadStays } from "../store/actions/stay.actions.js";
 import { SearchBar } from "./SearchBar.jsx";
 import { StickySearchBar } from "./StickySearchBar.jsx";
-import { useLocation } from "react-router-dom"; // ✅ Import useLocation
+import { useLocation ,useSearchParams  } from "react-router-dom"; // ✅ Import useLocation
 
 export const AppHeader = () => {
   const location = useLocation(); // ✅ Get current page URL
+  const [searchParams] = useSearchParams();
   const isDetailsPage = /^\/stay\/[^/]+$/.test(location.pathname); // ✅ Match /stay/:stayId
 
   const [showSticky, setShowSticky] = useState(isDetailsPage);
@@ -27,7 +28,7 @@ export const AppHeader = () => {
     };
 
     dispatch(setSearchData(filterBy));
-  }, [dispatch]);
+  }, [dispatch , searchParams]);
 
   // ✅ Toggle sticky header based on scroll (only if NOT manually expanded or on details page)
   useEffect(() => {

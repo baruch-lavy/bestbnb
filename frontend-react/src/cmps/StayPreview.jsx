@@ -1,19 +1,21 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState , useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { WishlistModal } from './WishlistModal'
 import { SuccessMessage } from './SuccessMessage'
 
-export function StayPreview({ stay }) {
-  
+export function StayPreview({ stay , queryParams }) {
+    const location = useLocation(); // ✅ Get current query params from URL
     const [currentImgIdx, setCurrentImgIdx] = useState(0)
     const [isLiked, setIsLiked] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [showSuccess, setShowSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState('')
 
-    const handleModalClose = () => {
-        setIsModalOpen(false)
-    }
+    const handleModalClose = () => setIsModalOpen(false)
+
+    // useEffect(() => {
+    //     console.log(location.search) // ✅ Log current query params
+    // }, [location.search])      
 
     const showSuccessMessage = (message) => {
         if (showSuccess) {
@@ -37,9 +39,7 @@ export function StayPreview({ stay }) {
             const successMessage = document.querySelector('.success-message')
             if (successMessage) {
                 successMessage.classList.add('exit')
-                setTimeout(() => {
-                    setShowSuccess(false)
-                }, 300)
+                setTimeout(() => setShowSuccess(false), 300)
             }
         }, 4700)
     }
@@ -76,7 +76,7 @@ export function StayPreview({ stay }) {
     }
 
     if (!stay) return <Loader />
-    
+
     return (
         <>
             <article className="stay-preview">
@@ -86,7 +86,11 @@ export function StayPreview({ stay }) {
                         style={{ transform: `translateX(-${currentImgIdx * 100}%)` }}
                     >
                         {stay.imgUrls.map((url, idx) => (
-                            <Link key={idx} to={`/stay/${stay._id}`} target="_blank">
+                            <Link 
+                                key={idx} 
+                                to={`/stay/${stay._id}${location.search}`} 
+                                target="_blank"
+                            >
                                 <img src={url} alt={stay.name} />
                             </Link>
                         ))}
@@ -110,7 +114,7 @@ export function StayPreview({ stay }) {
 
                     <div className="img-btns">
                         {stay.isFavorite && (
-                            <Link to={`/stay/${stay._id}`} target="_blank">
+                            <Link to={`/stay/${stay._id}${location.search}`} target="_blank">
                                 <div className="guest-favorite">Guest favorite</div>
                             </Link>
                         )}
