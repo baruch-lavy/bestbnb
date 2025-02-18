@@ -2,6 +2,7 @@ import { legacy_createStore as createStore, combineReducers, applyMiddleware, co
 import { thunk } from "redux-thunk"; // ✅ Correct import
 
 import { stayReducer } from "./reducers/stay.reducer";
+import { orderReducer } from './reducers/order.reducer';
 import { userReducer } from "./reducers/user.reducer";
 import { reviewReducer } from "./reducers/review.reducer";
 import { systemReducer } from "./reducers/system.reducer";
@@ -10,6 +11,7 @@ import { searchReducer } from "./reducers/stay.reducer"; // Make sure this is co
 // ✅ Combine reducers
 const rootReducer = combineReducers({
   stayModule: stayReducer,
+  orderModule: orderReducer,
   userModule: userReducer,
   systemModule: systemReducer,
   reviewModule: reviewReducer,
