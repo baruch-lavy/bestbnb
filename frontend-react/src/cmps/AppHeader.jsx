@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSearchData, loadStays } from "../store/actions/stay.actions.js";
 import { SearchBar } from "./SearchBar.jsx";
 import { StickySearchBar } from "./StickySearchBar.jsx";
-import { useLocation } from "react-router-dom"; // ✅ Import useLocation
+import { useLocation, useSearchParams } from "react-router-dom"; // ✅ Import useLocation
 import { UserModal } from './UserModal';
 
 export const AppHeader = () => {
