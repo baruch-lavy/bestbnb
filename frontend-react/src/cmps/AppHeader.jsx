@@ -132,8 +132,8 @@ export const AppHeader = () => {
         </div>   
         </a>
           <nav className="nav-links">
-            <a href="#" onClick={(e) => { e.preventDefault(); handleNavigateToStays(); }}>Homes</a>
-            <a href="#">Experiences</a>
+            <a href="#">Homes</a>
+            <a href="#" className="expriences">Experiences</a>
           </nav>
         </div>
 
