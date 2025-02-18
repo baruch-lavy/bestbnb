@@ -137,10 +137,10 @@ export function StayPreview({ stay , queryParams }) {
                 <div className="info">
                     <div className="header-stay">
                         <h3>{stay.loc.city}, {stay.loc.country}</h3>
-                        <div className="rating">★ {randomData.rate}</div>
+                        <div className="rating">★ {stay.reviews[0]?.rate || 'New'}</div>
                     </div>
-                    <p className="distance">{randomData.distance} kilometers away</p>
-                    <p className="dates">{randomData.dates}</p>
+                    <p className="distance">{stay.distance}</p>
+                    <p className="dates">{stay.dates}</p>
                     <p className="price">${stay.price} <span>night</span></p>
                 </div>
             </article>
