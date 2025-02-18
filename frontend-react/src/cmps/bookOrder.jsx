@@ -1,7 +1,7 @@
-export function ConfirmationReserve() {
+export function bookOrder() {
     return (
-        <section className="confirmation-container">
-            <div className="confirmation-content">
+        <section className="book-order-container">
+            <div className="book-order-content">
                 <div className="success-icon">
                     <svg viewBox="0 0 48 48">
                         <path d="M24 4C12.95 4 4 12.95 4 24c0 11.04 8.95 20 20 20 11.04 0 20-8.96 20-20 0-11.05-8.96-20-20-20zm-4 30L10 24l2.83-2.83L20 28.34l15.17-15.17L38 16 20 34z" 
@@ -9,7 +9,7 @@ export function ConfirmationReserve() {
                     </svg>
                 </div>
                 <h1>Your reservation is confirmed</h1>
-                <p className="confirmation-message">You're going to Tel Aviv</p>
+                <p className="book-order-message">You're going to Tel Aviv</p>
                 
                 <div className="trip-details">
                     <div className="details-row">

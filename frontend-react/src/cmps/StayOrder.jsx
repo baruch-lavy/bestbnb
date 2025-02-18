@@ -180,7 +180,7 @@ export function StayOrder({ stay }) {
                     </section> */}
 
                 {/* Reserve Button */}
-                <Link to={`/stay/confirmation/${stay._id}${location.search}`}>
+                <Link to={`/stay/book/${stay._id}${location.search}`}>
                     <button
                         className="reserve-btn"
                         onMouseMove={handleMouseMove}>
