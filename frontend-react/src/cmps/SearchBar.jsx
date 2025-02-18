@@ -35,27 +35,27 @@ export const SearchBar = ({
     },
     {
       icon: faUmbrellaBeach,
-      name: "Tel Aviv-Yafo, Israel",
+      name: "Porto, Portugal",
       description: "Popular beach destination",
     },
     {
       icon: faBuilding,
-      name: "Bucharest, Romania",
+      name: "Barcelona, Spain",
       description: "For sights like Cismigiu Gardens",
     },
     {
       icon: faLandmark,
-      name: "Paris, France",
+      name: "New York, United States",
       description: "For its bustling nightlife",
     },
     {
       icon: faBuilding,
-      name: "Budapest, Hungary",
+      name: "Sydney, Australia",
       description: "For its stunning architecture",
     },
     {
       icon: faUtensils,
-      name: "Istanbul, Türkiye",
+      name: "Istanbul, Turkey",
       description: "For its top-notch dining",
     },
   ];
