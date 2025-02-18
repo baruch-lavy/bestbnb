@@ -94,7 +94,7 @@ export function StayDetails() {
           <div className="stay-short-info">
             <h3 className="info-header">{stay.type} in {stay.loc.city}, {stay.loc.country}</h3>
             <h5 className="info">{stay.capacity} guests · {stay.bedrooms} bedrooms · {stay.beds} beds · {stay.baths} bath</h5>
-            <h4 className="rate">★ {stay.reviews[0].rate} · {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4>
+            <h4 className="rate">★ {parseFloat((Math.random() * (5 - 4) + 4).toFixed(2))} · {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4>
           </div>
 
           <div className="host-short-info">

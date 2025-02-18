@@ -29,7 +29,7 @@ body {
     .logo-wrapper {
       display: flex;
       align-items: center;
-      filter: brightness(0) saturate(100%) invert(25%) sepia(82%) saturate(3371%) hue-rotate(332deg) brightness(100%) contrast(101%);
+      filter: brightness(0) saturate(100%) invert(38%) sepia(82%) saturate(3371%) hue-rotate(332deg) brightness(100%) contrast(101%);
       
       .logo {
         height: 35px;
@@ -39,7 +39,7 @@ body {
       .logo-text {
         font-size: 22px;
         font-weight: 700;
-        color: #fd2c52;
+        -webkit-text-stroke: 0.4px black;
         text-decoration: none;
         margin-left: 6px;
         letter-spacing: -0.8px;
