@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect ,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { setSearchData, loadStays } from "../store/actions/stay.actions.js";
@@ -15,7 +15,6 @@ export function StayOrder({ stay }) {
     const guestDropdownRef = useRef(null);
 
     const dispatch = useDispatch();
-    const stayLength = 5
     const cleanFee = 0.095
     const airbnbFee = 0.13
 
@@ -43,7 +42,7 @@ export function StayOrder({ stay }) {
     //       ...search.guests,
     //       [type]: Math.max(0, (search.guests?.[type] || 0) + amount),
     //     };
-    
+
     //     dispatch(
     //       setSearchData({
     //         ...search,
@@ -59,10 +58,22 @@ export function StayOrder({ stay }) {
         button.style.setProperty("--y", e.clientY - y);
     }
 
+    const start = new Date(searchData.startDate);
+    const end = new Date(searchData.endDate);
+    const timeDifference = end - start;
+    const stayLength = (timeDifference) ? timeDifference / (1000 * 3600 * 24) : ''
+
     return (
         <div className="order-section">
             <div className="order-card">
-                <h2 className="order-price">${stay.price}<span> night</span></h2>
+                <h2 className="order-price">
+                    {stayLength
+                        ? <>
+                            ${stay.price} <span>night</span>
+                        </>
+                        : 'Add dates for prices'
+                    }
+                </h2>
 
                 {/* Check-in & Check-out Dates */}
                 <div className="form-order">
@@ -173,27 +184,28 @@ export function StayOrder({ stay }) {
                     <button
                         className="reserve-btn"
                         onMouseMove={handleMouseMove}>
-                        Reserve
+                        {stayLength ? `Reserve` : 'Check availability'}
                     </button>
                 </Link>
 
                 {/* {checkIn && checkOut && */}
-                <div className="order-footer flex">
-                    <span>You won't be charged yet</span>
-                    <div className="footer-price-nigts flex">
-                        <span>${stay.price} X {stayLength} nights</span><span>${(stay.price * stayLength).toLocaleString()}</span>
+                {stayLength &&
+                    <div className="order-footer flex">
+                        <span>You won't be charged yet</span>
+                        <div className="footer-price-nigts flex">
+                            <span>${stay.price} X {stayLength} nights</span><span>${(stay.price * stayLength).toLocaleString()}</span>
+                        </div>
+                        <div className="footer-price-clean-fee flex">
+                            <span>Cleaning fee</span><span>${parseInt(stay.price * stayLength * cleanFee).toLocaleString()}</span>
+                        </div>
+                        <div className="footer-price-airbnb-fee flex">
+                            <span>Bestbnb service fee</span><span>${parseInt(stay.price * stayLength * airbnbFee).toLocaleString()}</span>
+                        </div>
+                        <div className="footer-price-total flex">
+                            <span>Total</span><span>${parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee)).toLocaleString()}</span>
+                        </div>
                     </div>
-                    <div className="footer-price-clean-fee flex">
-                        <span>Cleaning fee</span><span>${parseInt(stay.price * stayLength * cleanFee).toLocaleString()}</span>
-                    </div>
-                    <div className="footer-price-airbnb-fee flex">
-                        <span>Bestbnb service fee</span><span>${parseInt(stay.price * stayLength * airbnbFee).toLocaleString()}</span>
-                    </div>
-                    <div className="footer-price-total flex">
-                        <span>Total</span><span>${parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee)).toLocaleString()}</span>
-                    </div>
-                </div>
-                {/* } */}
+                }
             </div>
         </div>
     );
