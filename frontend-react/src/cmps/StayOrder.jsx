@@ -1,10 +1,11 @@
 
 import React, { useState, useEffect ,useRef } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { setSearchData, loadStays } from "../store/actions/stay.actions.js";
 
 export function StayOrder({ stay }) {
+    const location = useLocation() // ✅ Get current query params from URL
     const searchData = useSelector((state) => state.search);
     const [openDropdown, setOpenDropdown] = useState(null);
 
@@ -18,38 +19,38 @@ export function StayOrder({ stay }) {
     const cleanFee = 0.095
     const airbnbFee = 0.13
 
-    useEffect(() => {
-        const searchParams = new URLSearchParams(window.location.search);
-        const filterBy = {
-            destination: searchParams.get("destination") || "Anywhere",
-            startDate: searchParams.get("startDate") || "",
-            endDate: searchParams.get("endDate") || "",
-            guests: Number(searchParams.get("guests")) || 1,
-        };
+    // useEffect(() => {
+    //     const searchParams = new URLSearchParams(window.location.search);
+    //     const filterBy = {
+    //         destination: searchParams.get("destination") || "Anywhere",
+    //         startDate: searchParams.get("startDate") || "",
+    //         endDate: searchParams.get("endDate") || "",
+    //         guests: Number(searchParams.get("guests")) || 1,
+    //     };
 
-        console.log("🚀 Syncing Redux with URL search parameters:", filterBy);
-        dispatch(setSearchData(filterBy));
-    }, [dispatch]);
+    //     console.log("🚀 Syncing Redux with URL search parameters:", filterBy);
+    //     dispatch(setSearchData(filterBy));
+    // }, [dispatch]);
 
-    console.log('searchData', searchData)
+    // console.log('searchData', searchData)
 
     const handleDropdownOpen = (dropdown) => {
         setOpenDropdown((prev) => (prev === dropdown ? null : dropdown));
     };
 
-     const handleGuestChange = (type, amount) => {
-        const updatedGuests = {
-          ...search.guests,
-          [type]: Math.max(0, (search.guests?.[type] || 0) + amount),
-        };
+    //  const handleGuestChange = (type, amount) => {
+    //     const updatedGuests = {
+    //       ...search.guests,
+    //       [type]: Math.max(0, (search.guests?.[type] || 0) + amount),
+    //     };
     
-        dispatch(
-          setSearchData({
-            ...search,
-            guests: { ...updatedGuests }, // ✅ Ensuring new object reference
-          })
-        );
-      };
+    //     dispatch(
+    //       setSearchData({
+    //         ...search,
+    //         guests: { ...updatedGuests }, // ✅ Ensuring new object reference
+    //       })
+    //     );
+    //   };
 
     function handleMouseMove(e) {
         const button = e.currentTarget;
@@ -168,7 +169,7 @@ export function StayOrder({ stay }) {
                     </section> */}
 
                 {/* Reserve Button */}
-                <Link to={`/stay/confirmation/${stay._id}`}>
+                <Link to={`/stay/confirmation/${stay._id}${location.search}`}>
                     <button
                         className="reserve-btn"
                         onMouseMove={handleMouseMove}>

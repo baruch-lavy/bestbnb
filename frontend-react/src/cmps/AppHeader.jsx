@@ -26,7 +26,12 @@ export const AppHeader = () => {
       destination: searchParams.get("destination") || "Anywhere",
       startDate: searchParams.get("startDate") || "",
       endDate: searchParams.get("endDate") || "",
-      guests: Number(searchParams.get("guests")) || 1,
+      guests: {
+        adults: Number(searchParams.get("adults")) || 1,
+        children: Number(searchParams.get("children")) || 1,
+        infants: Number(searchParams.get("infants")) || 1,
+        pets: Number(searchParams.get("pets")) || 1
+      }
     };
 
     dispatch(setSearchData(filterBy));
