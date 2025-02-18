@@ -5,6 +5,7 @@ import { setSearchData, loadStays } from "../store/actions/stay.actions.js";
 import { SearchBar } from "./SearchBar.jsx";
 import { StickySearchBar } from "./StickySearchBar.jsx";
 import { useLocation } from "react-router-dom"; // ✅ Import useLocation
+import { UserModal } from './UserModal';
 
 export const AppHeader = () => {
   const location = useLocation(); // ✅ Get current page URL
@@ -15,6 +16,7 @@ export const AppHeader = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const dispatch = useDispatch();
   const searchData = useSelector((state) => state.search);
+  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
 
   // ✅ Sync Redux with URL params when the page loads
   useEffect(() => {
@@ -95,6 +97,23 @@ export const AppHeader = () => {
     else setOpenDropdown(dropdown);
   };
 
+  const handleUserIconClick = (event) => {
+    event.stopPropagation();
+    setIsUserModalOpen(!isUserModalOpen);
+  };
+
+  // Add click outside handler
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isUserModalOpen && !event.target.closest('.profile-menu') && !event.target.closest('.user-modal')) {
+        setIsUserModalOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isUserModalOpen]);
+
   return (
     <>
       {/* HEADER */}
@@ -130,7 +149,7 @@ export const AppHeader = () => {
         <div className="right-section">
           <span className="host">Bestbnb your home</span>
           <FaGlobe className="icon" />
-          <div className="profile-menu">
+          <div className="profile-menu" onClick={handleUserIconClick}>
             <FaBars className="menu-icon" />
             <FaUserCircle className="user-icon" />
           </div>
@@ -145,6 +164,12 @@ export const AppHeader = () => {
           handleSearch={handleSearch} // ✅ Search now returns to sticky mode
         />
       </div>
+
+      {/* Add UserModal */}
+      <UserModal 
+        isOpen={isUserModalOpen} 
+        onClose={() => setIsUserModalOpen(false)} 
+      />
     </>
-  );
-};
+  )
+}
