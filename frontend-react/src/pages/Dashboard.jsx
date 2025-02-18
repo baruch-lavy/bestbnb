@@ -13,8 +13,12 @@ export const Dashboard = () => {
   ]
 
   const recentOrders = [
-    { id: 1, product: 'Stay 1', customer: 'Customer 1', date: '2021-09-01', price: 100, status: 'PAID' },
-    { id: 2, product: 'Stay 2', customer: 'Customer 2', date: '2021-09-02', price: 200, status: 'PENDING' },
+    { id: "Cozy Retreat", product: 'France', customer: 'Customer 1', date: '2025-05-31', price: 578, status: 'PAID' },
+    { id: "Sunny Haven", product: 'Italy', customer: 'Customer 2', date: '2025-12-25', price: 213, status: 'PAID' },
+    { id: "Ocean Breeze", product: 'Japan', customer: 'Customer 3', date: '2025-01-08', price: 657, status: 'PENDING' },
+    { id: "Mountain Escape", product: 'Brazil', customer: 'Customer 4', date: '2025-08-02', price: 247, status: 'PAID' },
+    { id: "Urban Nest", product: 'Canada', customer: 'Customer 5', date: '2025-06-01', price: 586, status: 'PAID' },
+    { id: "Tranquil Stay", product: 'Australia', customer: 'Customer 6', date: '2025-11-04', price: 786, status: 'PENDING' },
   ]
 
   return (
@@ -26,7 +30,7 @@ export const Dashboard = () => {
           <div className="stat-content">
             <h3>Total sales</h3>
             <div className="stat-value">$1995.34</div>
-            <div className="stat-change decrease">-5% compared to last month</div>
+            <div className="stat-change decrease">-5% <span>compared to last month</span></div>
           </div>
           <div className="stat-icon">
             <FaMoneyBillWave />
@@ -37,7 +41,7 @@ export const Dashboard = () => {
           <div className="stat-content">
             <h3>Total customers</h3>
             <div className="stat-value">1250</div>
-            <div className="stat-change increase">+10% compared to last month</div>
+            <div className="stat-change increase">+10% <span>compared to last month</span></div>
           </div>
           <div className="stat-icon">
             <FaUsers />
@@ -48,7 +52,7 @@ export const Dashboard = () => {
           <div className="stat-content">
             <h3>Refunded</h3>
             <div className="stat-value">34</div>
-            <div className="stat-change decrease">-2% compared to last month</div>
+            <div className="stat-change decrease">-2% <span>compared to last month</span></div>
           </div>
           <div className="stat-icon">
             <FaExchangeAlt />
@@ -59,7 +63,7 @@ export const Dashboard = () => {
           <div className="stat-content">
             <h3>Average revenue</h3>
             <div className="stat-value">$50.25</div>
-            <div className="stat-change increase">+5% compared to last month</div>
+            <div className="stat-change increase">+5% <span>compared to last month</span></div>
           </div>
           <div className="stat-icon">
             <FaChartLine />
@@ -67,7 +71,6 @@ export const Dashboard = () => {
         </div>
       </div>
 
-      {/* Chart and Overview Section */}
       <div className="dashboard-grid">
         <div className="chart-section">
           <h2>Sale statistics</h2>
