@@ -1,21 +1,36 @@
-import { useState , useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { WishlistModal } from './WishlistModal'
 import { SuccessMessage } from './SuccessMessage'
 
+function generateRandomData(stay) {
+    const rating = (Math.random() * (5 - 4) + 4).toFixed(2)
+    
+    const distance = Math.floor(Math.random() * 14000 + 1000)
+    
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    const randomMonth = months[Math.floor(Math.random() * months.length)]
+    const randomDay = Math.floor(Math.random() * 20 + 1)
+    const dates = `${randomMonth} ${randomDay} - ${randomMonth} ${randomDay + 7}`
+
+    return {
+        rate: rating,
+        distance: `${distance.toLocaleString()}`,
+        dates
+    }
+}
+
 export function StayPreview({ stay , queryParams }) {
-    const location = useLocation(); // ✅ Get current query params from URL
+    const location = useLocation() // ✅ Get current query params from URL
     const [currentImgIdx, setCurrentImgIdx] = useState(0)
     const [isLiked, setIsLiked] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [showSuccess, setShowSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState('')
 
-    const handleModalClose = () => setIsModalOpen(false)
+    const randomData = useMemo(() => generateRandomData(stay), [stay._id])
 
-    // useEffect(() => {
-    //     console.log(location.search) // ✅ Log current query params
-    // }, [location.search])      
+    const handleModalClose = () => setIsModalOpen(false)
 
     const showSuccessMessage = (message) => {
         if (showSuccess) {
@@ -137,10 +152,10 @@ export function StayPreview({ stay , queryParams }) {
                 <div className="info">
                     <div className="header-stay">
                         <h3>{stay.loc.city}, {stay.loc.country}</h3>
-                        <div className="rating">★ {stay.reviews[0]?.rate || 'New'}</div>
+                        <div className="rating">★ {randomData.rate}</div>
                     </div>
-                    <p className="distance">{stay.distance}</p>
-                    <p className="dates">{stay.dates}</p>
+                    <p className="distance">{randomData.distance} kilometers away</p>
+                    <p className="dates">{randomData.dates}</p>
                     <p className="price">${stay.price} <span>night</span></p>
                 </div>
             </article>
