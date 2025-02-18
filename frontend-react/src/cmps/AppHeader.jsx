@@ -78,7 +78,7 @@ export const AppHeader = () => {
     dispatch(loadStays(filterBy));
   
     // ✅ Update URL parameters without page reload
-    const newUrl = `${window.location.pathname}?${new URLSearchParams(filterBy).toString()}`;
+    const newUrl = `${window.location.pathname}/?${new URLSearchParams(filterBy).toString()}`;
     window.history.pushState({}, "", newUrl);
   
     // ✅ Collapse back to sticky after search
