@@ -17,9 +17,9 @@ export const UserModal = ({ isOpen, onClose }) => {
         <div className="modal-links">
           <Link to="/login" className="modal-link" onClick={onClose}>Login</Link>
           <Link to="/signup" className="modal-link" onClick={onClose}>Signup</Link>
-          <div className="modal-link" onClick={handleDashboardClick}>Dashboard</div>
+          <Link to="/dashboard" className="modal-link" onClick={handleDashboardClick}>Dashboard</Link>
         </div>
       </div>
     </div>
   )
-};
+}

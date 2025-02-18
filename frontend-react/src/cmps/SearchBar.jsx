@@ -100,15 +100,20 @@ export const SearchBar = ({
         <div className="search-section where-section" ref={dropdownRef}>
           <span>Where</span>
           <input
-            type="text"
-            placeholder="Search destinations"
-            value={search.destination || ""}
-            onChange={(e) => {
-              const updatedSearch = { ...search, destination: e.target.value };
-              dispatch(setSearchData(updatedSearch));
-            }}
-            onFocus={() => handleDropdownOpen("where")}
-          />
+              type="text"
+              placeholder="search destination"
+              value={search.destination || ""}
+              onFocus={(e) => {
+                if (search.destination === "Anywhere") {
+                  dispatch(setSearchData({ ...search, destination: "" }));
+                }
+                handleDropdownOpen("where");
+              }}
+              onChange={(e) => {
+                const updatedSearch = { ...search, destination: e.target.value };
+                dispatch(setSearchData(updatedSearch));
+              }}
+            />
           {openDropdown === "where" && (
             <div className="dropdown">
               <div className="dropdown-header">Suggested destinations</div>

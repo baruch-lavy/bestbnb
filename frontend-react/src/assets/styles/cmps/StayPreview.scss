@@ -98,9 +98,8 @@
 
         .img-btns {
             position: absolute;
-            top: 4px;
-            left: 12px;
-            right: 12px;
+            top: 3px;
+            left: 230px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -139,7 +138,6 @@
                 justify-content: center;
                 cursor: pointer;
                 transition: transform 0.2s;
-                margin-left: auto;
                 
                 &:hover {
                     transform: scale(1.1);
