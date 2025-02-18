@@ -4,6 +4,9 @@ import { StayPreview } from "./StayPreview.jsx";
 import { CategoryFilter } from "./CategoryFilter.jsx";
 import { categories } from "../services/categories.service";
 import { Loader } from './Loader'
+import { useLocation } from "react-router-dom";
+
+// const location = useLocation();
 
 export function StayList() {
     const allStays = useSelector((state) => state.stayModule.stays);
@@ -150,7 +153,7 @@ export function StayList() {
                     {filteredStays.map((stay, index) => (
                         stay ? (
                             <li key={stay._id || index}>
-                                <StayPreview stay={stay} />
+                                <StayPreview stay={stay}/>
                             </li>
                         ) : (
                             <li key={`empty-${index}`} className="empty-stay"></li>
