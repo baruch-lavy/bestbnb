@@ -1,12 +1,12 @@
 .filter-container {
     display: flex;
-    // flex-direction: row-reverse;
+    padding-top: 40px;
 
     .filters-btn {
         height: 48px;
         width: 92px;
         position: absolute;
-        right: 67px;
+        right: 59px;
         top: 20%;
         padding: 7px 13px;
         margin-top: 9px;
@@ -38,7 +38,7 @@
 
     .category-filter {
         position: relative;
-        width: 93%;
+        width: 94%;
         margin-right: 110px;
         padding: 20px 0 0;
         margin-top: 1.3em;
@@ -81,7 +81,7 @@
             display: flex;
             overflow-x: scroll;
             scroll-behavior: smooth;
-            gap: 37px;
+            gap: 30px;
             -ms-overflow-style: none;
             scrollbar-width: none;
             position: relative;
