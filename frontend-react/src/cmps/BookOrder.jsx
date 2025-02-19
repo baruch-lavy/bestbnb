@@ -153,15 +153,15 @@ export function BookOrder() {
 
                 <div className="trip-details">
                     <h3 className="book-order-message">Your trip</h3>
-                    <div className="details-row">
-                        <div className="detail-item">
+                    <div className="details-row flex">
+                        <div className="detail-item flex">
                             <h3>Dates</h3>
                             <p>
                                 {formatDateRange(searchData.startDate, searchData.endDate)}
                             </p>
                             {/* <p>{new Date(searchData.startDate).toLocaleDateString()}-{new Date(searchData.endDate).toLocaleDateString()}</p> */}
                         </div>
-                        <div className="detail-item">
+                        <div className="detail-item flex">
                             <h3>Guests</h3>
                             <p>{
                                 `${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0) > 0

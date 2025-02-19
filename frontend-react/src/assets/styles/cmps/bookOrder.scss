@@ -33,6 +33,12 @@
         .success-header-content {
             display: flex;
 
+
+            h1 {
+                font-size: rem(32px);
+                line-height: rem(36px);
+            }
+
             .success-icon {
                 width: 48px;
                 height: 48px;
@@ -55,8 +61,22 @@
         .booking-highlights {
             border: 1px solid rgb(221, 221, 221);
             border-radius: rem(12px);
-            justify-content: space-between;            padding: rem(24px);
+            justify-content: space-between;
+            padding: rem(24px);
             margin: 0 0 rem(88px) 0;
+
+            .booking-highlights-text {
+                h5 {
+                    font-size: rem(16px);
+                    line-height: rem(20px);
+                }
+
+                h6 {
+                    font-size: rem(16px);
+                    line-height: rem(20px);
+                    font-weight: 100;
+                }
+            }
 
         }
 
@@ -65,28 +85,25 @@
             border-bottom: 1px solid rgb(235, 235, 235);
             margin: 24px 0;
 
+            .book-order-message {
+                font-size: rem(22px);
+                line-height: rem(26px);
+            }
+
             .details-row {
-                display: flex;
-                padding: 24px 0;
-                gap: 16px;
+                flex-direction: column;
 
                 .detail-item {
-                    flex: 1;
-                    text-align: left;
+                    justify-content: space-between;
 
                     h3 {
-                        font-size: 16px;
-                        line-height: 20px;
-                        font-weight: 600;
-                        margin-bottom: 8px;
-                        color: rgb(34, 34, 34);
+                        font-size: rem(16px);
+                        line-height: rem(20px);
                     }
 
                     p {
-                        font-size: 14px;
-                        line-height: 18px;
-                        color: rgb(113, 113, 113);
-                        margin: 0;
+                        font-size: rem(16px);
+                        line-height: rem(20px);
                     }
                 }
             }
