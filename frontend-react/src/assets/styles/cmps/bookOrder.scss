@@ -1,77 +1,154 @@
 .book-order-container {
-    padding: 24px;
-    max-width: 500px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    margin-top: 150px;
+    margin-top: 160px; //header should be close
+    min-height: calc(100vh - 80px);
+    display: grid;
+    grid-template-columns: minmax(10px, 1fr) minmax(200px, 2fr) minmax(200px, 2fr) minmax(10px, 1fr);   
+    // align-items: center;
+    // justify-content: center;
 
     .book-order-content {
-        .trip-details {
+      grid-column: 2;
+        border-radius: 12px;
+        padding: 32px;
+        width: 512px;
+        text-align: center;
+        box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+
+        .success-header{
+            display: flex;
+            // justify-content: center;
+            align-items: center;
+    
+            .success-icon {
+                width: 48px;
+                height: 48px;
+                margin: 0 auto 24px;
+                
+                svg {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 26px;
+            color: rgb(34, 34, 34);
+        }
+
+        .book-order-message {
+            font-size: 16px;
+            line-height: 20px;
+            color: rgb(34, 34, 34);
             margin-bottom: 24px;
+        }
+
+        .trip-details {
+            border-top: 1px solid rgb(235, 235, 235);
+            border-bottom: 1px solid rgb(235, 235, 235);
+            margin: 24px 0;
 
             .details-row {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
+                display: flex;
+                padding: 24px 0;
                 gap: 16px;
-                margin-bottom: 24px;
-            }
 
-            .detail-item {
-                h3 {
-                    font-size: 16px;
-                    color: #666;
-                    margin-bottom: 8px;
-                }
-                p {
-                    font-size: 18px;
-                    font-weight: 500;
-                }
-            }
+                .detail-item {
+                    flex: 1;
+                    text-align: left;
 
-            .price-details {
-                border-top: 1px solid #ddd;
-                padding-top: 16px;
-
-                h3 {
-                    font-size: 18px;
-                    margin-bottom: 12px;
-                }
-
-                p {
-                    display: flex;
-                    justify-content: space-between;
-                    margin-bottom: 8px;
-
-                    &.total {
+                    h3 {
+                        font-size: 16px;
+                        line-height: 20px;
                         font-weight: 600;
-                        font-size: 20px;
-                        margin-top: 16px;
-                        padding-top: 16px;
-                        border-top: 1px solid #ddd;
+                        margin-bottom: 8px;
+                        color: rgb(34, 34, 34);
+                    }
+
+                    p {
+                        font-size: 14px;
+                        line-height: 18px;
+                        color: rgb(113, 113, 113);
+                        margin: 0;
                     }
                 }
             }
         }
 
         .action-buttons {
-            .primary-btn {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            button {
                 width: 100%;
-                padding: 14px;
-                background: #FF385C;
-                color: white;
-                border: none;
+                min-height: 48px;
+                padding: 14px 24px;
                 border-radius: 8px;
                 font-size: 16px;
-                font-weight: 500;
+                font-weight: 600;
                 cursor: pointer;
+                transition: transform 0.1s ease;
 
-                &:disabled {
-                    opacity: 0.7;
-                    cursor: not-allowed;
+                &:active {
+                    transform: scale(0.96);
+                }
+            }
+
+            .primary-btn {
+                background-color: rgb(255, 56, 92);
+                border: none;
+                color: white;
+
+                &:hover {
+                    background-color: rgb(247, 49, 85);
+                }
+            }
+
+            .secondary-btn {
+                background-color: white;
+                color: rgb(34, 34, 34);
+                border: 1px solid rgb(34, 34, 34);
+
+                &:hover {
+                    background-color: rgb(247, 247, 247);
                 }
             }
         }
     }
+
+    .mini-stay-details{
+        grid-column: 3;
+        margin-left: 8.3%;
+        .mini-stay-details-card{
+            position: -webkit-sticky !important;
+            position: sticky !important;
+            top: 32px;
+            z-index: 2 !important;
+            
+            border: 1px solid rgb(221, 221, 221);
+            border-radius: rem(12px);
+            
+            padding: rem(24px);
+            margin: 0 0  rem(88px) 0 ;
+    
+        }
+
+    }
 } 
+
+
+.booking-highlights{
+    img{
+       width: rem(32px);
+       height: rem(32px); 
+    }
+}
+
+.mini-stay-details-img{
+    width: rem(104px);
+    height: rem(106px);
+}
