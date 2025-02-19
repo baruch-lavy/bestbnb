@@ -27,7 +27,8 @@ export function ReviewPreview({ review }) {
             <p className="review-txt">{review.txt}</p>
             <button className="show-more-review-txt">
             {/* //   onClick={() => setIsSummaryModalOpen(true)}> */}
-              Show more  <img src="/img/stays/asset23.svg" alt="" />
+              Show more
+                {/* <img src="/img/stays/asset23.svg" alt="" /> */}
             </button>
         </div>
     </article>
