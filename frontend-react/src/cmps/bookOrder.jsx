@@ -90,8 +90,8 @@ export function BookOrder() {
             await orderService.save(newOrder)
         } catch (error) {
             console.error('Failed to submit order:', error)
-        // } finally {
-        //     setIsBooked(false)
+            // } finally {
+            //     setIsBooked(false)
         }
     }
 
@@ -109,10 +109,15 @@ export function BookOrder() {
     if (!stay) return <div>Loading...</div>
     return (
         <section className="book-order-container">
-            <div className="book-order-content">
 
-                {isBooked ? (
-                    <div className="success-header">
+            {isBooked ? (
+                <div className="success-header">
+                    <div className="back-icon">
+                        <Link to={`/stay/${stay._id}${window.location.search}`} >
+                            <img src="/img/stays/left.svg" alt="" />
+                        </Link>
+                    </div>
+                    <div className="success-header-content">
                         <div className="success-icon">
                             <svg viewBox="0 0 48 48">
                                 <path d="M24 4C12.95 4 4 12.95 4 24c0 11.04 8.95 20 20 20 11.04 0 20-8.96 20-20 0-11.05-8.96-20-20-20zm-4 30L10 24l2.83-2.83L20 28.34l15.17-15.17L38 16 20 34z"
@@ -121,18 +126,22 @@ export function BookOrder() {
                         </div>
                         <h1>Your order has been confirmed!</h1>
                     </div>
-                ) : (
-                    <div className="success-header">
-                        <div className="success-icon">
-                            <Link to={`/stay/${stay._id}${window.location.search}`} >
-                                <img src="/img/stays/left.svg" alt="" />
-                            </Link>
-                        </div>
+                </div>
+            ) : (
+                <div className="success-header">
+                    <div className="back-icon">
+                        <Link to={`/stay/${stay._id}${window.location.search}`} >
+                            <img src="/img/stays/left.svg" alt="" />
+                        </Link>
+                    </div>
+                    <div className="success-header-content">
                         <h1>Confirm and pay</h1>
                     </div>
-                )}
+                </div>
+            )}
 
-                <div className="booking-highlights">
+            <div className="book-order-content">
+                <div className="booking-highlights flex">
                     <div className="booking-highlights-text">
                         <h5>This is a rare find.</h5>
                         <h6>{stay.host.fullname}'s place is usually booked.</h6>
@@ -183,13 +192,13 @@ export function BookOrder() {
                     </div>
                 )}
 
-             
-                
-                    
-          
+
+
+
+
 
                 <button className="confirm-btn"
-                onClick={handleSubmitOrder}>
+                    onClick={handleSubmitOrder}>
                     {isBooked ? `Review your order` : 'Confirm and pay'}
                 </button>
             </div>
