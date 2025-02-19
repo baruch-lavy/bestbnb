@@ -61,6 +61,13 @@ export function BookOrder() {
         return `${formatDate(startDate)} – ${formatDate(endDate)}`
     }
 
+    function handleMouseMove(e) {
+        const button = e.currentTarget;
+        const { x, y } = button.getBoundingClientRect();
+        button.style.setProperty("--x", e.clientX - x);
+        button.style.setProperty("--y", e.clientY - y);
+    }
+
     const handleSubmitOrder = async () => {
         if (!stay || !searchData.startDate || !searchData.endDate) {
             console.error('Please select dates and guests')
@@ -201,7 +208,8 @@ export function BookOrder() {
 
 
                 <button className="reserve-btn"
-                    onClick={() => handleSubmitOrder()}>
+                    onClick={() => handleSubmitOrder()}
+                    onMouseMove={handleMouseMove}>
                     {isBooked ? `Review your order` : 'Confirm and pay'}
                 </button>
             </div>
