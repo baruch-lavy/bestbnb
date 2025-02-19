@@ -17,6 +17,7 @@ import { UserMsg } from './cmps/UserMsg.jsx'
 import { BookOrder } from './cmps/BookOrder.jsx'
 import { Dashboard } from './pages/Dashboard.jsx'
 import { SearchResults } from './pages/SearchResults.jsx';
+import { Trips } from './pages/Trips'
 // import { OrderConfirmation } from './cmps/OrderConfirmation'
 
 export function RootCmp() {
@@ -41,6 +42,7 @@ export function RootCmp() {
                     <Route path="admin" element={<AdminIndex />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/search-results" element={<SearchResults />} />
+                    <Route path="/trips" element={<Trips />} />
                     {/* <Route path="/confirmation" element={<OrderConfirmation />} /> */}
                 </Routes>
             </main>

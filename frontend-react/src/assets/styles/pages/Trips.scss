@@ -1,0 +1,104 @@
+.trips-page {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    h1 {
+        font-size: 32px;
+        margin-bottom: 24px;
+        color: #222;
+    }
+
+    .orders-table {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+        overflow: hidden;
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+            th, td {
+                padding: 16px;
+                text-align: left;
+                border-bottom: 1px solid #ebebeb;
+            }
+
+            th {
+                background: #f7f7f7;
+                font-weight: 600;
+                color: #222;
+            }
+
+            .stay-info {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+
+                img {
+                    width: 80px;
+                    height: 60px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                }
+
+                h3 {
+                    margin: 0;
+                    font-size: 16px;
+                    color: #222;
+                }
+
+                p {
+                    margin: 4px 0 0;
+                    color: #717171;
+                    font-size: 14px;
+                }
+            }
+
+            .status {
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-size: 14px;
+                font-weight: 500;
+
+                &.pending {
+                    background: #fff8e6;
+                    color: #b88217;
+                }
+
+                &.approved {
+                    background: #e6f8f0;
+                    color: #17b85f;
+                }
+
+                &.rejected {
+                    background: #ffe6e6;
+                    color: #b81717;
+                }
+            }
+
+            .remove-btn {
+                background: none;
+                border: none;
+                color: #717171;
+                cursor: pointer;
+                padding: 8px;
+                border-radius: 50%;
+                transition: all 0.2s;
+
+                &:hover {
+                    background: #f7f7f7;
+                    color: #ff385c;
+                }
+            }
+        }
+    }
+
+    .no-trips {
+        text-align: center;
+        padding: 48px;
+        color: #717171;
+        font-size: 18px;
+    }
+} 
