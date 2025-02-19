@@ -1,5 +1,5 @@
-import { useState, useMemo } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useState, useMemo ,useEffect } from 'react'
+import { Link, useLocation , useSearchParams } from 'react-router-dom'
 import { WishlistModal } from './WishlistModal'
 import { SuccessMessage } from './SuccessMessage'
 
@@ -22,11 +22,17 @@ function generateRandomData(stay) {
 
 export function StayPreview({ stay , queryParams }) {
     const location = useLocation() // ✅ Get current query params from URL
+    const [searchParams] = useSearchParams(); // ✅ Use this instead of `useLocation()`
     const [currentImgIdx, setCurrentImgIdx] = useState(0)
     const [isLiked, setIsLiked] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [showSuccess, setShowSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState('')
+
+
+  useEffect(() => {
+    console.log("Updated location.search:", location.search);
+  }, [location.search , searchParams]); // ✅ Logs query param changes
 
     const randomData = useMemo(() => generateRandomData(stay), [stay._id])
 
@@ -103,8 +109,7 @@ export function StayPreview({ stay , queryParams }) {
                         {stay.imgUrls.map((url, idx) => (
                             <Link 
                                 key={idx} 
-                                to={`/stay/${stay._id}${location.search}`} 
-                                target="_blank"
+                                to={{ pathname:`/stay/${stay._id}`, search: location.search }} target="_blank"
                             >
                                 <img src={url} alt={stay.name} />
                             </Link>

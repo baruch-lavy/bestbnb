@@ -76,7 +76,7 @@ export const AppHeader = () => {
     };
   
     dispatch(loadStays(filterBy));
-  
+
     // ✅ Update URL parameters without page reload
     const newUrl = `${window.location.pathname}/?${new URLSearchParams(filterBy).toString()}`;
     window.history.pushState({}, "", newUrl);
@@ -88,9 +88,9 @@ export const AppHeader = () => {
   
 
   // ✅ Manual Navigation via "Stays" Button
-  const handleNavigateToStays = () => {
-    window.location.href = `/search-results?${new URLSearchParams(searchData).toString()}`;
-  };
+  // const handleNavigateToStays = () => {
+  //   window.location.href = `/search-results?${new URLSearchParams(searchData).toString()}`;
+  // };
 
 
   // ✅ Toggle Dropdown Open/Close

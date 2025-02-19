@@ -4,11 +4,10 @@ import { StayPreview } from "./StayPreview.jsx";
 import { CategoryFilter } from "./CategoryFilter.jsx";
 import { categories } from "../services/categories.service";
 import { Loader } from './Loader'
-import { useLocation } from "react-router-dom";
-
-// const location = useLocation();
+import { useSearchParams } from "react-router-dom";
 
 export function StayList() {
+    const [searchParams , setSearchParams] = useSearchParams(); // ✅ Extract query params
     const allStays = useSelector((state) => state.stayModule.stays);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [filteredStays, setFilteredStays] = useState(null);
@@ -113,7 +112,8 @@ export function StayList() {
         setIsLoading(true);
         setFilteredStays(allStays);
         setIsLoading(false);
-    }, [allStays]);
+    }, [allStays , searchParams]); // ✅ Detects changes in all stays
+    
 
     if (isLoading) {
         return (
