@@ -102,7 +102,7 @@
         }
 
         .create-wishlist-btn {
-            width: 100%;
+            width: 98%;
             padding: 14px;
             background: #222;
             color: white;
@@ -112,6 +112,13 @@
             font-weight: 600;
             cursor: pointer;
             transition: transform 0.2s;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-bottom-right-radius: 30px;
+            border-bottom-left-radius: 30px;
+            
 
             &:hover {
                 transform: scale(1.01);
