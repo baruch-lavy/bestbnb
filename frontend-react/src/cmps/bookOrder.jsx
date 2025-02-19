@@ -115,30 +115,32 @@ export function BookOrder() {
             </div>
 
             <section className='mini-stay-details'>
-                <div className="mini-stay-details-content">
-                    <div className="mini-stay-details-header">
-                        <h4>{stay.title}</h4>
-                        <h5>Entire home</h5>
+                <div className='mini-stay-details-card'>
+                    <div className="mini-stay-details-content">
+                        <div className="mini-stay-details-header">
+                            <h4>{stay.title}</h4>
+                            <h5>Entire home</h5>
+                        </div>
+                        <div className="mini-stay-details-img">
+                            <img src={stay.imgUrls[0]} alt="" />
+                        </div>
                     </div>
-                    <div className="mini-stay-details-img">
-                        <img src={stay.imgUrls[0]} alt="" />
-                    </div>
-                </div>
 
-                <div className="mini-stay-price-details">
-                    <div className="mini-stay-price-details-header flex">
-                        <h3>Price details</h3>
-                        <div className="footer-price-nigts flex">
-                            <span>${stay.price} X {stayLength} nights</span><span>${(stay.price * stayLength).toLocaleString()}</span>
-                        </div>
-                        <div className="footer-price-clean-fee flex">
-                            <span>Cleaning fee</span><span>${parseInt(stay.price * stayLength * cleanFee).toLocaleString()}</span>
-                        </div>
-                        <div className="footer-price-airbnb-fee flex">
-                            <span>Bestbnb service fee</span><span>${parseInt(stay.price * stayLength * airbnbFee).toLocaleString()}</span>
-                        </div>
-                        <div className="footer-price-total flex">
-                            <span>Total (USD)</span><span>${parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee)).toLocaleString()}</span>
+                    <div className="mini-stay-price-details">
+                        <div className="mini-stay-price-details-header flex">
+                            <h3>Price details</h3>
+                            <div className="footer-price-nigts flex">
+                                <span>${stay.price} X {stayLength} nights</span><span>${(stay.price * stayLength).toLocaleString()}</span>
+                            </div>
+                            <div className="footer-price-clean-fee flex">
+                                <span>Cleaning fee</span><span>${parseInt(stay.price * stayLength * cleanFee).toLocaleString()}</span>
+                            </div>
+                            <div className="footer-price-airbnb-fee flex">
+                                <span>Bestbnb service fee</span><span>${parseInt(stay.price * stayLength * airbnbFee).toLocaleString()}</span>
+                            </div>
+                            <div className="footer-price-total flex">
+                                <span>Total (USD)</span><span>${parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee)).toLocaleString()}</span>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,12 +1,13 @@
 .book-order-container {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(247, 247, 247);
+    margin-top: 160px; //header should be close
+    min-height: calc(100vh - 80px);
+    display: grid;
+    grid-template-columns: minmax(10px, 1fr) minmax(200px, 2fr) minmax(200px, 2fr) minmax(10px, 1fr);   
+    // align-items: center;
+    // justify-content: center;
 
     .book-order-content {
-        background-color: white;
+      grid-column: 2;
         border-radius: 12px;
         padding: 32px;
         width: 512px;
@@ -118,4 +119,36 @@
             }
         }
     }
+
+    .mini-stay-details{
+        grid-column: 3;
+        margin-left: 8.3%;
+        .mini-stay-details-card{
+            position: -webkit-sticky !important;
+            position: sticky !important;
+            top: 32px;
+            z-index: 2 !important;
+            
+            border: 1px solid rgb(221, 221, 221);
+            border-radius: rem(12px);
+            
+            padding: rem(24px);
+            margin: 0 0  rem(88px) 0 ;
+    
+        }
+
+    }
 } 
+
+
+.booking-highlights{
+    img{
+       width: rem(32px);
+       height: rem(32px); 
+    }
+}
+
+.mini-stay-details-img{
+    width: rem(104px);
+    height: rem(106px);
+}
