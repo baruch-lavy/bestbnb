@@ -1,13 +1,21 @@
 .filter-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    top: 35px;
+    overflow: hidden;
+    position: sticky;
+    background-color: white;
+    z-index: 4;
     padding-top: 40px;
+    justify-items: stretch;
+    align-items: baseline;
 
     .filters-btn {
         height: 48px;
         width: 92px;
         position: absolute;
-        right: 59px;
-        top: 21.4%;
+        right: -5px;
+        top: 51%;
         padding: 7px 13px;
         margin-top: 9px;
         border: 1px solid #ddd;
@@ -22,6 +30,7 @@
         line-height: 20.02px;
         transition: all 0.2s ease-in-out;
         z-index: 1;
+        order: 2;
 
         &:hover {
             border: 1px solid #222222;
@@ -38,10 +47,11 @@
 
     .category-filter {
         position: relative;
-        width: 94%;
-        margin-right: 110px;
+        width: 93%;
         padding: 20px 0 0;
         margin-top: 1.3em;
+        overflow: hidden;
+        margin-bottom: 0.2em;
 
         &::before,
         &::after {
@@ -81,7 +91,7 @@
             display: flex;
             overflow-x: scroll;
             scroll-behavior: smooth;
-            gap: 30px;
+            gap: 45px;
             -ms-overflow-style: none;
             scrollbar-width: none;
             position: relative;
@@ -95,7 +105,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-width: 56px;
             cursor: pointer;
             color: #717171;
             border-bottom: 2px solid transparent;
@@ -106,6 +115,7 @@
                 flex-direction: column;
                 align-items: center;
                 transition: transform 0.1s ease;
+                padding-bottom: 12px;
                 
                 img {
                     width: 24px;

@@ -6,22 +6,22 @@ import 'react-datepicker/dist/react-datepicker.css';
 import 'react-day-picker/style.css';
 
 export function Calendar(){
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  // const [startDate, setStartDate] = useState(null);
+  // const [endDate, setEndDate] = useState(null);
 
-  // Example availability data (this could be fetched from an API)
-  const unavailableDates = [
-    new Date(2025, 1, 10),  // Unavailable date 1
-    new Date(2025, 1, 15),  // Unavailable date 2
-    new Date(2025, 1, 20),  // Unavailable date 3
-  ];
+  // // Example availability data (this could be fetched from an API)
+  // const unavailableDates = [
+  //   new Date(2025, 1, 10),  // Unavailable date 1
+  //   new Date(2025, 1, 15),  // Unavailable date 2
+  //   new Date(2025, 1, 20),  // Unavailable date 3
+  // ];
 
-  const isDateUnavailable = (date) => {
-    return unavailableDates.some(
-      (unavailableDate) =>
-        unavailableDate.toDateString() === date.toDateString()
-    );
-  };
+  // const isDateUnavailable = (date) => {
+  //   return unavailableDates.some(
+  //     (unavailableDate) =>
+  //       unavailableDate.toDateString() === date.toDateString()
+  //   );
+  // };
 
   return (
     <div className="details-calendar-container">

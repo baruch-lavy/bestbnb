@@ -20,7 +20,6 @@
 @import "pages/ReviewIndex";
 @import "pages/UserDetails";
 @import "pages/TaskDetails";
-@import "pages/LoginSignup";
 @import "pages/SearchResults";
 @import "pages/Dashboard";
 @import "pages/login.scss";
@@ -47,10 +46,9 @@
 @import "cmps/SuccessMessage.scss";
 @import "cmps/WishlistModal.scss";
 @import "cmps/FilterModal.scss";
-@import "cmps/ConfirmationReserve.scss";
+@import "cmps/BookOrder.scss";
 @import "cmps/UserModal.scss";
-
-
+@import "cmps/OrderConfirmation.scss";
 
 @import "cmps/Loader.scss";
 @import "cmps/SearchBar.scss";

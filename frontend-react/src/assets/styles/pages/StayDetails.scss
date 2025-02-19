@@ -20,11 +20,6 @@
             align-items: center;
             width: 100%;
 
-            .stay-name {
-                color: #222222;
-
-            }
-
             .stay-header-btns {
 
                 display: flex;
@@ -111,7 +106,6 @@
         section {
             display: flex;
             flex-direction: column;
-            color: #222222;
 
             &>* {
                 border-bottom: 0.5px solid #22222238;

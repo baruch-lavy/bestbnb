@@ -1,6 +1,6 @@
 .main-container main {
     min-height: calc(100vh - 7rem);
-    overflow: hidden;
+    // overflow: hidden;
 }
 
 .details-page .main-container main {
@@ -9,40 +9,3 @@
 
 
 
-
-// .app {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-// }
-
-// // 🔹 Search Bar: Centered & Pushed Down from Header
-// .search-container {
-//     width: 100%;
-//     display: flex;
-//     justify-content: center;
-//     margin-top: 20px;  // Ensures it's positioned BELOW the header
-//     margin-bottom: 20px; // Adds space between search bar and category filter
-// }
-
-// // 🔹 Stay Index: Ensure it starts below the search bar
-// .stay-index {
-//     width: 100%;
-//     display: flex;
-//     justify-content: center;
-// }
-
-// // 🔹 Category Filter: Positioned Correctly Below Search Bar
-// .filter-container {
-//     width: 100%;
-//     display: flex;
-//     justify-content: center;
-//     margin-bottom: 20px;  // Ensures spacing between filter & stays list
-// }
-
-// // 🔹 Stay List: Correct Positioning
-// .stay-list {
-//     width: 100%;
-//     max-width: 1200px;
-//     margin: 0 auto;
-// }

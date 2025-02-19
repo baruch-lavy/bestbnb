@@ -1,12 +1,13 @@
 
-import React, { useState, useEffect ,useRef } from "react";
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { setSearchData, loadStays } from "../store/actions/stay.actions.js";
 
 export function StayOrder({ stay }) {
-    const searchData = useSelector((state) => state.search);
-    const [openDropdown, setOpenDropdown] = useState(null);
+    const location = useLocation() // ✅ Get current query params from URL
+    const searchData = useSelector((state) => state.search)
+    const [openDropdown, setOpenDropdown] = useState(null)
 
     console.log('searchData', searchData)
     const dropdownRef = useRef(null);
@@ -14,42 +15,41 @@ export function StayOrder({ stay }) {
     const guestDropdownRef = useRef(null);
 
     const dispatch = useDispatch();
-    const stayLength = 5
     const cleanFee = 0.095
     const airbnbFee = 0.13
 
-    useEffect(() => {
-        const searchParams = new URLSearchParams(window.location.search);
-        const filterBy = {
-            destination: searchParams.get("destination") || "Anywhere",
-            startDate: searchParams.get("startDate") || "",
-            endDate: searchParams.get("endDate") || "",
-            guests: Number(searchParams.get("guests")) || 1,
-        };
+    // useEffect(() => {
+    //     const searchParams = new URLSearchParams(window.location.search);
+    //     const filterBy = {
+    //         destination: searchParams.get("destination") || "Anywhere",
+    //         startDate: searchParams.get("startDate") || "",
+    //         endDate: searchParams.get("endDate") || "",
+    //         guests: Number(searchParams.get("guests")) || 1,
+    //     };
 
-        console.log("🚀 Syncing Redux with URL search parameters:", filterBy);
-        dispatch(setSearchData(filterBy));
-    }, [dispatch]);
+    //     console.log("🚀 Syncing Redux with URL search parameters:", filterBy);
+    //     dispatch(setSearchData(filterBy));
+    // }, [dispatch]);
 
-    console.log('searchData', searchData)
+    // console.log('searchData', searchData)
 
     const handleDropdownOpen = (dropdown) => {
         setOpenDropdown((prev) => (prev === dropdown ? null : dropdown));
     };
 
-     const handleGuestChange = (type, amount) => {
-        const updatedGuests = {
-          ...search.guests,
-          [type]: Math.max(0, (search.guests?.[type] || 0) + amount),
-        };
-    
-        dispatch(
-          setSearchData({
-            ...search,
-            guests: { ...updatedGuests }, // ✅ Ensuring new object reference
-          })
-        );
-      };
+    //  const handleGuestChange = (type, amount) => {
+    //     const updatedGuests = {
+    //       ...search.guests,
+    //       [type]: Math.max(0, (search.guests?.[type] || 0) + amount),
+    //     };
+
+    //     dispatch(
+    //       setSearchData({
+    //         ...search,
+    //         guests: { ...updatedGuests }, // ✅ Ensuring new object reference
+    //       })
+    //     );
+    //   };
 
     function handleMouseMove(e) {
         const button = e.currentTarget;
@@ -58,10 +58,22 @@ export function StayOrder({ stay }) {
         button.style.setProperty("--y", e.clientY - y);
     }
 
+    const start = new Date(searchData.startDate);
+    const end = new Date(searchData.endDate);
+    const timeDifference = end - start;
+    const stayLength = (timeDifference) ? timeDifference / (1000 * 3600 * 24) : ''
+
     return (
         <div className="order-section">
             <div className="order-card">
-                <h2 className="order-price">${stay.price}<span> night</span></h2>
+                <h2 className="order-price">
+                    {stayLength
+                        ? <>
+                            ${stay.price} <span>night</span>
+                        </>
+                        : 'Add dates for prices'
+                    }
+                </h2>
 
                 {/* Check-in & Check-out Dates */}
                 <div className="form-order">
@@ -102,8 +114,14 @@ export function StayOrder({ stay }) {
                         <input
                             placeholder="1 guest"
                             name="guests"
-                            value={((searchData.guests?.adults || 0) + (searchData.guests?.children || 0)) <= 1 ? "1 guest" : `${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0)
-                                } guests`}
+                            value={
+                                `${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0) > 0 
+                                  ? (searchData.guests?.adults || 0) + (searchData.guests?.children || 0) 
+                                  : 1} guest${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0) !== 1 ? 's' : ''}, ${searchData.guests?.infants || 0} infant${(searchData.guests?.infants || 0) !== 1 ? 's' : ''}, ${searchData.guests?.pets || 0} pet${(searchData.guests?.pets || 0) !== 1 ? 's' : ''}`
+                            }
+                        
+                            // value={((searchData.guests?.adults || 0) + (searchData.guests?.children || 0)) <= 1 ? "1 guest" : `${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0)
+                            //     } guests`}
                             readOnly
                             onClick={() => handleDropdownOpen("who")}
                         />
@@ -168,31 +186,32 @@ export function StayOrder({ stay }) {
                     </section> */}
 
                 {/* Reserve Button */}
-                <Link to={`/stay/confirmation/${stay._id}`}>
+                <Link to={`/stay/book/${stay._id}${location.search}`}>
                     <button
                         className="reserve-btn"
                         onMouseMove={handleMouseMove}>
-                        Reserve
+                        {stayLength ? `Reserve` : 'Check availability'}
                     </button>
                 </Link>
 
                 {/* {checkIn && checkOut && */}
-                <div className="order-footer flex">
-                    <span>You won't be charged yet</span>
-                    <div className="footer-price-nigts flex">
-                        <span>${stay.price} X {stayLength} nights</span><span>${(stay.price * stayLength).toLocaleString()}</span>
+                {stayLength &&
+                    <div className="order-footer flex">
+                        <span>You won't be charged yet</span>
+                        <div className="footer-price-nigts flex">
+                            <span>${stay.price} X {stayLength} nights</span><span>${(stay.price * stayLength).toLocaleString()}</span>
+                        </div>
+                        <div className="footer-price-clean-fee flex">
+                            <span>Cleaning fee</span><span>${parseInt(stay.price * stayLength * cleanFee).toLocaleString()}</span>
+                        </div>
+                        <div className="footer-price-airbnb-fee flex">
+                            <span>Bestbnb service fee</span><span>${parseInt(stay.price * stayLength * airbnbFee).toLocaleString()}</span>
+                        </div>
+                        <div className="footer-price-total flex">
+                            <span>Total</span><span>${parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee)).toLocaleString()}</span>
+                        </div>
                     </div>
-                    <div className="footer-price-clean-fee flex">
-                        <span>Cleaning fee</span><span>${parseInt(stay.price * stayLength * cleanFee).toLocaleString()}</span>
-                    </div>
-                    <div className="footer-price-airbnb-fee flex">
-                        <span>Bestbnb service fee</span><span>${parseInt(stay.price * stayLength * airbnbFee).toLocaleString()}</span>
-                    </div>
-                    <div className="footer-price-total flex">
-                        <span>Total</span><span>${parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee)).toLocaleString()}</span>
-                    </div>
-                </div>
-                {/* } */}
+                }
             </div>
         </div>
     );

@@ -6,6 +6,8 @@ import { SearchBar } from "./SearchBar.jsx";
 import { StickySearchBar } from "./StickySearchBar.jsx";
 import { useLocation, useSearchParams } from "react-router-dom"; // ✅ Import useLocation
 import { UserModal } from './UserModal';
+import { FaAirbnb } from 'react-icons/fa'
+
 
 export const AppHeader = () => {
   const location = useLocation(); // ✅ Get current page URL
@@ -26,7 +28,12 @@ export const AppHeader = () => {
       destination: searchParams.get("destination") || "Anywhere",
       startDate: searchParams.get("startDate") || "",
       endDate: searchParams.get("endDate") || "",
-      guests: Number(searchParams.get("guests")) || 1,
+      guests: {
+        adults: Number(searchParams.get("adults")) || 1,
+        children: Number(searchParams.get("children")) || 1,
+        infants: Number(searchParams.get("infants")) || 1,
+        pets: Number(searchParams.get("pets")) || 1
+      }
     };
 
     dispatch(setSearchData(filterBy));
@@ -122,12 +129,13 @@ export const AppHeader = () => {
       <header className={`header ${showSticky ? "sticky-header" : ""} ${isDetailsPage ? "details-header" : ""}`}>
         <div className="left-section">
         <a href="/stay">
-        <div className="logo-wrapper">
-          <img 
+          {/* <img 
             src="/img/stays/bestbnb-logo.svg"
             alt="Bestbnb Logo"
             className="logo" 
-          />
+          /> */}
+        <div className="logo-wrapper">
+          <FaAirbnb className="logo" /> 
           <span className="logo-text">bestbnb</span>
         </div>   
         </a>
@@ -154,6 +162,10 @@ export const AppHeader = () => {
           <div className="profile-menu" onClick={handleUserIconClick}>
             <FaBars className="menu-icon" />
             <FaUserCircle className="user-icon" />
+        <UserModal 
+          isOpen={isUserModalOpen} 
+          onClose={() => setIsUserModalOpen(false)} 
+        />
           </div>
         </div>
       </header>
@@ -166,12 +178,6 @@ export const AppHeader = () => {
           handleSearch={handleSearch} // ✅ Search now returns to sticky mode
         />
       </div>
-
-      {/* Add UserModal */}
-      <UserModal 
-        isOpen={isUserModalOpen} 
-        onClose={() => setIsUserModalOpen(false)} 
-      />
     </>
   )
 }
