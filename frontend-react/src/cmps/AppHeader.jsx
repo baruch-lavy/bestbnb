@@ -6,6 +6,8 @@ import { SearchBar } from "./SearchBar.jsx";
 import { StickySearchBar } from "./StickySearchBar.jsx";
 import { useLocation, useSearchParams } from "react-router-dom"; // ✅ Import useLocation
 import { UserModal } from './UserModal';
+import { FaAirbnb } from 'react-icons/fa'
+
 
 export const AppHeader = () => {
   const location = useLocation(); // ✅ Get current page URL
@@ -127,12 +129,13 @@ export const AppHeader = () => {
       <header className={`header ${showSticky ? "sticky-header" : ""} ${isDetailsPage ? "details-header" : ""}`}>
         <div className="left-section">
         <a href="/stay">
-        <div className="logo-wrapper">
-          <img 
+          {/* <img 
             src="/img/stays/bestbnb-logo.svg"
             alt="Bestbnb Logo"
             className="logo" 
-          />
+          /> */}
+        <div className="logo-wrapper">
+          <FaAirbnb className="logo" /> 
           <span className="logo-text">bestbnb</span>
         </div>   
         </a>
