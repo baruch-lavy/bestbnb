@@ -5,7 +5,7 @@ import { HomePage } from './pages/HomePage'
 import { AboutUs, AboutTeam, AboutVision } from './pages/AboutUs'
 import { StayIndex } from './pages/StayIndex.jsx'
 import { ReviewIndex } from './pages/ReviewIndex.jsx'
-import { ChatApp } from './pages/Chat.jsx'
+// import { ChatApp } from './pages/Chat.jsx'
 import { AdminIndex } from './pages/AdminIndex.jsx'
 
 import { StayDetails } from './pages/StayDetails'
@@ -20,7 +20,7 @@ import { Login } from './pages/Login.jsx'
 import { Signup } from './pages/Signup.jsx'
 import { Dashboard } from './pages/Dashboard.jsx'
 import { SearchResults } from './pages/SearchResults.jsx';
-import { OrderConfirmation } from './cmps/OrderConfirmation'
+// import { OrderConfirmation } from './cmps/OrderConfirmation'
 
 export function RootCmp() {
     return (
@@ -40,7 +40,7 @@ export function RootCmp() {
                     <Route path="user/:id" element={<UserDetails />} />
                     <Route path="/stay/book/:id" element={<BookOrder />} />
                     <Route path="review" element={<ReviewIndex />} />
-                    <Route path="chat" element={<ChatApp />} />
+                    {/* <Route path="chat" element={<ChatApp />} /> */}
                     <Route path="admin" element={<AdminIndex />} />
                     <Route path="login" element={<LoginSignup />}>
                     
@@ -49,7 +49,7 @@ export function RootCmp() {
                     </Route>
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/search-results" element={<SearchResults />} />
-                    <Route path="/confirmation" element={<OrderConfirmation />} />
+                    {/* <Route path="/confirmation" element={<OrderConfirmation />} /> */}
                 </Routes>
             </main>
             <AppFooter />
