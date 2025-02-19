@@ -102,6 +102,7 @@ export function loadStays(filterBy) {
 
 
 export async function loadStay(stayId) {
+  console.log('stayId', stayId)
   try {
     const stay = await stayService.getById(stayId)
     store.dispatch(getCmdSetStay(stay))

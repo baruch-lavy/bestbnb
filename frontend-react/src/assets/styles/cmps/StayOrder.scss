@@ -67,6 +67,9 @@
                 padding: rem(7px) rem(12px) ;
                 display: flex;
                 flex-direction: column;
+                input{
+                    width: auto;
+                }
             }
 
             .order-dates-label,

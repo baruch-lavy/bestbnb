@@ -114,8 +114,14 @@ export function StayOrder({ stay }) {
                         <input
                             placeholder="1 guest"
                             name="guests"
-                            value={((searchData.guests?.adults || 0) + (searchData.guests?.children || 0)) <= 1 ? "1 guest" : `${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0)
-                                } guests`}
+                            value={
+                                `${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0) > 0 
+                                  ? (searchData.guests?.adults || 0) + (searchData.guests?.children || 0) 
+                                  : 1} guest${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0) !== 1 ? 's' : ''}, ${searchData.guests?.infants || 0} infant${(searchData.guests?.infants || 0) !== 1 ? 's' : ''}, ${searchData.guests?.pets || 0} pet${(searchData.guests?.pets || 0) !== 1 ? 's' : ''}`
+                            }
+                        
+                            // value={((searchData.guests?.adults || 0) + (searchData.guests?.children || 0)) <= 1 ? "1 guest" : `${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0)
+                            //     } guests`}
                             readOnly
                             onClick={() => handleDropdownOpen("who")}
                         />
