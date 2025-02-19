@@ -159,6 +159,10 @@ export const AppHeader = () => {
           <div className="profile-menu" onClick={handleUserIconClick}>
             <FaBars className="menu-icon" />
             <FaUserCircle className="user-icon" />
+        <UserModal 
+          isOpen={isUserModalOpen} 
+          onClose={() => setIsUserModalOpen(false)} 
+        />
           </div>
         </div>
       </header>
@@ -171,12 +175,6 @@ export const AppHeader = () => {
           handleSearch={handleSearch} // ✅ Search now returns to sticky mode
         />
       </div>
-
-      {/* Add UserModal */}
-      <UserModal 
-        isOpen={isUserModalOpen} 
-        onClose={() => setIsUserModalOpen(false)} 
-      />
     </>
   )
 }

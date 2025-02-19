@@ -185,11 +185,6 @@ export function BookOrder() {
                     </div>
                 )}
 
-             
-                
-                    
-          
-
                 <button className="confirm-btn"
                 onClick={handleSubmitOrder}>
                     {isBooked ? `Review your order` : 'Confirm and pay'}

@@ -1,7 +1,8 @@
 .user-modal {
   position: absolute;
-  top: 70px;
-  right: 65px;
+  bottom: 0;
+  right: 0px;
+  transform: translateY(103%);
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.12);
