@@ -39,10 +39,11 @@ async function remove(orderId) {
 }
 
 async function save(order) {
+    
     if (order._id) {
         return storageService.put(STORAGE_KEY, order)
     } else {
-        // כשיוצרים הזמנה חדשה
+        
         order._id = _makeId()
         if (!order.status) order.status = 'pending'
         if (!order.msgs) order.msgs = []

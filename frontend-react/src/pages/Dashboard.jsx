@@ -44,8 +44,8 @@ export const Dashboard = () => {
   async function handleOrderStatus(orderId, status) {
     try {
       await orderService.updateOrderStatus(orderId, status)
-      loadOrdersData() // Reload orders after update
-      loadStats()  // Reload stats after update
+      loadOrdersData() 
+      loadStats()  
     } catch (err) {
       console.error('Failed to update order status:', err)
     }
@@ -72,7 +72,8 @@ export const Dashboard = () => {
         <div className="stat-card">
           <div className="stat-content">
             <h3>Total sales</h3>
-            <div className="stat-value">${stats.totalSales.toFixed(2)}</div>
+            <div className="stat-value">${700}</div>
+            {/* <div className="stat-value">${stats.totalSales.toFixed(2)}</div> */}
             <div className="stat-change decrease">-5% <span>compared to last month</span></div>
           </div>
           <div className="stat-icon">
@@ -119,10 +120,28 @@ export const Dashboard = () => {
           <h2>Sale statistics</h2>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Line type="monotone" dataKey="value" stroke="#8884d8" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
+            <XAxis dataKey="name" stroke="#666" />
+            <YAxis stroke="#666" />
+            <Line 
+              type="monotone" 
+              dataKey="value" 
+              stroke="#FF385C"
+              strokeWidth={2}
+              dot={{
+                fill: '#FF385C',
+                stroke: '#FF385C',
+                strokeWidth: 2,
+                r: 4
+              }}
+
+              activeDot={{
+                fill: '#FF385C',
+                stroke: '#fff',
+                strokeWidth: 2,
+                r: 6
+              }}
+            />
             </LineChart>
           </ResponsiveContainer>
         </div>
