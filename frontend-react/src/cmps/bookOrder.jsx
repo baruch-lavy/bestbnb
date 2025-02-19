@@ -8,15 +8,40 @@ export function BookOrder() {
     const { stayId } = useParams()
     const stay = useSelector(storeState => storeState.stayModule.stay)
     const searchData = useSelector((state) => state.search)
-    const [isBooked, setisBooked] = useState(false);
+    const [isBooked, setIsBooked] = useState(false);
+
+    const loggedInUser = userService.getLoggedinUser() || {
+        _id: 'u101',
+        fullname: 'Guest User'
+    }
+
+    //  useEffect(() => {
+    //         loadStay()
+    //     }, [id])
+
+    //     const loadStay = async () => {
+    //         try {
+    //             const stay = await stayService.getById(id)
+    //             setStay(stay)
+    //         } catch (err) {
+    //             console.error('Failed to load stay:', err)
+    //         }
+    //     }
 
     const cleanFee = 0.095
     const airbnbFee = 0.13
+
 
     const start = new Date(searchData.startDate);
     const end = new Date(searchData.endDate);
     const timeDifference = end - start;
     const stayLength = (timeDifference) ? timeDifference / (1000 * 3600 * 24) : ''
+    // const calculateNights = (startDate, endDate) => {
+    //     const start = new Date(startDate)
+    //     const end = new Date(endDate)
+    //     const diffTime = Math.abs(end - start)
+    //     return Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+    // }
 
     function formatDate(date) {
         const options = { month: 'short', day: 'numeric' }; // Format to "Month Day"
@@ -32,7 +57,56 @@ export function BookOrder() {
         return `${formatDate(startDate)} – ${formatDate(endDate)}`
     }
 
+    const handleSubmitOrder = async () => {
+        if (!stay || !searchData.startDate || !searchData.endDate) {
+            console.error('Please select dates and guests')
+            return
+        }
 
+        try {
+            setIsBooked(true)
+            const newOrder = {
+                _id: '',
+                hostId: stay.host,
+                guest: {
+                    _id: loggedInUser._id,
+                    fullname: loggedInUser.fullname,
+                },
+                totalPrice: parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee)).toLocaleString(),
+                startDate: formatDate(searchData.startDate),
+                endDate: formatDate(searchData.endDate),
+                guests: {
+                    adults: searchData.guests?.adults || 1,
+                    children: searchData.guests?.children || 0,
+                },
+                stay: {
+                    _id: stay._id,
+                    name: stay.name,
+                    price: stay.price,
+                },
+                status: 'pending',
+                msgs: []
+            }
+            await orderService.save(newOrder)
+        } catch (error) {
+            console.error('Failed to submit order:', error)
+        // } finally {
+        //     setIsBooked(false)
+        }
+    }
+
+    //to do
+    // handleclick(){
+    // if isBooked {
+    // navigate('/confirmation', { 
+    //     state: { 
+    //         stay: stay.name,
+    //         dates: `${formatDate(searchData.startDate)} - ${formatDate(searchData.endDate)}`,
+    //         guests: `${searchData.guests?.adults + (searchData.guests?.children || 0)} guests`,
+    //     } 
+    // })
+
+    if (!stay) return <div>Loading...</div>
     return (
         <section className="book-order-container">
             <div className="book-order-content">
@@ -109,7 +183,13 @@ export function BookOrder() {
                     </div>
                 )}
 
-                <button className="confirm-btn">
+             
+                
+                    
+          
+
+                <button className="confirm-btn"
+                onClick={handleSubmitOrder}>
                     {isBooked ? `Review your order` : 'Confirm and pay'}
                 </button>
             </div>
