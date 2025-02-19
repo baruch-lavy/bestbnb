@@ -1,6 +1,6 @@
 .book-order-container {
-    margin-top: 160px; //header should be close
-    min-height: calc(100vh - 80px);
+    margin-top: 120px; //header should be close
+    // min-height: calc(100vh - 80px);
     display: grid;
     grid-template-columns: minmax(10px, 1fr) minmax(200px, 2fr) minmax(200px, 2fr) minmax(10px, 1fr);
     grid-template-rows: auto auto;
@@ -12,6 +12,7 @@
         grid-row: 1;
         display: flex;
         align-items: center;
+
 
         .back-icon {
 
@@ -37,6 +38,7 @@
             h1 {
                 font-size: rem(32px);
                 line-height: rem(36px);
+                margin-bottom: 48px;
             }
 
             .success-icon {
@@ -56,14 +58,19 @@
         grid-row: 2;
         grid-column: 2;
         border-radius: 12px;
-        padding: 32px;
+        // padding: 32px;
 
         .booking-highlights {
             border: 1px solid rgb(221, 221, 221);
             border-radius: rem(12px);
             justify-content: space-between;
             padding: rem(24px);
-            margin: 0 0 rem(88px) 0;
+            margin-bottom: 24px;
+
+            img {
+                width: rem(32px);
+                height: rem(32px);
+            }
 
             .booking-highlights-text {
                 h5 {
@@ -75,19 +82,21 @@
                     font-size: rem(16px);
                     line-height: rem(20px);
                     font-weight: 100;
+                    margin-bottom: 0;
                 }
             }
 
         }
 
         .trip-details {
-            border-top: 1px solid rgb(235, 235, 235);
+
             border-bottom: 1px solid rgb(235, 235, 235);
-            margin: 24px 0;
+            margin-bottom: 32px;
 
             .book-order-message {
                 font-size: rem(22px);
                 line-height: rem(26px);
+                margin-bottom: 24px;
             }
 
             .details-row {
@@ -95,6 +104,14 @@
 
                 .detail-item {
                     justify-content: space-between;
+
+                    &:first-child {
+                        margin-bottom: 8px;
+                    }
+
+                    &:last-child {
+                        margin-bottom: 17px;
+                    }
 
                     h3 {
                         font-size: rem(16px);
@@ -109,57 +126,75 @@
             }
         }
 
-        .action-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+        .cancellation-policy {
+            border-bottom: 1px solid rgb(235, 235, 235);
+            margin-bottom: 32px;
 
-            button {
-                width: 100%;
-                min-height: 48px;
-                padding: 14px 24px;
-                border-radius: 8px;
-                font-size: 16px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: transform 0.1s ease;
-
-                &:active {
-                    transform: scale(0.96);
-                }
+            h3 {
+                font-size: rem(22px);
+                line-height: rem(26px);
+                margin-bottom: 24px;
             }
 
-            .primary-btn {
-                background-color: rgb(255, 56, 92);
-                border: none;
-                color: white;
+            p {
+                font-size: rem(16px);
+                line-height: rem(20px);
+                padding-bottom: 32px;
+                margin-bottom: 0;
 
-                &:hover {
-                    background-color: rgb(247, 49, 85);
+                span {
+                    text-decoration: underline;
+                    font-weight: bold;
                 }
             }
+        }
 
-            .secondary-btn {
-                background-color: white;
-                color: rgb(34, 34, 34);
-                border: 1px solid rgb(34, 34, 34);
+        .reservation-status {
+            border-bottom: 1px solid rgb(235, 235, 235);
+            margin-bottom: 32px;
 
-                &:hover {
-                    background-color: rgb(247, 247, 247);
+            p {
+                font-size: rem(16px);
+                line-height: rem(20px);
+                padding-bottom: 32px;
+                margin-bottom: 0;
+            }
+
+        }
+
+        .agreement-terms {
+            border-bottom: 1px solid rgb(235, 235, 235);
+            margin-bottom: 32px;
+
+            p {
+                font-size: rem(12px);
+                line-height: rem(16px);
+                padding-bottom: 32px;
+                margin-bottom: 0;
+
+                span {
+                    text-decoration: underline;
+                    font-weight: bold;
                 }
             }
+        }
+
+        .reserve-btn{
+            font-size: rem(18px);
+            line-height: rem(24px);
+            width: 200px;
         }
     }
 
     .mini-stay-details {
         grid-row: 2;
         grid-column: 3;
-        margin-left: 8.3%;
+        margin-left: 94px;
 
         .mini-stay-details-card {
             position: -webkit-sticky !important;
             position: sticky !important;
-            top: 32px;
+            top: 80px;
             z-index: 2 !important;
 
             border: 1px solid rgb(221, 221, 221);
@@ -168,20 +203,71 @@
             padding: rem(24px);
             margin: 0 0 rem(88px) 0;
 
+            .mini-stay-details-content {
+                border-bottom: 1px solid rgb(235, 235, 235);
+                padding-bottom: 32px;
+
+                .mini-stay-details-img img {
+                    width: 100%;
+                    height: 102px;
+                    object-fit: cover;
+                    border-radius: 1rem;
+                    aspect-ratio: 1;
+                }
+
+                .mini-stay-details-header {
+                    margin-left: 16px;
+                    align-self: center;
+
+
+                    h4 {
+                        font-size: 1rem;
+                        line-height: rem(20px);
+                        font-weight: bold;
+                    }
+
+                    h5 {
+                        font-size: rem(14px);
+                        line-height: rem(18px);
+                        font-weight: 100;
+
+                        span{
+                            font-weight: bold;
+                        }
+                    }
+
+                }
+            }
+
+            .mini-stay-price-details-header {
+                flex-direction: column;
+    
+                &>h3 {
+                    font-size: rem(22px);
+                    line-height: rem(26px);
+                    margin-top: 24px;
+                  margin-bottom: 8px;
+                }
+
+                > :last-child {
+                    font-weight: bold;
+                    padding-top: rem(24px);
+                    margin-top: rem(24px) !important;
+                    border-top: 0.5px solid #3a39392f;
+                }
+    
+                .footer-price-clean-fee :first-child ,.footer-price-airbnb-fee :first-child{
+                    text-decoration: underline;
+                }
+    
+                &>*:not(:first-child) {
+                    justify-content: space-between;
+                    font-size: rem(16px);
+                    line-height: rem(20px);
+                    margin-top: rem(16px)
+                }
+            }
         }
 
     }
-}
-
-
-.booking-highlights {
-    img {
-        width: rem(32px);
-        height: rem(32px);
-    }
-}
-
-.mini-stay-details-img {
-    width: rem(104px);
-    height: rem(106px);
 }
