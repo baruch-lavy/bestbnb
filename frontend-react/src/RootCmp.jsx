@@ -20,6 +20,7 @@ import { Login } from './pages/Login.jsx'
 import { Signup } from './pages/Signup.jsx'
 import { Dashboard } from './pages/Dashboard.jsx'
 import { SearchResults } from './pages/SearchResults.jsx';
+import { OrderConfirmation } from './cmps/OrderConfirmation'
 
 export function RootCmp() {
     return (
@@ -48,6 +49,7 @@ export function RootCmp() {
                     </Route>
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/search-results" element={<SearchResults />} />
+                    <Route path="/confirmation" element={<OrderConfirmation />} />
                 </Routes>
             </main>
             <AppFooter />

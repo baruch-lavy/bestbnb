@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
-
 import { socketService, SOCKET_EMIT_SEND_MSG, SOCKET_EVENT_ADD_MSG, SOCKET_EMIT_SET_TOPIC } from '../services/socket.service'
 
 export function ChatApp() {
@@ -8,6 +7,7 @@ export function ChatApp() {
     const [msgs, setMsgs] = useState([])
     const [topic, setTopic] = useState('Love')
     const [isBotMode, setIsBotMode] = useState(false)
+    const messagesEndRef = useRef(null)
 
     const loggedInUser = useSelector(storeState => storeState.userModule.user)
 
@@ -25,12 +25,19 @@ export function ChatApp() {
         socketService.emit(SOCKET_EMIT_SET_TOPIC, topic)
     }, [topic])
 
+    useEffect(() => {
+        scrollToBottom()
+    }, [msgs])
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    }
+
     function addMsg(newMsg) {
         setMsgs(prevMsgs => [...prevMsgs, newMsg])
     }
 
     function sendBotResponse() {
-        // Handle case: send single bot response (debounce).
         botTimeoutRef.current && clearTimeout(botTimeoutRef.current)
         botTimeoutRef.current = setTimeout(() => {
             setMsgs(prevMsgs => ([...prevMsgs, { from: 'Bot', txt: 'You are amazing!' }]))
@@ -39,12 +46,13 @@ export function ChatApp() {
 
     function sendMsg(ev) {
         ev.preventDefault()
+        if (!msg.txt.trim()) return
+
         const from = loggedInUser?.fullname || 'Me'
         const newMsg = { from, txt: msg.txt }
         socketService.emit(SOCKET_EMIT_SEND_MSG, newMsg)
         if (isBotMode) sendBotResponse()
-        // for now - we add the msg ourself
-        // addMsg(newMsg)
+        addMsg(newMsg)
         setMsg({ txt: '' })
     }
 
@@ -54,41 +62,73 @@ export function ChatApp() {
     }
 
     return (
-        <section className="chat">
-            <h2>Lets Chat about {topic}</h2>
+        <div className="chat-container">
+            <div className="chat-header">
+                <h2>Chat with Host about {topic}</h2>
 
-            <label>
-                <input type="checkbox" name="isBotMode" checked={isBotMode}
-                    onChange={({ target }) => setIsBotMode(target.checked)} />
-                Bot Mode
-            </label>
+                <div className="chat-controls">
+                    <label>
+                        <input 
+                            type="checkbox" 
+                            name="isBotMode" 
+                            checked={isBotMode}
+                            onChange={({ target }) => setIsBotMode(target.checked)} 
+                        />
+                        Bot Mode
+                    </label>
 
-            <div>
-                <label>
-                    <input type="radio" name="topic" value="Love"
-                        checked={topic === 'Love'} onChange={({ target }) => setTopic(target.value)} />
-                    Love
-                </label>
+                    <div className="topic-selector">
+                        <label>
+                            <input 
+                                type="radio" 
+                                name="topic" 
+                                value="Love"
+                                checked={topic === 'Love'} 
+                                onChange={({ target }) => setTopic(target.value)} 
+                            />
+                            Love
+                        </label>
 
-                <label>
-                    <input
-                        type="radio" name="topic" value="Politics"
-                        checked={topic === 'Politics'} onChange={({ target }) => setTopic(target.value)} />
-                    Politics
-                </label>
-
+                        <label>
+                            <input
+                                type="radio" 
+                                name="topic" 
+                                value="Politics"
+                                checked={topic === 'Politics'} 
+                                onChange={({ target }) => setTopic(target.value)} 
+                            />
+                            Politics
+                        </label>
+                    </div>
+                </div>
             </div>
 
-            <form onSubmit={sendMsg}>
-                <input
-                    type="text" value={msg.txt} onChange={handleFormChange}
-                    name="txt" autoComplete="off" />
-                <button>Send</button>
-            </form>
+            <div className="messages-container">
+                <ul>
+                    {msgs.map((msg, idx) => (
+                        <li 
+                            key={idx} 
+                            className={`message-animation ${msg.from === 'Me' ? 'message-from-me' : 'message-from-other'}`}
+                        >
+                            <div className="message-sender">{msg.from}</div>
+                            <div className="message-text">{msg.txt}</div>
+                        </li>
+                    ))}
+                    <div ref={messagesEndRef} />
+                </ul>
+            </div>
 
-            <ul>
-                {msgs.map((msg, idx) => (<li key={idx}>{msg.from}: {msg.txt}</li>))}
-            </ul>
-        </section>
+            <form onSubmit={sendMsg} className="chat-form">
+                <input
+                    type="text" 
+                    value={msg.txt} 
+                    onChange={handleFormChange}
+                    name="txt" 
+                    autoComplete="off"
+                    placeholder="Type your message here..."
+                />
+                <button disabled={!msg.txt.trim()}>Send</button>
+            </form>
+        </div>
     )
 }
