@@ -10,7 +10,9 @@ export const orderService = {
     remove,
     addOrderMsg,
     updateOrderStatus,
-    getOrderStats
+    getOrderStats,
+    getOrderStats,
+    getOrdersByBuyer
 }
 
 async function query(filterBy = {}) {
@@ -207,4 +209,14 @@ function _makeId(length = 5) {
         text += possible.charAt(Math.floor(Math.random() * possible.length))
     }
     return text
+}
+
+async function getOrdersByBuyer() {
+    try {
+        const orders = await query()
+        return orders.filter(order => order.guest._id === 'u101')  // כרגע הארדקודד, אח"כ נחבר למשתמש אמיתי
+    } catch (err) {
+        console.error('Failed to get buyer orders:', err)
+        throw err
+    }
 }
