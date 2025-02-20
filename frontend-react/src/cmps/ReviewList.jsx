@@ -12,9 +12,9 @@ export function ReviewList({ reviews, onRemoveReview }) {
     //     return review.byUser?._id === user._id
     // }
 
-    return <section>
-        <ul className="list review-list">
-            {reviews.map(review =>
+    return <section className='reviw-list-main'>
+        <ul className="review-list">
+            {reviews.slice(0 , 6).map(review =>
                 <li key={review.id}>
                     <ReviewPreview review={review}/>
                     {/* {shouldShowActionBtns(review) && <div className="actions">
@@ -23,6 +23,6 @@ export function ReviewList({ reviews, onRemoveReview }) {
                 </li>)
             }
         </ul>
-        <button>Show all {reviews.length} reviews</button>
+        <button className="reviw-all-btn">Show all {reviews.length} reviews</button>
     </section>
 }

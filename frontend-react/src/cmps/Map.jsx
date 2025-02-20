@@ -32,7 +32,7 @@ export function Map() {
   ]
 
   return (
-    <div>
+    <div className="map-container">
       <h1 className="map-header">Where you’ll be</h1>
       <div className="map" style={{ height: '50vh', width: '100%', borderRadius: '20px' }}>
         <GoogleMapReact

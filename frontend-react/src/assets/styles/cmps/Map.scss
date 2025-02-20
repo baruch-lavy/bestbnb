@@ -20,3 +20,12 @@
         }
     }
 }
+
+.map-container {
+    border-top: 0.5px solid #22222238;
+    .map-header {
+        font-size: rem(22px);
+        line-height: rem(26px);
+        margin: 48px 0;
+    }
+}
