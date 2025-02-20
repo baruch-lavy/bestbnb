@@ -2,20 +2,20 @@ import { useState } from 'react'
 
 const amenities = [
     { id: 'wifi', label: 'Wifi', icon: 'asset1.svg' },
-    { id: 'kitchen', label: 'Kitchen', icon: 'kitchen.svg' },
-    { id: 'washer', label: 'Washer', icon: 'washer.svg' },
-    { id: 'dryer', label: 'Dryer', icon: 'dryer.svg' },
-    { id: 'air', label: 'Air conditioning', icon: 'air.svg' },
-    { id: 'heating', label: 'Heating', icon: 'heating.svg' },
+    { id: 'kitchen', label: 'Kitchen', icon: 'asset2.svg' },
+    { id: 'washer', label: 'Washer', icon: 'asset3.svg' },
+    { id: 'dryer', label: 'Dryer', icon: 'asset4.svg' },
+    { id: 'air', label: 'Air conditioning', icon: 'asset5.svg' },
+    { id: 'heating', label: 'Heating', icon: 'asset6.svg' },
 ]
 
 const moreAmenities = [
-    { id: 'pool', label: 'Pool', icon: 'pool.svg' },
-    { id: 'hot-tub', label: 'Hot tub', icon: 'hot-tub.svg' },
-    { id: 'parking', label: 'Free parking', icon: 'parking.svg' },
-    { id: 'gym', label: 'Gym', icon: 'gym.svg' },
-    { id: 'breakfast', label: 'Breakfast', icon: 'breakfast.svg' },
-    { id: 'pets', label: 'Pets allowed', icon: 'pets.svg' },
+    { id: 'pool', label: 'Pool', icon: 'asset7.svg' },
+    { id: 'hot-tub', label: 'Hot tub', icon: 'asset8.svg' },
+    { id: 'parking', label: 'Free parking', icon: 'asset9.svg' },
+    { id: 'gym', label: 'Gym', icon: 'asset10.svg' },
+    { id: 'breakfast', label: 'Breakfast', icon: 'asset11.svg' },
+    { id: 'pets', label: 'Pets allowed', icon: 'asset12.svg' },
 ]
 
 export function FilterModal({ isOpen, onClose }) {
