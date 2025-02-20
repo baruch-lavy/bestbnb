@@ -10,24 +10,24 @@ export function ReviewPreview({ review }) {
         return `${randomMonth} ${randomYear}`;
     }
 
-    return <article className="preview review-preview">
-        <div className="review-by">
+    return <article className="review-preview">
+        <div className="review-by flex">
             <Link to={`/user/${by._id}`}>
-                <img src={by.imgUrl} alt="" style={{ borderRadius: '50%', width: '2rem', height: '2rem', objectFit: 'cover' }}
+                <img src={by.imgUrl} alt=""
                 /></Link>
             <div className="reviewer-details">
                 <h5>{by.fullname}</h5>
                 <h6>{(parseInt(Math.random() * 12) + 2)} years on Bestbnb</h6>
             </div>
         </div>
-        <div>
+        <div className="review-contant flex">
             <div className="review-rate">
-                ★★★★★ · {getRandomDate()} · Stayed a few nights
+                ★★★★★ · <span>{getRandomDate()}</span> · Stayed a few nights
             </div>
             <p className="review-txt">{review.txt}</p>
             <button className="show-more-review-txt">
-            {/* //   onClick={() => setIsSummaryModalOpen(true)}> */}
-              Show more
+                {/* //   onClick={() => setIsSummaryModalOpen(true)}> */}
+                Show more
                 {/* <img src="/img/stays/asset23.svg" alt="" /> */}
             </button>
         </div>
