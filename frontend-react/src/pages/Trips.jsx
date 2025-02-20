@@ -37,7 +37,18 @@ export function Trips() {
     }
   }
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return (
+    <div className="loading-trips">
+      <div className="loader-container">
+        <div className="loader-dots">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  )
   if (!orders.length) return <div className="no-trips">No trips booked yet</div>
 
   return (

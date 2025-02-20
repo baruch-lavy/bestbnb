@@ -90,7 +90,7 @@ export function StayPreview({ stay , queryParams }) {
         }
     }
 
-    if (!stay) return <Loader />
+    // if (!stay) return <Loader />
 
     return (
         <>
