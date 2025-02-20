@@ -109,7 +109,7 @@ export function StayPreview({ stay , queryParams }) {
                         {stay.imgUrls.map((url, idx) => (
                             <Link 
                                 key={idx} 
-                                to={{ pathname:`/stay/${stay._id}`, search: location.search }} target="_blank"
+                                to={{ pathname:`/stay/${stay._id}`, search: location.search }}
                             >
                                 <img src={url} alt={stay.name} />
                             </Link>
@@ -134,7 +134,7 @@ export function StayPreview({ stay , queryParams }) {
 
                     <div className="img-btns">
                         {stay.isFavorite && (
-                            <Link to={`/stay/${stay._id}${location.search}`} target="_blank">
+                            <Link to={`/stay/${stay._id}${location.search}`} >
                                 <div className="guest-favorite">Guest favorite</div>
                             </Link>
                         )}

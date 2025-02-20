@@ -22,7 +22,8 @@ export function StayDetails() {
   const stay = useSelector(storeState => storeState.stayModule.stay)
   const [isImgLoading, setImgLoading] = useState(true)
   const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false)
-
+  const searchData = useSelector((state) => state.search);
+console.log('searchData:', searchData);
   useEffect(() => {
     document.body.classList.add('details-page')
 
