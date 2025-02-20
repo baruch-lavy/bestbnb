@@ -19,6 +19,9 @@ body {
   background: white;
   position: relative; // ✅ Ensure sticky search bar is positioned inside
 
+   &.sticky-header{
+    border-bottom: 1px solid #dddddd;
+  }
   /** LEFT SECTION **/
   .left-section {
     display: flex;
