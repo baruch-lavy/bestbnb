@@ -17,6 +17,10 @@ export function BookOrder() {
         fullname: 'Guest User'
     }
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     //  useEffect(() => {
     //         loadStay()
     //     }, [id])
@@ -38,12 +42,10 @@ export function BookOrder() {
     const end = new Date(searchData.endDate);
     const timeDifference = end - start;
     const stayLength = (timeDifference) ? timeDifference / (1000 * 3600 * 24) : ''
-    // const calculateNights = (startDate, endDate) => {
-    //     const start = new Date(startDate)
-    //     const end = new Date(endDate)
-    //     const diffTime = Math.abs(end - start)
-    //     return Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-    // }
+ 
+    const cancellationDate = new Date(start);
+    cancellationDate.setDate(cancellationDate.getDate() - 1);
+    const formattedCancellationDate = formatDate(cancellationDate);
 
     function formatDate(date) {
         const options = { month: 'short', day: 'numeric' }; // Format to "Month Day"
@@ -59,6 +61,13 @@ export function BookOrder() {
         return `${formatDate(startDate)} – ${formatDate(endDate)}`
     }
 
+    function handleMouseMove(e) {
+        const button = e.currentTarget;
+        const { x, y } = button.getBoundingClientRect();
+        button.style.setProperty("--x", e.clientX - x);
+        button.style.setProperty("--y", e.clientY - y);
+    }
+
     const handleSubmitOrder = async () => {
         if (!stay || !searchData.startDate || !searchData.endDate) {
             console.error('Please select dates and guests')
@@ -68,16 +77,13 @@ export function BookOrder() {
         try {
             setIsBooked(true)
             const newOrder = {
-                hostId: { 
-                    _id: stay.host._id,
-                    fullname: stay.host.fullname,
-                    imgUrl: stay.host.imgUrl || "..."
-                },
+                _id: '',
+                hostId: stay.host,
                 guest: {
                     _id: loggedInUser._id,
                     fullname: loggedInUser.fullname,
                 },
-                totalPrice: parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee)),
+                totalPrice: parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee)).toLocaleString(),
                 startDate: formatDate(searchData.startDate),
                 endDate: formatDate(searchData.endDate),
                 guests: {
@@ -88,17 +94,15 @@ export function BookOrder() {
                     _id: stay._id,
                     name: stay.name,
                     price: stay.price,
-                    imgUrls: stay.imgUrls,
-                    loc: stay.loc
                 },
                 status: 'pending',
                 msgs: []
             }
-            
-            const savedOrder = await orderService.save(newOrder)
-            console.log('Saved order:', savedOrder)
+            await orderService.save(newOrder)
         } catch (error) {
             console.error('Failed to submit order:', error)
+            // } finally {
+            //     setIsBooked(false)
         }
     }
 
@@ -185,35 +189,42 @@ export function BookOrder() {
                 ) : (
                     <div>
                         <div className="cancellation-policy">
-                            <h3>Cancellation policy</h3>
-                            <p>Free cancellation before Feb 22. Cancel before Mar 17 for a partial refund. Learn more</p>
+                            <h3 >Cancellation policy</h3>
+                            <p>Cancel before {formattedCancellationDate} for a partial refund. After that, this reservation is non-refundable. <span>Learn more</span></p>
                         </div>
 
                         <div className="reservation-status">
-                            <p>Your reservation won't be confirmed until the Host accepts your request (within 24 hours). You won't be charged until then.</p>
+                            <p>Your reservation won’t be confirmed until the Host accepts your request (within 24 hours). You won’t be charged until then.</p>
                         </div>
                         <div className="agreement-terms">
-                            <p>By selecting the button below, I agree to the Host's House Rules, Ground rules for guests, Airbnb's Rebooking and Refund Policy, and that Airbnb can charge my payment method if I'm responsible for damage. I agree to pay the total amount shown if the Host accepts my booking request.</p>
-                            <p>I also agree to the updated Terms of Service, Payments Terms of Service, and I acknowledge the Privacy Policy.</p>
+                            <p>By selecting the button below, I agree to the <span>Host's House Rules, Ground rules for guests, Airbnb's Rebooking and Refund Policy,</span> and that Airbnb can <span>charge my payment method</span> if I’m responsible for damage.</p>
                         </div>
                     </div>
                 )}
 
-                <button className="confirm-btn"
-                    onClick={handleSubmitOrder}>
+
+
+
+
+
+                <button className="reserve-btn"
+                    onClick={() => handleSubmitOrder()}
+                    onMouseMove={handleMouseMove}>
                     {isBooked ? `Review your order` : 'Confirm and pay'}
                 </button>
             </div>
 
             <section className='mini-stay-details'>
                 <div className='mini-stay-details-card'>
-                    <div className="mini-stay-details-content">
-                        <div className="mini-stay-details-header">
-                            <h4>{stay.title}</h4>
-                            <h5>Entire home</h5>
-                        </div>
+                    <div className="mini-stay-details-content flex">
                         <div className="mini-stay-details-img">
                             <img src={stay.imgUrls[0]} alt="" />
+                        </div>
+                        <div className="mini-stay-details-header">
+                            <h4>{stay.name}</h4>
+                            <h5>Entire home</h5>
+                            <h5 className="rate"><span>★ {parseFloat((Math.random() * (5 - 4) + 4).toFixed(2))}</span> ({stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'})</h5>
+
                         </div>
                     </div>
 
