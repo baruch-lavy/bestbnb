@@ -114,7 +114,6 @@ function _createOrders() {
             msgs: [],
             status: 'pending',
         },
-        
     ]
     storageService.saveToStorage(STORAGE_KEY, orders)
     return orders
