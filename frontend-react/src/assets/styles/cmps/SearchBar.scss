@@ -73,8 +73,8 @@
 /* Default round button */
 .search-btn {
   position: absolute;
-  right: 10px;
-  top: 45%;
+  right: 6.6px;
+  top: 42.5%;
   transform: translateY(-50%); // ✅ Ensures perfect vertical centering
   background: #ff385c;
   color: white;
@@ -94,19 +94,24 @@
 .search-bar:focus-within .search-btn {
   width: 90px; /* Expands width */
   border-radius: 50px; /* Rounded pill shape */
-  // background: linear-gradient(to right, #ff385c, #d70466); /* Gradient effect */
+  background: linear-gradient(to right, #ff385c, #d70466); /* Gradient effect */
   justify-content: center;
   padding: 10 16px; /* Adds padding for text */
   transition: all 0.3s ease;
+
+   svg {
+    display: none; /* Hides the search icon */
+   }
 }
 
 /* Add space for text inside expanded button */
 .search-bar:focus-within .search-btn::after {
   content: " Search";
-  font-size: 16px;
+  font-size: 17px;
   color: white;
   font-weight: bold;
-  margin-left: 8px;
+  font-family: "Poppins", sans-serif;
+  // margin-left:10px;
 }
 
 /* Hover effect */
@@ -288,119 +293,123 @@
 /* =============================== */
 /*     DATE PICKER DROPDOWN        */
 /* =============================== */
+/* =============================== */
+/*    CLEAN & COMPACT DATE PICKER  */
+/* =============================== */
 
 .date-picker-dropdown {
   position: absolute;
-  top: 50px;
-  left: 0;
-  width: 740px;
+  left: -120px;
+  width: 500px; /* ✅ Slightly reduced width */
   background: white;
-  border-radius: 16px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 12px; /* ✅ Reduced padding */
   z-index: 10;
   display: flex;
   flex-direction: column;
 }
 
-/* 🔥 Styling for Month Navigation */
+/* ✅ Month Header */
 .react-datepicker__header {
   background: transparent;
   border: none;
-  padding: 8px 12px;
+  padding: 4px 0; /* ✅ Less padding */
   text-align: center;
 }
 
-/* ✅ Make month titles look correct */
 .react-datepicker__current-month {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   color: #222;
 }
 
-/* ✅ Style the navigation arrows */
+/* ✅ Navigation Arrows */
 .react-datepicker__navigation {
-  top: 16px;
-  width: 32px;
-  height: 32px;
+  top: 10px;
+  width: 24px;
+  height: 24px;
 }
 
-/* ✅ Fix Days Layout */
+/* ✅ COMPACT Month Layout */
 .react-datepicker__month-container {
   display: flex !important;
   flex-direction: row !important;
   justify-content: space-between !important;
   width: 100% !important;
-  gap: 24px;
+  gap: 5px; /* ✅ Tighter spacing */
+  padding: 4px 0; /* ✅ Less padding */
 }
 
-/* ✅ Ensuring each month is equally sized */
 .react-datepicker__month {
   width: 48% !important;
 }
 
-/* =============================== */
-/*         WHO SECTION             */
-/* =============================== */
-
-.who-section {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  position: relative;
-  padding: 8px 16px;
-  border-radius: 50px;
-  transition: background 0.2s ease-in-out;
-  height: 66px; // ✅ Ensures it takes full height of search bar
-
-  &:hover,
-  &:focus-within {
-    background: #ebebeb; /* ✅ Airbnb’s hover color */
-    border-radius: 50px;
-    transition: background 0.2s ease-in-out;
-  }
-}
-
-.who-section span {
-  font-size: 12px;
+/* ✅ Weekday Headers */
+.react-datepicker__day-names {
+  display: flex !important;
+  justify-content: space-between;
+  font-size: 10px; /* ✅ Smaller text */
   font-weight: 600;
-  color: #222;
+  text-transform: uppercase;
+  color: #666;
+  padding-bottom: 2px; /* ✅ Less padding */
 }
 
-.who-section input {
-  border: none;
-  outline: none;
-  font-size: 16px;
-  padding: 2px 0;
-  background: transparent;
-  width: 100%;
-  text-align: left;
-  color: #717171;
-  font-weight: 400;
+/* ✅ Day Grid */
+.react-datepicker__week {
+  display: flex !important;
+  justify-content: space-between;
 }
 
-/* 🔍 Search Button inside "Who" Section */
-.who-section .search-btn {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #ff385c;
-  color: white;
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
+/* ✅ Days */
+.react-datepicker__day {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: #e03450;
-  }
+  width: 26px; /* ✅ Slightly smaller */
+  height: 26px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #222;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  margin: 2px; /* ✅ Less margin */
 }
+
+/* ✅ Selected Day */
+.react-datepicker__day--selected {
+  background-color: #007AFF !important;
+  color: white !important;
+  font-weight: 600;
+  box-shadow: 0px 2px 8px rgba(0, 122, 255, 0.2);
+}
+
+/* ✅ Hover Effect */
+.react-datepicker__day:hover {
+  background-color: rgba(0, 122, 255, 0.15);
+}
+
+/* ✅ Disabled Days */
+.react-datepicker__day--disabled {
+  color: #bbb !important;
+  pointer-events: none;
+  background: none;
+  opacity: 0.5;
+}
+
+/* ✅ Sundays in Red */
+.react-datepicker__day:nth-child(7n + 1) {
+  color: #D9534F;
+}
+
+/* ✅ Final Fixes */
+.react-datepicker {
+  padding: 4px;
+  border-radius: 10px;
+}
+
 
 /* =============================== */
 /*     GUEST DROPDOWN STYLES       */
@@ -491,15 +500,15 @@
   }
 }
 
-.dropdown,
-.guest-dropdown,
-.date-picker-dropdown {
-  position: absolute;
-  top: 50px;
-  left: 0;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-  padding: 20px;
-  z-index: 9999 !important; // 🔥 Force highest priority
-}
+// .dropdown,
+// .guest-dropdown,
+// .date-picker-dropdown {
+//   position: absolute;
+//   top: 50px;
+//   left: 0;
+//   background: white;
+//   border-radius: 16px;
+//   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+//   padding: 20px;
+//   z-index: 9999 !important; // 🔥 Force highest priority
+// }
