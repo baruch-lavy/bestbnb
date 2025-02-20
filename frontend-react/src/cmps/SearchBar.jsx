@@ -29,11 +29,6 @@ export const SearchBar = ({
 
   const destinations = [
     {
-      icon: faLocationArrow,
-      name: "Nearby",
-      description: "Find what’s around you",
-    },
-    {
       icon: faUmbrellaBeach,
       name: "Porto, Portugal",
       description: "Popular beach destination",

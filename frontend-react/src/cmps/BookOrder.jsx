@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { userService } from '../services/user.service'
-import { orderService } from '../services/order/order.service.local'
+import { orderService } from '../services/order/order.service.remote'
 
 
 export function BookOrder() {
@@ -98,7 +98,8 @@ export function BookOrder() {
                 status: 'pending',
                 msgs: []
             }
-            await orderService.save(newOrder)
+            
+            await orderService.save(newOrder , event)
         } catch (error) {
             console.error('Failed to submit order:', error)
             // } finally {
