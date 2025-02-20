@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { StayPreview } from "./StayPreview.jsx";
 import { CategoryFilter } from "./CategoryFilter.jsx";
 import { categories } from "../services/categories.service";
-import { useLocation } from "react-router-dom";
+import { useLocation  , useSearchParams} from "react-router-dom";
 
 // const location = useLocation();
 
