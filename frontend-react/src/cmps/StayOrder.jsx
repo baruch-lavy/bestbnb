@@ -67,12 +67,7 @@ export function StayOrder({ stay }) {
         <div className="order-section">
             <div className="order-card">
                 <h2 className="order-price">
-                    {stayLength
-                        ? <>
-                            ${stay.price} <span>night</span>
-                        </>
-                        : 'Add dates for prices'
-                    }
+                    ${stay.price} <span>night</span>
                 </h2>
 
                 {/* Check-in & Check-out Dates */}
@@ -115,11 +110,11 @@ export function StayOrder({ stay }) {
                             placeholder="1 guest"
                             name="guests"
                             value={
-                                `${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0) > 0 
-                                  ? (searchData.guests?.adults || 0) + (searchData.guests?.children || 0) 
-                                  : 1} guest${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0) !== 1 ? 's' : ''}, ${searchData.guests?.infants || 0} infant${(searchData.guests?.infants || 0) !== 1 ? 's' : ''}, ${searchData.guests?.pets || 0} pet${(searchData.guests?.pets || 0) !== 1 ? 's' : ''}`
+                                `${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0) || 1} guest${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0) !== 1 ? 's' : ''}`
+                                + (searchData.guests?.infants > 0 ? `, ${searchData.guests.infants} infant${searchData.guests.infants !== 1 ? 's' : ''}` : '')
+                                + (searchData.guests?.pets > 0 ? `, ${searchData.guests.pets} pet${searchData.guests.pets !== 1 ? 's' : ''}` : '')
                             }
-                        
+
                             // value={((searchData.guests?.adults || 0) + (searchData.guests?.children || 0)) <= 1 ? "1 guest" : `${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0)
                             //     } guests`}
                             readOnly
@@ -190,12 +185,11 @@ export function StayOrder({ stay }) {
                     <button
                         className="reserve-btn"
                         onMouseMove={handleMouseMove}>
-                        {stayLength ? `Reserve` : 'Check availability'}
+                        Reserve
                     </button>
                 </Link>
 
                 {/* {checkIn && checkOut && */}
-                {stayLength &&
                     <div className="order-footer flex">
                         <span>You won't be charged yet</span>
                         <div className="footer-price-nigts flex">
@@ -211,7 +205,6 @@ export function StayOrder({ stay }) {
                             <span>Total</span><span>${parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee)).toLocaleString()}</span>
                         </div>
                     </div>
-                }
             </div>
         </div>
     );
