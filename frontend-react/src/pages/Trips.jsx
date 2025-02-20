@@ -6,7 +6,6 @@ import { FaTrash } from 'react-icons/fa'
 export function Trips() {
   const [orders, setOrders] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState(null)
 
   useEffect(() => {
     loadOrders()
@@ -15,11 +14,10 @@ export function Trips() {
   async function loadOrders() {
     try {
       const orders = await orderService.getOrdersByBuyer()
-      console.log('Loaded orders in Trips:', orders)
       setOrders(orders)
     } catch (err) {
       console.error('Failed to load orders:', err)
-      setError(err.message)
+      showErrorMsg('Failed to load orders')
     } finally {
       setIsLoading(false)
     }
@@ -27,16 +25,30 @@ export function Trips() {
 
   async function onRemoveOrder(orderId) {
     try {
-      await orderService.remove(orderId)
-      setOrders(orders.filter(order => order._id !== orderId))
+      await orderService.updateOrderStatus(orderId, 'cancelled')
+      setOrders(orders.map(order => 
+        order._id === orderId 
+          ? { ...order, status: 'cancelled' }
+          : order
+      ))
     } catch (err) {
-      console.error('Failed to remove order:', err)
-      showErrorMsg('Failed to remove order')
+      console.error('Failed to cancel order:', err)
+      showErrorMsg('Failed to cancel order')
     }
   }
 
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error: {error}</div>
+  if (isLoading) return (
+    <div className="loading-trips">
+      <div className="loader-container">
+        <div className="loader-dots">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  )
   if (!orders.length) return <div className="no-trips">No trips booked yet</div>
 
   return (
@@ -60,18 +72,19 @@ export function Trips() {
               <tr key={order._id}>
                 <td>
                   <div className="stay-info">
-                    <img src={order.stay.imgUrls[0]} alt={order.stay.name} />
+                    <img src={order.stay.imgUrls?.[0] || '/img/stays/default.jpg'} alt={order.stay.name} />
                     <div>
                       <h3>{order.stay.name}</h3>
-                      <p>{order.stay.loc.city}, {order.stay.loc.country}</p>
+                      <p>{order.stay.loc?.city || ''}, {order.stay.loc?.country || ''}</p>
                     </div>
                   </div>
                 </td>
                 <td>
-                  {new Date(order.startDate).toLocaleDateString()} - 
-                  {new Date(order.endDate).toLocaleDateString()}
+                  {order.startDate} - {order.endDate}
                 </td>
-                <td>{order.guests.adults + order.guests.children} guests</td>
+                <td>
+                  {(order.guests?.adults || 0) + (order.guests?.children || 0)} guests
+                </td>
                 <td>${order.totalPrice}</td>
                 <td>
                   <span className={`status ${order.status}`}>
@@ -80,10 +93,11 @@ export function Trips() {
                 </td>
                 <td>
                   <button 
-                    className="remove-btn"
+                    className="cancel-btn"
                     onClick={() => onRemoveOrder(order._id)}
+                    disabled={order.status === 'cancelled'}
                   >
-                    <FaTrash />
+                    {order.status === 'cancelled' ? 'Cancelled' : 'Cancel Order'}
                   </button>
                 </td>
               </tr>

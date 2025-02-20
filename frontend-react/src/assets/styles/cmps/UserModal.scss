@@ -1,7 +1,7 @@
 .user-menu-modal {
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: -1px;
     transform: translateY(109%);
     background: white;
     border-radius: 12px;
@@ -40,7 +40,7 @@
     }
     .modal-link.enrollment {
         border-bottom: 1px solid #e0dddd; ;
-        padding-bottom: 15px;
+        padding-bottom: 8px;
     }
 }
 

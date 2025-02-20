@@ -1,7 +1,7 @@
 .trips-page {
     padding: 24px;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 60px auto;
 
     h1 {
         font-size: 32px;
@@ -76,6 +76,11 @@
                     background: #ffe6e6;
                     color: #b81717;
                 }
+
+                &.cancelled {
+                    background: #ffe6e6;
+                    color: #b81717;
+                }
             }
 
             .remove-btn {
@@ -94,11 +99,66 @@
             }
         }
     }
-
-    .no-trips {
-        text-align: center;
-        padding: 48px;
+    
+    
+    .cancel-btn {
+        background: none;
+        border: none;
         color: #717171;
-        font-size: 18px;
+        cursor: pointer;
+        padding: 8px 16px;
+        border-radius: 8px;
+        transition: all 0.2s;
+        font-size: 14px;
+        
+        &:hover:not(:disabled) {
+            background: #ffe6e6;
+            color: #ff385c;
+        }
+        
+        &:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
     }
 } 
+
+.no-trips {
+    text-align: center;
+    margin-top: 13em;
+    color: #02020279;
+    font-size: 25px;
+}
+
+.loading-trips {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    .loader-container {
+        text-align: center;
+    }
+
+    .loader-dots {
+        display: flex;
+        gap: 8px;
+        
+        div {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ff214a;
+            animation: bounce 0.5s infinite;
+
+            &:nth-child(2) { animation-delay: 0.1s; }
+            &:nth-child(3) { animation-delay: 0.2s; }
+            &:nth-child(4) { animation-delay: 0.3s; }
+        }
+    }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}

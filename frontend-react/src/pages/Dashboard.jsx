@@ -60,9 +60,18 @@ export const Dashboard = () => {
     { name: 'Jun', value: 16 }
   ]
 
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error: {error}</div>
-  if (!orders.length) return <div>No orders found</div>
+  if (isLoading) return (
+    <div className="loading-trips">
+      <div className="loader-container">
+        <div className="loader-dots">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  )
 
   return (
     <div className="dashboard-container">
