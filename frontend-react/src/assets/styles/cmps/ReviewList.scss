@@ -2,23 +2,9 @@
     display: grid;
     border-top: 0.5px solid #22222238;
     grid-template-columns: repeat(2, 1fr);
-    /* 2 columns, equal width */
     column-gap: 100px;
-    /* Space between grid items */
     grid-auto-flow: row;
 
     align-items: start;
-
-    // > * {
-    //     grid-row: 1;
-    // }
-
-    // .actions {
-    //     grid-column: 2;
-
-    //     button {
-    //         margin: 0;
-    //     }
-    // }
 
 }
