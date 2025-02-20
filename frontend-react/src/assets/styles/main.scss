@@ -22,7 +22,8 @@
 @import "pages/TaskDetails";
 @import "pages/SearchResults";
 @import "pages/Dashboard";
-@import "pages/login.scss";
+@import "pages/Trips.scss";
+@import "pages/Chat";
 
 // Components
 // @import "cmps/list.scss";
@@ -35,6 +36,7 @@
 // @import "cmps/UserMsg.scss";
 
 @import "cmps/StayOrder.scss";
+@import "cmps/Map.scss";
 @import "cmps/Calendar.scss";
 @import "cmps/SummaryModal.scss";
 @import "cmps/ReviewEdit.scss";

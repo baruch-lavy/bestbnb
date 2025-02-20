@@ -3,8 +3,9 @@ import { useSelector } from "react-redux";
 import { StayPreview } from "./StayPreview.jsx";
 import { CategoryFilter } from "./CategoryFilter.jsx";
 import { categories } from "../services/categories.service";
-import { Loader } from './Loader'
-import { useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
+// const location = useLocation();
 
 export function StayList() {
     const [searchParams , setSearchParams] = useSearchParams(); // ✅ Extract query params
@@ -112,20 +113,7 @@ export function StayList() {
         setIsLoading(true);
         setFilteredStays(allStays);
         setIsLoading(false);
-    }, [allStays , searchParams]); // ✅ Detects changes in all stays
-    
-
-    if (isLoading) {
-        return (
-            <div className="stay-index">
-                <CategoryFilter 
-                    onSelectCategory={handleCategorySelect}
-                    selectedCategory={selectedCategory}
-                />
-                <Loader />
-            </div>
-        );
-    }
+    }, [allStays])
 
     if (!filteredStays?.length) {
         return (
@@ -139,7 +127,7 @@ export function StayList() {
                     <p>Try adjusting your search criteria or removing some filters</p>
                 </div>
             </div>
-        );
+        )
     }
     
     return (

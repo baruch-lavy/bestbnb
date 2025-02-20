@@ -8,8 +8,16 @@ export const UserModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate()
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [isLoginMode, setIsLoginMode] = useState(true)
-  const [credentials, setCredentials] = useState({ username: '', password: '', fullname: '' })
+  const [credentials, setCredentials] = useState({ 
+    username: '', 
+    password: '', 
+    fullname: '',
+    email: '',
+    phone: '',
+    address: ''
+  })
   const [users, setUsers] = useState([])
+  const [isClosing, setIsClosing] = useState(false)
 
   useEffect(() => {
     loadUsers()
@@ -30,20 +38,47 @@ export const UserModal = ({ isOpen, onClose }) => {
     setShowAuthModal(true)
   }
 
+  const handleModeSwitch = () => {
+    setIsLoginMode(!isLoginMode)
+  }
+
+  const closeWithAnimation = () => {
+    setIsClosing(true)
+    setTimeout(() => {
+      setIsClosing(false)
+      setShowAuthModal(false)
+      setCredentials({ username: '', password: '', fullname: '', email: '', phone: '', address: '' })
+      onClose()
+    }, 300)
+  }
+
+  const handleSocialLogin = (provider) => {
+    closeWithAnimation()
+  }
+
+  const handleGuestLogin = () => {
+    closeWithAnimation()
+  }
+
   async function handleSubmit(ev) {
     ev.preventDefault()
     if (!credentials.username) return
 
     try {
-      if (isLoginMode) {
-        await login(credentials)
-      } else {
-        await signup(credentials)
-      }
-      setShowAuthModal(false)
-      onClose()
+        let user
+        if (isLoginMode) {
+            user = await login(credentials)
+        } else {
+            user = await signup(credentials)
+        }
+        console.log('Logged in user:', user)
+        
+        if (user) {
+            closeWithAnimation()
+            window.location.reload()
+        }
     } catch (err) {
-      console.error('Failed to authenticate:', err)
+        console.error('Failed to authenticate:', err)
     }
   }
 
@@ -67,16 +102,20 @@ export const UserModal = ({ isOpen, onClose }) => {
         <div className="user-menu-modal">
           <div className="modal-links">
             <button className="modal-link" onClick={() => handleAuthClick('login')}>
-              Login
+              Log in
             </button>
-            <button className="modal-link" onClick={() => handleAuthClick('signup')}>
-              Signup
+            <button className="modal-link enrollment" onClick={() => handleAuthClick('signup')}>
+              Sign up
             </button>
             <button className="modal-link" onClick={handleDashboardClick}>
               Dashboard
             </button>
-            <button className="close-btn" onClick={() => setShowAuthModal(false)}>×</button>
-
+            <button className="modal-link" onClick={() => {
+              onClose()
+              navigate('/trips')
+            }}>
+              Trips
+            </button>
           </div>
         </div>
       )}
@@ -84,31 +123,20 @@ export const UserModal = ({ isOpen, onClose }) => {
       {/* Auth Modal */}
       {showAuthModal && (
         <div className="modal-overlay" onClick={handleOverlayClick}>
-          <div className="auth-modal" onClick={e => e.stopPropagation()}>
-            <button className="close-btn" onClick={() => setShowAuthModal(false)}>×</button>
-            
+          <div 
+            className={`auth-modal ${isClosing ? 'closing' : ''}`} 
+            onClick={e => e.stopPropagation()}
+          >
             <div className="modal-header">
               <h2>{isLoginMode ? 'Log in' : 'Sign up'}</h2>
+              <button className="close-btn" onClick={() => setShowAuthModal(false)}>×</button>
             </div>
 
             <div className="modal-content">
               <h3>Welcome to Bestbnb</h3>
               
               <form onSubmit={handleSubmit}>
-                {isLoginMode ? (
-                  <select
-                    name="username"
-                    value={credentials.username}
-                    onChange={handleChange}
-                    required>
-                    <option value="">Choose your account</option>
-                    {users.map(user => 
-                      <option key={user._id} value={user.username}>
-                        {user.fullname}
-                      </option>
-                    )}
-                  </select>
-                ) : (
+                {!isLoginMode && (
                   <>
                     <input
                       type="text"
@@ -119,25 +147,52 @@ export const UserModal = ({ isOpen, onClose }) => {
                       required
                     />
                     <input
-                      type="text"
-                      name="username"
-                      placeholder="Username"
-                      value={credentials.username}
+                      type="email"
+                      name="email"
+                      placeholder="Email"
+                      value={credentials.email}
                       onChange={handleChange}
                       required
                     />
                     <input
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      value={credentials.password}
+                      type="tel"
+                      name="phone"
+                      placeholder="Phone number"
+                      value={credentials.phone}
+                      onChange={handleChange}
+                      required
+                    />
+                    <input
+                      type="text"
+                      name="address"
+                      placeholder="Address"
+                      value={credentials.address}
                       onChange={handleChange}
                       required
                     />
                   </>
                 )}
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  value={credentials.username}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={credentials.password}
+                  onChange={handleChange}
+                  required
+                />
 
-                <button className="primary-btn" disabled={!credentials.username}>
+                <button 
+                  className="primary-btn" 
+                  disabled={!credentials.username || (!isLoginMode && !(credentials.fullname && credentials.email && credentials.phone && credentials.address))}
+                >
                   Continue
                 </button>
               </form>
@@ -147,16 +202,25 @@ export const UserModal = ({ isOpen, onClose }) => {
               </div>
 
               <div className="social-buttons">
-                <button className="social-btn">
+                <button 
+                  type="button"
+                  className="social-btn"
+                  onClick={() => handleSocialLogin('Google')}>
                   <FaGoogle /> Continue with Google
                 </button>
-                <button className="social-btn">
+                <button 
+                  type="button"
+                  className="social-btn"
+                  onClick={() => handleSocialLogin('Facebook')}>
                   <FaFacebook /> Continue with Facebook
                 </button>
               </div>
 
               {isLoginMode && (
-                <button className="guest-btn">
+                <button 
+                  type="button"
+                  className="guest-btn"
+                  onClick={handleGuestLogin}>
                   <FaUserCircle /> Continue as Guest
                 </button>
               )}
@@ -166,7 +230,7 @@ export const UserModal = ({ isOpen, onClose }) => {
                   {isLoginMode ? "Don't have an account? " : "Already have an account? "}
                   <button 
                     className="switch-mode-btn"
-                    onClick={() => setIsLoginMode(!isLoginMode)}>
+                    onClick={handleModeSwitch}>
                     {isLoginMode ? 'Sign up' : 'Log in'}
                   </button>
                 </p>
