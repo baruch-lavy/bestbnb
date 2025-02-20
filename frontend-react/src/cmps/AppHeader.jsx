@@ -158,7 +158,7 @@ export const AppHeader = () => {
 
         <div className="right-section">
           <span className="host">Bestbnb your home</span>
-          <FaGlobe className="icon" />
+          {/* <FaGlobe className="icon" /> */}
           <div className="profile-menu" onClick={handleUserIconClick}>
             <FaBars className="menu-icon" />
             <FaUserCircle className="user-icon" />
