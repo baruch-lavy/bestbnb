@@ -118,6 +118,7 @@
   flex: 1;
   position: relative;
   padding: 8px 16px;
+  padding-right: 0;
   border-radius: 50px;
   transition: background 0.2s ease-in-out;
   height: 66px;  // ✅ Centers text inside the section
@@ -264,6 +265,15 @@
     color: #717171;
     font-weight: 400;
   }
+
+}
+
+.dates-divider{
+  position: absolute;
+  width: 0.7px;
+  height: 32px;
+  background: #ddd;
+  left: 135px;
 }
 
 /* ✅ Hover effect for the whole date field */

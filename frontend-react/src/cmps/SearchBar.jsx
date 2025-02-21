@@ -206,7 +206,7 @@ export const SearchBar = ({
                 readOnly
               />
             </div>
-            <div className="divider"></div>
+            <div className="dates-divider"></div>
             <div className="date-input">
               <span>Check out</span>
               <input
