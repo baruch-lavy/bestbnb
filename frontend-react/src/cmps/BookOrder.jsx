@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { userService } from '../services/user.service'
-import { orderService } from '../services/order/order.service.remote'
+import { orderService } from '../services/order/order.service.local'
 
 
 export function BookOrder() {
@@ -83,7 +83,7 @@ export function BookOrder() {
                     _id: loggedInUser._id,
                     fullname: loggedInUser.fullname,
                 },
-                totalPrice: parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee)).toLocaleString(),
+                totalPrice: parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee)),
                 startDate: formatDate(searchData.startDate),
                 endDate: formatDate(searchData.endDate),
                 guests: {
@@ -99,11 +99,13 @@ export function BookOrder() {
                 msgs: []
             }
             
-            await orderService.save(newOrder , event)
+            const savedOrder = await orderService.save(newOrder)
+            console.log('Order saved:', savedOrder)
+            
         } catch (error) {
             console.error('Failed to submit order:', error)
-            // } finally {
-            //     setIsBooked(false)
+            setIsBooked(false) // Reset on error
+            // Optionally show error message to user
         }
     }
 
@@ -195,10 +197,10 @@ export function BookOrder() {
                         </div>
 
                         <div className="reservation-status">
-                            <p>Your reservation won’t be confirmed until the Host accepts your request (within 24 hours). You won’t be charged until then.</p>
+                            <p>Your reservation won't be confirmed until the Host accepts your request (within 24 hours). You won't be charged until then.</p>
                         </div>
                         <div className="agreement-terms">
-                            <p>By selecting the button below, I agree to the <span>Host's House Rules, Ground rules for guests, Airbnb's Rebooking and Refund Policy,</span> and that Airbnb can <span>charge my payment method</span> if I’m responsible for damage.</p>
+                            <p>By selecting the button below, I agree to the <span>Host's House Rules, Ground rules for guests, Airbnb's Rebooking and Refund Policy,</span> and that Airbnb can <span>charge my payment method</span> if I'm responsible for damage.</p>
                         </div>
                     </div>
                 )}
