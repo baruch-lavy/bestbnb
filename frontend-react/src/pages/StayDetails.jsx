@@ -94,7 +94,8 @@ console.log('searchData:', searchData);
           {/* {stay && */}
           <div className="stay-short-info">
             <h3 className="info-header">{stay.type} in {stay.loc.city}, {stay.loc.country}</h3>
-            <h5 className="info">{stay.capacity} guests · {stay.bedrooms} bedrooms · {stay.beds} beds · {stay.baths} bath</h5>
+            <h5 className="info">{stay.capacity} guests · {stay.bedrooms} bedrooms</h5> 
+            {/* · {stay.beds} beds · {stay.baths} bath */}
             <h4 className="rate">★ {parseFloat((Math.random() * (5 - 4) + 4).toFixed(2))} · {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4>
           </div>
 
@@ -125,7 +126,7 @@ console.log('searchData:', searchData);
 
       <div className="reviw-and-map">
         <ReviewList reviews={stay.reviews} />
-        <Map />
+        <Map loc={stay.loc}/>
       </div>
       {/* // } */}
       {/* <button onClick={() => { onAddStayMsg(stay._id) }}>Add stay msg</button> */}

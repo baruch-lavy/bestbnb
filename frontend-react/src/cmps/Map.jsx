@@ -13,9 +13,9 @@ function Marker() {
 const API_KEY =
   import.meta.env.GOOGLE_MAP_API || 'AIzaSyDMZRuz51lshuCi8Jkp3-RLZdYL_NJ6dzU'
 
-export function Map() {
-  const [coordinates, setCoordinates] = useState({ lat: 32.0853, lng: 34.7818 })
-  const [zoom, setZoom] = useState(8)
+export function Map({loc}) {
+  const [coordinates, setCoordinates] = useState({ lat: 50.816348, lng: 22.532209 })
+  const [zoom, setZoom] = useState(11)
 
   function handleClick({ lat, lng }) {
     setCoordinates({ lat, lng })
@@ -25,8 +25,8 @@ export function Map() {
       city: 'Haifa',
       id: 101,
       position: {
-        lat: 32.820789,
-        lng: 34.963488,
+        lat: 50.816348,
+        lng: 22.532209,
       },
     }
   ]

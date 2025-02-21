@@ -2,7 +2,7 @@
     display: grid;
     margin: 0;
     grid-template-columns: 1fr 1120px 1fr;
-    grid-template-rows: repeat(4, minmax(200px, auto));
+    grid-template-rows: repeat(3, minmax(200px, auto));
     min-height: 100vh;
     // overflow-y: auto;
 

@@ -70,19 +70,21 @@
             img {
                 width: rem(32px);
                 height: rem(32px);
+                align-self: center;
             }
 
             .booking-highlights-text {
                 h5 {
                     font-size: rem(16px);
                     line-height: rem(20px);
+                    margin: 0 0 7px 0;
                 }
 
                 h6 {
                     font-size: rem(16px);
                     line-height: rem(20px);
                     font-weight: 100;
-                    margin-bottom: 0;
+                    margin: 0;
                 }
             }
 
@@ -116,6 +118,7 @@
                     h3 {
                         font-size: rem(16px);
                         line-height: rem(20px);
+                        margin: 0;
                     }
 
                     p {
@@ -179,7 +182,7 @@
             }
         }
 
-        .reserve-btn{
+        .reserve-btn {
             font-size: rem(18px);
             line-height: rem(24px);
             width: 200px;
@@ -224,14 +227,16 @@
                         font-size: 1rem;
                         line-height: rem(20px);
                         font-weight: bold;
+                        margin: 0 0 5px 0;
                     }
 
                     h5 {
                         font-size: rem(14px);
                         line-height: rem(18px);
                         font-weight: 100;
+                        margin: 0 0 5px 0;
 
-                        span{
+                        span {
                             font-weight: bold;
                         }
                     }
@@ -241,12 +246,12 @@
 
             .mini-stay-price-details-header {
                 flex-direction: column;
-    
+
                 &>h3 {
                     font-size: rem(22px);
                     line-height: rem(26px);
                     margin-top: 24px;
-                  margin-bottom: 8px;
+                    margin-bottom: 8px;
                 }
 
                 > :last-child {
@@ -255,11 +260,12 @@
                     margin-top: rem(24px) !important;
                     border-top: 0.5px solid #3a39392f;
                 }
-    
-                .footer-price-clean-fee :first-child ,.footer-price-airbnb-fee :first-child{
+
+                .footer-price-clean-fee :first-child,
+                .footer-price-airbnb-fee :first-child {
                     text-decoration: underline;
                 }
-    
+
                 &>*:not(:first-child) {
                     justify-content: space-between;
                     font-size: rem(16px);
