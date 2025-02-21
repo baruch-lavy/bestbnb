@@ -6,19 +6,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow, faBuilding, faUmbrellaBeach, faUtensils, faLandmark } from "@fortawesome/free-solid-svg-icons";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { format } from 'date-fns'
 
 export const StickySearchBar = ({ openDropdown, handleDropdownOpen, handleSearch }) => {
   const dispatch = useDispatch();
   const search = useSelector((state) => state.search);
 
   const destinations = [
-    { icon: faLocationArrow, name: "Nearby", description: "Find what’s around you" },
     { icon: faUmbrellaBeach, name: "Tel Aviv-Yafo, Israel", description: "Popular beach destination" },
     { icon: faBuilding, name: "Bucharest, Romania", description: "For sights like Cismigiu Gardens" },
     { icon: faLandmark, name: "Paris, France", description: "For its bustling nightlife" },
     { icon: faBuilding, name: "Budapest, Hungary", description: "For its stunning architecture" },
     { icon: faUtensils, name: "Istanbul, Türkiye", description: "For its top-notch dining" },
   ];
+
+  const formatDateRange = (startDate, endDate) => {
+    if (!startDate || !endDate) return "Any week";
+    return `${format(new Date(startDate), "d MMM")} - ${format(new Date(endDate), "d MMM")}`;
+  };
 
   return (
     <div className="sticky-search-bar">
@@ -32,9 +37,7 @@ export const StickySearchBar = ({ openDropdown, handleDropdownOpen, handleSearch
 
         {/* DATES - Click to open dropdown */}
         <span className="sticky-item" onClick={() => handleDropdownOpen("dates")}>
-          {search.startDate && search.endDate
-            ? `${new Date(search.startDate).toLocaleDateString()} - ${new Date(search.endDate).toLocaleDateString()}`
-            : "Any week"}
+        {formatDateRange(search.startDate, search.endDate)}
         </span>
 
         <span className="sticky-divider">|</span>

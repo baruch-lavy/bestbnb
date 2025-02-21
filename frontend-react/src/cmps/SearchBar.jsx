@@ -26,6 +26,10 @@ export const SearchBar = ({
   const dropdownRef = useRef(null);
   const datePickerRef = useRef(null);
   const guestDropdownRef = useRef(null);
+  const dateInputRef = useRef(null);
+  const guestInputRef = useRef(null);
+
+
 
   const destinations = [
     {
@@ -89,6 +93,35 @@ export const SearchBar = ({
     );
   };
 
+  const handleDestinationSelect = (destination) => {
+    console.log("Selected destination:", destination);
+    if (!destination) return;
+  
+    setTimeout(() => {
+      if (dateInputRef?.current) {
+        dateInputRef.current.focus();
+        dateInputRef.current.click(); // ✅ Trigger click if focus fails
+        console.log("Focus Date Picker");
+      }
+    }, 100);
+  };
+
+  const handleDateSelect = (dates) => {
+    console.log("Selected dates:", dates);
+    if (!dates[1]) return;
+  
+    setTimeout(() => {
+      if (guestInputRef?.current) {
+        guestInputRef.current.focus(); // ✅ Move focus to "Who" (Guests) input
+        guestInputRef.current.click(); // ✅ Trigger click if focus fails
+        console.log("Focus Guests Input");
+      }
+    }, 210); // ✅ Small delay allows UI updates first
+  };
+  
+  
+  
+
   return (
     <div className="search-container">
       <div className={`search-bar ${openDropdown ? "expanded" : ""}`}>
@@ -133,8 +166,10 @@ export const SearchBar = ({
                       setSearchData({
                         ...search,
                         destination: dest.name,
-                      })
-                    );
+                      }
+                    )
+                  );
+                    handleDestinationSelect(dest.name);
                     handleDropdownOpen(null);
                   }}
                 >
@@ -162,6 +197,7 @@ export const SearchBar = ({
               <input
                 type="text"
                 placeholder="Add dates"
+                ref={dateInputRef}
                 value={
                   search.startDate
                     ? new Date(search.startDate).toLocaleDateString()
@@ -170,7 +206,7 @@ export const SearchBar = ({
                 readOnly
               />
             </div>
-            <div className="divider"></div>
+            <div className="dates-divider"></div>
             <div className="date-input">
               <span>Check out</span>
               <input
@@ -200,7 +236,7 @@ export const SearchBar = ({
                       endDate: end || null, // ✅ Explicitly set `null` to trigger Redux update
                     })
                   );
-
+                  handleDateSelect(dates);
                   if (end) setTimeout(() => handleDropdownOpen(null), 200);
                 }}
                 startDate={search.startDate ? new Date(search.startDate) : null}
@@ -217,10 +253,11 @@ export const SearchBar = ({
 
         {/* WHO Section */}
         <div className="search-section who-section" ref={guestDropdownRef}>
-          <span>Who</span>
+          <span className="who-span">Who</span>
           <input
             type="text"
             placeholder="Add guests"
+            ref={guestInputRef}
             value={
               (search.guests?.adults || 0) + (search.guests?.children || 0) > 0
                 ? `${

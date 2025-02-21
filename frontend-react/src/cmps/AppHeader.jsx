@@ -20,7 +20,7 @@ export const AppHeader = () => {
   const dispatch = useDispatch();
   const searchData = useSelector((state) => state.search);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
-console.log('searchData:', searchData);
+// console.log('searchData:', searchData);
   // ✅ Sync Redux with URL params when the page loads
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
