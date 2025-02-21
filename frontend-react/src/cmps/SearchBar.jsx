@@ -253,7 +253,7 @@ export const SearchBar = ({
 
         {/* WHO Section */}
         <div className="search-section who-section" ref={guestDropdownRef}>
-          <span>Who</span>
+          <span className="who-span">Who</span>
           <input
             type="text"
             placeholder="Add guests"

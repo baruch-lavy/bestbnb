@@ -18,7 +18,7 @@
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 40px; // ✅ Adjusted for a perfect match
-//   padding: 10px 14px; // ✅ Reduced padding for correct height
+  // padding: 10px 14px; // ✅ Reduced padding for correct height
   width: 850px; // ✅ Adjust width to match the image
   height: 66px; // ✅ Ensure correct height
   gap: 12px; // ✅ Proper spacing
@@ -34,25 +34,14 @@
 }
 
 /* Individual Sections */
-.search-section {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: flex-start;
-//   position: relative;
-//   flex: 1;
-}
 
-// .search-section:hover {
-//     background: rgba(200, 200, 200, 0.2); /* Light gray with slight transparency */
-//     border-radius: 12px; /* Subtle rounded edges instead of an extreme oval */
-//     transition: background 0.2s ease-in-out; /* Smooth transition */
-// }
 
 .search-section span {
   font-size: 12px;
   font-weight: bold;
   color: #222;
   margin-bottom: 3px;
+  // padding-top: 5px;
 }
 
 .search-section input {
@@ -468,10 +457,11 @@
 .guest-btn {
   width: 32px;
   height: 32px;
-  border: 1px solid #ddd;
+  border: 1px solid #373636;
   border-radius: 50%;
   background: white;
   font-size: 18px;
+  color: #373636;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -498,6 +488,34 @@
   &:hover {
     color: #222;
   }
+}
+
+.search-section.who-section {
+  position: relative;
+  padding: 3.2px 16px;
+  border-radius: 50px;
+  transition: background 0.2s ease-in-out;
+  height: 70px;  // ✅ Centers text inside the section
+  
+
+  &:hover,
+  &:focus-within {
+    background: #ebebeb; // ✅ Airbnb's actual hover color
+    border-radius: 50px;
+    transition: background 0.2s ease-in-out;
+  }
+   
+  input {
+    border: none;
+    padding-top: 36px;
+  }
+
+}
+
+.who-span{
+  position: absolute;
+  top: 10.7px;
+  right: 5;
 }
 
 // .dropdown,
