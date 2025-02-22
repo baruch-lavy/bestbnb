@@ -14,8 +14,8 @@ const API_KEY =
   import.meta.env.GOOGLE_MAP_API || 'AIzaSyDMZRuz51lshuCi8Jkp3-RLZdYL_NJ6dzU'
 
 export function Map({loc}) {
-  const [coordinates, setCoordinates] = useState({ lat: 50.816348, lng: 22.532209 })
-  const [zoom, setZoom] = useState(11)
+  const [coordinates, setCoordinates] = useState({ lat: 40.782388, lng:  -73.957528 })
+  const [zoom, setZoom] = useState(13)
 
   function handleClick({ lat, lng }) {
     setCoordinates({ lat, lng })
@@ -42,8 +42,8 @@ export function Map({loc}) {
           onClick={handleClick}
         >
           <Marker
-            lat={branches[0].position.lat}
-            lng={branches[0].position.lng}
+            lat={coordinates.lat}
+            lng={coordinates.lng}
             key={branches[0].id}
           />
         </GoogleMapReact>
