@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { userService } from '../services/user.service'
-import { orderService } from '../services/order/order.service.local'
+import { orderService } from '../services/order'
 import { Loading } from './Loading'
 
 export function BookOrder() {
@@ -94,6 +94,9 @@ export function BookOrder() {
                     _id: stay._id,
                     name: stay.name,
                     price: stay.price,
+                    imgUrl: stay.imgUrls[0],
+                    city: stay.loc.city,
+                    country: stay.loc.country,
                 },
                 status: 'pending',
                 msgs: []

@@ -75,7 +75,7 @@ export const UserModal = ({ isOpen, onClose }) => {
         
         if (user) {
             closeWithAnimation()
-            window.location.reload()
+            // window.location.reload()
         }
     } catch (err) {
         console.error('Failed to authenticate:', err)

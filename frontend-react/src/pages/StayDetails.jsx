@@ -102,7 +102,7 @@ export function StayDetails() {
             <img src={stay.host.imgUrl} alt="Host" className="host-avatar" style={{ borderRadius: '50%', width: '2rem', height: '2rem', objectFit: 'cover' }} />
             <div className="host-short-details">
               <h4>Hosted by {stay.host.fullname}</h4>
-              <span className="superhost">Superhost · {stay.host.yearsHosting} years hosting</span>
+              <span className="superhost">{stay.host.isSuperhost && 'Superhost ·'}  {(parseInt(Math.random() * 12) + 2)} years hosting</span>
             </div>
           </div>
 

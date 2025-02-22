@@ -63,10 +63,10 @@ export function Trips() {
               <tr key={order._id}>
                 <td>
                   <div className="stay-info">
-                    <img src={order.stay.imgUrls?.[0] || '/img/stays/default.jpg'} alt={order.stay.name} />
+                    <img src={order.stay.imgUrl || '/img/stays/default.jpg'} alt={order.stay.name} />
                     <div>
                       <h3>{order.stay.name}</h3>
-                      <p>{order.stay.loc?.city || ''}, {order.stay.loc?.country || ''}</p>
+                      <p>{order.stay.city || ''}, {order.stay.country || ''}</p>
                     </div>
                   </div>
                 </td>
