@@ -1,11 +1,13 @@
 // Calendar.js
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux'
 import DatePicker from 'react-datepicker';
 import { DayPicker } from 'react-day-picker';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-day-picker/style.css';
 
-export function Calendar() {
+export function Calendar({ stay }) {
+  const searchData = useSelector((state) => state.search);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
@@ -18,17 +20,37 @@ export function Calendar() {
     }
   }
 
+  const start = new Date(searchData.startDate);
+  const end = new Date(searchData.endDate);
+  const timeDifference = end - start;
+  const stayLength = (timeDifference) ? timeDifference / (1000 * 3600 * 24) : ''
+
+  function formatDate(date) {
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  }
+
+
+  const [selectedDays, setSelectedDays] = useState([
+    new Date(2025, 2, 12), // Mar 12, 2025
+    new Date(2025, 2, 16)  // Mar 16, 2025
+  ]);
 
   return (
     <div className="details-calendar-container">
-      <h3>9 nights in Taylors Island</h3>
-      <h6>Mar 16, 2025 - May 23, 2025</h6>
+      <h3>{stayLength} nights in {stay.name}</h3>
+      <h6>{formatDate(start)} - {formatDate(end)}</h6>
 
       <div className="calendar">
         <DayPicker
           captionLayout="label"
           min={1}
           mode="range"
+          selectedDays={selectedDays}
+          selected={selectedDays}
           numberOfMonths={2}
           showOutsideDays
           onDayClick={handleDayClick}/>
