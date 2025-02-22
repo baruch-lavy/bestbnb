@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FaUsers, FaMoneyBillWave, FaExchangeAlt, FaChartLine } from 'react-icons/fa'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
 import { orderService } from '../services/order/order.service.local'
+import { Loading } from '../cmps/Loading'
 
 export const Dashboard = () => {
   const [orders, setOrders] = useState([])
@@ -60,18 +61,19 @@ export const Dashboard = () => {
     { name: 'Jun', value: 16 }
   ]
 
-  if (isLoading) return (
-    <div className="loading-trips">
-      <div className="loader-container">
-        <div className="loader-dots">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-    </div>
-  )
+  // if (isLoading) return (
+  //   <div className="loading-trips">
+  //     <div className="loader-container">
+  //       <div className="loader-dots">
+  //         <div></div>
+  //         <div></div>
+  //         <div></div>
+  //         <div></div>
+  //       </div>
+  //     </div>
+  //   </div>
+  // )
+  if (isLoading) return < Loading />
 
   return (
     <div className="dashboard-container">
@@ -183,7 +185,6 @@ export const Dashboard = () => {
         <table className="orders-table">
           <thead>
             <tr>
-              <th>Order ID</th>
               <th>Stay</th>
               <th>Guest</th>
               <th>Dates</th>
@@ -195,7 +196,6 @@ export const Dashboard = () => {
           <tbody>
             {orders.map(order => (
               <tr key={order._id}>
-                <td>{order._id}</td>
                 <td>{order.stay.name}</td>
                 <td>{order.guest.fullname}</td>
                 <td>{`${order.startDate} - ${order.endDate}`}</td>

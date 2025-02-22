@@ -96,8 +96,6 @@ export function StayPreview({ stay , queryParams }) {
         }
     }
 
-    // if (!stay) return <Loader />
-
     return (
         <>
             <article className="stay-preview">

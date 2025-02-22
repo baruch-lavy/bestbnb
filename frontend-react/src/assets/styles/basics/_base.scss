@@ -47,4 +47,35 @@ input {
     max-width: 100%;
 }
 
+.loading-trips {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 
+    .loader-container {
+        text-align: center;
+    }
+
+    .loader-dots {
+        display: flex;
+        gap: 8px;
+        
+        div {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ff214a;
+            animation: bounce 0.5s infinite;
+
+            &:nth-child(2) { animation-delay: 0.1s; }
+            &:nth-child(3) { animation-delay: 0.2s; }
+            &:nth-child(4) { animation-delay: 0.3s; }
+        }
+    }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { orderService } from '../services/order/order.service.local'
 import { showErrorMsg } from '../services/event-bus.service'
 import { FaTrash } from 'react-icons/fa'
+import { Loading } from '../cmps/Loading'
 
 export function Trips() {
   const [orders, setOrders] = useState([])
@@ -37,18 +38,8 @@ export function Trips() {
     }
   }
 
-  if (isLoading) return (
-    <div className="loading-trips">
-      <div className="loader-container">
-        <div className="loader-dots">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-    </div>
-  )
+  if (isLoading) return < Loading />
+
   if (!orders.length) return <div className="no-trips">No trips booked yet</div>
 
   return (

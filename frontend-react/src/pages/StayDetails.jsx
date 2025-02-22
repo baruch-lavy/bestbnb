@@ -12,8 +12,7 @@ import { Map } from '../cmps/Map.jsx'
 import { Calendar } from '../cmps/Calendar.jsx'
 import { SummaryModal } from '../cmps/SummaryModal.jsx'
 import { StayOrder } from '../cmps/StayOrder.jsx'
-
-
+import { Loading } from '../cmps/Loading.jsx'
 
 
 export function StayDetails() {
@@ -51,7 +50,7 @@ export function StayDetails() {
 
   }
 
-  if (!stay) return <p>loading</p>
+  if (!stay) return < Loading />
 
   return (
     <section className="stay-details">
