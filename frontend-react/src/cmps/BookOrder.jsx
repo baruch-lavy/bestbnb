@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { userService } from '../services/user.service'
 import { orderService } from '../services/order/order.service.local'
-
+import { Loading } from './Loading'
 
 export function BookOrder() {
     const { stayId } = useParams()
@@ -120,7 +120,7 @@ export function BookOrder() {
     //     } 
     // })
 
-    if (!stay) return <div>Loading...</div>
+    if (!stay) return < Loading />
     return (
         <section className="book-order-container">
 
