@@ -14,7 +14,8 @@ export const UserModal = ({ isOpen, onClose }) => {
     fullname: '',
     email: '',
     phone: '',
-    address: ''
+    address: '',
+    orders : []
   })
   const [users, setUsers] = useState([])
   const [isClosing, setIsClosing] = useState(false)
@@ -47,7 +48,7 @@ export const UserModal = ({ isOpen, onClose }) => {
     setTimeout(() => {
       setIsClosing(false)
       setShowAuthModal(false)
-      setCredentials({ username: '', password: '', fullname: '', email: '', phone: '', address: '' })
+      setCredentials({ username: '', password: '', fullname: '', email: '', phone: '', address: '' , orders : [] })
       onClose()
     }, 300)
   }
@@ -70,12 +71,13 @@ export const UserModal = ({ isOpen, onClose }) => {
             user = await login(credentials)
         } else {
             user = await signup(credentials)
+            console.log('user:', user , 'credentials :', credentials);
         }
         console.log('Logged in user:', user)
         
         if (user) {
             closeWithAnimation()
-            window.location.reload()
+            // window.location.reload()
         }
     } catch (err) {
         console.error('Failed to authenticate:', err)

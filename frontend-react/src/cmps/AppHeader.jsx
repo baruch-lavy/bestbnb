@@ -20,7 +20,10 @@ export const AppHeader = () => {
   const dispatch = useDispatch();
   const searchData = useSelector((state) => state.search);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
-// console.log('searchData:', searchData);
+  const user = useSelector((state) => state.userModule.user);
+  // console.log('user:', user);
+
+
   // ✅ Sync Redux with URL params when the page loads
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
@@ -130,11 +133,6 @@ console.log('filterBy:', filterBy);
       <header className={`header ${showSticky ? "sticky-header" : ""} ${isDetailsPage ? "details-header" : ""}`}>
         <div className="left-section">
         <a href="/stay">
-          {/* <img 
-            src="/img/stays/bestbnb-logo.svg"
-            alt="Bestbnb Logo"
-            className="logo" 
-          /> */}
         <div className="logo-wrapper">
           <FaAirbnb className="logo" /> 
           <span className="logo-text">bestbnb</span>
@@ -162,7 +160,21 @@ console.log('filterBy:', filterBy);
           {/* <FaGlobe className="icon" /> */}
           <div className="profile-menu" onClick={handleUserIconClick}>
             <FaBars className="menu-icon" />
-            <FaUserCircle className="user-icon" />
+
+            {user ? (
+          <div className="user-info">
+            <div className="user-icon-container">
+              <FaUserCircle className="user-icon" />
+              <span className="user-initial">
+                {user.fullname.charAt(0).toUpperCase()}
+              </span>
+            </div>
+          </div>
+        ) : (
+          <FaUserCircle className="user-icon" />
+          
+        )}
+             
         <UserModal 
           isOpen={isUserModalOpen} 
           onClose={() => setIsUserModalOpen(false)} 

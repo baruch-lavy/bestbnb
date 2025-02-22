@@ -121,6 +121,35 @@ body {
     }
   }
 
+
+  .user-icon-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .user-icon {
+    font-size: 36px;  /* Adjust size as needed */
+    color: #222; /* Dark icon */
+  }
+  
+  .user-initial {
+    position: absolute;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+  }
+  
+
   /** STICKY SEARCH BAR - POSITIONED IN THE CENTER **/
   .sticky-search-wrapper {
     position: absolute;

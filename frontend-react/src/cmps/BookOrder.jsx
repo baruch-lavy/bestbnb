@@ -77,7 +77,6 @@ export function BookOrder() {
         try {
             setIsBooked(true)
             const newOrder = {
-                _id: '',
                 hostId: stay.host,
                 guest: {
                     _id: loggedInUser._id,
