@@ -117,7 +117,9 @@ export function StayDetails() {
               summary={stay.summary}
             />
           </article>
+
           <StayAmenities amenities={stay.amenities} />
+          
           <Calendar />
         </section>
         <StayOrder stay={stay} />

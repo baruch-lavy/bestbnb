@@ -7,7 +7,7 @@ export function StayAmenities({ amenities }) {
         <article className="amenities">
             <h3>What this place offers</h3>
             <ul className="amenities-lines">
-                {amenities.slice(0, 5).map((amenity, index) => {
+                {amenities.slice(0, 10).map((amenity, index) => {
                     const icon = gAmenities.find(item => amenity === item.label);
                     if (!icon) return null; // If no matching icon found, don't render this item
                     
