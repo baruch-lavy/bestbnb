@@ -44,18 +44,23 @@ async function remove(orderId) {
 }
 
 async function save(order) {
-    
-    if (order._id) {
-        return storageService.put(STORAGE_KEY, order)
-    } else {
-        order._id = _makeId()
-        if (!order.status) order.status = 'pending'
-        if (!order.msgs) order.msgs = []
-        
-        const orders = await storageService.query(STORAGE_KEY)
-        orders.unshift(order)
-        storageService.saveToStorage(STORAGE_KEY, orders)
-        return order
+    try {
+        if (order._id) {
+            return storageService.put(STORAGE_KEY, order)
+        } else {
+            order._id = _makeId()
+            if (!order.status) order.status = 'pending'
+            if (!order.msgs) order.msgs = []
+            
+            const orders = await storageService.query(STORAGE_KEY)
+            orders.unshift(order)
+            await storageService.saveToStorage(STORAGE_KEY, orders)
+            console.log('Order saved successfully:', order)
+            return order
+        }
+    } catch (err) {
+        console.error('Failed to save order:', err)
+        throw err
     }
 }
 

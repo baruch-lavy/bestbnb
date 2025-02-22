@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { loadUsers, removeUser } from '../store/actions/user.actions'
 import { useNavigate } from 'react-router'
+import { Loading } from '../cmps/Loading'
 
 export function AdminIndex() {
     const navigate = useNavigate()
@@ -16,7 +17,7 @@ export function AdminIndex() {
 	}, [])
 
 	return <section className="admin">
-        {isLoading && 'Loading...'}
+        {isLoading && <Loading />}
         {users && (
             <ul>
                 {users.map(user => (

@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { SummaryModal } from '../cmps/SummaryModal.jsx'
+
+
 
 export function ReviewPreview({ review }) {
+    const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false)
     const { by, aboutUser } = review
 
     function getRandomDate() {
@@ -9,6 +14,9 @@ export function ReviewPreview({ review }) {
         const randomYear = Math.floor(Math.random() * (2024 - 2022 + 1)) + 2022;
         return `${randomMonth} ${randomYear}`;
     }
+
+    const length = 160
+    const isLongText = review.txt.length > length
 
     return <article className="review-preview">
         <div className="review-by flex">
@@ -25,11 +33,17 @@ export function ReviewPreview({ review }) {
                 ★★★★★ · <span>{getRandomDate()}</span> · Stayed a few nights
             </div>
             <p className="review-txt">{review.txt}</p>
-            <button className="show-more-review-txt">
-                {/* //   onClick={() => setIsSummaryModalOpen(true)}> */}
-                Show more
-                {/* <img src="/img/stays/asset23.svg" alt="" /> */}
-            </button>
+            {isLongText &&
+                <button className="show-more-review-txt"
+                    onClick={() => setIsSummaryModalOpen(true)}>
+                    Show more
+                </button>}
+                <SummaryModal
+        isOpen={isSummaryModalOpen}
+        onClose={() => setIsSummaryModalOpen(false)}
+        summary={review.txt}
+    />
         </div>
     </article>
 }
+//     

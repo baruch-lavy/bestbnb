@@ -1,6 +1,7 @@
 import { loadStays, addStay, updateStay, removeStay, addStayMsg } from '../store/actions/stay.actions'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { Loading } from '../cmps/Loading'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { stayService } from '../services/stay/'
@@ -18,6 +19,8 @@ export function StayIndex() {
     useEffect(() => {
         dispatch(loadStays()); // ✅ Fetch stays on mount
     }, [dispatch]);
+
+    if (!stays) return < Loading />
 
     return (
         <section className="stay-index">

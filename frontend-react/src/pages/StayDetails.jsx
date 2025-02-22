@@ -12,8 +12,7 @@ import { Map } from '../cmps/Map.jsx'
 import { Calendar } from '../cmps/Calendar.jsx'
 import { SummaryModal } from '../cmps/SummaryModal.jsx'
 import { StayOrder } from '../cmps/StayOrder.jsx'
-
-
+import { Loading } from '../cmps/Loading.jsx'
 
 
 export function StayDetails() {
@@ -23,7 +22,7 @@ export function StayDetails() {
   const [isImgLoading, setImgLoading] = useState(true)
   const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false)
   const searchData = useSelector((state) => state.search);
-console.log('searchData:', searchData);
+
   useEffect(() => {
     document.body.classList.add('details-page')
 
@@ -51,7 +50,7 @@ console.log('searchData:', searchData);
 
   }
 
-  if (!stay) return <p>loading</p>
+  if (!stay) return < Loading />
 
   return (
     <section className="stay-details">
@@ -94,8 +93,8 @@ console.log('searchData:', searchData);
           {/* {stay && */}
           <div className="stay-short-info">
             <h3 className="info-header">{stay.type} in {stay.loc.city}, {stay.loc.country}</h3>
-            <h5 className="info">{stay.capacity} guests · {stay.bedrooms} bedrooms</h5> 
-            {/* · {stay.beds} beds · {stay.baths} bath */}
+            <h5 className="info">{stay.capacity} guests · {stay.bedrooms} bedrooms · {stay.capacity} beds · {Math.floor(Math.random() * 3) + 2} baths</h5>
+
             <h4 className="rate">★ {parseFloat((Math.random() * (5 - 4) + 4).toFixed(2))} · {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4>
           </div>
 
@@ -103,9 +102,10 @@ console.log('searchData:', searchData);
             <img src={stay.host.imgUrl} alt="Host" className="host-avatar" style={{ borderRadius: '50%', width: '2rem', height: '2rem', objectFit: 'cover' }} />
             <div className="host-short-details">
               <h4>Hosted by {stay.host.fullname}</h4>
-              <span className="superhost">Superhost · {stay.host.yearsHosting} years hosting</span>
+              <span className="superhost">{stay.host.isSuperhost && 'Superhost ·'}  {(parseInt(Math.random() * 12) + 2)} years hosting</span>
             </div>
           </div>
+
           <article className="stay-summary">
             <p>{stay.summary}</p>
             <button className="show-more-summary"
@@ -126,7 +126,7 @@ console.log('searchData:', searchData);
 
       <div className="reviw-and-map">
         <ReviewList reviews={stay.reviews} />
-        <Map loc={stay.loc}/>
+        <Map loc={stay.loc} />
       </div>
       {/* // } */}
       {/* <button onClick={() => { onAddStayMsg(stay._id) }}>Add stay msg</button> */}
