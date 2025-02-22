@@ -15,30 +15,31 @@
 
 
         .back-icon {
-
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-
-            &:hover {
-                cursor: pointer;
-                background-color: gray;
-            }
-
+            width: 32px;
+            height: 32px;
+            
             img {
+                border-radius: 50%;
                 width: 16px;
                 height: 16px;
+                cursor: pointer;
+                transition: transform 0.2s ease-in-out;
+            }
+            
+            img:hover {
+                transform: scale(1.2);
             }
         }
 
         .success-header-content {
             display: flex;
-
+            align-items: center;
 
             h1 {
                 font-size: rem(32px);
                 line-height: rem(36px);
                 margin-bottom: 48px;
+                margin-left: 15px;
             }
 
             .success-icon {
