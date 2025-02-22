@@ -185,7 +185,6 @@ export const Dashboard = () => {
         <table className="orders-table">
           <thead>
             <tr>
-              <th>Order ID</th>
               <th>Stay</th>
               <th>Guest</th>
               <th>Dates</th>
@@ -197,7 +196,6 @@ export const Dashboard = () => {
           <tbody>
             {orders.map(order => (
               <tr key={order._id}>
-                <td>{order._id}</td>
                 <td>{order.stay.name}</td>
                 <td>{order.guest.fullname}</td>
                 <td>{`${order.startDate} - ${order.endDate}`}</td>
