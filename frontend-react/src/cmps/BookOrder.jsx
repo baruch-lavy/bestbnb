@@ -11,6 +11,8 @@ export function BookOrder() {
     const stay = useSelector(storeState => storeState.stayModule.stay)
     const searchData = useSelector((state) => state.search)
     const [isBooked, setIsBooked] = useState(false);
+    const user = useSelector((state) => state.userModule.user);
+    // console.log('user:', user);
 
     const loggedInUser = userService.getLoggedinUser() || {
         _id: 'u101',
@@ -79,8 +81,8 @@ export function BookOrder() {
             const newOrder = {
                 hostId: stay.host,
                 guest: {
-                    _id: loggedInUser._id,
-                    fullname: loggedInUser.fullname,
+                    _id: user._id,
+                    fullname: user.fullname,
                 },
                 totalPrice: parseInt(stay.price * stayLength * (1 + airbnbFee + cleanFee)),
                 startDate: formatDate(searchData.startDate),
