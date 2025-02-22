@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FaUsers, FaMoneyBillWave, FaExchangeAlt, FaChartLine } from 'react-icons/fa'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
-import { orderService } from '../services/order/order.service.remote'
+import { orderService } from '../services/order/order.service.local'
 import { Loading } from '../cmps/Loading'
 
 export const Dashboard = () => {
