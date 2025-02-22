@@ -29,7 +29,7 @@ export const AppHeader = () => {
     const searchParams = new URLSearchParams(window.location.search);
     console.log('searchParams:', searchParams);
     const filterBy = {
-      destination: searchParams.get("destination") || "Anywhere",
+      destination: searchParams.get("destination") || "",
       startDate: searchParams.get("startDate") || "",
       endDate: searchParams.get("endDate") || "",
       guests: {
@@ -80,7 +80,7 @@ console.log('filterBy:', filterBy);
   // ✅ Ensure Search Also Closes Expanded Mode & Returns to Sticky
   const handleSearch = () => {
     const filterBy = {
-      destination: searchData.destination || "Anywhere",
+      destination: searchData.destination || "",
       startDate: searchData.startDate || "",
       endDate: searchData.endDate || "",
       guests: encodeURIComponent(JSON.stringify(searchData.guests || { adults: 1, children: 0 })), // ✅ Fix object issue
