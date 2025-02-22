@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FaUsers, FaMoneyBillWave, FaExchangeAlt, FaChartLine } from 'react-icons/fa'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
-import { orderService } from '../services/order'
+import { orderService } from '../services/order/order.service.remote'
 import { Loading } from '../cmps/Loading'
 
 export const Dashboard = () => {
@@ -61,18 +61,6 @@ export const Dashboard = () => {
     { name: 'Jun', value: 16 }
   ]
 
-  // if (isLoading) return (
-  //   <div className="loading-trips">
-  //     <div className="loader-container">
-  //       <div className="loader-dots">
-  //         <div></div>
-  //         <div></div>
-  //         <div></div>
-  //         <div></div>
-  //       </div>
-  //     </div>
-  //   </div>
-  // )
   if (isLoading) return < Loading />
 
   return (
