@@ -220,11 +220,15 @@
 
                 ul {
                     margin: 0;
+                    display: flex;
+                    flex-wrap: wrap;
+                    column-gap: rem(24px);
 
                     li {
                         font-size: rem(16px);
                         line-height: rem(24px);
                         padding-bottom: rem(16px);
+                        width: calc(50% - rem(12px));
 
                         .amenity {
                             display: flex;

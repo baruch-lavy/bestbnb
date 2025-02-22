@@ -15,7 +15,7 @@ export function ReviewList({ reviews, onRemoveReview }) {
     return <section className='reviw-list-main'>
         <ul className="review-list">
             {reviews.slice(0 , 6).map(review =>
-                <li key={review.id}>
+                <li key={review.at}>
                     <ReviewPreview review={review}/>
                     {/* {shouldShowActionBtns(review) && <div className="actions">
                         <button onClick={() => onRemoveReview(review._id)}>x</button>
