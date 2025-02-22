@@ -8,7 +8,8 @@ export const orderService = {
     save,
     remove,
     addOrderMsg,
-    getOrdersByBuyer
+    getOrdersByBuyer,
+    updateOrderStatus
 }
 
 async function query(filterBy = { txt: '', price: 0 }) {
@@ -32,8 +33,6 @@ function getOrdersByBuyer() {
     }
 }
 
-
-
 async function remove(orderId) {
     return httpService.delete(`order/${orderId}`)
 }
@@ -46,6 +45,15 @@ async function save(order) {
         savedOrder = await httpService.post('order', order)
     }
     return savedOrder
+}
+
+async function updateOrderStatus(orderId, status) {
+    try {
+        return await httpService.put(`order/${orderId}`, { status }) // ✅ Send only status update
+    } catch (err) {
+        console.error("Failed to update order status:", err)
+        throw err
+    }
 }
 
 async function addOrderMsg(orderId, txt) {
