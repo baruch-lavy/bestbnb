@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { orderService } from '../services/order/order.service.local'
+import { orderService } from '../services/order'
 import { showErrorMsg } from '../services/event-bus.service'
 import { FaTrash } from 'react-icons/fa'
 import { Loading } from '../cmps/Loading'

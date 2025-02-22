@@ -1,11 +1,14 @@
 import { httpService } from '../http.service'
 
+const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
+
 export const orderService = {
     query,
     getById,
     save,
     remove,
-    addOrderMsg
+    addOrderMsg,
+    getOrdersByBuyer
 }
 
 async function query(filterBy = { txt: '', price: 0 }) {
@@ -15,6 +18,21 @@ async function query(filterBy = { txt: '', price: 0 }) {
 function getById(orderId) {
     return httpService.get(`order/${orderId}`)
 }
+
+function getOrdersByBuyer() {
+    try {
+        const user = JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+        if (!user || !user._id) throw new Error("User not found")
+
+        // ✅ Use httpService instead of fetch
+        return httpService.get(`order/user/${user._id}`)
+    } catch (err) {
+        console.error("Error fetching orders:", err)
+        throw err
+    }
+}
+
+
 
 async function remove(orderId) {
     return httpService.delete(`order/${orderId}`)
