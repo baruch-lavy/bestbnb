@@ -4,16 +4,30 @@
   margin: 0 auto;
   margin-top: 73px;
 
+  @media (max-width: 768px) {
+    padding: 12px;
+    margin-top: 60px;
+  }
+
   h1 {
     margin-bottom: 24px;
     font-size: 24px;
     font-weight: 600;
+
+    @media (max-width: 768px) {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
   }
 
   h2 {
     margin-bottom: 16px;
     font-size: 20px;
     font-weight: 600;
+
+    @media (max-width: 768px) {
+      font-size: 18px;
+    }
   }
 }
 
@@ -22,6 +36,15 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   margin-bottom: 24px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
 
 .stat-card {
@@ -80,6 +103,29 @@
     align-items: center;
     justify-content: center;
   }
+
+  @media (max-width: 768px) {
+    padding: 16px;
+
+    .stat-content {
+      h3 {
+        font-size: 13px;
+      }
+
+      .stat-value {
+        font-size: 20px;
+      }
+
+      .stat-change {
+        font-size: 11px;
+      }
+    }
+
+    .stat-icon {
+      font-size: 16px;
+      padding: 8px;
+    }
+  }
 }
 
 .dashboard-grid {
@@ -87,6 +133,10 @@
   grid-template-columns: 2fr 1fr;
   gap: 24px;
   margin-bottom: 24px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .chart-section, .overview-section {
@@ -118,36 +168,64 @@
     span:last-child {
       font-weight: 600;
     }
+
+    @media (max-width: 768px) {
+      padding: 8px 0;
+      font-size: 14px;
+    }
   }
 }
 
 .orders-section {
+  overflow-x: auto;
   background: rgb(250, 250, 250);
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+  @media (max-width: 768px) {
+    padding: 12px;
+  }
 }
 
 .orders-table {
   width: 100%;
+  min-width: 800px;
   border-collapse: collapse;
 
   th, td {
     padding: 12px;
     text-align: center;
     border-bottom: 1px solid #E5E7EB;
+
+    @media (max-width: 768px) {
+      padding: 8px;
+      font-size: 14px;
+    }
+
+    &:first-child {
+      text-align: left;
+    }
   }
   
   td {
     color: #161616;
     font-size: 15px;
     font-weight: 600;
+
+    @media (max-width: 768px) {
+      font-size: 13px;
+    }
   }
   
   th {
     font-size: 16px;
     color: #666;
     font-weight: 600;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
   }
 
   .status-badge {
@@ -176,6 +254,12 @@
     margin-right: 8px;
     cursor: pointer;
     border: none;
+
+    @media (max-width: 768px) {
+      padding: 4px 8px;
+      font-size: 11px;
+      margin-right: 4px;
+    }
   }
 
   .btn-approve {
@@ -192,18 +276,250 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 640px) {
   .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .dashboard-grid {
     grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 640px) {
-  .stats-grid {
+.chart-section {
+  @media (max-width: 768px) {
+    height: 250px;
+  }
+}
+
+// Mobile-first table view
+.orders-table {
+  @media (max-width: 768px) {
+    min-width: unset;
+    width: 100%;
+
+    thead {
+      display: none;
+    }
+
+    tbody {
+      tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        padding: 16px;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        
+        &:hover {
+          transform: translateY(-2px);
+          transition: all 0.2s ease;
+        }
+      }
+
+      td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border: none;
+        font-size: 14px;
+        text-align: left;
+
+        &:before {
+          content: attr(data-label);
+          font-weight: 500;
+          color: #666;
+          flex: 1;
+        }
+
+        &:not(:last-child) {
+          border-bottom: 1px solid #f0f0f0;
+        }
+
+        // Status badge styling
+        .status-badge {
+          margin-left: auto;
+          padding: 6px 12px;
+        }
+      }
+    }
+
+    // Action buttons in mobile
+    td[data-label="Action"] {
+      flex-direction: column;
+      gap: 8px;
+
+      &:before {
+        margin-bottom: 8px;
+      }
+
+      .btn-approve, .btn-reject {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+        border-radius: 8px;
+        margin: 0;
+        transition: all 0.2s ease;
+
+        &:active {
+          transform: scale(0.98);
+        }
+      }
+    }
+  }
+}
+
+// Collapsible sections improvements
+.stats-section, .chart-section, .orders-section {
+  @media (max-width: 768px) {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 24px;
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      margin-bottom: 12px;
+      cursor: pointer;
+
+      h2 {
+        margin: 0;
+        font-size: 16px;
+      }
+
+      &:after {
+        content: '▼';
+        font-size: 14px;
+        color: #666;
+        transition: all 0.3s ease;
+      }
+
+      &.collapsed {
+        margin-bottom: 0;
+        
+        &:after {
+          transform: rotate(-90deg);
+        }
+      }
+    }
+
+    .section-content {
+      height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      opacity: 0;
+      visibility: hidden;
+
+      &.expanded {
+        height: auto;
+        opacity: 1;
+        visibility: visible;
+        margin-top: 12px;
+      }
+    }
+  }
+}
+
+// Orders section specific improvements
+.orders-section {
+  @media (max-width: 768px) {
+    .section-content.expanded {
+      padding: 0 8px;
+      
+      tbody {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  }
+}
+
+// Orders table improvements
+.orders-table {
+  @media (max-width: 768px) {
+    tbody {
+      tr {
+        margin-bottom: 0; // Remove margin as we're using gap in the parent
+      }
+    }
+  }
+}
+
+// Stats cards improvements
+.stats-grid {
+  @media (max-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 0;
+
+    .stat-card {
+      margin: 0;
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      
+      .stat-content {
+        h3 {
+          font-size: 12px;
+          margin-bottom: 12px;
+        }
+        
+        .stat-value {
+          font-size: 20px;
+          margin-bottom: 8px;
+        }
+        
+        .stat-change {
+          font-size: 11px;
+          padding: 4px 8px;
+          
+          span {
+            display: none; // Hide "compared to last month" on mobile
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
     grid-template-columns: 1fr;
+  }
+}
+
+// Chart section improvements
+.chart-section {
+  @media (max-width: 768px) {
+    .section-content.expanded {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+
+      .recharts-wrapper {
+        height: 200px !important;
+        margin: -20px;
+        
+        .recharts-surface {
+          height: 100% !important;
+        }
+      }
+    }
+  }
+}
+
+// Loading state improvements
+.loading-container {
+  @media (max-width: 768px) {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 } 
