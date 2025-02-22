@@ -96,30 +96,14 @@ async function updateOrderStatus(orderId, status) {
 }
 
 function _createOrders() {
-    const orders = [
-        {
-            _id: 'ord_456821',
-            hostId: { _id: 'u103', fullname: "Alice", imgUrl: "..." },
-            guest: {
-                _id: 'u106',
-                fullname: 'David Smith',
-            },
-            totalPrice: 238,
-            startDate: 'Feb 15',
-            endDate: 'Mar 01',
-            guests: {
-                adults: 2,
-                kids: 1,
-            },
-            stay: {
-                _id: 'h107',
-                name: 'Fresh and modern 1BR in Bed-Stuy',
-                price: 110.0,
-            },
-            msgs: [],
-            status: 'pending',
-        },
-    ]
+    // Check if orders already exist in storage
+    const existingOrders = storageService.loadFromStorage(STORAGE_KEY)
+    if (existingOrders && existingOrders.length) {
+        return existingOrders
+    }
+
+    // If no orders exist, return empty array instead of default order
+    const orders = []
     storageService.saveToStorage(STORAGE_KEY, orders)
     return orders
 }
