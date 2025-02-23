@@ -81,7 +81,7 @@ export function Trips() {
 
   return (
     <section className="trips-page">
-      <h1>Your trips</h1>
+      <h1>Trips & Stays</h1>
 
       <div className="orders-table">
         <table>
