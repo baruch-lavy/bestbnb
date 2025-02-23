@@ -13,6 +13,7 @@ export const AppHeader = () => {
   const location = useLocation(); // ✅ Get current page URL
   const [searchParams] = useSearchParams();
   const isDetailsPage = /^\/stay\/[^/]+$/.test(location.pathname); // ✅ Match /stay/:stayId
+  const isDashboardPage = location.pathname === '/dashboard'; // Add dashboard page check
 
   const [showSticky, setShowSticky] = useState(isDetailsPage);
   const [forceExpand, setForceExpand] = useState(false); // ✅ Track if manually expanded
@@ -130,7 +131,7 @@ console.log('filterBy:', filterBy);
   return (
     <>
       {/* HEADER */}
-      <header className={`header ${showSticky ? "sticky-header" : ""} ${isDetailsPage ? "details-header" : ""}`}>
+      <header className={`header ${showSticky ? "sticky-header" : ""} ${isDetailsPage ? "details-header" : ""} ${isDashboardPage ? "dashboard-page" : ""}`}>
         <div className="left-section">
         <a href="/stay">
         <div className="logo-wrapper">
@@ -139,18 +140,18 @@ console.log('filterBy:', filterBy);
         </div>   
         </a>
           <nav className="nav-links">
-            <a href="#">Homes</a>
+            <a href="/stay">Homes</a>
             <a href="#" className="expriences">Experiences</a>
           </nav>
         </div>
 
-        {/* ✅ Sticky Search Bar - Click to Expand */}
-        {showSticky && !forceExpand && (
+        {/* Fix: Only show sticky search when showSticky is true AND not on dashboard */}
+        {showSticky && !forceExpand && !isDashboardPage && (
           <div className="sticky-search-wrapper" onClick={handleStickyClick}>
             <StickySearchBar
               openDropdown={openDropdown}
               handleDropdownOpen={handleDropdownOpen}
-              handleSearch={handleSearch} // ✅ Search now returns to sticky mode
+              handleSearch={handleSearch}
             />
           </div>
         )}
@@ -183,14 +184,16 @@ console.log('filterBy:', filterBy);
         </div>
       </header>
 
-      {/* ✅ Full Search Bar - Shows When Expanded */}
-      <div className={`full-search-bar ${showSticky && !forceExpand ? "hidden" : ""}`}>
-        <SearchBar
-          openDropdown={openDropdown}
-          handleDropdownOpen={handleDropdownOpen}
-          handleSearch={handleSearch} // ✅ Search now returns to sticky mode
-        />
-      </div>
+      {/* Full search bar logic remains the same */}
+      {!isDashboardPage && (
+        <div className={`full-search-bar ${showSticky && !forceExpand ? "hidden" : ""}`}>
+          <SearchBar
+            openDropdown={openDropdown}
+            handleDropdownOpen={handleDropdownOpen}
+            handleSearch={handleSearch}
+          />
+        </div>
+      )}
     </>
   )
 }

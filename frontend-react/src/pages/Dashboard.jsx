@@ -92,24 +92,22 @@ export const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <h1>Review & analyze your data</h1>
+      <h1>Financial & Booking Reports</h1>
       
-      {/* Stats Section */}
       <div className="stats-section">
         <div 
           className={`section-header ${!expandedSections.stats ? 'collapsed' : ''}`}
           onClick={() => toggleSection('stats')}
         >
-          <h2>Statistics</h2>
-        </div>
+         </div>
         <div className={`section-content ${expandedSections.stats ? 'expanded' : ''}`}>
           <div className="stats-grid">
             <div className="stat-card">
               <div className="stat-content">
                 <h3>Total sales</h3>
-                <div className="stat-value">${700}</div>
+                <div className="stat-value">${1},{486},{987}</div>
                 {/* <div className="stat-value">${stats.totalSales.toFixed(2)}</div> */}
-                <div className="stat-change decrease">-5% <span>compared to last month</span></div>
+                <div className="stat-change increase">+23% <span>compared to last month</span></div>
               </div>
               <div className="stat-icon">
                 <FaMoneyBillWave />
@@ -119,7 +117,8 @@ export const Dashboard = () => {
             <div className="stat-card">
               <div className="stat-content">
                 <h3>Total customers</h3>
-                <div className="stat-value">{stats.totalCustomers}</div>
+                {/* <div className="stat-value">{stats.totalCustomers}</div> */}
+                <div className="stat-value">{1},{522}</div>
                 <div className="stat-change increase">+10% <span>compared to last month</span></div>
               </div>
               <div className="stat-icon">
@@ -130,7 +129,8 @@ export const Dashboard = () => {
             <div className="stat-card">
               <div className="stat-content">
                 <h3>Refunded</h3>
-                <div className="stat-value">{stats.refundedCount}</div>
+                {/* <div className="stat-value">{stats.refundedCount}</div> */}
+                <div className="stat-value">{13}</div>
                 <div className="stat-change decrease">-2% <span>compared to last month</span></div>
               </div>
               <div className="stat-icon">
@@ -141,7 +141,8 @@ export const Dashboard = () => {
             <div className="stat-card">
               <div className="stat-content">
                 <h3>Average revenue</h3>
-                <div className="stat-value">${stats.averageRevenue.toFixed(2)}</div>
+                {/* <div className="stat-value">${stats.averageRevenue.toFixed(2)}</div> */}
+                <div className="stat-value">${6},{842}</div>
                 <div className="stat-change increase">+5% <span>compared to last month</span></div>
               </div>
               <div className="stat-icon">
@@ -152,7 +153,6 @@ export const Dashboard = () => {
         </div>
       </div>
 
-      {/* Chart Section */}
       <div className="chart-section">
         <div 
           className={`section-header ${!expandedSections.chart ? 'collapsed' : ''}`}
@@ -190,7 +190,6 @@ export const Dashboard = () => {
         </div>
       </div>
 
-      {/* Orders Section */}
       <div className="orders-section">
         <div 
           className={`section-header ${!expandedSections.orders ? 'collapsed' : ''}`}

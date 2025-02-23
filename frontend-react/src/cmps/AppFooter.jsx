@@ -6,10 +6,44 @@ export function AppFooter() {
 	const [isSupportModalOpen, setIsSupportModalOpen] = useState(false)
 	const location = useLocation()
 	const isDetailsPage = location.pathname.includes('/stay/')
+	const isDashboardPage = location.pathname === '/dashboard'
+
+	if (isDashboardPage) {
+		return (
+			<footer className="app-footer dashboard-footer">
+				<div className="footer-bottom">
+					<div className="footer-bottom-left">
+						<p className="footer-copyright">© 2025 Bestbnb, Inc.</p>
+						<span className="dot-separator">·</span>
+						<a href="#">Terms</a>
+						<span className="dot-separator">·</span>
+						<a href="#">Sitemap</a>
+						<span className="dot-separator">·</span>
+						<a href="#">Privacy</a>
+						<span className="dot-separator">·</span>
+						<a href="#">Your Privacy Choices</a>
+					</div>
+
+					<div className="footer-bottom-right">
+						<button className="language-btn">
+							<img src="/img/stays/footer/footer 1.svg" className="globe-icon"/>
+							English (US)
+						</button>
+						<button className="currency-btn">
+							$ USD
+						</button>
+						<a href="#"><img src="/img/stays/icons/Facebook.svg" alt="Facebook"/></a>
+						<a href="#"><img src="/img/stays/icons/Twitter.svg" alt="Twitter"/></a>
+						<a href="#"><img src="/img/stays/icons/Instagram.svg" alt="Instagram"/></a>
+					</div>
+				</div>
+			</footer>
+		)
+	}
 
 	if (isDetailsPage) {
 		return (
-			<footer className="app-footer full details-footer">
+			<footer className={`app-footer full details-footer`}>
 				<div className="footer-content">
 					<div className="footer-section">
 						<h3>Support</h3>
