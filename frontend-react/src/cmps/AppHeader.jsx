@@ -140,7 +140,7 @@ console.log('filterBy:', filterBy);
         </div>   
         </a>
           <nav className="nav-links">
-            <a href="#">Homes</a>
+            <a href="/stay">Homes</a>
             <a href="#" className="expriences">Experiences</a>
           </nav>
         </div>

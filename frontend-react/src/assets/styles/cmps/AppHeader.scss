@@ -303,11 +303,9 @@ body {
 
 .full-search-bar{
   height: 80px;
-  // width: 850px;
 }
 
 
-/** HIDE FULL SEARCH BAR WHEN SCROLLING **/
 .full-search-bar.hidden {
   opacity: 0;
   visibility: hidden;
@@ -319,16 +317,14 @@ body {
   height: 32px;
 }
 
-// Add dashboard specific styles
 .header.dashboard-page {
-  position: relative !important; // Override any fixed positioning
+  position: relative !important;
   grid-column: 1 / -1 !important;
-  padding: 16px 24px; // Match dashboard container padding
+  padding: 16px 24px; 
   border-bottom: 1px solid #ddd;
-  max-width: 1400px;
   margin: 0 auto;
+  padding: 0px 273px 0 269px;
 
-  // Hide all search elements in dashboard
   .sticky-search-wrapper,
   .search-container,
   .full-search-bar {
@@ -340,7 +336,6 @@ body {
   }
 }
 
-// Hide full search bar that follows dashboard header
 .dashboard-page {
   + .full-search-bar {
     display: none !important;
