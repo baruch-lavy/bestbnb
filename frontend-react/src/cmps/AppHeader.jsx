@@ -184,7 +184,6 @@ console.log('filterBy:', filterBy);
         </div>
       </header>
 
-      {/* Full search bar logic remains the same */}
       {!isDashboardPage && (
         <div className={`full-search-bar ${showSticky && !forceExpand ? "hidden" : ""}`}>
           <SearchBar
@@ -193,7 +192,16 @@ console.log('filterBy:', filterBy);
             handleSearch={handleSearch}
           />
         </div>
+
       )}
+        <div className="dashboard-header">
+        <a href="/stay">
+        <div className="logo-wrapper">
+          <FaAirbnb className="logo" /> 
+          <span className="logo-text">bestbnb</span>
+        </div> 
+        </a>
+        </div>
     </>
   )
 }
