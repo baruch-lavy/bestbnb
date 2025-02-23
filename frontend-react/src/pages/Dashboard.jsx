@@ -249,10 +249,6 @@ export const Dashboard = () => {
       <footer className="dashboard-footer-media">
       <div className="footer-bottom-media">
         <p>&copy; 2025 Bestbnb. </p>
-        <div className="box-icon-dashboard-footer" ></div>
-        <a className="icon-dashboard-footer-media" href="#"><img src="/img/stays/icons/Facebook.svg" alt="Facebook"/></a>
-				<a className="icon-dashboard-footer-media" href="#"><img src="/img/stays/icons/Twitter.svg" alt="Twitter"/></a>
-				<a className="icon-dashboard-footer-media" href="#"><img src="/img/stays/icons/Instagram.svg" alt="Instagram"/></a>
       </div>
       </footer>
     </div>
