@@ -319,3 +319,31 @@ body {
   height: 32px;
 }
 
+// Add dashboard specific styles
+.header.dashboard-page {
+  position: relative !important; // Override any fixed positioning
+  grid-column: 1 / -1 !important;
+  padding: 16px 24px; // Match dashboard container padding
+  border-bottom: 1px solid #ddd;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  // Hide all search elements in dashboard
+  .sticky-search-wrapper,
+  .search-container,
+  .full-search-bar {
+    display: none !important;
+  }
+
+  @media (max-width: 768px) {
+    padding: 12px 16px;
+  }
+}
+
+// Hide full search bar that follows dashboard header
+.dashboard-page {
+  + .full-search-bar {
+    display: none !important;
+  }
+}
+
