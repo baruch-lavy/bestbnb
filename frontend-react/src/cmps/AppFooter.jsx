@@ -27,10 +27,11 @@ export function AppFooter() {
 					<div className="footer-bottom-right">
 						<button className="language-btn">
 							<img src="/img/stays/footer/footer 1.svg" className="globe-icon"/>
-							English (US)
+							<span>English (US)</span>
 						</button>
 						<button className="currency-btn">
-							$ USD
+							<span className="dollar-icon">$</span>
+							<span>USD</span>
 						</button>
 						<a href="#"><img src="/img/stays/icons/Facebook.svg" alt="Facebook"/></a>
 						<a href="#"><img src="/img/stays/icons/Twitter.svg" alt="Twitter"/></a>
