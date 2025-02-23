@@ -74,11 +74,29 @@ export const Dashboard = () => {
 
   const chartData = [
     { name: 'Jan', value: 10 },
-    { name: 'Feb', value: 15 },
-    { name: 'Mar', value: 12 },
-    { name: 'Apr', value: 18 },
-    { name: 'May', value: 14 },
-    { name: 'Jun', value: 16 }
+    { name: 'Jan w1', value: 15 },
+    { name: 'Jan w2', value: 20 },
+    { name: 'Jan w3', value: 18 },
+    { name: 'Feb', value: 22 },
+    { name: 'Feb w1', value: 5 },
+    { name: 'Feb w2', value: 28 },
+    { name: 'Feb w3', value: 24 },
+    { name: 'Mar', value: 20 },
+    { name: 'Mar w1', value: 25 },
+    { name: 'Mar w2', value: 12},
+    { name: 'Mar w3', value: 12 },
+    { name: 'Apr', value: 23 },
+    { name: 'Apr w1', value: 28 },
+    { name: 'Apr w2', value: 25 },
+    { name: 'Apr w3', value: 22 },
+    { name: 'May', value: 15 },
+    { name: 'May w1', value: 18 },
+    { name: 'May w2', value: 25 },
+    { name: 'May w3', value: 25 },
+    { name: 'Jun', value: 22 },
+    { name: 'Jun w1', value: 26 },
+    { name: 'Jun w2', value: 30 },
+    { name: 'Jun w3', value: 28 }
   ]
 
   const toggleSection = (section) => {
@@ -161,30 +179,47 @@ export const Dashboard = () => {
           <h2>Sale statistics</h2>
         </div>
         <div className={`section-content ${expandedSections.chart ? 'expanded' : ''}`}>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={249}>
             <LineChart data={chartData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-            <XAxis dataKey="name" stroke="#666" />
-            <YAxis stroke="#666" />
-            <Line 
-              type="monotone" 
-              dataKey="value" 
-              stroke="#FF385C"
-              strokeWidth={2}
-              dot={{
-                fill: '#FF385C',
-                stroke: '#FF385C',
-                strokeWidth: 2,
-                r: 4
-              }}
-
-              activeDot={{
-                fill: '#FF385C',
-                stroke: '#fff',
-                strokeWidth: 2,
-                r: 6
-              }}
-            />
+              <CartesianGrid 
+                strokeDasharray="3 3" 
+                stroke="#e0e0e0"
+                vertical={true}
+                horizontal={true}
+              />
+              <XAxis 
+                dataKey="name" 
+                stroke="#666"
+                tickLine={false}
+                axisLine={false}
+                interval={3}
+                tickFormatter={(value) => value.includes('w') ? '' : value}
+              />
+              <YAxis 
+                stroke="#666"
+                tickLine={false}
+                axisLine={false}
+                ticks={[0, 5, 10, 15, 20, 25, 30]}
+                domain={[0, 30]}
+              />
+              <Line 
+                type="monotone" 
+                dataKey="value" 
+                stroke="#FF385C"
+                strokeWidth={2}
+                dot={{
+                  fill: '#FF385C',
+                  stroke: '#FF385C',
+                  strokeWidth: 2,
+                  r: 2
+                }}
+                activeDot={{
+                  fill: '#FF385C',
+                  stroke: '#fff',
+                  strokeWidth: 2,
+                  r: 4
+                }}
+              />
             </LineChart>
           </ResponsiveContainer>
         </div>
