@@ -4,6 +4,7 @@ import { StayPreview } from "./StayPreview.jsx";
 import { CategoryFilter } from "./CategoryFilter.jsx";
 import { categories } from "../services/categories.service";
 import { useLocation  , useSearchParams} from "react-router-dom";
+import { Loading } from "./Loading.jsx";
 
 // const location = useLocation();
 
@@ -115,6 +116,8 @@ export function StayList() {
         setIsLoading(false);
     }, [allStays])
 
+    // if (!stay) return < Loading />
+    
     if (!filteredStays?.length) {
         return (
             <div className="stay-index">
