@@ -10,44 +10,25 @@ export function BookOrder() {
     const { stayId } = useParams()
     const stay = useSelector(storeState => storeState.stayModule.stay)
     const searchData = useSelector((state) => state.search)
-    const [isBooked, setIsBooked] = useState(false);
-    const user = useSelector((state) => state.userModule.user);
-    // console.log('user:', user);
-
-    const loggedInUser = userService.getLoggedinUser() || {
-        _id: 'u101',
-        fullname: 'Guest User'
-    }
+    const [isBooked, setIsBooked] = useState(false)
+    const user = useSelector((state) => state.userModule.user)
 
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [isBooked])
 
-    //  useEffect(() => {
-    //         loadStay()
-    //     }, [id])
-
-    //     const loadStay = async () => {
-    //         try {
-    //             const stay = await stayService.getById(id)
-    //             setStay(stay)
-    //         } catch (err) {
-    //             console.error('Failed to load stay:', err)
-    //         }
-    //     }
-
     const cleanFee = 0.095
     const airbnbFee = 0.13
 
 
-    const start = new Date(searchData.startDate);
-    const end = new Date(searchData.endDate);
-    const timeDifference = end - start;
+    const start = new Date(searchData.startDate)
+    const end = new Date(searchData.endDate)
+    const timeDifference = end - start
     const stayLength = (timeDifference) ? timeDifference / (1000 * 3600 * 24) : ''
  
-    const cancellationDate = new Date(start);
-    cancellationDate.setDate(cancellationDate.getDate() - 1);
-    const formattedCancellationDate = formatDate(cancellationDate);
+    const cancellationDate = new Date(start)
+    cancellationDate.setDate(cancellationDate.getDate() - 1)
+    const formattedCancellationDate = formatDate(cancellationDate)
 
     function formatDate(date) {
         const options = { month: 'short', day: 'numeric' }; // Format to "Month Day"
@@ -64,10 +45,10 @@ export function BookOrder() {
     }
 
     function handleMouseMove(e) {
-        const button = e.currentTarget;
-        const { x, y } = button.getBoundingClientRect();
-        button.style.setProperty("--x", e.clientX - x);
-        button.style.setProperty("--y", e.clientY - y);
+        const button = e.currentTarget
+        const { x, y } = button.getBoundingClientRect()
+        button.style.setProperty("--x", e.clientX - x)
+        button.style.setProperty("--y", e.clientY - y)
     }
 
     const handleSubmitOrder = async () => {
