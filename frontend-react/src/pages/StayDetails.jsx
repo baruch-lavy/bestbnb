@@ -32,6 +32,7 @@ export function StayDetails() {
   }, [])
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     loadStay(stayId)
   }, [stayId])
 
