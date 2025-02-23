@@ -62,14 +62,14 @@ export function Calendar({ stay }) {
           showOutsideDays
           onDayClick={handleDayClick}/>
        <div>
-        {startDate && endDate ? (
+        {/* {startDate && endDate ? (
           <p>
              Selected Range: {formatDate(startDate)} to{' '}
              {formatDate(endDate)}
           </p>
         ) : (
           <p>Select a start date, then an end date.</p>
-        )}
+        )} */}
       </div>
       </div>
     </div>
