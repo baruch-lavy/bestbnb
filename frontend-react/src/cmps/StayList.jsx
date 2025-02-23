@@ -4,6 +4,7 @@ import { StayPreview } from "./StayPreview.jsx";
 import { CategoryFilter } from "./CategoryFilter.jsx";
 import { categories } from "../services/categories.service";
 import { useLocation  , useSearchParams} from "react-router-dom";
+import { Loading } from "./Loading.jsx";
 
 // const location = useLocation();
 
@@ -53,7 +54,7 @@ export function StayList() {
         'A-frames': ['a-frame', 'cabin', 'unique'],
         'Barns': ['barn', 'converted', 'rustic'],
         'Towers': ['tower', 'unique', 'views'],
-        'Amazing pools': ['houseboat', 'boat', 'water'],
+        'Synagogue': ['houseboat', 'boat', 'water'],
         'Chalets': ['chalet', 'ski', 'mountain'],
         'Riads': ['riad', 'moroccan', 'traditional'],
         'Trulli': ['trullo', 'italian', 'traditional'],
@@ -115,6 +116,8 @@ export function StayList() {
         setIsLoading(false);
     }, [allStays])
 
+    // if (!stay) return < Loading />
+    
     if (!filteredStays?.length) {
         return (
             <div className="stay-index">
