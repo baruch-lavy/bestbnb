@@ -30,7 +30,7 @@
     "react-router-dom": "^6.16.0",
     "recharts": "^2.15.1",
     "redux": "^4.2.1",
-    "socket.io-client": "^4.7.2",
+    "socket.io-client": "^4.8.1",
     "socketio": "^1.0.0"
   },
   "devDependencies": {
