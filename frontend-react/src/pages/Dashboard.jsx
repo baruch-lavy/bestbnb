@@ -99,8 +99,7 @@ export const Dashboard = () => {
           className={`section-header ${!expandedSections.stats ? 'collapsed' : ''}`}
           onClick={() => toggleSection('stats')}
         >
-          <h2>Statistics</h2>
-        </div>
+         </div>
         <div className={`section-content ${expandedSections.stats ? 'expanded' : ''}`}>
           <div className="stats-grid">
             <div className="stat-card">
