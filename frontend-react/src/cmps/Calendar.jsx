@@ -1,5 +1,5 @@
 // Calendar.js
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import DatePicker from 'react-datepicker';
 import { DayPicker } from 'react-day-picker';
@@ -39,6 +39,13 @@ export function Calendar({ stay }) {
       });
     }
   }
+
+  useEffect(() => {
+    console.log('startDate changed:', startDate);
+    console.log('endDate changed:', endDate);
+  }, [startDate, endDate]);
+
+
   return (
     <div className="details-calendar-container">
       <h3>{stayLength} nights in {stay.name}</h3>
