@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { Link ,  useNavigate } from 'react-router-dom'
+import { useState, useEffect  } from 'react'
 import { useParams } from 'react-router-dom'
 import { userService } from '../services/user.service'
 import { orderService } from '../services/order'
@@ -12,6 +12,7 @@ export function BookOrder() {
     const searchData = useSelector((state) => state.search)
     const [isBooked, setIsBooked] = useState(false)
     const user = useSelector((state) => state.userModule.user)
+    const navigate = useNavigate()
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -56,7 +57,11 @@ export function BookOrder() {
             console.error('Please select dates and guests')
             return
         }
-
+        if (isBooked) {
+        navigate('/trips')
+        setIsBooked(false)
+        return
+        }
         try {
             setIsBooked(true)
             const newOrder = {
@@ -94,16 +99,6 @@ export function BookOrder() {
         }
     }
 
-    //to do
-    // handleclick(){
-    // if isBooked {
-    // navigate('/confirmation', { 
-    //     state: { 
-    //         stay: stay.name,
-    //         dates: `${formatDate(searchData.startDate)} - ${formatDate(searchData.endDate)}`,
-    //         guests: `${searchData.guests?.adults + (searchData.guests?.children || 0)} guests`,
-    //     } 
-    // })
 
     if (!stay) return < Loading />
     return (
