@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FaUsers, FaMoneyBillWave, FaExchangeAlt, FaChartLine } from 'react-icons/fa'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
 import { orderService } from '../services/order'
+import { userService } from '../services/user'
 import { Loading } from '../cmps/Loading'
 
 export const Dashboard = () => {
@@ -25,19 +26,32 @@ export const Dashboard = () => {
     loadOrdersData()
   }, [])
 
-  const loadOrdersData = async () => {
+  async function loadOrdersData() {
     try {
-      setIsLoading(true)
-      const orders = await orderService.query()
-      setOrders(orders)
-      await loadStats()
+        console.log('🔵 Fetching host orders...')
+
+        // ✅ Get the logged-in user
+        const loggedinUser = userService.getLoggedinUser()
+        if (!loggedinUser) {
+            console.error('❌ No logged-in user found')
+            showErrorMsg('You must be logged in')
+            return
+        }
+
+        console.log(`🆔 Logged-in hostId:`, loggedinUser._id)
+
+        // ✅ Fetch orders for this host
+        const hostOrders = await orderService.getOrdersByHost(loggedinUser._id)
+
+        console.log('✅ Orders received:', hostOrders.length)
+        setOrders(hostOrders)
     } catch (err) {
-      console.error('Error loading orders:', err)
-      setError('Failed to load orders')
+        console.error('❌ Error loading orders:', err)
+        showErrorMsg('Failed to load orders')
     } finally {
-      setIsLoading(false)
+        setIsLoading(false)
     }
-  }
+}
 
   async function loadStats() {
     try {

@@ -9,7 +9,8 @@ export const orderService = {
     remove,
     addOrderMsg,
     getOrdersByBuyer,
-    updateOrderStatus
+    updateOrderStatus,
+    getOrdersByHost,
 }
 
 async function query(filterBy = { txt: '', price: 0 }) {
@@ -29,6 +30,17 @@ function getOrdersByBuyer() {
         return httpService.get(`order/user/${user._id}`)
     } catch (err) {
         console.error("Error fetching orders:", err)
+        throw err
+    }
+}
+
+async function getOrdersByHost(hostId) {
+    console.log('hostId', hostId)
+    try {
+        console.log(`🔵 Fetching orders for hostId:`, hostId)
+        return await httpService.get(`order?hostId=${hostId}`)
+    } catch (err) {
+        console.error('❌ Failed to fetch host orders:', err)
         throw err
     }
 }
