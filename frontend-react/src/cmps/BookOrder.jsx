@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { Link ,  useNavigate } from 'react-router-dom'
+import { useState, useEffect  } from 'react'
 import { useParams } from 'react-router-dom'
 import { userService } from '../services/user.service'
 import { orderService } from '../services/order'
@@ -10,44 +10,26 @@ export function BookOrder() {
     const { stayId } = useParams()
     const stay = useSelector(storeState => storeState.stayModule.stay)
     const searchData = useSelector((state) => state.search)
-    const [isBooked, setIsBooked] = useState(false);
-    const user = useSelector((state) => state.userModule.user);
-    // console.log('user:', user);
-
-    const loggedInUser = userService.getLoggedinUser() || {
-        _id: 'u101',
-        fullname: 'Guest User'
-    }
+    const [isBooked, setIsBooked] = useState(false)
+    const user = useSelector((state) => state.userModule.user)
+    const navigate = useNavigate()
 
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [isBooked])
 
-    //  useEffect(() => {
-    //         loadStay()
-    //     }, [id])
-
-    //     const loadStay = async () => {
-    //         try {
-    //             const stay = await stayService.getById(id)
-    //             setStay(stay)
-    //         } catch (err) {
-    //             console.error('Failed to load stay:', err)
-    //         }
-    //     }
-
     const cleanFee = 0.095
     const airbnbFee = 0.13
 
 
-    const start = new Date(searchData.startDate);
-    const end = new Date(searchData.endDate);
-    const timeDifference = end - start;
+    const start = new Date(searchData.startDate)
+    const end = new Date(searchData.endDate)
+    const timeDifference = end - start
     const stayLength = (timeDifference) ? timeDifference / (1000 * 3600 * 24) : ''
  
-    const cancellationDate = new Date(start);
-    cancellationDate.setDate(cancellationDate.getDate() - 1);
-    const formattedCancellationDate = formatDate(cancellationDate);
+    const cancellationDate = new Date(start)
+    cancellationDate.setDate(cancellationDate.getDate() - 1)
+    const formattedCancellationDate = formatDate(cancellationDate)
 
     function formatDate(date) {
         const options = { month: 'short', day: 'numeric' }; // Format to "Month Day"
@@ -64,10 +46,10 @@ export function BookOrder() {
     }
 
     function handleMouseMove(e) {
-        const button = e.currentTarget;
-        const { x, y } = button.getBoundingClientRect();
-        button.style.setProperty("--x", e.clientX - x);
-        button.style.setProperty("--y", e.clientY - y);
+        const button = e.currentTarget
+        const { x, y } = button.getBoundingClientRect()
+        button.style.setProperty("--x", e.clientX - x)
+        button.style.setProperty("--y", e.clientY - y)
     }
 
     const handleSubmitOrder = async () => {
@@ -75,7 +57,11 @@ export function BookOrder() {
             console.error('Please select dates and guests')
             return
         }
-
+        if (isBooked) {
+        navigate('/trips')
+        setIsBooked(false)
+        return
+        }
         try {
             setIsBooked(true)
             const newOrder = {
@@ -113,16 +99,6 @@ export function BookOrder() {
         }
     }
 
-    //to do
-    // handleclick(){
-    // if isBooked {
-    // navigate('/confirmation', { 
-    //     state: { 
-    //         stay: stay.name,
-    //         dates: `${formatDate(searchData.startDate)} - ${formatDate(searchData.endDate)}`,
-    //         guests: `${searchData.guests?.adults + (searchData.guests?.children || 0)} guests`,
-    //     } 
-    // })
 
     if (!stay) return < Loading />
     return (
