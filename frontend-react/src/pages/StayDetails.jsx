@@ -32,6 +32,7 @@ export function StayDetails() {
   }, [])
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     loadStay(stayId)
   }, [stayId])
 
@@ -119,8 +120,8 @@ export function StayDetails() {
           </article>
 
           <StayAmenities amenities={stay.amenities} />
-          
-          <Calendar />
+
+          <Calendar stay={stay}/>
         </section>
         <StayOrder stay={stay} />
       </main>

@@ -53,7 +53,7 @@ export function StayList() {
         'A-frames': ['a-frame', 'cabin', 'unique'],
         'Barns': ['barn', 'converted', 'rustic'],
         'Towers': ['tower', 'unique', 'views'],
-        'Houseboats': ['houseboat', 'boat', 'water'],
+        'Amazing pools': ['houseboat', 'boat', 'water'],
         'Chalets': ['chalet', 'ski', 'mountain'],
         'Riads': ['riad', 'moroccan', 'traditional'],
         'Trulli': ['trullo', 'italian', 'traditional'],

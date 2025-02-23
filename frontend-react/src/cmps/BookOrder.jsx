@@ -21,7 +21,7 @@ export function BookOrder() {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-    }, [])
+    }, [isBooked])
 
     //  useEffect(() => {
     //         loadStay()
