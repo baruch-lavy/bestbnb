@@ -231,7 +231,7 @@ main {
   grid-column: 1 / -1;
   background-color: #f7f7f7;
   border-top: 1px solid #ddd;
-  padding: 37px 150px 60px 370px;
+  padding: 15px 150px 15px 279px;
   margin-top: 40px;
 
   .footer-content {
@@ -272,13 +272,15 @@ main {
     &-right {
       display: flex;
       align-items: center;
+      gap: 16px;
+      margin-left: 579px;
 
       button {
         display: flex;
         align-items: center;
         background: none;
         border: none;
-        padding: 8px 12px;
+        padding: 0;
         cursor: pointer;
         color: rgb(34, 34, 34);
         font-size: 13px;
