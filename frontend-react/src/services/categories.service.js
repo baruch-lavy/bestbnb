@@ -196,8 +196,8 @@ export const categories = [
     },
     {
         id: 'c40',
-        label: 'Amazing pools',
-        icon: '/img/stays/amenities/asset13.svg'
+        label: 'Synagogue',
+        icon: '/img/stays/icons/55.jpg'
     },
     {
         id: 'c41',
