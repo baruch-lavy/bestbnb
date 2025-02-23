@@ -6,10 +6,11 @@ export function AppFooter() {
 	const [isSupportModalOpen, setIsSupportModalOpen] = useState(false)
 	const location = useLocation()
 	const isDetailsPage = location.pathname.includes('/stay/')
+	const isDashboardPage = location.pathname === '/dashboard'
 
-	if (isDetailsPage) {
+	if (isDashboardPage || isDetailsPage) {
 		return (
-			<footer className="app-footer full details-footer">
+			<footer className={`app-footer full ${isDashboardPage ? 'dashboard-footer' : 'details-footer'}`}>
 				<div className="footer-content">
 					<div className="footer-section">
 						<h3>Support</h3>

@@ -225,3 +225,44 @@
 main {
     margin-bottom: 82px;
 }
+
+.app-footer.dashboard-footer {
+  position: static;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  background-color: #f7f7f7;
+  border-top: 1px solid #ddd;
+  padding: 24px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+
+  .footer-content {
+        display: none;
+  }
+
+  .footer-bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-left, &-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 16px;
+    
+    .footer-content {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+}
