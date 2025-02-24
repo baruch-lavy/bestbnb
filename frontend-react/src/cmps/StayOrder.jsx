@@ -81,7 +81,7 @@ export function StayOrder({ stay }) {
                             value={
                                 searchData.startDate
                                     ? new Date(searchData.startDate).toLocaleDateString()
-                                    : ""
+                                    : new Date(new Date().setDate(new Date().getDate() + 2)).toLocaleDateString()
                             }
                             readOnly
                         />
@@ -96,7 +96,7 @@ export function StayOrder({ stay }) {
                             value={
                                 searchData.endDate
                                     ? new Date(searchData.endDate).toLocaleDateString()
-                                    : ""
+                                    : new Date(new Date().setDate(new Date().getDate() + 9)).toLocaleDateString()
                             }
                             readOnly
                         />
