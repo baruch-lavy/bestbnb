@@ -197,10 +197,16 @@ console.log('filterBy:', filterBy);
         <div className="dashboard-header">
         <a href="/stay">
         <div className="logo-wrapper">
+
           <FaAirbnb className="logo" /> 
-          <span className="logo-text">bestbnb</span>
         </div> 
         </a>
+          <div className="user-info-dashboard">
+            <FaBars className="menu-icon-dashboard" />
+            <div className="user-icon-container">
+              <img src="/img/stays/user-host.jpg" className="user-img-dashboard" ></img>
+            </div>
+          </div>
         </div>
     </>
   )

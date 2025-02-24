@@ -429,10 +429,9 @@
   .dashboard-header {
     display: block;
     display: flex;
-    justify-content: space-around;
-    padding-top: 0.8em;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid #b5b5b6;
-    padding-bottom: 0.8em;
     grid-column: 1 / 4;
     position: fixed;
     top: 0;
@@ -440,6 +439,7 @@
     left: 0;
     background: white;
     z-index: 1000;
+    padding: 0.8em 32px 0.6em 24px;
 
     .logo-wrapper {
       display: flex;
@@ -447,9 +447,9 @@
       filter: brightness(0) saturate(100%) invert(38%) sepia(82%) saturate(3371%) hue-rotate(332deg) brightness(100%) contrast(101%);
       
       .logo {
-        height: 38px;
+        height: 43px;
         color: #FF385C;
-        font-size: 45px;
+        font-size: 48px;
       }
 
       .logo-text {
@@ -489,6 +489,29 @@
       margin: 0;
       filter: brightness(0) saturate(100%) invert(38%) sepia(82%) saturate(3371%) hue-rotate(332deg) brightness(100%) contrast(101%);
       font-weight: 600;
+    }
+  }
+
+  .user-info-dashboard {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    padding: 6px 14px;
+    position: relative;
+    cursor: pointer;
+    transition: box-shadow 0.2sease-in-out;
+    
+    .menu-icon-dashboard {
+      font-size: 1em;
+    }
+    
+    .user-img-dashboard {
+      border-radius: 50%;
+      width: 33px;
+      height: auto;
     }
   }
 
