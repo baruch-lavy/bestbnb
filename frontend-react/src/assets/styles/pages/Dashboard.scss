@@ -267,8 +267,6 @@
       }
 
       .action-buttons {
-        padding-top: 8px;
-        margin-top: 8px;
         
         button {
           padding: 6px 10px;
@@ -363,11 +361,12 @@
       &.rejected {
         background: #ffe6e6;
         color: #b81717;
+        padding: 4px 12px;
       }
 
       &.cancelled {
-        background: #ffe6e6;
-        color: #b81717;
+        background: #96969634;
+        color: #888888;
       }
     }
 
@@ -377,20 +376,36 @@
       justify-content: center;
 
       button {
-        padding: 6px 12px;
-        border-radius: 6px;
-        font-size: 12px;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
         border: none;
         cursor: pointer;
+        transition: background-color 0.2s;
 
-        &.approve {
-          background: #34D399;
+        &.btn-approve {
+          background: #17b860e3;
           color: white;
+
+          &:hover {
+            background: darken(#17b860e3, 5%);
+          }
         }
 
-        &.reject {
-          background: #EF4444;
+        &.btn-reject {
+          background: #ee3333e8;
           color: white;
+          padding: 0 23px;
+          
+          &:hover {
+            background: darken(#ee3333e8, 5%);
+          }
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
         }
       }
     }
