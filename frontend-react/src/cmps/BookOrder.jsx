@@ -1,14 +1,18 @@
-import { useSelector } from 'react-redux'
-import { Link ,  useNavigate } from 'react-router-dom'
-import { useState, useEffect  } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { userService } from '../services/user.service'
 import { orderService } from '../services/order'
 import { Loading } from './Loading'
+import { setSearchData } from "../store/actions/stay.actions"; // Redux action
+
 
 export function BookOrder() {
+    const dispatch = useDispatch()
     const { stayId } = useParams()
     const stay = useSelector(storeState => storeState.stayModule.stay)
+    const search = useSelector((state) => state.search || {}); // Ensure state exists
     const searchData = useSelector((state) => state.search)
     const [isBooked, setIsBooked] = useState(false)
     const user = useSelector((state) => state.userModule.user)
@@ -22,11 +26,22 @@ export function BookOrder() {
     const airbnbFee = 0.13
 
 
-    const start = new Date(searchData.startDate)
-    const end = new Date(searchData.endDate)
-    const timeDifference = end - start
+    const start = searchData.startDate ? new Date(searchData.startDate) : new Date().setDate(new Date().getDate() + 2);
+    const end = searchData.endDate ? new Date(searchData.endDate) : new Date().setDate(new Date().getDate() + 9);
+    const timeDifference = end - start;
     const stayLength = (timeDifference) ? timeDifference / (1000 * 3600 * 24) : ''
- 
+
+    if (!searchData.startDate && !searchData.endDate) {
+        dispatch(
+            setSearchData({
+                ...search,
+                startDate: new Date(new Date().setDate(new Date().getDate() + 2)).toString(),
+                endDate: new Date(new Date().setDate(new Date().getDate() + 9)).toString(), // ✅ Explicitly set `null` to trigger Redux update
+            })
+        );
+    }
+    console.log('searchData:', searchData)
+
     const cancellationDate = new Date(start)
     cancellationDate.setDate(cancellationDate.getDate() - 1)
     const formattedCancellationDate = formatDate(cancellationDate)
@@ -58,9 +73,9 @@ export function BookOrder() {
             return
         }
         if (isBooked) {
-        navigate('/trips')
-        setIsBooked(false)
-        return
+            navigate('/trips')
+            setIsBooked(false)
+            return
         }
         try {
             setIsBooked(true)
@@ -88,10 +103,10 @@ export function BookOrder() {
                 status: 'pending',
                 msgs: []
             }
-            
+
             const savedOrder = await orderService.save(newOrder)
             console.log('Order saved:', savedOrder)
-            
+
         } catch (error) {
             console.error('Failed to submit order:', error)
             setIsBooked(false) // Reset on error
@@ -156,9 +171,9 @@ export function BookOrder() {
                         <div className="detail-item flex">
                             <h3>Guests</h3>
                             <p>{
-                                `${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0) > 0
-                                    ? (searchData.guests?.adults || 0) + (searchData.guests?.children || 0)
-                                    : 1} guest${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0) !== 1 ? 's' : ''}, ${searchData.guests?.infants || 0} infant${(searchData.guests?.infants || 0) !== 1 ? 's' : ''}, ${searchData.guests?.pets || 0} pet${(searchData.guests?.pets || 0) !== 1 ? 's' : ''}`
+                                `${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0) || 1} guest${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0) !== 1 ? 's' : ''}`
+                                + (searchData.guests?.infants > 0 ? `, ${searchData.guests.infants} infant${searchData.guests.infants !== 1 ? 's' : ''}` : '')
+                                + (searchData.guests?.pets > 0 ? `, ${searchData.guests.pets} pet${searchData.guests.pets !== 1 ? 's' : ''}` : '')
                             }</p>
                         </div>
                     </div>
