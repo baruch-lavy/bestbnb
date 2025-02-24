@@ -344,17 +344,30 @@
 
     .status-badge {
       padding: 4px 8px;
-      border-radius: 12px;
-      font-size: 12px;
-
-      &.paid {
-        background: rgba(52, 211, 153, 0.1);
-        color: #34D399;
-      }
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
 
       &.pending {
-        background: rgba(251, 191, 36, 0.1);
-        color: #FBBF24;
+        font-size: 14px;
+        background: #fff8e6;
+        color: #b88217;
+        padding: 4px 12px;
+      }
+
+      &.approved {
+        background: #e6f8f0;
+        color: #17b85f;
+      }
+
+      &.rejected {
+        background: #ffe6e6;
+        color: #b81717;
+      }
+
+      &.cancelled {
+        background: #ffe6e6;
+        color: #b81717;
       }
     }
 
