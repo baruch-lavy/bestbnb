@@ -5,6 +5,7 @@
   
   @media (max-width: 768px) {
     padding: 16px;
+    margin-top: 58px;
   }
   
   h1 {
@@ -438,6 +439,7 @@
     right: 0;
     left: 0;
     background: white;
+    z-index: 1000;
 
     .logo-wrapper {
       display: flex;
