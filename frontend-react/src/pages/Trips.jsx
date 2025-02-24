@@ -96,7 +96,7 @@ export function Trips() {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
+            {orders.slice().reverse().map((order) => (
               <tr key={order._id}>
                 <td>
                   <div className="stay-info">
