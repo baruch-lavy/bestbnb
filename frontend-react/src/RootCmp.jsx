@@ -13,6 +13,7 @@ import { UserDetails } from './pages/UserDetails'
 
 import { AppHeader } from './cmps/AppHeader'
 import { AppFooter } from './cmps/AppFooter'
+import { FloatingMap } from './cmps/FloatingMap'
 import { UserMsg } from './cmps/UserMsg.jsx'
 import { BookOrder } from './cmps/BookOrder.jsx'
 import { Dashboard } from './pages/Dashboard.jsx'
@@ -29,6 +30,7 @@ export function RootCmp() {
             <main>
                 <Routes>
                     <Route path="" element={<HomePage />} />
+                    <Route path="" element={<FloatingMap />} />
                     <Route path="about" element={<AboutUs />}>
                         <Route path="team" element={<AboutTeam />} />
                         <Route path="vision" element={<AboutVision />} />
