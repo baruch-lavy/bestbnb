@@ -70,7 +70,7 @@ export function StayDetails() {
             </button>
           </div>
         </div>
-        <Link to="/stay/gallery/:id">
+        <Link to={`/stay/gallery/${stay._id}`}>
           <article className="mini-gallery">
 
             {isImgLoading && <div className="skeleton-loader"></div>}
