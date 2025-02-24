@@ -63,7 +63,6 @@
                 font-weight: 500;
 
                 &.pending {
-                    font-size: 14px;
                     background: #fff8e6;
                     color: #b88217;
                     padding: 4px 12px;
@@ -77,11 +76,12 @@
                 &.rejected {
                     background: #ffe6e6;
                     color: #b81717;
+                    padding: 4px 12px;
                 }
 
                 &.cancelled {
-                    background: #ffe6e6;
-                    color: #b81717;
+                    background: #96969634;
+                    color: #888888;
                 }
             }
 
@@ -114,8 +114,8 @@
         font-size: 14px;
         
         &:hover:not(:disabled) {
-            background: #ffe6e6;
-            color: #ff385c;
+            background: #96969634;
+            color: #353535;
         }
         
         &:disabled {

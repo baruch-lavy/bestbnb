@@ -258,7 +258,7 @@ export const Dashboard = () => {
                   </td>
                   <td data-label="Action">
                     {order.status === 'pending' && (
-                      <>
+                      <div className="action-buttons">
                         <button 
                           className="btn-approve"
                           onClick={() => handleOrderStatus(order._id, 'approved')}
@@ -271,7 +271,7 @@ export const Dashboard = () => {
                         >
                           Reject
                         </button>
-                      </>
+                      </div>
                     )}
                   </td>
                 </tr>
