@@ -28,7 +28,8 @@ export function UserDetails() {
     showSuccessMsg(`This user ${user.fullname} just got updated from socket, new score: ${user.score}`)
     store.dispatch({ type: 'SET_WATCHED_USER', user })
   }
-
+console.log('user:',user)
+console.log('params.id:',params.id)
   return (
     <section className="user-details">
       <h1>User Details</h1>
