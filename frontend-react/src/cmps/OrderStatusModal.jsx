@@ -4,7 +4,7 @@ export function OrderStatusModal({ order, onClose }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
-    }, 300000);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, [onClose]);
