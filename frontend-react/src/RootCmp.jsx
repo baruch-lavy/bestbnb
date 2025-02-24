@@ -19,6 +19,7 @@ import { BookOrder } from './cmps/BookOrder.jsx'
 import { Dashboard } from './pages/Dashboard.jsx'
 import { SearchResults } from './pages/SearchResults.jsx';
 import { Trips } from './pages/Trips'
+import { StayGallery } from './cmps/StayGallery.jsx'
 // import { OrderConfirmation } from './cmps/OrderConfirmation'
 
 export function RootCmp() {
@@ -39,6 +40,7 @@ export function RootCmp() {
                     <Route path="stay/:stayId" element={<StayDetails />} />
                     <Route path="user/:id" element={<UserDetails />} />
                     <Route path="/stay/book/:id" element={<BookOrder />} />
+                    <Route path="/stay/gallery/:id" element={<StayGallery />} />
                     <Route path="review" element={<ReviewIndex />} />
                     {/* <Route path="chat" element={<ChatApp />} /> */}
                     <Route path="admin" element={<AdminIndex />} />

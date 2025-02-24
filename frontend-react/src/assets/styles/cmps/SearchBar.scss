@@ -144,7 +144,7 @@
 
 .dropdown {
   position: absolute;
-  top: 50px;
+  top: 71px;
   left: 0;
   width: 350px;
   background: white;
@@ -359,7 +359,7 @@
       position: relative;
 
       &:not(&--selected):not(&--keyboard-selected):not(&--range-start):not(&--range-end) {
-        background: none;
+        // background: none;
       }
 
       &:hover:not(&--disabled):not(&--selected):not(&--range-start):not(&--range-end):not(&--in-range) {
@@ -385,9 +385,10 @@
       &--keyboard-selected,
       &--range-start,
       &--range-end {
-        background-color: #222;
-        color: white;
+        background-color: #222 !important;
+        color: white !important;
         font-weight: normal;
+        border-radius: 50% !important;
 
         &:hover {
           background-color: #222;
@@ -450,7 +451,7 @@
 
 .guest-dropdown {
   position: absolute;
-  top: 50px;
+  top: 71px;
   right: 0;
   width: 360px;
   background: white;

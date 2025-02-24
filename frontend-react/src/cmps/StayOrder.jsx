@@ -58,8 +58,8 @@ export function StayOrder({ stay }) {
         button.style.setProperty("--y", e.clientY - y);
     }
 
-    const start = new Date(searchData.startDate);
-    const end = new Date(searchData.endDate);
+    const start = searchData.startDate ? new Date(searchData.startDate) : new Date().setDate(new Date().getDate() + 2);
+    const end = searchData.endDate ? new Date(searchData.endDate) : new Date().setDate(new Date().getDate() + 9);
     const timeDifference = end - start;
     const stayLength = (timeDifference) ? timeDifference / (1000 * 3600 * 24) : ''
 
@@ -81,7 +81,7 @@ export function StayOrder({ stay }) {
                             value={
                                 searchData.startDate
                                     ? new Date(searchData.startDate).toLocaleDateString()
-                                    : ""
+                                    : new Date(new Date().setDate(new Date().getDate() + 2)).toLocaleDateString()
                             }
                             readOnly
                         />
@@ -96,7 +96,7 @@ export function StayOrder({ stay }) {
                             value={
                                 searchData.endDate
                                     ? new Date(searchData.endDate).toLocaleDateString()
-                                    : ""
+                                    : new Date(new Date().setDate(new Date().getDate() + 9)).toLocaleDateString()
                             }
                             readOnly
                         />
