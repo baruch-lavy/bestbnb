@@ -276,12 +276,14 @@
 
 .date-picker-dropdown {
   position: absolute;
-  left: -120px;
+  left: -315px;
+  top: 78px;
   width: 850px;
+  height: 480px;
   background: white;
   border-radius: 32px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-  padding: 24px 32px 16px;
+  padding: 65px 32px 16px 104px;
   z-index: 1;
 
   .react-datepicker {
@@ -311,7 +313,8 @@
       font-weight: 600;
       color: #222;
       margin-bottom: 32px;
-      text-align: left;
+      text-align: center;
+      margin-left: -50px;
     }
 
     &__day-names,
@@ -320,6 +323,7 @@
       grid-template-columns: repeat(7, 40px);
       gap: 0;
       justify-content: start;
+      margin-bottom: 10px;
     }
 
     &__day-name {
@@ -350,20 +354,61 @@
       align-items: center;
       justify-content: center;
       border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
 
-      &:hover:not(&--disabled) {
-        background-color: #f7f7f7;
+      &:not(&--selected):not(&--keyboard-selected):not(&--range-start):not(&--range-end) {
+        background: none;
+      }
+
+      &:hover:not(&--disabled):not(&--selected):not(&--range-start):not(&--range-end):not(&--in-range) {
+        border: 1px solid #222;
+        border-radius: 50%;
+        background: none;
+        color: #222;
       }
 
       &--disabled {
         color: #ddd;
         text-decoration: line-through;
         opacity: 0.5;
+        cursor: default;
+
+        &:hover {
+          border: none;
+          background: none;
+        }
+      }
+
+      &--selected,
+      &--keyboard-selected,
+      &--range-start,
+      &--range-end {
+        background-color: #222;
+        color: white;
+        font-weight: normal;
+
+        &:hover {
+          background-color: #222;
+          border: none;
+        }
+      }
+
+      &--in-selecting-range,
+      &--in-range {
+        background-color: #f7f7f7;
+        border-radius: 0;
+        color: #222;
+
+        &:hover {
+          background-color: #f7f7f7;
+          border: none;
+        }
       }
 
       &--today {
         font-weight: 600;
-        position: relative;
 
         &::after {
           content: '';
@@ -377,17 +422,6 @@
           border-radius: 50%;
         }
       }
-
-      &--in-range {
-        background-color: #f7f7f7;
-        border-radius: 0;
-      }
-
-      &--range-start,
-      &--range-end {
-        background-color: #222;
-        color: white;
-      }
     }
 
     &__navigation {
@@ -395,8 +429,7 @@
       top: 24px;
 
       &--previous {
-        left: auto;
-        right: 48px;
+        left: -80px;
       }
 
       &--next {
