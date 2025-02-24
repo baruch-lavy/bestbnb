@@ -245,7 +245,7 @@ export const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {orders.map(order => (
+              {orders.slice().reverse().map(order => (
                 <tr key={order._id}>
                   <td data-label="Stay">{order.stay.name}</td>
                   <td data-label="Guest">{order.guest.fullname}</td>
