@@ -17,10 +17,12 @@ export function StayGallery() {
       if (!stay) return < Loading />
 
     return (
-        <article className="gallery">
-          <header>
-            <Link to={`/stay/${stay._id}`}>{'<'}</Link>
-          </header>
+        <article className="gallery-page">
+          <div className="back-icon-gallery">
+            <Link to={`/stay/${stay._id}`}>
+                  <img src="/img/stays/left.svg" alt="" />
+            </Link>
+          </div>
           <ul className="gallery-imgs">
             {stay.imgUrls.map((imgUrl, index) => (
               <li key={imgUrl} className={index % 3 === 0 ? 'big' : 'small'}>
@@ -29,7 +31,7 @@ export function StayGallery() {
             ))}
           </ul>
         </article>
-      );
+      )
     }
     
     
