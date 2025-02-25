@@ -24,7 +24,6 @@ export const AppHeader = () => {
   const searchData = useSelector((state) => state.search);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const user = useSelector((state) => state.userModule.user);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   // console.log('user:', user);
 
 
@@ -87,16 +86,16 @@ console.log('filterBy:', filterBy);
       destination: searchData.destination || "",
       startDate: searchData.startDate || "",
       endDate: searchData.endDate || "",
-      guests: encodeURIComponent(JSON.stringify(searchData.guests || { adults: 1, children: 0 })), // ✅ Fix object issue
+      guests: encodeURIComponent(JSON.stringify(searchData.guests || { adults: 1, children: 0 })),
     };
   
     dispatch(loadStays(filterBy));
 
-    // ✅ Update URL parameters without page reload
+    // Update URL parameters without page reload
     const newUrl = `${window.location.pathname}/?${new URLSearchParams(filterBy).toString()}`;
     window.history.pushState({}, "", newUrl);
   
-    // ✅ Collapse back to sticky after search
+    // Close any open dropdowns
     setForceExpand(false);
     setShowSticky(true);
   };
@@ -131,29 +130,22 @@ console.log('filterBy:', filterBy);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isUserModalOpen]);
 
-  // Add this function to handle mobile menu toggle
-  const handleMobileMenuToggle = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
   return (
     <>
       {/* HEADER */}
       <header className={`header ${showSticky ? "sticky-header" : ""} ${isDetailsPage ? "details-header" : ""} ${isDashboardPage ? "dashboard-page" : ""} ${isTripsPage ? "trips-page" : ""} ${isGalleryPage ? "gallery-page" : ""}`}>
-        <div className="header-content">
-          <div className="left-section">
-            <a href="/stay">
-              <div className="logo-wrapper">
-                <FaAirbnb className="logo" /> 
-                <span className="logo-text">bestbnb</span>
-              </div>   
+        <div className="left-section">
+        <a href="/stay">
+        <div className="logo-wrapper">
+          <FaAirbnb className="logo" /> 
+          <span className="logo-text">bestbnb</span>
+        </div> 
             </a>
             <nav className="nav-links">
               <a href="/stay">Homes</a>
               <a href="#" className="expriences">Experiences</a>
             </nav>
           </div>
-
           {/* Fix: Only show sticky search when showSticky is true AND not on dashboard */}
           {showSticky && !forceExpand && !isDashboardPage && (
             <div className="sticky-search-wrapper" onClick={handleStickyClick}>
@@ -194,23 +186,13 @@ console.log('filterBy:', filterBy);
                 isOpen={isUserModalOpen} 
                 onClose={() => setIsUserModalOpen(false)} 
               />
-            </div>
           </div>
-
-          {/* Add mobile menu button for small screens */}
-          {isTripsPage && (
-            <button 
-              className="mobile-menu-btn"
-              onClick={handleMobileMenuToggle}
-              style={{ display: 'none' }} // Will be shown via media query
-            >
-              <FaBars />
-            </button>
-          )}
         </div>
       </header>
 
-      {!isDashboardPage && !isTripsPage && (
+
+          {/* Add mobile menu button for small screens */}
+          {!isDashboardPage && !isTripsPage && (
         <div className={`full-search-bar ${showSticky && !forceExpand ? "hidden" : ""}`}>
           <SearchBar
             openDropdown={openDropdown}
@@ -233,13 +215,6 @@ console.log('filterBy:', filterBy);
             </div>
           </div>
         </div>
-
-        {/* Add mobile menu */}
-        {isTripsPage && isMobileMenuOpen && (
-          <div className="mobile-menu">
-            {/* Add mobile menu content */}
-          </div>
-        )}
     </>
   )
 }
