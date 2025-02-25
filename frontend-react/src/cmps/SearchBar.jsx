@@ -244,6 +244,7 @@ export const SearchBar = ({
                 selectsRange
                 monthsShown={2}
                 inline
+                minDate={new Date()}
               />
             </div>
           )}
