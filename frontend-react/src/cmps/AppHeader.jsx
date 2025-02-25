@@ -160,6 +160,7 @@ console.log('filterBy:', filterBy);
           <div className="right-section">
             <span className="host">Bestbnb your home</span>
             {/* <FaGlobe className="icon" /> */}
+            <img src="/img/stays/footer/footer 1.svg" className="icon" />
             <div className="profile-menu" onClick={handleUserIconClick}>
               <FaBars className="menu-icon" />
 {/* 
