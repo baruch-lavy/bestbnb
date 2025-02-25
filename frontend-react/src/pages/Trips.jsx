@@ -120,7 +120,7 @@ export function Trips() {
                             <th>Guests</th>
                             <th>Total Price</th>
                             <th>Status</th>
-                            <th>Actions</th>
+                            <th className="actions">Actions</th>
                         </tr>
                     </thead>
                     <tbody>

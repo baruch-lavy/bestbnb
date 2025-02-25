@@ -12,31 +12,33 @@ export function AppFooter() {
 	if (isDashboardPage || isTripsPage) {
 		return (
 			<footer className={`app-footer ${isTripsPage ? 'trips-footer' : 'dashboard-footer'}`}>
-				<div className="footer-bottom">
-					<div className="footer-bottom-left">
-						<p className="footer-copyright">© 2025 Bestbnb, Inc.</p>
-						<span className="dot-separator">·</span>
-						<a href="#">Terms</a>
-						<span className="dot-separator">·</span>
-						<a href="#">Sitemap</a>
-						<span className="dot-separator">·</span>
-						<a href="#">Privacy</a>
-						<span className="dot-separator">·</span>
-						<a href="#">Your Privacy Choices</a>
-					</div>
+				<div className="footer-wrapper">
+					<div className="footer-bottom">
+						<div className="footer-bottom-left">
+							<p className="footer-copyright">© 2025 Bestbnb, Inc.</p>
+							<span className="dot-separator">·</span>
+							<a href="#">Terms</a>
+							<span className="dot-separator">·</span>
+							<a href="#">Sitemap</a>
+							<span className="dot-separator">·</span>
+							<a href="#">Privacy</a>
+							<span className="dot-separator">·</span>
+							<a href="#">Your Privacy Choices</a>
+						</div>
 
-					<div className="footer-bottom-right">
-						<button className="language-btn">
-							<img src="/img/stays/footer/footer 1.svg" className="globe-icon"/>
-							<span>English (US)</span>
-						</button>
-						<button className="currency-btn">
-							<span className="dollar-icon">$</span>
-							<span>USD</span>
-						</button>
-						<a href="#"><img src="/img/stays/icons/Facebook.svg" alt="Facebook"/></a>
-						<a href="#"><img src="/img/stays/icons/Twitter.svg" alt="Twitter"/></a>
-						<a href="#"><img src="/img/stays/icons/Instagram.svg" alt="Instagram"/></a>
+						<div className="footer-bottom-right">
+							<button className="language-btn">
+								<img src="/img/stays/footer/footer 1.svg" className="globe-icon"/>
+								<span>English (US)</span>
+							</button>
+							<button className="currency-btn">
+								<span className="dollar-icon">$</span>
+								<span>USD</span>
+							</button>
+							<a href="#"><img src="/img/stays/icons/Facebook.svg" alt="Facebook"/></a>
+							<a href="#"><img src="/img/stays/icons/Twitter.svg" alt="Twitter"/></a>
+							<a href="#"><img src="/img/stays/icons/Instagram.svg" alt="Instagram"/></a>
+						</div>
 					</div>
 				</div>
 			</footer>

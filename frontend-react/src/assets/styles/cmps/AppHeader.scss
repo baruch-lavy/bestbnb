@@ -122,31 +122,37 @@ body {
   }
 
 
-  .user-icon-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  // .user-icon-container {
+  //   position: relative;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+
+  // }
   
+  // .user-icon {
+  //   font-size: 36px;  
+  //   color: #222; 
+  // }
+  
+  // .user-initial {
+  //   position: absolute;
+  //   font-size: 14px;
+  //   font-weight: bold;
+  //   color: white;
+  //   background: rgba(0, 0, 0, 0.7);
+  //   width: 20px;
+  //   height: 20px;
+  //   border-radius: 50%;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   text-transform: uppercase;
+  // }
+
   .user-icon {
-    font-size: 36px;  /* Adjust size as needed */
-    color: #222; /* Dark icon */
-  }
-  
-  .user-initial {
-    position: absolute;
-    font-size: 14px;
-    font-weight: bold;
-    color: white;
-    background: rgba(0, 0, 0, 0.7);
-    width: 20px;
-    height: 20px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-transform: uppercase;
+    border: 1px solid black;
   }
   
 
@@ -342,6 +348,94 @@ body {
   }
 }
 
+// .header.trips-page {
+//   position: relative !important;
+//   border-bottom: 1px solid #ddd;
+//   width: 100%;
+//   background-color: #fff;
+
+//   .host {
+//     display: none;
+//   }
+
+//   .header-content {
+//     max-width: 1280px;
+//     margin: 0 auto;
+//     padding: 16px 80px;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     width: 100%;
+//     box-sizing: border-box;
+//   }
+
+//   @media (max-width: 1440px) {
+//     .header-content {
+//       max-width: 1120px;
+//       padding: 16px 60px;
+//     }
+//   }
+
+//   @media (max-width: 1024px) {
+//     .header-content {
+//       max-width: 960px;
+//       padding: 16px 40px;
+//     }
+//   }
+
+//   @media (max-width: 768px) {
+//     .header-content {
+//       max-width: 100%;
+//       padding: 16px 24px;
+//     }
+   
+//   }
+
+//   .sticky-search-wrapper,
+//   .search-container,
+//   .full-search-bar {
+//     display: none !important;
+//   }
+// }
+
+// .trips-page {
+//   + .full-search-bar {
+//     display: none !important;
+//   }
+// }
+
+// .header.gallery-page {
+//   position: relative !important;
+//   grid-column: 1 / 4;
+//   display: flex;
+//   justify-content: space-around;
+//   align-items: center;
+//   padding: 16px 0;
+//   position: relative;
+//   justify-self: center;
+//   border-bottom: 1px solid #dddddd;
+//   margin-top: 0;
+  
+//   .sticky-search-wrapper,
+//   .search-container,
+//   .full-search-bar {
+//     display: none !important;
+//   }
+  
+// }
+
+// .gallery-page
+//  + .nav-links{
+//   display: none !important;
+// }
+
+// .gallery-page {
+//   + .full-search-bar {
+//     display: none !important;
+//   }
+
+// }
+
 .header.trips-page {
   position: relative !important;
   padding: 16px 24px;
@@ -400,7 +494,6 @@ body {
   }
 
 }
-
 
 .gallery-page {
   + .full-search-bar {
