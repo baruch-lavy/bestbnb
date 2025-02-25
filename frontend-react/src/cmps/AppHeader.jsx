@@ -170,7 +170,7 @@ console.log('filterBy:', filterBy);
             {/* <FaGlobe className="icon" /> */}
             <div className="profile-menu" onClick={handleUserIconClick}>
               <FaBars className="menu-icon" />
-
+{/* 
               {user ? (
                 <div className="user-info">
                   <div className="user-icon-container">
@@ -182,7 +182,13 @@ console.log('filterBy:', filterBy);
                 </div>
               ) : (
                 <FaUserCircle className="user-icon" />
-              )}
+              )} */}
+              
+                <div className="user-info">
+                  <div className="user-icon-container">
+                    <img src="/img/stays/user-guest.jpg" className="user-icon" />
+                  </div>
+                </div>
              
               <UserModal 
                 isOpen={isUserModalOpen} 
