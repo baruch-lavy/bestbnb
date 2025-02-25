@@ -18,11 +18,27 @@ export function StayGallery() {
 
     return (
         <article className="gallery-page">
-          <div className="back-icon-gallery">
-            <Link to={`/stay/${stay._id}`}>
-                  <img src="/img/stays/left.svg" alt="" />
-            </Link>
+          <div className="stay-header-gallery">
+            <div className="header-content">
+              <div className="back-btn">
+                <Link to={`/stay/${stay._id}`}>
+                  <img src="/img/stays/left.svg" alt="Back" />
+                </Link>
+              </div>
+
+              <div className="action-btns">
+                <button className="action-btn">
+                  <img src="/img/stays/share.svg" alt="Share" />
+                  <span>Share</span>
+                </button>
+                <button className="action-btn">
+                  <img src="/img/stays/heart.svg" alt="Save" />
+                  <span>Save</span>
+                </button>
+              </div>
+            </div>
           </div>
+
           <ul className="gallery-imgs">
             {stay.imgUrls.map((imgUrl, index) => (
               <li key={imgUrl} className={index % 3 === 0 ? 'big' : 'small'}>
@@ -31,8 +47,8 @@ export function StayGallery() {
             ))}
           </ul>
         </article>
-      )
-    }
+    )
+}
     
     
     

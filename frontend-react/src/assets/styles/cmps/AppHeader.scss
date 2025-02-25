@@ -369,27 +369,43 @@ body {
 }
 
 .header.gallery-page {
-  position: relative !important;
-  grid-column: 1 / 4;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 16px 0;
-  position: relative;
-  justify-self: center;
-  border-bottom: 1px solid #dddddd;
-  margin-top: 0;
+     display: none;
+}
 
+.header.gallery-page {
+  // position: relative !important;
+  // grid-column: 1 / 4;
+  // display: flex;
+  // justify-content: space-around;
+  // align-items: center;
+  // padding: 16px 0;
+  // position: relative;
+  // justify-self: center;
+  // border-bottom: 1px solid #dddddd;
+  // margin-top: 0;
+  
   .sticky-search-wrapper,
   .search-container,
   .full-search-bar {
     display: none !important;
   }
+  
+  .nav-links{
+    display: none !important;
+  }
+  
+  .host{
+    
+    display: none !important;
+  }
+
 }
+
 
 .gallery-page {
   + .full-search-bar {
     display: none !important;
   }
+
 }
 
