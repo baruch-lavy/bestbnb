@@ -26,12 +26,17 @@
                 text-align: left;
                 border-bottom: 1px solid #ebebeb;
                 font-size: 14px;
+                vertical-align: middle;
             }
 
             th {
                 background: #f7f7f7;
                 font-weight: 600;
                 color: #222;
+            }
+
+            .actions{
+              padding-left: 28px;
             }
 
             .stay-info {
@@ -68,7 +73,7 @@
                 font-size: 13px;
 
                 &.pending, &.rejected {
-                    padding: 3px 8px;
+                    padding: 4px 12px;
                     background: #fff8e6;
                     color: #b88217;
                 }
