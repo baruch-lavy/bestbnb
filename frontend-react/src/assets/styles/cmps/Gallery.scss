@@ -94,30 +94,11 @@
     }
 
 
-    
-
-    // .back-icon {
-    //     width: 32px;
-    //     height: 32px;
-        
-    //     img {
-    //         border-radius: 50%;
-    //         width: 16px;
-    //         height: 16px;
-    //         cursor: pointer;
-    //         transition: transform 0.2s ease-in-out;
-    //     }
-        
-    //     img:hover {
-    //         transform: scale(1.2);
-    //     }
-
     .gallery-imgs {
         grid-column: 2;
         margin-top: 150px;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(auto, 1fr 1fr);
         grid-gap: 10px;
         list-style-type: none;
         padding: 0;

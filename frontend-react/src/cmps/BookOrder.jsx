@@ -6,7 +6,7 @@ import { userService } from '../services/user.service'
 import { orderService } from '../services/order'
 import { Loading } from './Loading'
 import { setSearchData } from "../store/actions/stay.actions"; // Redux action
-
+import { loadStay, addStayMsg } from '../store/actions/stay.actions'
 
 export function BookOrder() {
     const dispatch = useDispatch()
@@ -20,7 +20,8 @@ export function BookOrder() {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-    }, [isBooked])
+        loadStay(stayId)
+      }, [stayId ,isBooked])
 
     const cleanFee = 0.095
     const airbnbFee = 0.13

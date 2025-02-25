@@ -8,12 +8,33 @@ import { loadStay, addStayMsg } from '../store/actions/stay.actions'
 export function StayGallery() {
      const { stayId } = useParams()
      const stay = useSelector(storeState => storeState.stayModule.stay)
-    
+     const shareLink = window.location.href
+
       useEffect(() => {
         window.scrollTo(0, 0)
         loadStay(stayId)
       }, [stayId])
 
+      function handleShare() {
+        if (navigator.share) {
+          try {
+            navigator.share({
+              title: 'Website Title',
+              text: 'Short description of the website',
+              url: shareLink,
+            }).then(() => {
+              console.log('Share successful');
+            }).catch((error) => {
+              console.error('Share failed:', error);
+            });
+          } catch (error) {
+            console.error('Share failed:', error);
+          }
+        } else {
+          alert('Your browser does not support sharing');
+        }
+      }
+    
       if (!stay) return < Loading />
 
     return (
@@ -27,7 +48,7 @@ export function StayGallery() {
               </div>
 
               <div className="action-btns">
-                <button className="action-btn">
+                <button className="action-btn"  onClick={handleShare}>
                   <img src="/img/stays/share.svg" alt="Share" />
                   <span>Share</span>
                 </button>

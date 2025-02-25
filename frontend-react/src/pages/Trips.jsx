@@ -17,6 +17,7 @@ export function Trips() {
     const previousOrdersRef = useRef(null);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         const user = userService.getLoggedinUser();
         if (user) {
             loggedinUserRef.current = user;
@@ -68,20 +69,20 @@ export function Trips() {
     async function checkForUpdates() {
         try {
             const currentOrders = await orderService.getOrdersByBuyer();
-            
+
             // בדיקה אם יש שינוי בסטטוס של הזמנה
             currentOrders.forEach(currentOrder => {
                 const previousOrder = previousOrdersRef.current?.find(
                     order => order._id === currentOrder._id
                 );
-                
+
                 if (previousOrder && previousOrder.status !== currentOrder.status) {
                     // מצאנו שינוי! נציג מודל
                     setStatusModal(currentOrder);
                     setOrders(currentOrders);
                 }
             });
-            
+
             previousOrdersRef.current = currentOrders;
         } catch (err) {
             console.error("Failed to check for updates:", err);
@@ -171,9 +172,9 @@ export function Trips() {
             </div>
 
             {statusModal && (
-                <OrderStatusModal 
-                    order={statusModal} 
-                    onClose={() => setStatusModal(null)} 
+                <OrderStatusModal
+                    order={statusModal}
+                    onClose={() => setStatusModal(null)}
                 />
             )}
         </section>
