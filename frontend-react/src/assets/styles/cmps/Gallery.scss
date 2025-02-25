@@ -9,7 +9,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 680px 1fr;
-    margin-top: 130px;
+    margin-top: 100px;
 
     .stay-header-gallery {
         position: fixed;
@@ -113,7 +113,7 @@
                 height: auto;
                 display: block;
                 object-fit: cover;
-                aspect-ratio: 1;
+                aspect-ratio: 16 / 11;
             }
         }
     }

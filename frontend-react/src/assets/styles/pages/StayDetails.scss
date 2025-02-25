@@ -5,7 +5,10 @@
     grid-template-rows: repeat(3, minmax(200px, auto));
     min-height: 100vh;
     // overflow-y: auto;
-
+    @include for-mobile-layout{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+    }
     .gallery-btn {
         position: relative;
         bottom: 64px;
