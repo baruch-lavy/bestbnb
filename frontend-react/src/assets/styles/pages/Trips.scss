@@ -2,6 +2,7 @@
     padding: 24px;
     max-width: 1200px;
     margin: 60px auto;
+    margin-top: 0;
 
     h1 {
         font-size: 32px;
@@ -130,5 +131,68 @@
     margin-top: 13em;
     color: #02020279;
     font-size: 25px;
+}
+
+.status-modal {
+  position: fixed;
+  top: 95px;
+  right: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  background: white;
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out;
+  
+  &.approved {
+    border-left: 4px solid #17b85f;
+  }
+  
+  &.rejected {
+    border-left: 4px solid #b81717;
+  }
+  
+  &.cancelled {
+    border-left: 4px solid #717171;
+  }
+
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    min-width: 300px;
+
+    h3 {
+      margin: 0 0 8px;
+      color: #222;
+      font-size: 18px;
+    }
+
+    p {
+      margin: 0;
+      color: #717171;
+      
+      &.dates {
+        font-size: 14px;
+        margin-top: 4px;
+      }
+    }
+
+    .status-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 

@@ -14,6 +14,7 @@ export const AppHeader = () => {
   const [searchParams] = useSearchParams();
   const isDetailsPage = /^\/stay\/[^/]+$/.test(location.pathname); // ✅ Match /stay/:stayId
   const isDashboardPage = location.pathname === '/dashboard'; // Add dashboard page check
+  const isTripsPage = location.pathname === '/trips'; // Add trips page check
 
   const [showSticky, setShowSticky] = useState(isDetailsPage);
   const [forceExpand, setForceExpand] = useState(false); // ✅ Track if manually expanded
@@ -131,7 +132,7 @@ console.log('filterBy:', filterBy);
   return (
     <>
       {/* HEADER */}
-      <header className={`header ${showSticky ? "sticky-header" : ""} ${isDetailsPage ? "details-header" : ""} ${isDashboardPage ? "dashboard-page" : ""}`}>
+      <header className={`header ${showSticky ? "sticky-header" : ""} ${isDetailsPage ? "details-header" : ""} ${isDashboardPage ? "dashboard-page" : ""} ${isTripsPage ? "trips-page" : ""}`}>
         <div className="left-section">
         <a href="/stay">
         <div className="logo-wrapper">
@@ -184,7 +185,7 @@ console.log('filterBy:', filterBy);
         </div>
       </header>
 
-      {!isDashboardPage && (
+      {!isDashboardPage && !isTripsPage && (
         <div className={`full-search-bar ${showSticky && !forceExpand ? "hidden" : ""}`}>
           <SearchBar
             openDropdown={openDropdown}
@@ -192,7 +193,6 @@ console.log('filterBy:', filterBy);
             handleSearch={handleSearch}
           />
         </div>
-
       )}
         <div className="dashboard-header">
         <a href="/stay">
