@@ -24,6 +24,7 @@ export const AppHeader = () => {
   const searchData = useSelector((state) => state.search);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const user = useSelector((state) => state.userModule.user);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   // console.log('user:', user);
 
 
@@ -130,59 +131,76 @@ console.log('filterBy:', filterBy);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isUserModalOpen]);
 
+  // Add this function to handle mobile menu toggle
+  const handleMobileMenuToggle = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <>
       {/* HEADER */}
       <header className={`header ${showSticky ? "sticky-header" : ""} ${isDetailsPage ? "details-header" : ""} ${isDashboardPage ? "dashboard-page" : ""} ${isTripsPage ? "trips-page" : ""} ${isGalleryPage ? "gallery-page" : ""}`}>
-        <div className="left-section">
-        <a href="/stay">
-        <div className="logo-wrapper">
-          <FaAirbnb className="logo" /> 
-          <span className="logo-text">bestbnb</span>
-        </div>   
-        </a>
-          <nav className="nav-links">
-            <a href="/stay">Homes</a>
-            <a href="#" className="expriences">Experiences</a>
-          </nav>
-        </div>
-
-        {/* Fix: Only show sticky search when showSticky is true AND not on dashboard */}
-        {showSticky && !forceExpand && !isDashboardPage && (
-          <div className="sticky-search-wrapper" onClick={handleStickyClick}>
-            <StickySearchBar
-              openDropdown={openDropdown}
-              handleDropdownOpen={handleDropdownOpen}
-              handleSearch={handleSearch}
-            />
+        <div className="header-content">
+          <div className="left-section">
+            <a href="/stay">
+              <div className="logo-wrapper">
+                <FaAirbnb className="logo" /> 
+                <span className="logo-text">bestbnb</span>
+              </div>   
+            </a>
+            <nav className="nav-links">
+              <a href="/stay">Homes</a>
+              <a href="#" className="expriences">Experiences</a>
+            </nav>
           </div>
-        )}
 
-        <div className="right-section">
-          <span className="host">Bestbnb your home</span>
-          {/* <FaGlobe className="icon" /> */}
-          <div className="profile-menu" onClick={handleUserIconClick}>
-            <FaBars className="menu-icon" />
+          {/* Fix: Only show sticky search when showSticky is true AND not on dashboard */}
+          {showSticky && !forceExpand && !isDashboardPage && (
+            <div className="sticky-search-wrapper" onClick={handleStickyClick}>
+              <StickySearchBar
+                openDropdown={openDropdown}
+                handleDropdownOpen={handleDropdownOpen}
+                handleSearch={handleSearch}
+              />
+            </div>
+          )}
 
-            {user ? (
-          <div className="user-info">
-            <div className="user-icon-container">
-              <FaUserCircle className="user-icon" />
-              <span className="user-initial">
-                {user.fullname.charAt(0).toUpperCase()}
-              </span>
+          <div className="right-section">
+            <span className="host">Bestbnb your home</span>
+            {/* <FaGlobe className="icon" /> */}
+            <div className="profile-menu" onClick={handleUserIconClick}>
+              <FaBars className="menu-icon" />
+
+              {user ? (
+                <div className="user-info">
+                  <div className="user-icon-container">
+                    <FaUserCircle className="user-icon" />
+                    <span className="user-initial">
+                      {user.fullname.charAt(0).toUpperCase()}
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                <FaUserCircle className="user-icon" />
+              )}
+             
+              <UserModal 
+                isOpen={isUserModalOpen} 
+                onClose={() => setIsUserModalOpen(false)} 
+              />
             </div>
           </div>
-        ) : (
-          <FaUserCircle className="user-icon" />
-          
-        )}
-             
-        <UserModal 
-          isOpen={isUserModalOpen} 
-          onClose={() => setIsUserModalOpen(false)} 
-        />
-          </div>
+
+          {/* Add mobile menu button for small screens */}
+          {isTripsPage && (
+            <button 
+              className="mobile-menu-btn"
+              onClick={handleMobileMenuToggle}
+              style={{ display: 'none' }} // Will be shown via media query
+            >
+              <FaBars />
+            </button>
+          )}
         </div>
       </header>
 
@@ -209,6 +227,13 @@ console.log('filterBy:', filterBy);
             </div>
           </div>
         </div>
+
+        {/* Add mobile menu */}
+        {isTripsPage && isMobileMenuOpen && (
+          <div className="mobile-menu">
+            {/* Add mobile menu content */}
+          </div>
+        )}
     </>
   )
 }
