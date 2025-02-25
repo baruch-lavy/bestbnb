@@ -379,17 +379,29 @@ body {
   justify-self: center;
   border-bottom: 1px solid #dddddd;
   margin-top: 0;
-
+  
   .sticky-search-wrapper,
   .search-container,
   .full-search-bar {
     display: none !important;
   }
+  
+  .nav-links{
+    display: none !important;
+  }
+  
+  .host{
+    
+    display: none !important;
+  }
+
 }
+
 
 .gallery-page {
   + .full-search-bar {
     display: none !important;
   }
+
 }
 
