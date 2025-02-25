@@ -348,6 +348,10 @@ body {
   width: 100%;
   background-color: #fff;
 
+  .host {
+    display: none;
+  }
+
   .header-content {
     max-width: 1280px;
     margin: 0 auto;
@@ -359,7 +363,6 @@ body {
     box-sizing: border-box;
   }
 
-  // Add responsive styles
   @media (max-width: 1440px) {
     .header-content {
       max-width: 1120px;
@@ -379,7 +382,7 @@ body {
       max-width: 100%;
       padding: 16px 24px;
     }
-    // ... rest of mobile styles
+   
   }
 
   .sticky-search-wrapper,
