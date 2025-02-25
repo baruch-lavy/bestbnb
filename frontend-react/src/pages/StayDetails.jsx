@@ -22,6 +22,7 @@ export function StayDetails() {
   const [isImgLoading, setImgLoading] = useState(true)
   const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false)
   const searchData = useSelector((state) => state.search);
+  const shareLink = window.location.href
 
   useEffect(() => {
     document.body.classList.add('details-page')
@@ -48,8 +49,28 @@ export function StayDetails() {
     } catch (err) {
       showErrorMsg('Cannot add stay msg')
     }
-
   }
+
+  function handleShare() {
+    if (navigator.share) {
+      try {
+        navigator.share({
+          title: 'Website Title',
+          text: 'Short description of the website',
+          url: shareLink,
+        }).then(() => {
+          console.log('Share successful');
+        }).catch((error) => {
+          console.error('Share failed:', error);
+        });
+      } catch (error) {
+        console.error('Share failed:', error);
+      }
+    } else {
+      alert('Your browser does not support sharing');
+    }
+  }
+
   if (!stay) return < Loading />
   
   return (
@@ -59,7 +80,7 @@ export function StayDetails() {
           <h1 className="stay-name"> {stay.name}</h1>
           <div className="stay-header-btns">
             <button className="show-more-summary"
-            // onClick={() => setIsSummaryModalOpen(true)}
+            onClick={handleShare}
             >
               <img src="/img/stays/share.svg" alt="" /><span>Share</span>
             </button>

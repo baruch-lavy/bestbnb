@@ -48,18 +48,19 @@
 
                 display: flex;
                 align-items: center;
-                gap: 5px;
+                gap: 20px;
+
 
                         .show-more-summary {
                         display: flex;
                         align-items: center;
                         gap: 5px;
                 
-                        color: inherit;
+                        color: #222222;
                         background-color: transparent;
                         font-size: rem(14px);
                         line-height: rem(18px);
-                        // font-weight: bold;
+                        font-weight: 600;
                         padding: 0;
                         margin: 0;
                 
