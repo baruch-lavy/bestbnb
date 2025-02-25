@@ -22,9 +22,10 @@
             border-collapse: collapse;
 
             th, td {
-                padding: 16px;
+                padding: 12px;
                 text-align: left;
                 border-bottom: 1px solid #ebebeb;
+                font-size: 14px;
             }
 
             th {
@@ -36,38 +37,38 @@
             .stay-info {
                 display: flex;
                 align-items: center;
-                gap: 12px;
+                gap: 8px;
 
                 img {
-                    width: 80px;
-                    height: 60px;
+                    width: 70px;
+                    height: 50px;
                     object-fit: cover;
-                    border-radius: 8px;
+                    border-radius: 6px;
                 }
 
                 h3 {
                     margin: 0;
-                    font-size: 16px;
+                    font-size: 14px;
                     color: #222;
+                    max-width: 200px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
 
                 p {
-                    margin: 4px 0 0;
+                    margin: 2px 0 0;
                     color: #717171;
-                    font-size: 14px;
+                    font-size: 13px;
                 }
             }
 
             .status {
-                padding: 4px 8px;
-                border-radius: 4px;
-                font-size: 14px;
-                font-weight: 500;
+                padding: 3px 8px;
+                font-size: 13px;
 
-                &.pending {
-                    background: #fff8e6;
-                    color: #b88217;
-                    padding: 4px 12px;
+                &.pending, &.rejected {
+                    padding: 3px 8px;
                 }
 
                 &.approved {
@@ -78,7 +79,6 @@
                 &.rejected {
                     background: #ffe6e6;
                     color: #b81717;
-                    padding: 4px 12px;
                 }
 
                 &.cancelled {
@@ -110,10 +110,11 @@
         border: none;
         color: #717171;
         cursor: pointer;
-        padding: 8px 16px;
+        padding: 6px 12px;
         border-radius: 8px;
         transition: all 0.2s;
-        font-size: 14px;
+        font-size: 13px;
+        white-space: nowrap;
         
         &:hover:not(:disabled) {
             background: #96969634;
