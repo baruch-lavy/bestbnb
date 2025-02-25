@@ -9,7 +9,6 @@ export function StayOrder({ stay }) {
     const searchData = useSelector((state) => state.search)
     const [openDropdown, setOpenDropdown] = useState(null)
 
-    console.log('searchData', searchData)
     const dropdownRef = useRef(null);
     const datePickerRef = useRef(null);
     const guestDropdownRef = useRef(null);

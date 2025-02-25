@@ -42,7 +42,6 @@ export function Calendar({ stay }) {
 
   useEffect(() => {
     console.log('startDate changed:', startDate);
-    console.log('endDate changed:', endDate);
   }, [startDate, endDate]);
 
 
