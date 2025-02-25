@@ -6,7 +6,7 @@
     position: sticky;
     background-color: white;
     z-index: 4;
-    padding-top: 40px;
+    padding-top: 60px;
     justify-items: stretch;
     align-items: baseline;
 
@@ -15,7 +15,7 @@
         width: 92px;
         position: absolute;
         right: -5px;
-        top: 51%;
+        top: 47%;
         padding: 7px 13px;
         margin-top: 9px;
         border: 1px solid #ddd;
@@ -48,8 +48,8 @@
     .category-filter {
         position: relative;
         width: 93%;
-        padding: 20px 0 0;
-        margin-top: 1.3em;
+        padding: 10px 0 0;
+        margin-top: 0.5em;
         overflow: hidden;
         margin-bottom: 0.2em;
 
@@ -174,7 +174,7 @@
 
         .scroll-btn {
             position: absolute;
-            top: 50%;
+            top: 38%;
             transform: translateY(-50%);
             width: 28px;
             height: 28px;

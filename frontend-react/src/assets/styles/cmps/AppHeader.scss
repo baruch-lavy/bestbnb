@@ -20,7 +20,7 @@ body {
   position: relative; // ✅ Ensure sticky search bar is positioned inside
 
    &.sticky-header{
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid #ddd;
   }
   /** LEFT SECTION **/
   .left-section {
@@ -316,6 +316,7 @@ body {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  margin-bottom: -80px;
 }
 
 .user-icon{
