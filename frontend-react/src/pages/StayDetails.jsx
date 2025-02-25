@@ -85,6 +85,10 @@ export function StayDetails() {
               ))}
             </div>
           </article>
+            <button className="gallery-btn">
+                <img src="/img/stays/show-gallery.svg" alt="show-gallery" />
+              Show all photos
+            </button>
         </Link>
       </header>
 
