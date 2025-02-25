@@ -7,10 +7,11 @@ export function AppFooter() {
 	const location = useLocation()
 	const isDetailsPage = location.pathname.includes('/stay/')
 	const isDashboardPage = location.pathname === '/dashboard'
+	const isTripsPage = location.pathname === '/trips'
 
-	if (isDashboardPage) {
+	if (isDashboardPage || isTripsPage) {
 		return (
-			<footer className="app-footer dashboard-footer">
+			<footer className={`app-footer ${isTripsPage ? 'trips-footer' : 'dashboard-footer'}`}>
 				<div className="footer-bottom">
 					<div className="footer-bottom-left">
 						<p className="footer-copyright">© 2025 Bestbnb, Inc.</p>

@@ -14,8 +14,9 @@ export const AppHeader = () => {
   const [searchParams] = useSearchParams();
   const isDetailsPage = /^\/stay\/[^/]+$/.test(location.pathname); // ✅ Match /stay/:stayId
   const isDashboardPage = location.pathname === '/dashboard'; // Add dashboard page check
-  const isTripsPage = location.pathname === '/trips'; // Add trips page check
-
+  const isTripsPage = location.pathname === '/trips'; 
+  const isGalleryPage = /^\/stay\/gallery\/[^/]+$/.test(location.pathname);
+  
   const [showSticky, setShowSticky] = useState(isDetailsPage);
   const [forceExpand, setForceExpand] = useState(false); // ✅ Track if manually expanded
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -132,7 +133,7 @@ console.log('filterBy:', filterBy);
   return (
     <>
       {/* HEADER */}
-      <header className={`header ${showSticky ? "sticky-header" : ""} ${isDetailsPage ? "details-header" : ""} ${isDashboardPage ? "dashboard-page" : ""} ${isTripsPage ? "trips-page" : ""}`}>
+      <header className={`header ${showSticky ? "sticky-header" : ""} ${isDetailsPage ? "details-header" : ""} ${isDashboardPage ? "dashboard-page" : ""} ${isTripsPage ? "trips-page" : ""} ${isGalleryPage ? "gallery-page" : ""}`}>
         <div className="left-section">
         <a href="/stay">
         <div className="logo-wrapper">
