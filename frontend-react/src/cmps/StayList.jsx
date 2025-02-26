@@ -115,8 +115,6 @@ export function StayList() {
         setFilteredStays(allStays);
         setIsLoading(false);
     }, [allStays])
-
-    // if (!stay) return < Loading />
     
     if (!filteredStays?.length) {
         return (
@@ -125,10 +123,11 @@ export function StayList() {
                     onSelectCategory={handleCategorySelect}
                     selectedCategory={selectedCategory}
                 />
-                <div className="no-stays-message">
+                {/* <div className="no-stays-message">
                     <h2>No stays found</h2>
                     <p>Try adjusting your search criteria or removing some filters</p>
-                </div>
+                </div> */}
+                < Loading />
             </div>
         )
     }
