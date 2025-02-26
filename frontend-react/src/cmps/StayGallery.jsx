@@ -1,4 +1,4 @@
-import { Link , useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { Loading } from '../cmps/Loading.jsx'
@@ -6,76 +6,84 @@ import { loadStay, addStayMsg } from '../store/actions/stay.actions'
 
 
 export function StayGallery() {
-     const { stayId } = useParams()
-     const stay = useSelector(storeState => storeState.stayModule.stay)
-     const shareLink = window.location.href
+  const { stayId } = useParams()
+  const stay = useSelector(storeState => storeState.stayModule.stay)
+  const shareLink = window.location.href
 
-      useEffect(() => {
-        window.scrollTo(0, 0)
-        loadStay(stayId)
-      }, [stayId])
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    loadStay(stayId)
+  }, [stayId])
 
-      function handleShare() {
-        if (navigator.share) {
-          try {
-            navigator.share({
-              title: 'Website Title',
-              text: 'Short description of the website',
-              url: shareLink,
-            }).then(() => {
-              console.log('Share successful');
-            }).catch((error) => {
-              console.error('Share failed:', error);
-            });
-          } catch (error) {
-            console.error('Share failed:', error);
-          }
-        } else {
-          alert('Your browser does not support sharing');
-        }
+  function handleShare() {
+    if (navigator.share) {
+      try {
+        navigator.share({
+          title: 'Website Title',
+          text: 'Short description of the website',
+          url: shareLink,
+        }).then(() => {
+          console.log('Share successful');
+        }).catch((error) => {
+          console.error('Share failed:', error);
+        });
+      } catch (error) {
+        console.error('Share failed:', error);
       }
-    
-      if (!stay) return < Loading />
+    } else {
+      alert('Your browser does not support sharing');
+    }
+  }
 
-    return (
-        <article className="gallery-page">
-          <div className="stay-header-gallery">
-            <div className="header-content">
-              <div className="back-btn">
-                <Link to={`/stay/${stay._id}`}>
-                  <img src="/img/stays/left.svg" alt="Back" />
-                </Link>
-              </div>
+  if (!stay) return < Loading />
 
-              <div className="action-btns">
-                <button className="action-btn"  onClick={handleShare}>
-                  <img src="/img/stays/share.svg" alt="Share" />
-                  <span>Share</span>
-                </button>
-                <button className="action-btn">
-                  <img src="/img/stays/heart.svg" alt="Save" />
-                  <span>Save</span>
-                </button>
-              </div>
-            </div>
+  return (
+    <article className="gallery-page">
+      <div className="stay-header-gallery">
+        <div className="header-content">
+          <div className="back-btn">
+            <Link to={`/stay/${stay._id}`}>
+              <img src="/img/stays/left.svg" alt="Back" />
+            </Link>
           </div>
 
-          <ul className="gallery-imgs">
-            {stay.imgUrls.map((imgUrl, index) => (
-              <li key={imgUrl} className={index % 3 === 0 ? 'big' : 'small'}>
-                <img src={imgUrl} alt="house image" />
-              </li>
-            ))}
-          </ul>
-        </article>
-    )
+          <div className="action-btns">
+            <button className="action-btn" onClick={handleShare}>
+              <img src="/img/stays/share.svg" alt="Share" />
+              <span>Share</span>
+            </button>
+            <button className="action-btn">
+              <img src="/img/stays/heart.svg" alt="Save" />
+              <span>Save</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <ul className="gallery-imgs">
+        {stay.imgUrls.map((imgUrl, index) => (
+          <li key={imgUrl} className={index % 3 === 0 ? 'big' : 'small'}>
+            <img src={imgUrl} alt="house image" />
+          </li>
+        ))}
+        {/* <div>
+          <video width="100%" height="auto" controls>
+            <source
+              src="https://res.cloudinary.com/dv2brrhll/video/upload/v1739186304/samples/dance-2.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div> */}
+      </ul>
+    </article>
+  )
 }
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
 //     <article className="gallery">
 //         <header>
 //             <Link to={`/stay/${stay._id}`}>{'<'}</Link>
