@@ -41,9 +41,12 @@
 
     header {
         grid-row: 1;
-        grid-column: 1/-1;
+        grid-column: 2;
         display: grid;
         grid-template-rows: auto auto;
+        
+        @include for-mobile-layout {
+            grid-column: 1/-1;        }
 
         .stay-header {
             // margin-top: 80px;
