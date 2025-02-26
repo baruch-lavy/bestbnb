@@ -2,7 +2,7 @@
     width: 48px;
     height: 48px;
     background-color: #ff385c;
-    border-radius: 50%;
+    border-radius: 50% !important;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,10 +13,8 @@
         height: auto;
         transition: all 0.3s ease;
 
-        /* Smooth transition */
         &:hover {
             content: url('https://res.cloudinary.com/dv2brrhll/image/upload/v1740000974/abnb_hk75m7.svg');
-            /* Path to the new image */
         }
     }
 }
@@ -32,4 +30,10 @@
 
 div.map div div{
     border-radius: 20px;
+}
+
+div.map{
+@include for-mobile-layout{
+   height: 218px !important;
+}
 }

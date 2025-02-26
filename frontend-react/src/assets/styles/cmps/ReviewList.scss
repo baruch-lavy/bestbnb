@@ -8,6 +8,10 @@
 
     align-items: start;
 
+    @include for-mobile-layout {
+        display: block;
+    }
+
 }
 
 button.reviw-all-btn {
