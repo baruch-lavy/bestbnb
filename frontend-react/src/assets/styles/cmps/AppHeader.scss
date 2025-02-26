@@ -332,6 +332,18 @@ body {
   margin: 0 auto;
   padding: 0px 273px 0 269px;
 
+  .nav-links {
+    display: none;
+  }
+
+  .host {
+    display: none;
+  }
+  
+  .icon {
+    display: none;
+  }
+
   .sticky-search-wrapper,
   .search-container,
   .full-search-bar {
@@ -459,6 +471,10 @@ body {
     display: none;
   }
 
+  .nav-links {
+    display: none;
+  }
+
   @media (min-width: 1440px) {
     padding: 0 370px;
   }
@@ -552,11 +568,33 @@ body {
 
 }
 
-// .details-page.search-container {
-//   display: none !important;
+.header.book-page {
   
-//   .sticky-search-wrapper {
-//     // display: block;
-//   }
+position: relative;
+border-bottom: 1px solid rgba(0, 0, 0, 0.185);
+grid-column: 1 / -1;
 
-// }
+  .sticky-search-wrapper,
+  .search-container,
+  .full-search-bar {
+    display: none !important;
+  }
+  
+  .nav-links{
+    display: none !important;
+  }
+  
+  .host{
+    
+    display: none !important;
+  }
+
+}
+
+.book-page {
+  + .full-search-bar {
+    display: none !important;
+  }
+
+}
+
