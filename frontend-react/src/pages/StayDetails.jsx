@@ -120,14 +120,17 @@ export function StayDetails() {
             <h3 className="info-header">{stay.type} in {stay.loc.city}, {stay.loc.country}</h3>
             <h5 className="info">{stay.capacity} guests · {stay.bedrooms} bedrooms · {stay.capacity} beds · {stay.bathrooms} baths</h5>
 
-            <h4 className="rate">★ {parseFloat((Math.random() * (5 - 4) + 4).toFixed(2))} · {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4>
+            <h4 className="rate">★ 4.86 · {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4>
+            {/* <h4 className="rate">★ {parseFloat((Math.random() * (5 - 4) + 4).toFixed(2))} · {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4> */}
+            
           </div>
 
           <div className="host-short-info">
             <img src={stay.host.pictureUrl} alt="Host" className="host-avatar" style={{ borderRadius: '50%', width: '2rem', height: '2rem', objectFit: 'cover' }} />
             <div className="host-short-details">
               <h4>Hosted by {stay.host.fullname}</h4>
-              <span className="superhost">{stay.host.isSuperhost && 'Superhost ·'}  {(parseInt(Math.random() * 12) + 2)} years hosting</span>
+              <span className="superhost">{stay.host.isSuperhost && '★ Superhost ·'}  11 years hosting</span>
+              {/* <span className="superhost">{stay.host.isSuperhost && 'Superhost ·'}  {(parseInt(Math.random() * 12) + 2)} years hosting</span> */}
             </div>
           </div>
 

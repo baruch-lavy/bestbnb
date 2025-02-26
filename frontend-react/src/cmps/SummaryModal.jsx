@@ -1,6 +1,11 @@
 
 
 export function SummaryModal({ isOpen, onClose, summary }) {
+
+    const paragraphs = summary.split('. ').map((sentence, index) => {
+        return <p key={index}>{sentence.trim()}.</p>
+      });
+
     if (!isOpen) return null
     return (
         <div className="filter-modal-overlay" onClick={onClose}>
@@ -14,7 +19,7 @@ export function SummaryModal({ isOpen, onClose, summary }) {
                 </header>
                 <div className="summary-modal-text">
                     <h2 className="summary-modal-header">About this space</h2>
-                    <article >{summary}</article>
+                    <article >{paragraphs}</article>
                 </div>
             </div>
         </div>
