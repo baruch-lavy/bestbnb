@@ -4,7 +4,7 @@ export function SummaryModal({ isOpen, onClose, summary }) {
 
     const paragraphs = summary.split('. ').map((sentence, index) => {
         return <p key={index}>{sentence.trim()}.</p>
-      });
+      })
 
     if (!isOpen) return null
     return (

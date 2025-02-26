@@ -94,7 +94,7 @@ export function StayDetails() {
         <Link to={`/stay/gallery/${stay._id}`}>
           <article className="mini-gallery">
 
-            {isImgLoading && <div className="skeleton-loader"></div>}
+            {/* {isImgLoading && <div className="skeleton-loader"></div>} */}
             <div className="main-image"
               onLoad={handleImageLoad}
               style={{ display: isImgLoading ? 'none' : 'block' }}>
