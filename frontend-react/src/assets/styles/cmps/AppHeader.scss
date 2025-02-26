@@ -552,11 +552,33 @@ body {
 
 }
 
-// .details-page.search-container {
-//   display: none !important;
+.header.book-page {
   
-//   .sticky-search-wrapper {
-//     // display: block;
-//   }
+position: relative;
+border-bottom: 1px solid rgba(0, 0, 0, 0.185);
+grid-column: 1 / -1;
 
-// }
+  .sticky-search-wrapper,
+  .search-container,
+  .full-search-bar {
+    display: none !important;
+  }
+  
+  .nav-links{
+    display: none !important;
+  }
+  
+  .host{
+    
+    display: none !important;
+  }
+
+}
+
+.book-page {
+  + .full-search-bar {
+    display: none !important;
+  }
+
+}
+

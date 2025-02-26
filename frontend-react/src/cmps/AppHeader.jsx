@@ -16,6 +16,7 @@ export const AppHeader = () => {
   const isDashboardPage = location.pathname === '/dashboard'; // Add dashboard page check
   const isTripsPage = location.pathname === '/trips'; 
   const isGalleryPage = /^\/stay\/gallery\/[^/]+$/.test(location.pathname);
+  const isBookPage = /^\/stay\/book\/[^/]+$/.test(location.pathname);
   
   const [showSticky, setShowSticky] = useState(isDetailsPage);
   const [forceExpand, setForceExpand] = useState(false); // ✅ Track if manually expanded
@@ -133,7 +134,7 @@ console.log('filterBy:', filterBy);
   return (
     <>
       {/* HEADER */}
-      <header className={`header ${showSticky ? "sticky-header" : ""} ${isDetailsPage ? "details-header" : ""} ${isDashboardPage ? "dashboard-page" : ""} ${isTripsPage ? "trips-page" : ""} ${isGalleryPage ? "gallery-page" : ""}`}>
+      <header className={`header ${showSticky ? "sticky-header" : ""} ${isDetailsPage ? "details-header" : ""} ${isDashboardPage ? "dashboard-page" : ""} ${isTripsPage ? "trips-page" : ""} ${isGalleryPage ? "gallery-page" : ""} ${isBookPage ? "book-page" : ""}`}>
         <div className="left-section">
         <a href="/stay">
         <div className="logo-wrapper">
