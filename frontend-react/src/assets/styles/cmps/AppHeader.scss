@@ -332,6 +332,18 @@ body {
   margin: 0 auto;
   padding: 0px 273px 0 269px;
 
+  .nav-links {
+    display: none;
+  }
+
+  .host {
+    display: none;
+  }
+  
+  .icon {
+    display: none;
+  }
+
   .sticky-search-wrapper,
   .search-container,
   .full-search-bar {
@@ -456,6 +468,10 @@ body {
   }
   
   .icon {
+    display: none;
+  }
+
+  .nav-links {
     display: none;
   }
 

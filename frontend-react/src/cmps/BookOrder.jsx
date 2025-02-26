@@ -196,7 +196,7 @@ export function BookOrder() {
                             <p>Your reservation won't be confirmed until the Host accepts your request (within 24 hours). You won't be charged until then.</p>
                         </div>
                         <div className="agreement-terms">
-                            <p>By selecting the button below, I agree to the <span>Host's House Rules, Ground rules for guests, Airbnb's Rebooking and Refund Policy,</span> and that Airbnb can <span>charge my payment method</span> if I'm responsible for damage.</p>
+                            <p>By selecting the button below, I agree to the <span>Host's House Rules, Ground rules for guests, Bestbnb's Rebooking and Refund Policy,</span> and that Bestbnb can <span>charge my payment method</span> if I'm responsible for damage.</p>
                         </div>
                     </div>
                 )}
