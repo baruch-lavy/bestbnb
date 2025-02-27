@@ -201,11 +201,6 @@ export function BookOrder() {
                     </div>
                 )}
 
-
-
-
-
-
                 <button className="reserve-btn"
                     onClick={() => handleSubmitOrder()}
                     onMouseMove={handleMouseMove}>
