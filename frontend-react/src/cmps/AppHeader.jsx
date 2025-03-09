@@ -25,13 +25,11 @@ export const AppHeader = () => {
   const searchData = useSelector((state) => state.search);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const user = useSelector((state) => state.userModule.user);
-  // console.log('user:', user);
 
 
   // ✅ Sync Redux with URL params when the page loads
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
-    console.log('searchParams:', searchParams);
     const filterBy = {
       destination: searchParams.get("destination") || "",
       startDate: searchParams.get("startDate") || "",
@@ -43,7 +41,6 @@ export const AppHeader = () => {
         pets: Number(searchParams.get("pets")) || 0
       }
     };
-console.log('filterBy:', filterBy);
     dispatch(setSearchData(filterBy));
   }, [dispatch , searchParams]);
 

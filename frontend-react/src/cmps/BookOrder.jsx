@@ -41,7 +41,6 @@ export function BookOrder() {
             })
         );
     }
-    console.log('searchData:', searchData)
 
     const cancellationDate = new Date(start)
     cancellationDate.setDate(cancellationDate.getDate() - 1)
@@ -106,7 +105,6 @@ export function BookOrder() {
             }
 
             const savedOrder = await orderService.save(newOrder)
-            console.log('Order saved:', savedOrder)
 
         } catch (error) {
             console.error('Failed to submit order:', error)

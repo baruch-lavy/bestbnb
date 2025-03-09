@@ -94,27 +94,25 @@ export const SearchBar = ({
   };
 
   const handleDestinationSelect = (destination) => {
-    console.log("Selected destination:", destination);
+   
     if (!destination) return;
   
     setTimeout(() => {
       if (dateInputRef?.current) {
         dateInputRef.current.focus();
         dateInputRef.current.click(); // ✅ Trigger click if focus fails
-        console.log("Focus Date Picker");
       }
     }, 100);
   };
 
   const handleDateSelect = (dates) => {
-    console.log("Selected dates:", dates);
+
     if (!dates[1]) return;
   
     setTimeout(() => {
       if (guestInputRef?.current) {
         guestInputRef.current.focus(); // ✅ Move focus to "Who" (Guests) input
         guestInputRef.current.click(); // ✅ Trigger click if focus fails
-        console.log("Focus Guests Input");
       }
     }, 210); // ✅ Small delay allows UI updates first
   };

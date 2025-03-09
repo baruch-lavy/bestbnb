@@ -20,7 +20,6 @@ const initialState = {
 export const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_SEARCH_DATA:
-      console.log('action', action)
       return { ...state, ...action.payload };
     default:
       return state;
