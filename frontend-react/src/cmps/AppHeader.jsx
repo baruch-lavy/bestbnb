@@ -41,7 +41,7 @@ export const AppHeader = () => {
         pets: Number(searchParams.get("pets")) || 0
       }
     };
-    dispatch(setSearchData(filterBy));
+    setSearchData(filterBy);
   }, [dispatch , searchParams]);
 
   // ✅ Toggle sticky header based on scroll (only if NOT manually expanded or on details page)
@@ -79,7 +79,7 @@ export const AppHeader = () => {
   }, [forceExpand]);
 
   // ✅ Ensure Search Also Closes Expanded Mode & Returns to Sticky
-  const handleSearch = () => {
+  const handleSearch = async () => {
     const filterBy = {
       destination: searchData.destination || "",
       startDate: searchData.startDate || "",
@@ -87,9 +87,8 @@ export const AppHeader = () => {
       guests: encodeURIComponent(JSON.stringify(searchData.guests || { adults: 1, children: 0 })),
     };
   
-    dispatch(loadStays(filterBy));
-
-    // Update URL parameters without page reload
+    loadStays(filterBy);
+   
     const newUrl = `${window.location.pathname}/?${new URLSearchParams(filterBy).toString()}`;
     window.history.pushState({}, "", newUrl);
   

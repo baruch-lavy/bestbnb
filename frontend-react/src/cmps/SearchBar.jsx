@@ -85,12 +85,12 @@ export const SearchBar = ({
       [type]: Math.max(0, (search.guests?.[type] || 0) + amount),
     };
 
-    dispatch(
+    // dispatch(
       setSearchData({
-        ...search,
+        // ...search,
         guests: { ...updatedGuests }, // ✅ Ensuring new object reference
       })
-    );
+    // );
   };
 
   const handleDestinationSelect = (destination) => {
@@ -142,12 +142,12 @@ export const SearchBar = ({
             onChange={(e) => {
               setIsTyping(true); // ✅ User is typing
               const updatedSearch = { ...search, destination: e.target.value };
-              dispatch(setSearchData(updatedSearch));
+              setSearchData(updatedSearch);
             }}
             onBlur={() => {
               if (!search.destination.trim()) {
                 setIsTyping(false); // ✅ Reset if input is empty
-                dispatch(setSearchData({ ...search, destination: "Anywhere" })); // ✅ Restore "Anywhere"
+                setSearchData({ ...search, destination: "Anywhere" }); // ✅ Restore "Anywhere"
               }
             }}
           onFocus={() => handleDropdownOpen("where")}
@@ -160,13 +160,13 @@ export const SearchBar = ({
                   key={index}
                   className="suggestion"
                   onClick={() => {
-                    dispatch(
+                 
                       setSearchData({
-                        ...search,
+                        // ...search,
                         destination: dest.name,
                       }
                     )
-                  );
+             
                     handleDestinationSelect(dest.name);
                     handleDropdownOpen(null);
                   }}
@@ -227,13 +227,13 @@ export const SearchBar = ({
                 onChange={(dates) => {
                   const [start, end] = dates;
 
-                  dispatch(
+                  // dispatch(
                     setSearchData({
-                      ...search,
+                      // ...search,
                       startDate: start || null,
                       endDate: end || null, // ✅ Explicitly set `null` to trigger Redux update
                     })
-                  );
+                  // );
                   handleDateSelect(dates);
                   if (end) setTimeout(() => handleDropdownOpen(null), 200);
                 }}

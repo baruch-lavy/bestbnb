@@ -11,6 +11,7 @@ import { SET_SEARCH_DATA } from "../actions/stay.actions";
 const initialState = {
   stays: [],
   stay: null,
+ 
   destination: "Anywhere",
   startDate: null,
   endDate: null,

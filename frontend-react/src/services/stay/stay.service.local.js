@@ -20,7 +20,6 @@ export const stayService = {
     save,
     remove,
     addStayMsg,
-
 }
 window.cs = stayService
 

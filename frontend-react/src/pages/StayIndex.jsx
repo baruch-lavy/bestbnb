@@ -17,7 +17,7 @@ export function StayIndex() {
 
     // ✅ Load stays when the component mounts
     useEffect(() => {
-        dispatch(loadStays()); // ✅ Fetch stays on mount
+        loadStays(); // ✅ Fetch stays on mount
     }, [dispatch]);
 
     if (!stays) return < Loading />

@@ -1,105 +1,55 @@
 import { stayService } from '../../services/stay'
 import { store } from '../store'
 import { ADD_STAY, REMOVE_STAY, SET_STAYS, SET_STAY, UPDATE_STAY, ADD_STAY_MSG } from '../reducers/stay.reducer'
+import { getDefaultFilter } from "../../services/stay/index"; // ✅ Import the default filter
 
 export const SET_SEARCH_DATA = "SET_SEARCH_DATA";
 
-export const setSearchData = (data) => ({
-  type: SET_SEARCH_DATA,
-  payload: data,
-});
+// export const setSearchData = (data) => ({
+//   type: SET_SEARCH_DATA,
+//   payload: data,
+// });
 
 
-import { getDefaultFilter } from "../../services/stay/index"; // ✅ Import the default filter
 
-export function loadStays(filterBy) {
-  return async (dispatch) => {
-    const fullFilter = { ...getDefaultFilter(), ...filterBy };
-    try {
-      const stays = await stayService.query(fullFilter);
-      
-      // Dispatch the action after the async operation is complete
-      dispatch(getCmdSetStays(stays));
-    } catch (err) {
-      console.log('Cannot load stays', err);
-      // Optionally, dispatch an error action here if you want to handle it in your reducers
-    }
-  };
+export async function setSearchData(data) {
+  try {
+    // await stayService.remove(stayId)
+    store.dispatch({type: SET_SEARCH_DATA,
+      payload: data})
+  } catch (err) {
+    console.log('Cannot set search', err)
+    throw err
+  }
 }
 
-// export function loadStays(filterBy = {}) {
+
+export async function loadStays(filterBy) {
+  try {
+    const fullFilter = { ...getDefaultFilter(), ...filterBy };
+      const stays = await stayService.query(fullFilter)
+      store.dispatch(getCmdSetStays(stays))
+  } catch (err) {
+      console.log('Cannot load stays', err)
+      throw err
+  }
+}
+
+
+// export function loadStays(filterBy) {
 //   return async (dispatch) => {
+//     const fullFilter = { ...getDefaultFilter(), ...filterBy };
 //     try {
-//       // ✅ Merge `filterBy` with `getDefaultFilter()` to ensure all fields exist
-//       const fullFilter = { ...getDefaultFilter(), ...filterBy };
-
-//       // ✅ Fetch all stays
-//       const allStays = await stayService.query();
-
-//       if (!allStays || allStays.length === 0) {
-//         dispatch({ type: SET_STAYS, stays: [] });
-//         return;
-//       }
-
-//       // ✅ If no filter is applied, return all stays
-//       if (!fullFilter.destination && !fullFilter.guests && !fullFilter.startDate && !fullFilter.endDate) {
-//         dispatch({ type: SET_STAYS, stays: allStays });
-//         return;
-//       }
-
-//       // ✅ Filter stays based on the applied filters
-//       const filteredStays = allStays.filter((stay) => {
-
-//         // ✅ Destination Filtering
-//         if (fullFilter.destination && fullFilter.destination !== "Anywhere") {
-//           if (!stay.loc?.country?.toLowerCase().includes(fullFilter.destination.toLowerCase())) {
-//             // console.log(`❌ Skipping ${stay.name} (Destination doesn't match)`);
-//             return false;
-//           }
-//         }
-
-//         // ✅ Guests Filtering
-//         if (fullFilter.guests) {
-//           const maxGuests = stay.capacity || stay.maxGuests || 0; 
-//           if (maxGuests < fullFilter.guests) {
-//             // console.log(`❌ Skipping ${stay.name} (Not enough guest capacity)`);
-//             return false;
-//           }
-//         }
-
-//         // ✅ Date Filtering
-//         if (fullFilter.startDate && fullFilter.endDate) {
-//           const searchStart = new Date(fullFilter.startDate).getTime();
-//           const searchEnd = new Date(fullFilter.endDate).getTime();
-
-//           if (stay.availableFrom && stay.availableTo) {
-//             const stayStart = new Date(stay.availableFrom).getTime();
-//             const stayEnd = new Date(stay.availableTo).getTime();
-
-//             if (searchStart < stayStart || searchEnd > stayEnd) {
-//               // console.log(`❌ Skipping ${stay.name} (Not available in selected dates)`);
-//               return false;
-//             }
-//           } else {
-//             // console.log(`2❌ Skipping ${stay.name} (No available dates info)`);
-//             return false; 
-//           }
-//         }
-
-//         // console.log(`✅ Keeping ${stay.name}`);
-//         return true;
-//       });
-
-//       // console.log("🚀 ~ Filtered stays:", filteredStays);
-
-//       // ✅ Dispatch filtered stays or empty array if none found
-//       dispatch({ type: SET_STAYS, stays: filteredStays.length ? filteredStays : [] });
+//       const stays = await stayService.query(fullFilter);
+      
+//       // Dispatch the action after the async operation is complete
+//       dispatch(getCmdSetStays(stays));
 //     } catch (err) {
-//       console.error("❌ Cannot load stays:", err);
+//       console.log('Cannot load stays', err);
+//       // Optionally, dispatch an error action here if you want to handle it in your reducers
 //     }
 //   };
 // }
-
 
 export async function loadStay(stayId) {
   console.log('stayId', stayId)

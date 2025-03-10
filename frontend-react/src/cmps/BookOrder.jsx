@@ -21,6 +21,14 @@ export function BookOrder() {
     useEffect(() => {
         window.scrollTo(0, 0)
         loadStay(stayId)
+        if (!searchData.startDate && !searchData.endDate) {
+          
+                setSearchData({
+                    ...search,
+                    startDate: new Date(new Date().setDate(new Date().getDate() + 2)).toString(),
+                    endDate: new Date(new Date().setDate(new Date().getDate() + 9)).toString(), // ✅ Explicitly set `null` to trigger Redux update
+                });
+        }
       }, [stayId ,isBooked])
 
     const cleanFee = 0.095
@@ -32,15 +40,6 @@ export function BookOrder() {
     const timeDifference = end - start;
     const stayLength = (timeDifference) ? timeDifference / (1000 * 3600 * 24) : ''
 
-    if (!searchData.startDate && !searchData.endDate) {
-        dispatch(
-            setSearchData({
-                ...search,
-                startDate: new Date(new Date().setDate(new Date().getDate() + 2)).toString(),
-                endDate: new Date(new Date().setDate(new Date().getDate() + 9)).toString(), // ✅ Explicitly set `null` to trigger Redux update
-            })
-        );
-    }
 
     const cancellationDate = new Date(start)
     cancellationDate.setDate(cancellationDate.getDate() - 1)

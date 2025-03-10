@@ -1,13 +1,13 @@
-import { useState, useMemo ,useEffect } from 'react'
-import { Link, useLocation , useSearchParams } from 'react-router-dom'
+import { useState, useMemo, useEffect } from 'react'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { WishlistModal } from './WishlistModal'
 import { SuccessMessage } from './SuccessMessage'
 
 function generateRandomData(stay) {
     const rating = (Math.random() * (5 - 4) + 4).toFixed(2)
-    
+
     const distance = Math.floor(Math.random() * 14000 + 1000)
-    
+
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     const randomMonth = months[Math.floor(Math.random() * months.length)]
     const randomDay = Math.floor(Math.random() * 20 + 1)
@@ -20,7 +20,7 @@ function generateRandomData(stay) {
     }
 }
 
-export function StayPreview({ stay , queryParams }) {
+export function StayPreview({ stay, queryParams }) {
     const location = useLocation() // ✅ Get current query params from URL
     const [searchParams] = useSearchParams(); // ✅ Use this instead of `useLocation()`
     const [currentImgIdx, setCurrentImgIdx] = useState(0)
@@ -30,9 +30,9 @@ export function StayPreview({ stay , queryParams }) {
     const [successMessage, setSuccessMessage] = useState('')
 
 
-  useEffect(() => {
-    console.log("Updated location.search:", location.search);
-  }, [location.search , searchParams]); // ✅ Logs query param changes
+    useEffect(() => {
+        console.log("Updated location.search:", location.search);
+    }, [location.search, searchParams]); // ✅ Logs query param changes
 
     const randomData = useMemo(() => generateRandomData(stay), [stay._id])
 
@@ -100,14 +100,14 @@ export function StayPreview({ stay , queryParams }) {
         <>
             <article className="stay-preview">
                 <div className="img-container">
-                    <div 
-                        className="images-wrapper" 
+                    <div
+                        className="images-wrapper"
                         style={{ transform: `translateX(-${currentImgIdx * 100}%)` }}
                     >
                         {stay.imgUrls.map((url, idx) => (
-                            <Link 
-                                key={idx} 
-                                to={{ pathname:`/stay/${stay._id}`, search: location.search }}
+                            <Link
+                                key={idx}
+                                to={{ pathname: `/stay/${stay._id}`, search: location.search }}
                             >
                                 <img src={url} alt={stay.name} />
                             </Link>
@@ -123,8 +123,8 @@ export function StayPreview({ stay , queryParams }) {
 
                     <div className="dots-container">
                         {stay.imgUrls.map((_, idx) => (
-                            <span 
-                                key={idx} 
+                            <span
+                                key={idx}
                                 className={`dot ${idx === currentImgIdx ? 'active' : ''}`}
                             />
                         ))}
@@ -136,14 +136,14 @@ export function StayPreview({ stay , queryParams }) {
                                 <div className="guest-favorite">Guest favorite</div>
                             </Link>
                         )}
-                        <button 
+                        <button
                             className="btn-like"
                             onClick={handleLikeClick}>
-                            <svg 
-                                viewBox="0 0 32 32" 
-                                xmlns="http://www.w3.org/2000/svg" 
-                                aria-hidden="true" 
-                                role="presentation" 
+                            <svg
+                                viewBox="0 0 32 32"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                                role="presentation"
                                 focusable="false"
                                 className={isLiked ? 'active' : ''}>
                                 <path d="M16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z" />
@@ -154,7 +154,7 @@ export function StayPreview({ stay , queryParams }) {
 
                 <div className="info">
                     <div className="header-stay">
-                        <h3>{stay.loc.city}, {stay.loc.country}</h3>
+                        <h3>{stay?.loc?.city}, {stay?.loc?.country}</h3>
                         <div className="rating">★ {randomData.rate}</div>
                     </div>
                     <p className="distance">{randomData.distance} kilometers away</p>
@@ -163,7 +163,7 @@ export function StayPreview({ stay , queryParams }) {
                 </div>
             </article>
 
-            <WishlistModal 
+            <WishlistModal
                 isOpen={isModalOpen}
                 onClose={handleModalClose}
                 onSave={handleWishlistSave}
@@ -171,7 +171,7 @@ export function StayPreview({ stay , queryParams }) {
             />
 
             {showSuccess && (
-                <SuccessMessage 
+                <SuccessMessage
                     message={successMessage}
                     onClose={() => setIsModalOpen(true)}
                     imgUrl={stay.imgUrls[0]}
