@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState , useRef  } from 'react'
 import { SummaryModal } from '../cmps/SummaryModal.jsx'
 
 
@@ -7,12 +7,19 @@ import { SummaryModal } from '../cmps/SummaryModal.jsx'
 export function ReviewPreview({ review }) {
     const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false)
     const { by, aboutUser } = review
+    const randomDateRef = useRef()
+    const yearsOnBestbnbRef = useRef()
 
-    function getRandomDate() {
-        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        const randomMonth = months[Math.floor(Math.random() * months.length)];
-        const randomYear = Math.floor(Math.random() * (2024 - 2022 + 1)) + 2022;
-        return `${randomMonth} ${randomYear}`;
+
+    if (!randomDateRef.current)  {
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        const randomMonth = months[Math.floor(Math.random() * months.length)]
+        const randomYear = Math.floor(Math.random() * (2024 - 2022 + 1)) + 2022
+        randomDateRef.current = `${randomMonth} ${randomYear}`
+    }
+
+    if (!yearsOnBestbnbRef.current) {
+        yearsOnBestbnbRef.current = parseInt(Math.random() * 12) + 2
     }
 
     const length = 160
@@ -25,12 +32,12 @@ export function ReviewPreview({ review }) {
                 /></Link>
             <div className="reviewer-details">
                 <h5>{by.fullname}</h5>
-                <h6>{(parseInt(Math.random() * 12) + 2)} years on Bestbnb</h6>
+                <h6>{yearsOnBestbnbRef.current} years on Bestbnb</h6>
             </div>
         </div>
         <div className="review-contant flex">
             <div className="review-rate">
-                ★★★★★ · <span>{getRandomDate()}</span> · Stayed a few nights
+                ★★★★★ · <span>{randomDateRef.current}</span> · Stayed a few nights
             </div>
             <p className="review-txt">{review.txt}</p>
             {isLongText &&
