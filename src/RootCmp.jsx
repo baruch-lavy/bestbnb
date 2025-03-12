@@ -36,18 +36,15 @@ export function RootCmp() {
                         <Route path="team" element={<AboutTeam />} />
                         <Route path="vision" element={<AboutVision />} />
                     </Route>
-                    {/* <Route path="stay" element={<StayIndex />} /> */}
                     <Route path="stay/:stayId" element={<StayDetails />} />
                     <Route path="user/:id" element={<UserDetails />} />
                     <Route path="/stay/book/:stayId" element={<BookOrder />} />
                     <Route path="/stay/gallery/:stayId" element={<StayGallery />} />
                     <Route path="review" element={<ReviewIndex />} />
-                    {/* <Route path="chat" element={<ChatApp />} /> */}
                     <Route path="admin" element={<AdminIndex />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/search-results" element={<SearchResults />} />
                     <Route path="/trips" element={<Trips />} />
-                    {/* <Route path="/confirmation" element={<OrderConfirmation />} /> */}
                 </Routes>
             </main>
             <AppFooter />

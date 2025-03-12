@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSearchData, loadStays } from "../store/actions/stay.actions.js";
 import { SearchBar } from "./SearchBar.jsx";
 import { StickySearchBar } from "./StickySearchBar.jsx";
-import { Link, useLocation, useSearchParams } from "react-router-dom"; // ✅ Import useLocation
+import { Link, NavLink, useLocation, useSearchParams } from "react-router-dom"; // ✅ Import useLocation
 import { UserModal } from './UserModal';
 import { FaAirbnb } from 'react-icons/fa'
 
@@ -43,6 +43,16 @@ export const AppHeader = () => {
     };
     setSearchData(filterBy);
   }, [dispatch, searchParams]);
+
+  // ✅ Reset the search bar state
+  const resetSearch = () => {
+    dispatch(setSearchData({
+      destination: '',
+      startDate: '',
+      endDate: '',
+      guests: { adults: 1, children: 0, infants: 0, pets: 0 }
+    }));
+  };
 
   // ✅ Toggle sticky header based on scroll (only if NOT manually expanded or on details page)
   useEffect(() => {
@@ -89,7 +99,8 @@ export const AppHeader = () => {
 
     loadStays(filterBy);
 
-    const newUrl = `${window.location.pathname}/?${new URLSearchParams(filterBy).toString()}`;
+    const newUrl = `${window.location.origin}${window.location.pathname}?${new URLSearchParams(filterBy).toString()}`;
+
     window.history.pushState({}, "", newUrl);
 
     // Close any open dropdowns
@@ -132,16 +143,14 @@ export const AppHeader = () => {
       {/* HEADER */}
       <header className={`header ${showSticky ? "sticky-header" : ""} ${isDetailsPage ? "details-header" : ""} ${isDashboardPage ? "dashboard-page" : ""} ${isTripsPage ? "trips-page" : ""} ${isGalleryPage ? "gallery-page" : ""} ${isBookPage ? "book-page" : ""}`}>
         <div className="left-section">
-          {/* <a href="/stay"> */}
-          <Link to={'/stay'}>
+          <NavLink to={'/'} onClick={resetSearch}>
             <div className="logo-wrapper">
               <FaAirbnb className="logo" />
               <span className="logo-text">bestbnb</span>
             </div>
-            {/* </a> */}
-          </Link>
+          </NavLink>
           <nav className="nav-links">
-            <a href="/stay">Homes</a>
+            <NavLink to={'/'} onClick={resetSearch}>Homes</NavLink>
             <a href="#" className="expriences">Experiences</a>
           </nav>
         </div>
@@ -202,12 +211,12 @@ export const AppHeader = () => {
         </div>
       )}
       <div className="dashboard-header">
-        <a href="/stay">
+        <NavLink to={'/'} onClick={resetSearch}>
           <div className="logo-wrapper">
 
             <FaAirbnb className="logo" />
           </div>
-        </a>
+        </NavLink>
         <div className="user-info-dashboard">
           <FaBars className="menu-icon-dashboard" />
           <div className="user-icon-container">
