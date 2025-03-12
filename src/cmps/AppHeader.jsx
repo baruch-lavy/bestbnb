@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSearchData, loadStays } from "../store/actions/stay.actions.js";
 import { SearchBar } from "./SearchBar.jsx";
 import { StickySearchBar } from "./StickySearchBar.jsx";
-import { useLocation, useSearchParams } from "react-router-dom"; // ✅ Import useLocation
+import { Link, useLocation, useSearchParams } from "react-router-dom"; // ✅ Import useLocation
 import { UserModal } from './UserModal';
 import { FaAirbnb } from 'react-icons/fa'
 
@@ -14,10 +14,10 @@ export const AppHeader = () => {
   const [searchParams] = useSearchParams();
   const isDetailsPage = /^\/stay\/[^/]+$/.test(location.pathname); // ✅ Match /stay/:stayId
   const isDashboardPage = location.pathname === '/dashboard'; // Add dashboard page check
-  const isTripsPage = location.pathname === '/trips'; 
+  const isTripsPage = location.pathname === '/trips';
   const isGalleryPage = /^\/stay\/gallery\/[^/]+$/.test(location.pathname);
   const isBookPage = /^\/stay\/book\/[^/]+$/.test(location.pathname);
-  
+
   const [showSticky, setShowSticky] = useState(isDetailsPage);
   const [forceExpand, setForceExpand] = useState(false); // ✅ Track if manually expanded
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -42,7 +42,7 @@ export const AppHeader = () => {
       }
     };
     setSearchData(filterBy);
-  }, [dispatch , searchParams]);
+  }, [dispatch, searchParams]);
 
   // ✅ Toggle sticky header based on scroll (only if NOT manually expanded or on details page)
   useEffect(() => {
@@ -86,17 +86,17 @@ export const AppHeader = () => {
       endDate: searchData.endDate || "",
       guests: encodeURIComponent(JSON.stringify(searchData.guests || { adults: 1, children: 0 })),
     };
-  
+
     loadStays(filterBy);
-   
+
     const newUrl = `${window.location.pathname}/?${new URLSearchParams(filterBy).toString()}`;
     window.history.pushState({}, "", newUrl);
-  
+
     // Close any open dropdowns
     setForceExpand(false);
     setShowSticky(true);
   };
-  
+
 
   // ✅ Manual Navigation via "Stays" Button
   // const handleNavigateToStays = () => {
@@ -132,35 +132,37 @@ export const AppHeader = () => {
       {/* HEADER */}
       <header className={`header ${showSticky ? "sticky-header" : ""} ${isDetailsPage ? "details-header" : ""} ${isDashboardPage ? "dashboard-page" : ""} ${isTripsPage ? "trips-page" : ""} ${isGalleryPage ? "gallery-page" : ""} ${isBookPage ? "book-page" : ""}`}>
         <div className="left-section">
-        <a href="/stay">
-        <div className="logo-wrapper">
-          <FaAirbnb className="logo" /> 
-          <span className="logo-text">bestbnb</span>
-        </div> 
-            </a>
-            <nav className="nav-links">
-              <a href="/stay">Homes</a>
-              <a href="#" className="expriences">Experiences</a>
-            </nav>
-          </div>
-          {/* Fix: Only show sticky search when showSticky is true AND not on dashboard */}
-          {showSticky && !forceExpand && !isDashboardPage && (
-            <div className="sticky-search-wrapper" onClick={handleStickyClick}>
-              <StickySearchBar
-                openDropdown={openDropdown}
-                handleDropdownOpen={handleDropdownOpen}
-                handleSearch={handleSearch}
-              />
+          {/* <a href="/stay"> */}
+          <Link to={'/stay'}>
+            <div className="logo-wrapper">
+              <FaAirbnb className="logo" />
+              <span className="logo-text">bestbnb</span>
             </div>
-          )}
+            {/* </a> */}
+          </Link>
+          <nav className="nav-links">
+            <a href="/stay">Homes</a>
+            <a href="#" className="expriences">Experiences</a>
+          </nav>
+        </div>
+        {/* Fix: Only show sticky search when showSticky is true AND not on dashboard */}
+        {showSticky && !forceExpand && !isDashboardPage && (
+          <div className="sticky-search-wrapper" onClick={handleStickyClick}>
+            <StickySearchBar
+              openDropdown={openDropdown}
+              handleDropdownOpen={handleDropdownOpen}
+              handleSearch={handleSearch}
+            />
+          </div>
+        )}
 
-          <div className="right-section">
-            <span className="host">Bestbnb your home</span>
-            {/* <FaGlobe className="icon" /> */}
-            <img src="/img/stays/footer/footer 1.svg" className="icon" />
-            <div className="profile-menu" onClick={handleUserIconClick}>
-              <FaBars className="menu-icon" />
-{/* 
+        <div className="right-section">
+          <span className="host">Bestbnb your home</span>
+          {/* <FaGlobe className="icon" /> */}
+          <img src="/img/stays/footer/footer 1.svg" className="icon" />
+          <div className="profile-menu" onClick={handleUserIconClick}>
+            <FaBars className="menu-icon" />
+            {/* 
               {user ? (
                 <div className="user-info">
                   <div className="user-icon-container">
@@ -173,24 +175,24 @@ export const AppHeader = () => {
               ) : (
                 <FaUserCircle className="user-icon" />
               )} */}
-              
-                <div className="user-info">
-                  <div className="user-icon-container">
-                    <img src="/img/stays/user-guest.jpg" className="user-icon" />
-                  </div>
-                </div>
-             
-              <UserModal 
-                isOpen={isUserModalOpen} 
-                onClose={() => setIsUserModalOpen(false)} 
-              />
+
+            <div className="user-info">
+              <div className="user-icon-container">
+                <img src="/img/stays/user-guest.jpg" className="user-icon" />
+              </div>
+            </div>
+
+            <UserModal
+              isOpen={isUserModalOpen}
+              onClose={() => setIsUserModalOpen(false)}
+            />
           </div>
         </div>
       </header>
 
 
-          {/* Add mobile menu button for small screens */}
-          {!isDashboardPage && !isTripsPage && (
+      {/* Add mobile menu button for small screens */}
+      {!isDashboardPage && !isTripsPage && (
         <div className={`full-search-bar ${showSticky && !forceExpand ? "hidden" : ""}`}>
           <SearchBar
             openDropdown={openDropdown}
@@ -199,20 +201,20 @@ export const AppHeader = () => {
           />
         </div>
       )}
-        <div className="dashboard-header">
+      <div className="dashboard-header">
         <a href="/stay">
-        <div className="logo-wrapper">
+          <div className="logo-wrapper">
 
-          <FaAirbnb className="logo" /> 
-        </div> 
+            <FaAirbnb className="logo" />
+          </div>
         </a>
-          <div className="user-info-dashboard">
-            <FaBars className="menu-icon-dashboard" />
-            <div className="user-icon-container">
-              <img src="/img/stays/user-host.jpg" className="user-img-dashboard" ></img>
-            </div>
+        <div className="user-info-dashboard">
+          <FaBars className="menu-icon-dashboard" />
+          <div className="user-icon-container">
+            <img src="/img/stays/user-host.jpg" className="user-img-dashboard" ></img>
           </div>
         </div>
+      </div>
     </>
   )
 }
