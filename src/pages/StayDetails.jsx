@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -21,7 +21,9 @@ export function StayDetails() {
   const stay = useSelector(storeState => storeState.stayModule.stay)
   const [isImgLoading, setImgLoading] = useState(true)
   const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false)
-  const searchData = useSelector((state) => state.search);
+  const searchData = useSelector((state) => state.search)
+  const stayRateRef = useRef()
+  const yearsOnBestbnbRef = useRef()
   const shareLink = window.location.href
 
   useEffect(() => {
@@ -42,37 +44,34 @@ export function StayDetails() {
   function handleImageLoad() {
     setImgLoading(false)
   }
-  async function onAddStayMsg(stayId) {
-    try {
-      await addStayMsg(stayId, 'bla bla ' + parseInt(Math.random() * 10))
-      showSuccessMsg(`Stay msg added`)
-    } catch (err) {
-      showErrorMsg('Cannot add stay msg')
-    }
-  }
 
-  function handleShare() {
+  async function handleShare() {
     if (navigator.share) {
       try {
-        navigator.share({
+        await navigator.share({
           title: 'Website Title',
           text: 'Short description of the website',
           url: shareLink,
-        }).then(() => {
-          console.log('Share successful');
-        }).catch((error) => {
-          console.error('Share failed:', error);
-        });
+        })
+        console.log('Share successful')
       } catch (error) {
-        console.error('Share failed:', error);
+        console.error('Share failed:', error)
       }
     } else {
-      alert('Your browser does not support sharing');
+      alert('Your browser does not support sharing')
     }
   }
 
+  if (!stayRateRef.current) {
+    stayRateRef.current = parseFloat((Math.random() * (5 - 4) + 4).toFixed(2))
+  }
+
+  if (!yearsOnBestbnbRef.current) {
+    yearsOnBestbnbRef.current = parseInt(Math.random() * 12) + 2
+  }
+
   if (!stay) return < Loading />
-  
+
   return (
     <section className="stay-details">
       <header>
@@ -80,21 +79,19 @@ export function StayDetails() {
           <h1 className="stay-name"> {stay.name}</h1>
           <div className="stay-header-btns">
             <button className="show-more-summary"
-            onClick={handleShare}
+              onClick={handleShare}
             >
               <img src="/img/stays/share.svg" alt="" /><span>Share</span>
             </button>
-            <button className="show-more-summary"
-            // onClick={() => setIsSummaryModalOpen(true)}
-            >
+            <button className="show-more-summary">
               <img src="/img/stays/heart.svg" alt="" /><span>Save</span>
             </button>
           </div>
         </div>
+
         <Link to={`/stay/gallery/${stay._id}`}>
           <article className="mini-gallery">
 
-            {/* {isImgLoading && <div className="skeleton-loader"></div>} */}
             <div className="main-image"
               onLoad={handleImageLoad}
               style={{ display: isImgLoading ? 'none' : 'block' }}>
@@ -106,10 +103,10 @@ export function StayDetails() {
               ))}
             </div>
           </article>
-            <button className="gallery-btn">
-                <img src="/img/stays/show-gallery.svg" alt="show-gallery" />
-              Show all photos
-            </button>
+          <button className="gallery-btn">
+            <img src="/img/stays/show-gallery.svg" alt="show-gallery" />
+            Show all photos
+          </button>
         </Link>
       </header>
 
@@ -119,18 +116,14 @@ export function StayDetails() {
           <div className="stay-short-info">
             <h3 className="info-header">{stay.type} in {stay.loc.city}, {stay.loc.country}</h3>
             <h5 className="info">{stay.capacity} guests · {stay.bedrooms} bedrooms · {stay.capacity} beds · {stay.bathrooms} baths</h5>
-
-            <h4 className="rate">★ 4.86 · {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4>
-            {/* <h4 className="rate">★ {parseFloat((Math.random() * (5 - 4) + 4).toFixed(2))} · {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4> */}
-            
+            <h4 className="rate">★ {stayRateRef.current} · {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4>
           </div>
 
           <div className="host-short-info">
             <img src={stay.host.pictureUrl} alt="Host" className="host-avatar" style={{ borderRadius: '50%', width: '2rem', height: '2rem', objectFit: 'cover' }} />
             <div className="host-short-details">
               <h4>Hosted by {stay.host.fullname}</h4>
-              <span className="superhost">{stay.host.isSuperhost && '★ Superhost ·'}  11 years hosting</span>
-              {/* <span className="superhost">{stay.host.isSuperhost && 'Superhost ·'}  {(parseInt(Math.random() * 12) + 2)} years hosting</span> */}
+              <span className="superhost">{stay.host.isSuperhost && 'Superhost ·'}  {yearsOnBestbnbRef.current} years hosting</span>
             </div>
           </div>
 
@@ -149,7 +142,7 @@ export function StayDetails() {
 
           <StayAmenities amenities={stay.amenities} />
 
-          <Calendar stay={stay}/>
+          <Calendar stay={stay} />
         </section>
         <StayOrder stay={stay} />
       </main>

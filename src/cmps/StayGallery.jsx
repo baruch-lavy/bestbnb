@@ -15,23 +15,20 @@ export function StayGallery() {
     loadStay(stayId)
   }, [stayId])
 
-  function handleShare() {
+  async function handleShare() {
     if (navigator.share) {
       try {
-        navigator.share({
+        await navigator.share({
           title: 'Website Title',
           text: 'Short description of the website',
           url: shareLink,
-        }).then(() => {
-          console.log('Share successful');
-        }).catch((error) => {
-          console.error('Share failed:', error);
-        });
+        })
+          console.log('Share successful')
       } catch (error) {
-        console.error('Share failed:', error);
+        console.error('Share failed:', error)
       }
     } else {
-      alert('Your browser does not support sharing');
+      alert('Your browser does not support sharing')
     }
   }
 
@@ -66,34 +63,7 @@ export function StayGallery() {
             <img src={imgUrl} alt="house image" />
           </li>
         ))}
-        {/* <div>
-          <video width="100%" height="auto" controls>
-            <source
-              src="https://res.cloudinary.com/dv2brrhll/video/upload/v1739186304/samples/dance-2.mp4"
-              type="video/mp4"
-            />
-          </video>
-        </div> */}
       </ul>
     </article>
   )
 }
-
-
-
-
-
-
-//     <article className="gallery">
-//         <header>
-//             <Link to={`/stay/${stay._id}`}>{'<'}</Link>
-//         </header>
-//         <ul className="gallery-imgs">
-//             {stay.imgUrls.map(imgUrl =>
-//                 <li key={imgUrl}>
-//                         <img src={imgUrl} alt="house image" />
-//                 </li>)
-//             }
-//         </ul>
-//     </article>
-// }
