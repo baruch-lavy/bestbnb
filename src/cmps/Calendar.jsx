@@ -1,31 +1,31 @@
 // Calendar.js
-import React, { useState , useEffect } from 'react';
+import React, { useState , useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import DatePicker from 'react-datepicker';
-import { DayPicker } from 'react-day-picker';
-import 'react-datepicker/dist/react-datepicker.css';
-import 'react-day-picker/style.css';
+import DatePicker from 'react-datepicker'
+import { DayPicker } from 'react-day-picker'
+import 'react-datepicker/dist/react-datepicker.css'
+import 'react-day-picker/style.css'
 
 export function Calendar({ stay }) {
 
-  const searchData = useSelector((state) => state.search);
-  const [selectedRange, setSelectedRange] = useState({ from: searchData.startDate, to: searchData.endDate });
-  const [startDate, setStartDate] = useState(new Date(searchData.startDate)); // Convert to Date object
-  const [endDate, setEndDate] = useState(new Date(searchData.endDate)); // Convert to Date object
+  const searchData = useSelector((state) => state.search)
+  const [selectedRange, setSelectedRange] = useState({ from: searchData.startDate, to: searchData.endDate })
+  const [startDate, setStartDate] = useState(new Date(searchData.startDate)) 
+  const [endDate, setEndDate] = useState(new Date(searchData.endDate)) 
 
   function handleDayClick(date) {
     if (!startDate || endDate) {
-      setStartDate(date);
-      setEndDate(null);
+      setStartDate(date)
+      setEndDate(null)
     } else if (startDate && !endDate) {
-      setEndDate(date);
+      setEndDate(date)
     }
   }
 
-  const start = new Date(searchData.startDate);
-  const end = new Date(searchData.endDate);
-  const timeDifference = end - start;
-  const stayLength = timeDifference ? timeDifference / (1000 * 3600 * 24) : '';
+  const start = new Date(searchData.startDate)
+  const end = new Date(searchData.endDate)
+  const timeDifference = end - start
+  const stayLength = timeDifference ? timeDifference / (1000 * 3600 * 24) : ''
 
   function formatDate(date) {
     // Ensure the date is a valid Date object before calling toLocaleDateString
@@ -34,12 +34,12 @@ export function Calendar({ stay }) {
         year: 'numeric',
         month: 'short',
         day: 'numeric',
-      });
+      })
     }
   }
 
   useEffect(() => {
-  }, [startDate, endDate]);
+  }, [startDate, endDate])
 
 
   return (
@@ -59,5 +59,5 @@ export function Calendar({ stay }) {
           onDayClick={handleDayClick}/>
       </div>
     </div>
-  );
-};
+  )
+}

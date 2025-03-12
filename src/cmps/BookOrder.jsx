@@ -5,14 +5,14 @@ import { useParams } from 'react-router-dom'
 import { userService } from '../services/user.service'
 import { orderService } from '../services/order'
 import { Loading } from './Loading'
-import { setSearchData } from "../store/actions/stay.actions"; // Redux action
+import { setSearchData } from "../store/actions/stay.actions"
 import { loadStay, addStayMsg } from '../store/actions/stay.actions'
 
 export function BookOrder() {
     const dispatch = useDispatch()
     const { stayId } = useParams()
     const stay = useSelector(storeState => storeState.stayModule.stay)
-    const search = useSelector((state) => state.search || {}); // Ensure state exists
+    const search = useSelector((state) => state.search || {})
     const searchData = useSelector((state) => state.search)
     const [isBooked, setIsBooked] = useState(false)
     const user = useSelector((state) => state.userModule.user)
@@ -27,7 +27,7 @@ export function BookOrder() {
                     ...search,
                     startDate: new Date(new Date().setDate(new Date().getDate() + 2)).toString(),
                     endDate: new Date(new Date().setDate(new Date().getDate() + 9)).toString(), // ✅ Explicitly set `null` to trigger Redux update
-                });
+                })
         }
       }, [stayId ,isBooked])
 
@@ -35,9 +35,9 @@ export function BookOrder() {
     const airbnbFee = 0.13
 
 
-    const start = searchData.startDate ? new Date(searchData.startDate) : new Date().setDate(new Date().getDate() + 2);
-    const end = searchData.endDate ? new Date(searchData.endDate) : new Date().setDate(new Date().getDate() + 9);
-    const timeDifference = end - start;
+    const start = searchData.startDate ? new Date(searchData.startDate) : new Date().setDate(new Date().getDate() + 2)
+    const end = searchData.endDate ? new Date(searchData.endDate) : new Date().setDate(new Date().getDate() + 9)
+    const timeDifference = end - start
     const stayLength = (timeDifference) ? timeDifference / (1000 * 3600 * 24) : ''
 
 
@@ -46,8 +46,8 @@ export function BookOrder() {
     const formattedCancellationDate = formatDate(cancellationDate)
 
     function formatDate(date) {
-        const options = { month: 'short', day: 'numeric' }; // Format to "Month Day"
-        return new Date(date).toLocaleDateString('en-US', options); // Return "Month Day" (e.g., "May 20")
+        const options = { month: 'short', day: 'numeric' } // Format to "Month Day"
+        return new Date(date).toLocaleDateString('en-US', options) // Return "Month Day" (e.g., "May 20")
     }
 
     function formatDateRange(startDate, endDate) {
@@ -74,6 +74,10 @@ export function BookOrder() {
         if (isBooked) {
             navigate('/trips')
             setIsBooked(false)
+            return
+        }
+        if (!user) {
+            console.error('Please login')
             return
         }
         try {
