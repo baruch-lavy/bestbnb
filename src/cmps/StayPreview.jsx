@@ -31,7 +31,6 @@ export function StayPreview({ stay, queryParams }) {
 
 
     useEffect(() => {
-        console.log("Updated location.search:", location.search);
     }, [location.search, searchParams]); // ✅ Logs query param changes
 
     const randomData = useMemo(() => generateRandomData(stay), [stay._id])
