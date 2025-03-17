@@ -1,15 +1,13 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { userService } from '../services/user.service'
 import { orderService } from '../services/order'
-import { Loading } from './Loading'
+import { Loading } from '../cmps/Loading'
 import { setSearchData } from "../store/actions/stay.actions"
-import { loadStay, addStayMsg } from '../store/actions/stay.actions'
+import { loadStay } from '../store/actions/stay.actions'
 
 export function BookOrder() {
-    const dispatch = useDispatch()
     const { stayId } = useParams()
     const stay = useSelector(storeState => storeState.stayModule.stay)
     const search = useSelector((state) => state.search || {})

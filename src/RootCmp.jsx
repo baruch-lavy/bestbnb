@@ -15,11 +15,11 @@ import { AppHeader } from './cmps/AppHeader'
 import { AppFooter } from './cmps/AppFooter'
 import { FloatingMap } from './cmps/FloatingMap'
 import { UserMsg } from './cmps/UserMsg.jsx'
-import { BookOrder } from './cmps/BookOrder.jsx'
+import { BookOrder } from './pages/BookOrder.jsx'
 import { Dashboard } from './pages/Dashboard.jsx'
 import { SearchResults } from './pages/SearchResults.jsx';
 import { Trips } from './pages/Trips'
-import { StayGallery } from './cmps/StayGallery.jsx'
+import { StayGallery } from './pages/StayGallery.jsx'
 // import { OrderConfirmation } from './cmps/OrderConfirmation'
 
 export function RootCmp() {

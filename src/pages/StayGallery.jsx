@@ -1,8 +1,8 @@
 import { Link, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Loading } from '../cmps/Loading.jsx'
-import { loadStay, addStayMsg } from '../store/actions/stay.actions'
+import { loadStay } from '../store/actions/stay.actions.js'
 
 
 export function StayGallery() {
