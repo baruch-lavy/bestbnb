@@ -13,6 +13,7 @@ import { Calendar } from '../cmps/Calendar.jsx'
 import { SummaryModal } from '../cmps/SummaryModal.jsx'
 import { StayOrder } from '../cmps/StayOrder.jsx'
 import { Loading } from '../cmps/Loading.jsx'
+import { StayMiniGallery } from '../cmps/StayMiniGallery.jsx'
 
 
 export function StayDetails() {
@@ -46,19 +47,20 @@ export function StayDetails() {
   }
 
   async function handleShare() {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'Website Title',
-          text: 'Short description of the website',
-          url: shareLink,
-        })
-        console.log('Share successful')
-      } catch (error) {
-        console.error('Share failed:', error)
-      }
-    } else {
-      alert('Your browser does not support sharing')
+    if (!navigator.share) {
+      showErrorMsg('Your browser does not support sharing')
+      return
+    }
+
+    try {
+      await navigator.share({
+        title: stay.name,
+        text: stay.summary.substring(0, 100) + '...',
+        url: shareLink,
+      })
+      console.log('Share successful')
+    } catch (error) {
+      console.error('Share failed:', error)
     }
   }
 
@@ -78,41 +80,25 @@ export function StayDetails() {
         <div className="stay-header">
           <h1 className="stay-name"> {stay.name}</h1>
           <div className="stay-header-btns">
-            <button className="show-more-summary"
-              onClick={handleShare}
-            >
-              <img src="/img/stays/share.svg" alt="" /><span>Share</span>
+            <button className="share-like-btn"
+              onClick={handleShare}>
+              <img src="/img/stays/share.svg" alt="" />
+              Share
             </button>
-            <button className="show-more-summary">
-              <img src="/img/stays/heart.svg" alt="" /><span>Save</span>
+            <button className="share-like-btn">
+              <img src="/img/stays/heart.svg" alt="" />
+              Save
             </button>
           </div>
         </div>
 
         <Link to={`/stay/gallery/${stay._id}`}>
-          <article className="mini-gallery">
-
-            <div className="main-image"
-              onLoad={handleImageLoad}
-              style={{ display: isImgLoading ? 'none' : 'block' }}>
-              <img src={stay.imgUrls[0]} alt="Main house image" />
-            </div>
-            <div className="other-images">
-              {stay.imgUrls.slice(1, 5).map((imgUrl, index) => (
-                <img key={index} src={imgUrl} alt={`house image ${index + 1}`} />
-              ))}
-            </div>
-          </article>
-          <button className="gallery-btn">
-            <img src="/img/stays/show-gallery.svg" alt="show-gallery" />
-            Show all photos
-          </button>
+          <StayMiniGallery stay={stay} handleImageLoad={handleImageLoad} isImgLoading={isImgLoading} />
         </Link>
       </header>
 
       <main>
         <section>
-          {/* {stay && */}
           <div className="stay-short-info">
             <h3 className="info-header">{stay.type} in {stay.loc.city}, {stay.loc.country}</h3>
             <h5 className="info">{stay.capacity} guests · {stay.bedrooms} bedrooms · {stay.capacity} beds · {stay.bathrooms} baths</h5>
