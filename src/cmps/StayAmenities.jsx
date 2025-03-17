@@ -1,41 +1,36 @@
 import { gAmenities } from '../services/amenities.service'
 
 export function StayAmenities({ amenities }) {
-    // Optionally log the amenities array
+
+    const shuffleArray = (array) => {
+        return array.sort(() => Math.random() - 0.5)
+    }
+
+    const shuffledAmenities = [...gAmenities]
+    shuffleArray(shuffledAmenities)
+
+    const selectedAmenities = shuffledAmenities.slice(0, amenities.length) 
 
     return (
         <article className="amenities">
             <h3>What this place offers</h3>
             <ul className="amenities-lines">
-                {amenities.slice(0, 10).map((amenity, index) => {
-                    const icon = gAmenities.find(item => amenity === item.label);
-                    if (!icon) return null; // If no matching icon found, don't render this item
-                    
+                {selectedAmenities.slice(0, 10).map((amenity) => {
+                    if (!amenity) return null
+
                     return (
-                        <li key={index}>
+                        <li key={amenity.id}>
                             <div className="amenity">
                                 <span className="amenity-icon">
-                                    <img src={icon.icon} alt={amenity} />
+                                    <img src={amenity.icon} alt={amenity.label} />
                                 </span>
-                                <span className="amenity-label">{amenity}</span>
+                                <span className="amenity-label">{amenity.label}</span>
                             </div>
                         </li>
-                    );
+                    )
                 })}
             </ul>
             <button>Show all {amenities.length} {amenities.length > 1 ? 'amenities' : 'amenity'}</button>
         </article>
-    );
+    )
 }
-
-
-// {
-//     amenities.map(amenity => (
-//         <button key={amenity.id} className="amenity-btn">
-//             <span className="amenity-icon">
-//                 <img src={`/img/stays/amenities/${amenity.icon}`} alt={amenity.label} />
-//             </span>
-//             <span className="amenity-label">{amenity.label}</span>
-//         </button>
-//     ))
-// }
