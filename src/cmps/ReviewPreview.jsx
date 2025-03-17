@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useState , useRef  } from 'react'
+import { useState, useRef } from 'react'
 import { SummaryModal } from '../cmps/SummaryModal.jsx'
 
 
@@ -11,7 +11,7 @@ export function ReviewPreview({ review }) {
     const yearsOnBestbnbRef = useRef()
 
 
-    if (!randomDateRef.current)  {
+    if (!randomDateRef.current) {
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
         const randomMonth = months[Math.floor(Math.random() * months.length)]
         const randomYear = Math.floor(Math.random() * (2024 - 2022 + 1)) + 2022
@@ -45,11 +45,11 @@ export function ReviewPreview({ review }) {
                     onClick={() => setIsSummaryModalOpen(true)}>
                     Show more
                 </button>}
-                <SummaryModal
-        isOpen={isSummaryModalOpen}
-        onClose={() => setIsSummaryModalOpen(false)}
-        summary={review.txt}
-    />
+            <SummaryModal
+                isOpen={isSummaryModalOpen}
+                onClose={() => setIsSummaryModalOpen(false)}
+                summary={review.txt}
+            />
         </div>
     </article>
 }

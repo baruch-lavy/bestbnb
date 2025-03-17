@@ -4,8 +4,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
-import { loadStay, addStayMsg } from '../store/actions/stay.actions'
-import { StayGallery } from '../cmps/StayGallery'
+import { loadStay } from '../store/actions/stay.actions'
 import { StayAmenities } from '../cmps/StayAmenities.jsx'
 import { ReviewList } from '../cmps/ReviewList.jsx'
 import { Map } from '../cmps/Map.jsx'
@@ -93,7 +92,11 @@ export function StayDetails() {
         </div>
 
         <Link to={`/stay/gallery/${stay._id}`}>
-          <StayMiniGallery stay={stay} handleImageLoad={handleImageLoad} isImgLoading={isImgLoading} />
+          <StayMiniGallery 
+          stay={stay}
+          handleImageLoad={handleImageLoad}
+          isImgLoading={isImgLoading}
+          />
         </Link>
       </header>
 
@@ -137,8 +140,6 @@ export function StayDetails() {
         <ReviewList reviews={stay.reviews} />
         <Map loc={stay.loc} />
       </div>
-      {/* // } */}
-      {/* <button onClick={() => { onAddStayMsg(stay._id) }}>Add stay msg</button> */}
 
     </section>
   )
