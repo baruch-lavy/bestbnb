@@ -1,12 +1,11 @@
-import { legacy_createStore as createStore, combineReducers, applyMiddleware, compose } from "redux";
-// import { thunk } from "redux-thunk"; // ✅ Correct import
+import { legacy_createStore as createStore, combineReducers, applyMiddleware, compose } from "redux"
 
-import { stayReducer } from "./reducers/stay.reducer";
-import { orderReducer } from './reducers/order.reducer';
-import { userReducer } from "./reducers/user.reducer";
-import { reviewReducer } from "./reducers/review.reducer";
-import { systemReducer } from "./reducers/system.reducer";
-import { searchReducer } from "./reducers/stay.reducer"; // Make sure this is correct!
+import { stayReducer } from "./reducers/stay.reducer"
+import { orderReducer } from './reducers/order.reducer'
+import { userReducer } from "./reducers/user.reducer"
+import { reviewReducer } from "./reducers/review.reducer"
+import { systemReducer } from "./reducers/system.reducer"
+import { searchReducer } from "./reducers/stay.reducer" 
 
 // ✅ Combine reducers
 const rootReducer = combineReducers({
@@ -16,17 +15,10 @@ const rootReducer = combineReducers({
   systemModule: systemReducer,
   reviewModule: reviewReducer,
   search: searchReducer,
-});
-
+})
 
 const middleware = (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() : undefined
 export const store = createStore(rootReducer, middleware)
-
-// ✅ Enable Redux DevTools
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-// ✅ Apply middleware correctly
-// export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk))); 
 
 // For debug:
 // store.subscribe(() => {
