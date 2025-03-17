@@ -1,6 +1,6 @@
 .user-msg {
     position: fixed;
-    top: 60px;
+    bottom: 60px;
     right: .2em;
 
     display: flex;
@@ -9,6 +9,7 @@
     padding: .2em;
     padding-inline-end: 20px;
     background-color: grey;
+    border-radius: 0.5rem;
 
     color:white;
     font-size: .9em;
@@ -32,7 +33,7 @@
 }
 
 .user-msg.success {
-    background-color: rgb(41, 189, 73);
+    background-color: rgba(54, 167, 78, 0.568);
 }
 .user-msg.error {
     background-color: rgb(216, 59, 59);
