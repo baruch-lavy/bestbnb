@@ -80,25 +80,25 @@ export const gAmenities = [
         icon: '/img/stays/amenities/asset25.svg'
     },
     {
-            id: 'a43',
-            label: 'Self check-in',
-            icon: '/img/stays/amenities/asset43.svg'
-        },
-        {
-            id: 'a27',
-            label: 'Free parking on premises',
-            icon: '/img/stays/amenities/asset27.svg'
-        },
-        {
-            id: 'a31',
-            label: 'Free washer – In building',
-            icon: '/img/stays/amenities/asset31.svg'
-        },
-        {
-            id: 'a32',
-            label: 'Central air conditioning',
-            icon: '/img/stays/amenities/asset32.svg'
-        },
+        id: 'a43',
+        label: 'Self check-in',
+        icon: '/img/stays/amenities/asset43.svg'
+    },
+    {
+        id: 'a27',
+        label: 'Free parking on premises',
+        icon: '/img/stays/amenities/asset27.svg'
+    },
+    {
+        id: 'a31',
+        label: 'Free washer – In building',
+        icon: '/img/stays/amenities/asset31.svg'
+    },
+    {
+        id: 'a32',
+        label: 'Central air conditioning',
+        icon: '/img/stays/amenities/asset32.svg'
+    },
     {
         id: 'a47',
         label: 'Hair dryer',
@@ -113,201 +113,155 @@ export const gAmenities = [
         id: 'a50',
         label: 'Central heating',
         icon: '/img/stays/amenities/asset50.svg'
+    },
+    {
+        id: 'a50',
+        label: 'Central heating',
+        icon: '/img/stays/amenities/asset50.svg'
+    },
+    {
+        id: 'a51',
+        label: 'Air conditioning',
+        icon: '/img/stays/amenities/asset51.svg'
+    },
+    {
+        id: 'a56',
+        label: 'Essentials',
+        icon: '/img/stays/amenities/asset56.svg'
+    },
+    {
+        id: 'a57',
+        label: 'Hangers',
+        icon: '/img/stays/amenities/asset57.svg'
+    },
+    {
+        id: 'a58',
+        label: 'Bed linens',
+        icon: '/img/stays/amenities/asset58.svg'
+    },
+    {
+        id: 'a59',
+        label: 'Ethernet connection',
+        icon: '/img/stays/amenities/asset59.svg'
+    },
+    {
+        id: 'a60',
+        label: 'Exercise equipment',
+        icon: '/img/stays/amenities/asset60.svg'
+    },
+    {
+        id: 'a61',
+        label: 'Pool table',
+        icon: '/img/stays/amenities/asset61.svg'
+    },
+    {
+        id: 'a62',
+        label: 'Theme room',
+        icon: '/img/stays/amenities/asset62.svg'
+    },
+    // {
+    //     id: 'a63',
+    //     label: 'Sauna',
+    //     icon: '/img/stays/amenities/asset63.svg'
+    // },
+    {
+        id: 'a64',
+        label: 'Ceiling fan',
+        icon: '/img/stays/amenities/asset64.svg'
+    },
+    {
+        id: 'a65',
+        label: 'Heating',
+        icon: '/img/stays/amenities/asset65.svg'
+    },
+    {
+        id: 'a68',
+        label: 'Fire extinguisher',
+        icon: '/img/stays/amenities/asset68.svg'
+    },
+    {
+        id: 'a69',
+        label: 'First aid kit',
+        icon: '/img/stays/amenities/asset69.svg'
+    },
+    {
+        id: 'a70',
+        label: 'Refrigerator',
+        icon: '/img/stays/amenities/asset70.svg'
+    },
+    {
+        id: 'a71',
+        label: 'Microwave',
+        icon: '/img/stays/amenities/asset71.svg'
+    },
+    {
+        id: 'a72',
+        label: 'Dishes and silverware',
+        icon: '/img/stays/amenities/asset72.svg'
+    },
+    {
+        id: 'a73',
+        label: 'Dishwasher',
+        icon: '/img/stays/amenities/asset73.svg'
+    },
+    {
+        id: 'a74',
+        label: 'Stove',
+        icon: '/img/stays/amenities/asset74.svg'
+    },
+    {
+        id: 'a75',
+        label: 'Oven',
+        icon: '/img/stays/amenities/asset75.svg'
+    },
+    {
+        id: 'a76',
+        label: 'Coffee maker',
+        icon: '/img/stays/amenities/asset76.svg'
+    },
+    {
+        id: 'a77',
+        label: 'Wine glasses',
+        icon: '/img/stays/amenities/asset77.svg'
+    },
+    {
+        id: 'a78',
+        label: 'Toaster',
+        icon: '/img/stays/amenities/asset78.svg'
+    },
+    {
+        id: 'a79',
+        label: 'Trash compactor',
+        icon: '/img/stays/amenities/asset79.svg'
+    },
+    {
+        id: 'a80',
+        label: 'Backyard',
+        icon: '/img/stays/amenities/asset80.svg'
+    },
+    {
+        id: 'a81',
+        label: 'Fire pit',
+        icon: '/img/stays/amenities/asset81.svg'
+    },
+    {
+        id: 'a82',
+        label: 'Outdoor furniture',
+        icon: '/img/stays/amenities/asset82.svg'
+    },
+    {
+        id: 'a83',
+        label: 'BBQ grill',
+        icon: '/img/stays/amenities/asset83.svg'
+    },
+    {
+        id: 'a84',
+        label: 'Sun loungers',
+        icon: '/img/stays/amenities/asset84.svg'
+    },
+    {
+        id: 'a86',
+        label: 'Lockbox',
+        icon: '/img/stays/amenities/asset86.svg'
     }
 ]
-
-
-
-
-
-
-
-
-
-//     {
-//         id: 'a23',
-//         label: 's',
-//         icon: '/img/stays/amenities/asset23.svg'
-//     },
-//     {
-//         id: 'a4',
-//         label: 'age',
-//         icon: '/img/stays/amenities/asset4.svg'
-//     },
-//     {
-//         id: 'a5',
-//         label: 'house',
-//         icon: '/img/stays/amenities/asset5.svg'
-//     },
-//     {
-//         id: 'a9',
-//         label: 'ns',
-//         icon: '/img/stays/amenities/asset9.svg'
-//     },
-//     {
-//         id: 'a12',
-//         label: 'nds',
-//         icon: '/img/stays/amenities/asset12.svg'
-//     },
-//     {
-//         id: 'a17',
-//         label: 'ic',
-//         icon: '/img/stays/amenities/asset17.svg'
-//     },
-//     {
-//         id: 'a18',
-//         label: 'rt',
-//         icon: '/img/stays/amenities/asset18.svg'
-//     },
-//     {
-//         id: 'a19',
-//         label: 'ical',
-//         icon: '/img/stays/amenities/asset19.svg'
-//     },
-//     {
-//         id: 'a20',
-//         label: 'mills',
-//         icon: '/img/stays/amenities/asset20.svg'
-//     },
-//     {
-//         id: 'a26',
-//         label: 'st',
-//         icon: '/img/stays/amenities/asset26.svg'
-//     },
-//     {
-//         id: 'a28',
-//         label: 'thouse',
-//         icon: '/img/stays/amenities/asset28.svg'
-//     },
-//     {
-//         id: 'a29',
-//         label: 'ainers',
-//         icon: '/img/stays/amenities/asset29.svg'
-//     },
-//     {
-//         id: 'a30',
-//         label: 's',
-//         icon: '/img/stays/amenities/asset30.svg'
-//     },
-//     {
-//         id: 'a33',
-//         label: 'ry',
-//         icon: '/img/stays/amenities/asset33.svg'
-//     },
-//     {
-//         id: 'a34',
-//         label: 's',
-//         icon: '/img/stays/amenities/asset34.svg'
-//     },
-//     {
-//         id: 'a35',
-//         label: 'ing',
-//         icon: '/img/stays/amenities/asset35.svg'
-//     },
-//     {
-//         id: 'a36',
-//         label: '',
-//         icon: '/img/stays/amenities/asset36.svg'
-//     },
-//     {
-//         id: 'a37',
-//         label: 'ing',
-//         icon: '/img/stays/amenities/asset37.svg'
-//     },
-//     {
-//         id: 'a38',
-//         label: 'ames',
-//         icon: '/img/stays/amenities/asset38.svg'
-//     },
-//     {
-//         id: 'a39',
-//         label: 's',
-//         icon: '/img/stays/amenities/asset39.svg'
-//     },
-//     {
-//         id: 'a40',
-//         label: 'rs',
-//         icon: '/img/stays/amenities/asset40.svg'
-//     },
-//     {
-//         id: 'a41',
-//         label: 'eboats',
-//         icon: '/img/stays/amenities/asset41.svg'
-//     },
-//     {
-//         id: 'a42',
-//         label: 'ets',
-//         icon: '/img/stays/amenities/asset42.svg'
-//     },
-//     {
-//         id: 'a44',
-//         label: 's',
-//         icon: '/img/stays/amenities/asset44.svg'
-//     },
-//     {
-//         id: 'a45',
-//         label: 'li',
-//         icon: '/img/stays/amenities/asset45.svg'
-//     },
-//     {
-//         id: 'a46',
-//         label: 'adic',
-//         icon: '/img/stays/amenities/asset46.svg'
-//     },
-//     {
-//         id: 'a49',
-//         label: 'ers',
-//         icon: '/img/stays/amenities/asset49.svg'
-//     },
-    
-//     {
-//         id: 'a51',
-//         label: 'ical',
-//         icon: '/img/stays/amenities/asset51.svg'
-//     },
-//     {
-//         id: 'a52',
-//         label: 'tive spaces',
-//         icon: '/img/stays/amenities/asset52.svg'
-//     },
-//     {
-//         id: 'a53',
-//         label: 'ans',
-//         icon: '/img/stays/amenities/asset53.svg'
-//     },
-//     {
-//         id: 'a54',
-//         label: 'us',
-//         icon: '/img/stays/amenities/asset54.svg'
-//     },
-//     {
-//         id: 'a55',
-//         label: 's particulares',
-//         icon: '/img/stays/amenities/asset55.svg'
-//     },
-//     {
-//         id: 'a56',
-//         label: 'ks',
-//         icon: '/img/stays/amenities/asset56.svg'
-//     },
-//     {
-//         id: 'a57',
-//         label: 'd pianos',
-//         icon: '/img/stays/amenities/asset57.svg'
-//     },
-//     {
-//         id: 'a58',
-//         label: 'grid',
-//         icon: '/img/stays/amenities/asset58.svg'
-//     },
-//     {
-//         id: 'a59',
-//         label: 'in/out',
-//         icon: '/img/stays/amenities/asset59.svg'
-//     },
-//     {
-//         id: 'a60',
-//         label: 'yards',
-//         icon: '/img/stays/amenities/asset60.svg'
-//     }
-// ] 
