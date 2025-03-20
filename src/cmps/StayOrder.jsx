@@ -60,7 +60,7 @@ export function StayOrder({ stay }) {
     const start = searchData.startDate ? new Date(searchData.startDate) : new Date().setDate(new Date().getDate() + 2)
     const end = searchData.endDate ? new Date(searchData.endDate) : new Date().setDate(new Date().getDate() + 9)
     const timeDifference = end - start
-    const stayLength = (timeDifference) ? timeDifference / (1000 * 3600 * 24) : ''
+    const stayLength = (timeDifference) ? Math.ceil(timeDifference / (1000 * 3600 * 24)) : ''
 
     return (
         <div className="order-section">

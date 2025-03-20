@@ -11,7 +11,6 @@ export const orderService = {
     addOrderMsg,
     updateOrderStatus,
     getOrderStats,
-    getOrderStats,
     getOrdersByBuyer
 }
 

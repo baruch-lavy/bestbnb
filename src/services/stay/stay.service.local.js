@@ -5,15 +5,6 @@ import { userService } from '../user'
 const STORAGE_KEY = 'stay'
 // _createStays()
 
-// const categoryMapping = {
-//     'OMG!': ['Luxury', 'Exclusive'],
-//     'Icons': ['Modern', 'Urban'],
-//     'Castles': ['Villa', 'Mansion'],
-//     'Beachfront': ['Beachfront', 'Seaview'],
-//     'Cabins': ['Cabin', 'Cottage'],
-//     // ... add more mappings
-// }
-
 export const stayService = {
     query,
     getById,
@@ -28,7 +19,6 @@ async function query(filterBy = { txt: '', minPrice: 0, maxPrice: Infinity, dest
     var stays = await storageService.query(STORAGE_KEY);
 
     const { txt, minPrice, maxPrice, destination, guests, startDate, endDate, category } = filterBy;
-    console.log('Raw guests:', guests); // ✅ Debugging
 
     if (!stays || stays.length === 0) return [];
 
@@ -45,43 +35,14 @@ async function query(filterBy = { txt: '', minPrice: 0, maxPrice: Infinity, dest
         totalGuests = guests;
     }
 
-    console.log('Total guests:', totalGuests); // ✅ Debugging
-
     // ✅ Destination Filtering (Fix: use `loc.country` instead of `location`)
     if (destination) {
         const regex = new RegExp(destination, 'i');
         stays = stays.filter(stay => regex.test(stay.loc?.city || '') || regex.test(stay.loc?.country || ''));
     }
 
-    // ✅ Text Filtering (Fix: Check Name & Description)
-    // if (txt) {
-    //     const regex = new RegExp(txt, 'i');
-    //     stays = stays.filter(stay => regex.test(stay.name));
-    // }
-
     // ✅ Price Filtering
     stays = stays.filter(stay => stay.price >= minPrice && stay.price <= maxPrice);
-
-    // ✅ Guest Filtering (Fix: Use `totalGuests` instead of `guests`)
-    // if (totalGuests > 0) {
-    // stays = stays.filter(stay => stay.capacity >= totalGuests);
-    // }
-
-    // ✅ FIXED: Date Filtering (Convert `dates` string to actual dates)
-    // if (startDate && endDate) {
-    //     const searchStart = new Date(startDate).getTime();
-    //     const searchEnd = new Date(endDate).getTime();
-
-    //     stays = stays.filter(stay => {
-    //         if (!stay.dates) return true; // ✅ Keep stays without date info
-
-    //         const [startStr, endStr] = stay.dates.split(" - "); // ✅ Extract the start and end from "Feb 25 - Mar 2"
-    //         const stayStart = new Date(`${startStr} 2024`).getTime(); // ✅ Convert to timestamp
-    //         const stayEnd = new Date(`${endStr} 2024`).getTime();
-
-    //         return searchStart >= stayStart && searchEnd <= stayEnd;
-    //     });
-    // }
 
     // ✅ Category Filtering
     if (category) {

@@ -1,13 +1,13 @@
 .user-msg {
     position: fixed;
-    bottom: 60px;
+    top: 60px;
     right: .2em;
 
     display: flex;
     align-items: center;
 
     padding: .2em;
-    padding-inline-end: 20px;
+    padding-inline: 20px;
     background-color: grey;
     border-radius: 0.5rem;
 

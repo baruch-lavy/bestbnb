@@ -114,3 +114,5 @@ function createDummySocketService() {
 // socketService.on('mama', cb)
 // socketService.emit('baba', 'Puk')
 // socketService.off('baba', cb)
+// socketService.emit('mama', 'lookuk')
+

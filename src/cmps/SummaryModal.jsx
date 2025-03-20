@@ -1,5 +1,3 @@
-
-
 export function SummaryModal({ isOpen, onClose, summary }) {
 
     const paragraphs = summary.split('. ').map((sentence, index) => {

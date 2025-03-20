@@ -6,6 +6,8 @@ import { orderService } from '../services/order'
 import { Loading } from '../cmps/Loading'
 import { setSearchData } from "../store/actions/stay.actions"
 import { loadStay } from '../store/actions/stay.actions'
+import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
+
 
 export function BookOrder() {
     const { stayId } = useParams()
@@ -36,7 +38,7 @@ export function BookOrder() {
     const start = searchData.startDate ? new Date(searchData.startDate) : new Date().setDate(new Date().getDate() + 2)
     const end = searchData.endDate ? new Date(searchData.endDate) : new Date().setDate(new Date().getDate() + 9)
     const timeDifference = end - start
-    const stayLength = (timeDifference) ? timeDifference / (1000 * 3600 * 24) : ''
+    const stayLength = (timeDifference) ? Math.ceil(timeDifference / (1000 * 3600 * 24)) : ''
 
 
     const cancellationDate = new Date(start)
@@ -75,7 +77,7 @@ export function BookOrder() {
             return
         }
         if (!user) {
-            console.error('Please login')
+            showErrorMsg('Please login')
             return
         }
         try {
@@ -109,8 +111,8 @@ export function BookOrder() {
 
         } catch (error) {
             console.error('Failed to submit order:', error)
-            setIsBooked(false) // Reset on error
-            // Optionally show error message to user
+            showErrorMsg('Failed to submit order')
+            setIsBooked(false)
         }
     }
 
@@ -166,7 +168,6 @@ export function BookOrder() {
                             <p>
                                 {formatDateRange(searchData.startDate, searchData.endDate)}
                             </p>
-                            {/* <p>{new Date(searchData.startDate).toLocaleDateString()}-{new Date(searchData.endDate).toLocaleDateString()}</p> */}
                         </div>
                         <div className="detail-item flex">
                             <h3>Guests</h3>

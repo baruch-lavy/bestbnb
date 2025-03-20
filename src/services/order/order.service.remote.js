@@ -26,7 +26,6 @@ function getOrdersByBuyer() {
         const user = JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
         if (!user || !user._id) throw new Error("User not found")
 
-        // ✅ Use httpService instead of fetch
         return httpService.get(`order/user/${user._id}`)
     } catch (err) {
         console.error("Error fetching orders:", err)
