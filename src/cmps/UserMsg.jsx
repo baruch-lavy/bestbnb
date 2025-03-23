@@ -1,8 +1,10 @@
 import { eventBus, showSuccessMsg } from '../services/event-bus.service'
 import { useState, useEffect, useRef } from 'react'
-import { socketService } from '../services/socket.service'
+import { socketService, SOCKET_EVENT_NEW_ORDER_MSG } from '../services/socket.service'
+import { OrderStatusModal } from './OrderStatusModal'
 
 export function UserMsg() {
+	const [statusModal, setStatusModal] = useState(null)
 	const [msg, setMsg] = useState(null)
 	const timeoutIdRef = useRef()
 
@@ -16,14 +18,13 @@ export function UserMsg() {
 			timeoutIdRef.current = setTimeout(closeMsg, 3000)
 		})
 
-		socketService.on('neworeder', order => {
-			console.log('new order', order)
-			showSuccessMsg(`Your host is ${order.status} your order`)
+		socketService.on(SOCKET_EVENT_NEW_ORDER_MSG, order => {
+			setStatusModal(order)
 		})
 
 		return () => {
 			unsubscribe()
-			socketService.off('neworeder')
+			socketService.off(SOCKET_EVENT_NEW_ORDER_MSG)
 		}
 	}, [])
 
@@ -31,13 +32,21 @@ export function UserMsg() {
 		setMsg(null)
 	}
 
-    function msgClass() {
-        return msg ? 'visible' : ''
-    }
+	function msgClass() {
+		return msg ? 'visible' : ''
+	}
 	return (
-		<section className={`user-msg ${msg?.type} ${msgClass()}`}>
-			{/* <button onClick={closeMsg}>x</button> */}
-			{msg?.txt}
-		</section>
-	)
+		<>
+			{statusModal ? (
+				<OrderStatusModal
+					order={statusModal}
+					onClose={() => setStatusModal(null)}
+				/>
+			) : (
+				<section className={`user-msg ${msg?.type} ${msgClass()}`}>
+					<button onClick={closeMsg}>x</button>
+					{msg?.txt}
+				</section>
+			)}
+		</>)
 }
