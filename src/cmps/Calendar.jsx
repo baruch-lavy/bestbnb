@@ -25,7 +25,7 @@ export function Calendar({ stay }) {
   const start = new Date(searchData.startDate)
   const end = new Date(searchData.endDate)
   const timeDifference = end - start
-  const stayLength = timeDifference ? timeDifference / (1000 * 3600 * 24) : ''
+  const stayLength = timeDifference ? Math.ceil(timeDifference / (1000 * 3600 * 24)) : ''
 
   function formatDate(date) {
     // Ensure the date is a valid Date object before calling toLocaleDateString

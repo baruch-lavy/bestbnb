@@ -104,7 +104,7 @@ function getCmdAddOrderMsg(msg) {
     }
 }
 
-unitTestActions()
+// unitTestActions()
 async function unitTestActions() {
     await loadOrders()
     await addOrder(orderService.getEmptyOrder())
