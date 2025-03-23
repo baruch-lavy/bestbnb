@@ -7,6 +7,7 @@ import { Loading } from '../cmps/Loading'
 import { setSearchData } from "../store/actions/stay.actions"
 import { loadStay } from '../store/actions/stay.actions'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
+import { addOrder } from '../store/actions/order.actions'
 
 
 export function BookOrder() {
@@ -76,6 +77,7 @@ export function BookOrder() {
             setIsBooked(false)
             return
         }
+
         if (!user) {
             showErrorMsg('Please login')
             return
@@ -107,7 +109,9 @@ export function BookOrder() {
                 msgs: []
             }
 
-            const savedOrder = await orderService.save(newOrder)
+            // const savedOrder = await orderService.save(newOrder)
+            const savedOrder = await addOrder(newOrder)
+            showSuccessMsg(`Your order added successfully`)
 
         } catch (error) {
             console.error('Failed to submit order:', error)
