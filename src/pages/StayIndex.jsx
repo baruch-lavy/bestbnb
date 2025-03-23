@@ -5,7 +5,7 @@ import { Loading } from '../cmps/Loading'
 import { StayList } from '../cmps/StayList'
 
 export function StayIndex() {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const stays = useSelector(storeState => storeState.stayModule.stays)
 
     useEffect(() => {

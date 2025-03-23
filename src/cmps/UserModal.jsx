@@ -71,7 +71,7 @@ export const UserModal = ({ isOpen, onClose }) => {
             user = await login(credentials)
         } else {
             user = await signup(credentials)
-            console.log('user:', user , 'credentials :', credentials);
+            console.log('user:', user , 'credentials :', credentials)
         }
         console.log('Logged in user:', user)
         

@@ -1,26 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 
 export function OrderStatusModal({ order, onClose }) {
   useEffect(() => {
     const timer = setTimeout(() => {
-      onClose();
-    }, 3000);
+      onClose()
+    }, 3000)
 
-    return () => clearTimeout(timer);
-  }, [onClose]);
+    return () => clearTimeout(timer)
+  }, [onClose])
 
   const getStatusMessage = () => {
     switch (order.status) {
       case 'approved':
-        return 'Your reservation has been approved!';
+        return 'Your reservation has been approved!'
       case 'rejected':
-        return 'Your reservation has been rejected';
+        return 'Your reservation has been rejected'
       case 'cancelled':
-        return 'Your reservation has been cancelled';
+        return 'Your reservation has been cancelled'
       default:
-        return 'Reservation status updated';
+        return 'Reservation status updated'
     }
-  };
+  }
 
   return (
     <div className={`status-modal ${order.status}`}>
@@ -30,5 +30,5 @@ export function OrderStatusModal({ order, onClose }) {
         <p className="dates">{order.startDate} - {order.endDate}</p>
       </div>
     </div>
-  );
+  )
 } 

@@ -22,7 +22,7 @@ function generateRandomData(stay) {
 
 export function StayPreview({ stay, queryParams }) {
     const location = useLocation() // ✅ Get current query params from URL
-    const [searchParams] = useSearchParams(); // ✅ Use this instead of `useLocation()`
+    const [searchParams] = useSearchParams() // ✅ Use this instead of `useLocation()`
     const [currentImgIdx, setCurrentImgIdx] = useState(0)
     const [isLiked, setIsLiked] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -31,7 +31,7 @@ export function StayPreview({ stay, queryParams }) {
 
 
     useEffect(() => {
-    }, [location.search, searchParams]); // ✅ Logs query param changes
+    }, [location.search, searchParams]) // ✅ Logs query param changes
 
     const randomData = useMemo(() => generateRandomData(stay), [stay._id])
 

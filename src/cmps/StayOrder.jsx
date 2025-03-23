@@ -1,54 +1,23 @@
 
-import React, { useState, useEffect, useRef } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState, useRef } from 'react'
+import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { setSearchData, loadStays } from "../store/actions/stay.actions.js"
 
 export function StayOrder({ stay }) {
-    const location = useLocation() // ✅ Get current query params from URL
+    const location = useLocation() 
     const searchData = useSelector((state) => state.search)
     const [openDropdown, setOpenDropdown] = useState(null)
 
     const dropdownRef = useRef(null)
     const datePickerRef = useRef(null)
     const guestDropdownRef = useRef(null)
-
-    const dispatch = useDispatch()
     const cleanFee = 0.095
     const airbnbFee = 0.13
-
-    // useEffect(() => {
-    //     const searchParams = new URLSearchParams(window.location.search)
-    //     const filterBy = {
-    //         destination: searchParams.get("destination") || "Anywhere",
-    //         startDate: searchParams.get("startDate") || "",
-    //         endDate: searchParams.get("endDate") || "",
-    //         guests: Number(searchParams.get("guests")) || 1,
-    //     }
-
-    //     console.log("🚀 Syncing Redux with URL search parameters:", filterBy)
-    //     dispatch(setSearchData(filterBy))
-    // }, [dispatch])
-
-    // console.log('searchData', searchData)
 
     const handleDropdownOpen = (dropdown) => {
         setOpenDropdown((prev) => (prev === dropdown ? null : dropdown))
     }
-
-    //  const handleGuestChange = (type, amount) => {
-    //     const updatedGuests = {
-    //       ...search.guests,
-    //       [type]: Math.max(0, (search.guests?.[type] || 0) + amount),
-    //     }
-
-    //     dispatch(
-    //       setSearchData({
-    //         ...search,
-    //         guests: { ...updatedGuests }, // ✅ Ensuring new object reference
-    //       })
-    //     )
-    //   }
 
     function handleMouseMove(e) {
         const button = e.currentTarget
@@ -71,7 +40,6 @@ export function StayOrder({ stay }) {
 
                 {/* Check-in & Check-out Dates */}
                 <div className="form-order">
-                    {/* <div className="order-dates-container"> */}
                     <div className="order-dates-in">
                         <label className="order-dates-label">CHECK-IN</label>
                         <input
@@ -100,7 +68,6 @@ export function StayOrder({ stay }) {
                             readOnly
                         />
                     </div>
-                    {/* </div> */}
 
                     {/* Guest Selection */}
                     <div className="order-guests">
@@ -113,9 +80,6 @@ export function StayOrder({ stay }) {
                                 + (searchData.guests?.infants > 0 ? `, ${searchData.guests.infants} infant${searchData.guests.infants !== 1 ? 's' : ''}` : '')
                                 + (searchData.guests?.pets > 0 ? `, ${searchData.guests.pets} pet${searchData.guests.pets !== 1 ? 's' : ''}` : '')
                             }
-
-                            // value={((searchData.guests?.adults || 0) + (searchData.guests?.children || 0)) <= 1 ? "1 guest" : `${(searchData.guests?.adults || 0) + (searchData.guests?.children || 0)
-                            //     } guests`}
                             readOnly
                             onClick={() => handleDropdownOpen("who")}
                         />
@@ -157,27 +121,6 @@ export function StayOrder({ stay }) {
                         )}
                     </div>
                 </div>
-
-                {/* <section className="rooms-and-beds">
-                        <h3>Rooms and beds</h3>
-                        <div className="rooms-inputs">
-                            <CounterGroup 
-                                label="Bedrooms"
-                                value={bedrooms}
-                                setValue={setBedrooms}
-                            />
-                            <CounterGroup 
-                                label="Beds"
-                                value={beds}
-                                setValue={setBeds}
-                            />
-                            <CounterGroup 
-                                label="Bathrooms"
-                                value={bathrooms}
-                                setValue={setBathrooms}
-                            />
-                        </div>
-                    </section> */}
 
                 {/* Reserve Button */}
                 <Link to={`/stay/book/${stay._id}${location.search}`}>

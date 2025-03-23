@@ -15,11 +15,8 @@ export function StayAmenities({ amenities }) {
         <article className="amenities">
             <h3>What this place offers</h3>
             <ul className="amenities-lines">
-                {selectedAmenities.slice(0, 10).map((amenity) => {
-                    if (!amenity) return null
-
-                    return (
-                        <li key={amenity.id}>
+                {selectedAmenities.slice(0, 10).map((amenity , idx) => 
+                        <li key={idx}>
                             <div className="amenity">
                                 <span className="amenity-icon">
                                     <img src={amenity.icon} alt={amenity.label} />
@@ -28,7 +25,7 @@ export function StayAmenities({ amenities }) {
                             </div>
                         </li>
                     )
-                })}
+                }
             </ul>
             <button>Show all {amenities.length} {amenities.length > 1 ? 'amenities' : 'amenity'}</button>
         </article>

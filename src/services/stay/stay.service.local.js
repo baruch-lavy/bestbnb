@@ -16,43 +16,43 @@ window.cs = stayService
 
 
 async function query(filterBy = { txt: '', minPrice: 0, maxPrice: Infinity, destination: '', guests: 1, startDate: null, endDate: null, category: null }) {
-    var stays = await storageService.query(STORAGE_KEY);
+    var stays = await storageService.query(STORAGE_KEY)
 
-    const { txt, minPrice, maxPrice, destination, guests, startDate, endDate, category } = filterBy;
+    const { txt, minPrice, maxPrice, destination, guests, startDate, endDate, category } = filterBy
 
-    if (!stays || stays.length === 0) return [];
+    if (!stays || stays.length === 0) return []
 
     // ✅ Convert `guests` to a valid number if it's an object
-    let totalGuests = 1; // Default to 1 guest
+    let totalGuests = 1 // Default to 1 guest
     if (typeof guests === "string") {
         try {
-            const parsedGuests = JSON.parse(decodeURIComponent(guests));
-            totalGuests = (parsedGuests.adults || 0) + (parsedGuests.children || 0); // ✅ Sum up adults & children
+            const parsedGuests = JSON.parse(decodeURIComponent(guests))
+            totalGuests = (parsedGuests.adults || 0) + (parsedGuests.children || 0) // ✅ Sum up adults & children
         } catch (err) {
-            console.error("Failed to parse guests:", err);
+            console.error("Failed to parse guests:", err)
         }
     } else if (typeof guests === "number") {
-        totalGuests = guests;
+        totalGuests = guests
     }
 
     // ✅ Destination Filtering (Fix: use `loc.country` instead of `location`)
     if (destination) {
-        const regex = new RegExp(destination, 'i');
-        stays = stays.filter(stay => regex.test(stay.loc?.city || '') || regex.test(stay.loc?.country || ''));
+        const regex = new RegExp(destination, 'i')
+        stays = stays.filter(stay => regex.test(stay.loc?.city || '') || regex.test(stay.loc?.country || ''))
     }
 
     // ✅ Price Filtering
-    stays = stays.filter(stay => stay.price >= minPrice && stay.price <= maxPrice);
+    stays = stays.filter(stay => stay.price >= minPrice && stay.price <= maxPrice)
 
     // ✅ Category Filtering
     if (category) {
         stays = stays.filter(stay => {
             return stay.type.toLowerCase() === category.toLowerCase() ||
-                stay.labels.some(label => label.toLowerCase() === category.toLowerCase());
-        });
+                stay.labels.some(label => label.toLowerCase() === category.toLowerCase())
+        })
     }
 
-    return stays;
+    return stays
 }
 
 

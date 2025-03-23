@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { StayPreview } from "./StayPreview.jsx";
-import { CategoryFilter } from "./CategoryFilter.jsx";
-import { categories } from "../services/categories.service";
-import { useLocation  , useSearchParams} from "react-router-dom";
-import { Loading } from "./Loading.jsx";
+import React, { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
+import { StayPreview } from "./StayPreview.jsx"
+import { CategoryFilter } from "./CategoryFilter.jsx"
+import { categories } from "../services/categories.service"
+import { useLocation  , useSearchParams} from "react-router-dom"
+import { Loading } from "./Loading.jsx"
 
-// const location = useLocation();
+// const location = useLocation()
 
 export function StayList() {
-    const [searchParams , setSearchParams] = useSearchParams(); // ✅ Extract query params
-    const allStays = useSelector((state) => state.stayModule.stays);
-    const [selectedCategory, setSelectedCategory] = useState(null);
-    const [filteredStays, setFilteredStays] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [searchParams , setSearchParams] = useSearchParams() // ✅ Extract query params
+    const allStays = useSelector((state) => state.stayModule.stays)
+    const [selectedCategory, setSelectedCategory] = useState(null)
+    const [filteredStays, setFilteredStays] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
 
     const categoryMappings = {
         'Villa': ['villa', 'mansion'],
@@ -71,49 +71,49 @@ export function StayList() {
         'Off-grid': ['off-grid', 'eco', 'remote'],
         'Ski-in/out': ['ski-in/out', 'ski', 'winter sports'],
         'Vineyards': ['vineyard', 'wine', 'countryside']
-    };
+    }
 
     const handleCategorySelect = (categoryId) => {
-        setSelectedCategory(categoryId);
+        setSelectedCategory(categoryId)
         if (!categoryId) {
-            setFilteredStays(allStays);
-            return;
+            setFilteredStays(allStays)
+            return
         }
 
-        const category = categories.find(cat => cat.id === categoryId);
-        if (!category) return;
+        const category = categories.find(cat => cat.id === categoryId)
+        if (!category) return
 
-        const categoryLabel = category.label;
-        const relevantTerms = categoryMappings[categoryLabel] || [categoryLabel.toLowerCase()];
+        const categoryLabel = category.label
+        const relevantTerms = categoryMappings[categoryLabel] || [categoryLabel.toLowerCase()]
 
         const filtered = allStays.filter(stay => {
-            const stayType = stay.type?.toLowerCase();
-            const stayLabels = stay.labels?.map(label => label.toLowerCase()) || [];
-            const amenities = stay.amenities?.map(amenity => amenity.toLowerCase()) || [];
-            const summary = stay.summary?.toLowerCase() || '';
+            const stayType = stay.type?.toLowerCase()
+            const stayLabels = stay.labels?.map(label => label.toLowerCase()) || []
+            const amenities = stay.amenities?.map(amenity => amenity.toLowerCase()) || []
+            const summary = stay.summary?.toLowerCase() || ''
 
             return relevantTerms.some(term => 
                 stayType?.includes(term) ||
                 stayLabels.some(label => label.includes(term)) ||
                 amenities.some(amenity => amenity.includes(term)) ||
                 summary.includes(term)
-            );
-        });
+            )
+        })
 
-        const remainder = filtered.length % 6;
+        const remainder = filtered.length % 6
         if (remainder !== 0) {
-            const paddingNeeded = 6 - remainder;
-            const padding = Array(paddingNeeded).fill(null);
-            setFilteredStays([...filtered, ...padding]);
+            const paddingNeeded = 6 - remainder
+            const padding = Array(paddingNeeded).fill(null)
+            setFilteredStays([...filtered, ...padding])
         } else {
-            setFilteredStays(filtered);
+            setFilteredStays(filtered)
         }
-    };
+    }
 
     useEffect(() => {
-        setIsLoading(true);
-        setFilteredStays(allStays);
-        setIsLoading(false);
+        setIsLoading(true)
+        setFilteredStays(allStays)
+        setIsLoading(false)
     }, [allStays])
     
     if (!filteredStays?.length) {
@@ -152,5 +152,5 @@ export function StayList() {
                 </ul>
             </div>
         </div>
-    );
+    )
 }

@@ -1,16 +1,9 @@
 import { stayService } from '../../services/stay'
 import { store } from '../store'
 import { ADD_STAY, REMOVE_STAY, SET_STAYS, SET_STAY, UPDATE_STAY, ADD_STAY_MSG } from '../reducers/stay.reducer'
-import { getDefaultFilter } from "../../services/stay/index"; // ✅ Import the default filter
+import { getDefaultFilter } from "../../services/stay/index"
 
-export const SET_SEARCH_DATA = "SET_SEARCH_DATA";
-
-// export const setSearchData = (data) => ({
-//   type: SET_SEARCH_DATA,
-//   payload: data,
-// });
-
-
+export const SET_SEARCH_DATA = "SET_SEARCH_DATA"
 
 export async function setSearchData(data) {
   try {
@@ -26,7 +19,7 @@ export async function setSearchData(data) {
 
 export async function loadStays(filterBy) {
   try {
-    const fullFilter = { ...getDefaultFilter(), ...filterBy };
+    const fullFilter = { ...getDefaultFilter(), ...filterBy }
       const stays = await stayService.query(fullFilter)
       store.dispatch(getCmdSetStays(stays))
   } catch (err) {
@@ -34,22 +27,6 @@ export async function loadStays(filterBy) {
       throw err
   }
 }
-
-
-// export function loadStays(filterBy) {
-//   return async (dispatch) => {
-//     const fullFilter = { ...getDefaultFilter(), ...filterBy };
-//     try {
-//       const stays = await stayService.query(fullFilter);
-      
-//       // Dispatch the action after the async operation is complete
-//       dispatch(getCmdSetStays(stays));
-//     } catch (err) {
-//       console.log('Cannot load stays', err);
-//       // Optionally, dispatch an error action here if you want to handle it in your reducers
-//     }
-//   };
-// }
 
 export async function loadStay(stayId) {
   try {
