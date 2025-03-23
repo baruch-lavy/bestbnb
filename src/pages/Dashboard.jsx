@@ -20,7 +20,7 @@ export const Dashboard = () => {
     chart: false,
     overview: false,
     orders: true
-  });
+  })
 
   useEffect(() => {
     loadOrdersData()
@@ -55,7 +55,13 @@ export const Dashboard = () => {
 
   async function loadStats() {
     try {
-      const stats = await orderService.getOrderStats()
+      const stats ={
+      totalSales: orders.reduce((acc, order) => acc + order.totalPrice, 0),
+      totalCustomers: new Set(orders.map(order => order.guest._id)).size,
+      refundedCount: orders.filter(order => order.status === 'rejected').length,
+      averageRevenue: orders.length ? orders.reduce((acc, order) => acc + order.totalPrice, 0) / orders.length : 0 
+      }
+      // const stats = await orderService.getOrderStats()
       setStats(stats)
     } catch (err) {
       console.error('Failed to load stats:', err)
@@ -103,8 +109,8 @@ export const Dashboard = () => {
     setExpandedSections(prev => ({
       ...prev,
       [section]: !prev[section]
-    }));
-  };
+    }))
+  }
 
   if (isLoading) return < Loading />
 
