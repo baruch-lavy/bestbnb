@@ -1,112 +1,71 @@
-import { useState, useEffect, useRef } from "react";
-import { orderService } from "../services/order";
-import { showErrorMsg } from "../services/event-bus.service";
-import { Loading } from "../cmps/Loading";
-import { io } from "socket.io-client";
-import { userService } from "../services/user";
-import { OrderStatusModal } from "../cmps/OrderStatusModal";
-
-const socket = io("http://localhost:3030", { transports: ["websocket"] }); // ✅ Ensure WebSocket connection
+import { useState, useEffect, useRef } from "react"
+import { orderService } from "../services/order"
+import { showErrorMsg } from "../services/event-bus.service"
+import { Loading } from "../cmps/Loading"
+import { store } from '../store/store'
+import { socketService , SOCKET_EVENT_ORDER_UPDATED } from '../services/socket.service'
+import { userService } from "../services/user"
 
 export function Trips() {
-    const [orders, setOrders] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [statusModal, setStatusModal] = useState(null);
-    const hasSocketListener = useRef(false);
-    const loggedinUserRef = useRef(null);
-    const previousOrdersRef = useRef(null);
+    const [orders, setOrders] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+    const hasSocketListener = useRef(false)
+    const loggedinUserRef = useRef(null)
+    const previousOrdersRef = useRef(null)
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-        const user = userService.getLoggedinUser();
+        window.scrollTo(0, 0)
+        const user = userService.getLoggedinUser()
         if (user) {
-            loggedinUserRef.current = user;
-            console.log("🔵 Logged-in user:", user);
-            loadOrders(); // ✅ Load orders as soon as user is set
-            setupWebSocket(user._id); // ✅ Setup WebSocket listener
+            loggedinUserRef.current = user
+            loadOrders()
+            socketService.emit("set-user-socket", user._id)
+            socketService.on(SOCKET_EVENT_ORDER_UPDATED, onOrderUpdate)
+        
         }
-        // בדיקה כל 5 שניות לשינויים
-        const interval = setInterval(checkForUpdates, 5000);
+      
         return () => {
-            clearInterval(interval);
-            socket.emit("unset-user-socket");
-            socket.off(`orderUpdated-${user._id}`);
-            hasSocketListener.current = false;
-        };
-    }, []);
+            socketService.off(SOCKET_EVENT_ORDER_UPDATED, onOrderUpdate)
+            hasSocketListener.current = false
+        }
+    }, [])
 
-    function setupWebSocket(userId) {
-        if (hasSocketListener.current) return;
-        hasSocketListener.current = true;
-
-        console.log("🛜 Registering WebSocket for user:", userId);
-        socket.emit("set-user-socket", userId); // ✅ Tell backend who the user is
-
-        // ✅ Listen for order updates in real-time
-        socket.on(`orderUpdated-${userId}`, (updatedOrder) => {
-            console.log("🔄 Trip order updated in real-time:", updatedOrder);
-            setOrders((prevOrders) =>
-                prevOrders.map((order) =>
-                    order._id === updatedOrder._id ? updatedOrder : order
-                )
-            );
-        });
-    }
+    function onOrderUpdate(order) {
+        store.dispatch({ type: 'SET_ORDER', order})
+        loadOrders()
+      }
 
     async function loadOrders() {
         try {
-            const orders = await orderService.getOrdersByBuyer();
-            setOrders(orders);
-            previousOrdersRef.current = orders;
+            const orders = await orderService.getOrdersByBuyer()
+            setOrders(orders)
+            previousOrdersRef.current = orders
         } catch (err) {
-            console.error("Failed to load orders:", err);
-            showErrorMsg("Failed to load orders");
+            console.error("Failed to load orders:", err)
+            showErrorMsg("Failed to load orders")
         } finally {
-            setIsLoading(false);
-        }
-    }
-
-    async function checkForUpdates() {
-        try {
-            const currentOrders = await orderService.getOrdersByBuyer();
-
-            // בדיקה אם יש שינוי בסטטוס של הזמנה
-            currentOrders.forEach(currentOrder => {
-                const previousOrder = previousOrdersRef.current?.find(
-                    order => order._id === currentOrder._id
-                );
-
-                if (previousOrder && previousOrder.status !== currentOrder.status) {
-                    // מצאנו שינוי! נציג מודל
-                    setStatusModal(currentOrder);
-                    setOrders(currentOrders);
-                }
-            });
-
-            previousOrdersRef.current = currentOrders;
-        } catch (err) {
-            console.error("Failed to check for updates:", err);
+            setIsLoading(false)
         }
     }
 
     async function onRemoveOrder(orderId) {
         try {
-            await orderService.updateOrderStatus(orderId, "cancelled");
+            await orderService.updateOrderStatus(orderId, "cancelled")
             setOrders(
                 orders.map((order) =>
                     order._id === orderId ? { ...order, status: "cancelled" } : order
                 )
-            );
+            )
         } catch (err) {
-            console.error("Failed to cancel order:", err);
-            showErrorMsg("Failed to cancel order");
+            console.error("Failed to cancel order:", err)
+            showErrorMsg("Failed to cancel order")
         }
     }
 
-    if (isLoading) return <Loading />;
+    if (isLoading) return <Loading />
 
     if (!orders.length)
-        return <div className="no-trips">No trips booked yet</div>;
+        return <div className="no-trips">No trips booked yet</div>
 
     return (
         <section className="trips-page">
@@ -170,13 +129,6 @@ export function Trips() {
                     </tbody>
                 </table>
             </div>
-
-            {statusModal && (
-                <OrderStatusModal
-                    order={statusModal}
-                    onClose={() => setStatusModal(null)}
-                />
-            )}
         </section>
-    );
+    )
 }
