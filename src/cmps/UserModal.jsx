@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaUserCircle, FaGoogle, FaFacebook } from 'react-icons/fa'
-import { userService } from '../services/user'
-import { login, signup } from '../store/actions/user.actions'
+import { login, signup, logout } from '../store/actions/user.actions'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { useSelector } from 'react-redux'
+// import { userService } from '../services/user.service'
 
 export const UserModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate()
+  const user = useSelector(storeState => storeState.userModule.user)
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [isLoginMode, setIsLoginMode] = useState(true)
   const [credentials, setCredentials] = useState({ 
@@ -18,22 +20,34 @@ export const UserModal = ({ isOpen, onClose }) => {
     address: '',
     orders : []
   })
-  const [users, setUsers] = useState([])
   const [isClosing, setIsClosing] = useState(false)
+  // const [users, setUsers] = useState([])
 
-  useEffect(() => {
-    loadUsers()
-  }, [])
+  // useEffect(() => {
+  //   loadUsers()
+  // }, [])
 
-  async function loadUsers() {
-    const users = await userService.getUsers()
-    setUsers(users)
+  // async function loadUsers() {
+  //   const users = await userService.getUsers()
+  //   setUsers(users)
+  // }
+  
+  async function onLogout() {
+    try {
+      await logout()
+      navigate('/')
+      showSuccessMsg(`Bye for now`)
+      onClose()
+    } catch (err) {
+      showErrorMsg('Cannot logout')
+    }
   }
 
   const handleDashboardClick = () => {
     onClose()
     navigate('/dashboard')
   }
+
 
   const handleAuthClick = (type) => {
     setIsLoginMode(type === 'login')
@@ -72,7 +86,6 @@ export const UserModal = ({ isOpen, onClose }) => {
             user = await login(credentials)
         } else {
             user = await signup(credentials)
-            console.log('user:', user , 'credentials :', credentials)
         }
         
         if (user) {
@@ -104,12 +117,16 @@ export const UserModal = ({ isOpen, onClose }) => {
       {isOpen && (
         <div className="user-menu-modal">
           <div className="modal-links">
+          {!user && ( <>
             <button className="modal-link" onClick={() => handleAuthClick('login')}>
               Log in
             </button>
             <button className="modal-link enrollment" onClick={() => handleAuthClick('signup')}>
               Sign up
-            </button>
+            </button> </> )}
+            {user && ( <button className="modal-link enrollment" onClick={() => onLogout()}>
+              Log out
+            </button> )}
             <button className="modal-link" onClick={handleDashboardClick}>
               Dashboard
             </button>
