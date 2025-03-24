@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect , useRef } from "react"
 import { useSelector } from "react-redux"
 import { StayPreview } from "./StayPreview.jsx"
 import { CategoryFilter } from "./CategoryFilter.jsx"
 import { categories } from "../services/categories.service"
-import { useLocation  , useSearchParams} from "react-router-dom"
+import { useSearchParams} from "react-router-dom"
 import { Loading } from "./Loading.jsx"
+import { categoryMappings } from '../services/amenities.service'
 
-// const location = useLocation()
 
 export function StayList() {
     const [searchParams , setSearchParams] = useSearchParams() // ✅ Extract query params
@@ -14,64 +14,8 @@ export function StayList() {
     const [selectedCategory, setSelectedCategory] = useState(null)
     const [filteredStays, setFilteredStays] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
-
-    const categoryMappings = {
-        'Villa': ['villa', 'mansion'],
-        'Cabin': ['cabin', 'wooden house'],
-        'Cottage': ['cottage', 'rural'],
-        'Penthouse': ['penthouse', 'luxury apartment'],
-        'Apartment': ['apartment', 'flat', 'condo'],
-        'Beachfront': ['beachfront', 'beach', 'seaside', 'ocean view'],
-        'Luxury': ['luxury', 'premium', 'exclusive'],
-        'Cabins': ['cabin', 'log cabin', 'wooden house'],
-        'Countryside': ['countryside', 'rural', 'farm', 'pastoral'],
-        'Lakefront': ['lakefront', 'lake view', 'lake house'],
-        'Islands': ['island', 'tropical', 'private island'],
-        'Beach': ['beach', 'coastal', 'seaside'],
-        'Tiny homes': ['tiny house', 'small house', 'compact'],
-        'Design': ['design', 'modern', 'architectural'],
-        'Camping': ['camping', 'camp', 'glamping', 'outdoor'],
-        'Arctic': ['arctic', 'snow', 'ice', 'winter'],
-        'Desert': ['desert', 'arid', 'oasis'],
-        'Tropical': ['tropical', 'paradise', 'exotic'],
-        'Windmills': ['windmill', 'historic', 'unique'],
-        'Caves': ['cave', 'cavern', 'grotto'],
-        'Skiing': ['ski', 'winter sports', 'mountain'],
-        'Farms': ['farm', 'ranch', 'countryside'],
-        'Historical': ['historical', 'heritage', 'classic'],
-        'Vineyard': ['vineyard', 'wine country', 'winery'],
-        'Forest': ['forest', 'woods', 'nature'],
-        'Mountain': ['mountain', 'alpine', 'hill'],
-        'Lighthouse': ['lighthouse', 'coastal', 'scenic'],
-        'Containers': ['container', 'modern', 'unique'],
-        'Domes': ['dome', 'geodesic', 'unique'],
-        'Boats': ['boat', 'houseboat', 'yacht'],
-        'Treehouses': ['treehouse', 'nature', 'unique'],
-        'Yurts': ['yurt', 'glamping', 'unique'],
-        'Golfing': ['golf', 'resort', 'sport'],
-        'Lake': ['lake', 'waterfront', 'lakeside'],
-        'Surfing': ['surf', 'beach', 'ocean'],
-        'A-frames': ['a-frame', 'cabin', 'unique'],
-        'Barns': ['barn', 'converted', 'rustic'],
-        'Towers': ['tower', 'unique', 'views'],
-        'Synagogue': ['houseboat', 'boat', 'water'],
-        'Chalets': ['chalet', 'ski', 'mountain'],
-        'Riads': ['riad', 'moroccan', 'traditional'],
-        'Trulli': ['trullo', 'italian', 'traditional'],
-        'Cycladic': ['cycladic', 'greek', 'mediterranean'],
-        'Shepherd': ['shepherd', 'rural', 'pastoral'],
-        'Campers': ['camper', 'rv', 'mobile'],
-        'Earth homes': ['earth house', 'eco', 'sustainable'],
-        'Creative spaces': ['creative', 'artistic', 'unique'],
-        'Ryokans': ['ryokan', 'japanese', 'traditional'],
-        'Minsus': ['minsu', 'taiwanese', 'traditional'],
-        'Casas particulares': ['casa particular', 'cuban', 'traditional'],
-        'Hanoks': ['hanok', 'korean', 'traditional'],
-        'Grand pianos': ['piano', 'musical', 'artistic'],
-        'Off-grid': ['off-grid', 'eco', 'remote'],
-        'Ski-in/out': ['ski-in/out', 'ski', 'winter sports'],
-        'Vineyards': ['vineyard', 'wine', 'countryside']
-    }
+    const bottomDivRef = useRef()
+    const [nextIdx, setNextIdx] = useState(0)
 
     const handleCategorySelect = (categoryId) => {
         setSelectedCategory(categoryId)
@@ -110,12 +54,25 @@ export function StayList() {
         }
     }
 
+ 
+
+
     useEffect(() => {
         setIsLoading(true)
         setFilteredStays(allStays)
         setIsLoading(false)
+        const observer = new IntersectionObserver(entries => {
+            const entry = entries[0]
+            if (entry.isIntersecting) {
+                setNextIdx(nextIdx => nextIdx + 1)
+            }
+        })
+
+        observer.observe(bottomDivRef.current)
+        
+
     }, [allStays])
-    
+
     if (!filteredStays?.length) {
         return (
             <div className="stay-index">
@@ -128,6 +85,7 @@ export function StayList() {
                     <p>Try adjusting your search criteria or removing some filters</p>
                 </div> */}
                 < Loading />
+                <div ref={bottomDivRef} className='bottom-div'></div>
             </div>
         )
     }
@@ -140,7 +98,7 @@ export function StayList() {
             />
             <div className="stay-list-container">
                 <ul className="stay-list clean-list">
-                    {filteredStays.map((stay, index) => (
+                    {filteredStays.slice(0, nextIdx * 20).map((stay, index) => (
                         stay ? (
                             <li key={stay._id || index}>
                                 <StayPreview stay={stay}/>
@@ -151,6 +109,7 @@ export function StayList() {
                     ))}
                 </ul>
             </div>
+            <div ref={bottomDivRef} className='bottom-div'></div>
         </div>
     )
 }
