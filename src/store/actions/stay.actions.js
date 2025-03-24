@@ -7,7 +7,6 @@ export const SET_SEARCH_DATA = "SET_SEARCH_DATA"
 
 export async function setSearchData(data) {
   try {
-    // await stayService.remove(stayId)
     store.dispatch({type: SET_SEARCH_DATA,
       payload: data})
   } catch (err) {
@@ -15,7 +14,6 @@ export async function setSearchData(data) {
     throw err
   }
 }
-
 
 export async function loadStays(filterBy) {
   try {
