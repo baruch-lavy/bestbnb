@@ -72,7 +72,14 @@ export const UserModal = ({ isOpen, onClose }) => {
     closeWithAnimation()
   }
 
-  const handleGuestLogin = () => {
+  async function handleGuestLogin(){
+    credentials.username = 'guest'
+    credentials.password = 'guest'
+    const user = await login(credentials)
+    if (!user || !user._id) {
+        console.error("❌ Login failed: No user ID returned.")
+        return
+    }
     closeWithAnimation()
   }
 
@@ -221,6 +228,15 @@ export const UserModal = ({ isOpen, onClose }) => {
                 <span>or</span>
               </div>
 
+              {isLoginMode && (
+                <button 
+                  type="button"
+                  className="guest-btn"
+                  onClick={handleGuestLogin}>
+                  <FaUserCircle /> Continue as Guest
+                </button>
+              )}
+              
               <div className="social-buttons">
                 <button 
                   type="button"
@@ -235,15 +251,6 @@ export const UserModal = ({ isOpen, onClose }) => {
                   <FaFacebook /> Continue with Facebook
                 </button>
               </div>
-
-              {isLoginMode && (
-                <button 
-                  type="button"
-                  className="guest-btn"
-                  onClick={handleGuestLogin}>
-                  <FaUserCircle /> Continue as Guest
-                </button>
-              )}
 
               <div className="modal-footer">
                 <p>

@@ -174,7 +174,7 @@
 
         .social-btn,
         .guest-btn {
-            color: black;
+            color: #222222;
             width: 100%;
             padding: 14px;
             border: 1px solid #222;
@@ -194,13 +194,14 @@
 
             &:hover {
                 background: #eeecec;
-                border-color: #000;
+                border-color: #222222;
             }
         }
 
         .guest-btn {
-            border-color: #dddddd;
-            color: #717171;
+            border-color: #222222;
+            color: #e61e4dc7;
+            height: 50px;
 
             &:hover {
                 border-color: #717171;
