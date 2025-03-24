@@ -1,5 +1,5 @@
 import { storageService } from '../async-storage.service'
-import { userService } from '../user.service.js'
+import { userService } from '../user/user.service.local'
 
 const STORAGE_KEY = 'order'
 

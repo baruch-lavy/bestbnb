@@ -34,9 +34,7 @@ function getOrdersByBuyer() {
 }
 
 async function getOrdersByHost(hostId) {
-    console.log('hostId', hostId)
     try {
-        console.log(`🔵 Fetching orders for hostId:`, hostId)
         return await httpService.get(`order?hostId=${hostId}`)
     } catch (err) {
         console.error('❌ Failed to fetch host orders:', err)

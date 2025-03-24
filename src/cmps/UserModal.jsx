@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaUserCircle, FaGoogle, FaFacebook } from 'react-icons/fa'
-import { userService } from '../services/user.service'
+import { userService } from '../services/user'
 import { login, signup } from '../store/actions/user.actions'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
 export const UserModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate()
@@ -73,14 +74,14 @@ export const UserModal = ({ isOpen, onClose }) => {
             user = await signup(credentials)
             console.log('user:', user , 'credentials :', credentials)
         }
-        console.log('Logged in user:', user)
         
         if (user) {
             closeWithAnimation()
-            // window.location.reload()
+            showSuccessMsg(`Welcome, ${user.fullname}!`)
         }
     } catch (err) {
         console.error('Failed to authenticate:', err)
+        showErrorMsg('Failed to authenticate')
     }
   }
 

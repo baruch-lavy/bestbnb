@@ -28,8 +28,7 @@ export const Dashboard = () => {
 
   async function loadOrdersData() {
     try {
-        console.log('🔵 Fetching host orders...')
-
+ 
         // ✅ Get the logged-in user
         const loggedinUser = userService.getLoggedinUser()
         if (!loggedinUser) {
@@ -37,8 +36,6 @@ export const Dashboard = () => {
             showErrorMsg('You must be logged in')
             return
         }
-
-        console.log(`🆔 Logged-in hostId:`, loggedinUser._id)
 
         // ✅ Fetch orders for this host
         const hostOrders = await orderService.getOrdersByHost(loggedinUser._id)
