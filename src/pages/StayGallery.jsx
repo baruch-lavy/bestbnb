@@ -46,12 +46,12 @@ export function StayGallery() {
 
           <div className="action-btns">
             <button className="action-btn" onClick={handleShare}>
-              <img src="/img/stays/share.svg" alt="share" />
-              <span>Share</span>
+              <img src="/img/stays/share.svg" alt="Share" />
+              <span>share</span>
             </button>
             <button className="action-btn">
-              <img src="/img/stays/heart.svg" alt="save" />
-              <span>Save</span>
+              <img src="/img/stays/heart.svg" alt="Save" />
+              <span>save</span>
             </button>
           </div>
         </div>
