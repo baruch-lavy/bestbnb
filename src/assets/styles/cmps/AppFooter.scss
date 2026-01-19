@@ -13,12 +13,26 @@
     font-size: 15px;
     color: #222222;
 
+    @include for-mobile-layout {
+        position: static; 
+        padding: 10px 16px;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+        // display: none;
+    }
+
     &.details-footer {
         position: relative;
         padding: 37px 80px 20px;
         display: flex;
         flex-direction: column;
         background: #f7f7f7;
+
+        @include for-mobile-layout {
+            padding: 30px 20px;
+            display: block; // show on details page
+        }
         
         .footer-content {
             max-width: 1280px;
@@ -26,6 +40,11 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 253px;
+
+            @include for-mobile-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
 
             .footer-section {
                 h3 {
@@ -63,6 +82,11 @@
             justify-content: space-between;
             align-items: center;
             gap: 253px;
+
+            @include for-mobile-layout {
+                gap: 10px;
+                flex-direction: column-reverse;
+            }
 
             .footer-bottom-left {
                 display: flex;

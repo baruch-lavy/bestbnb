@@ -40,7 +40,6 @@ export const Dashboard = () => {
         // ✅ Fetch orders for this host
         const hostOrders = await orderService.getOrdersByHost(loggedinUser._id)
 
-        console.log('✅ Orders received:', hostOrders.length)
         setOrders(hostOrders)
     } catch (err) {
         console.error('❌ Error loading orders:', err)

@@ -2,6 +2,10 @@
 	margin-bottom: 40px;
 	padding-right:  95px;
 
+    @include for-mobile-layout {
+        padding-right: 0;
+    }
+
 	.review-by {
 		display: flex;
 		column-gap: 14px;

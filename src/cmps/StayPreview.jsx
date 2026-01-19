@@ -29,6 +29,34 @@ export function StayPreview({ stay, queryParams }) {
     const [showSuccess, setShowSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState('')
 
+    // Swipe handling
+    const [touchStart, setTouchStart] = useState(null)
+    const [touchEnd, setTouchEnd] = useState(null)
+    const minSwipeDistance = 50
+
+    const onTouchStart = (e) => {
+        setTouchEnd(null) 
+        setTouchStart(e.targetTouches[0].clientX)
+    }
+
+    const onTouchMove = (e) => {
+        setTouchEnd(e.targetTouches[0].clientX)
+    }
+
+    const onTouchEnd = () => {
+        if (!touchStart || !touchEnd) return
+        const distance = touchStart - touchEnd
+        const isLeftSwipe = distance > minSwipeDistance
+        const isRightSwipe = distance < -minSwipeDistance
+        
+        if (isLeftSwipe && currentImgIdx < stay.imgUrls.length - 1) {
+            setCurrentImgIdx(prev => prev + 1)
+        }
+        if (isRightSwipe && currentImgIdx > 0) {
+            setCurrentImgIdx(prev => prev - 1)
+        }
+    }
+
 
     useEffect(() => {
     }, [location.search, searchParams]) // ✅ Logs query param changes
@@ -102,6 +130,9 @@ export function StayPreview({ stay, queryParams }) {
                     <div
                         className="images-wrapper"
                         style={{ transform: `translateX(-${currentImgIdx * 100}%)` }}
+                        onTouchStart={onTouchStart}
+                        onTouchMove={onTouchMove}
+                        onTouchEnd={onTouchEnd}
                     >
                         {stay.imgUrls.map((url, idx) => (
                             <Link

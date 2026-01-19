@@ -4,6 +4,36 @@
     display: grid;
     grid-template-columns: minmax(10px, 1fr) minmax(200px, 2fr) minmax(200px, 2fr) minmax(10px, 1fr);
     grid-template-rows: auto auto;
+
+    @include for-mobile-layout {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        
+        .success-header {
+            width: 100%;
+            padding: 0 20px;
+            order: 1;
+        }
+        
+        .mini-stay-details {
+            order: 2;
+            margin-left: 0 !important;
+            padding: 0 20px;
+            
+            .mini-stay-details-card {
+                position: static !important;
+                margin-bottom: 24px !important;
+            }
+        }
+        
+        .book-order-content {
+            order: 3;
+            width: 100%;
+            padding: 0 20px;
+        }
+    }
+
     // align-items: center;
     // justify-content: center;
 

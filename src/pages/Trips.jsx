@@ -86,7 +86,7 @@ export function Trips() {
                     <tbody>
                         {orders.slice().reverse().map((order) => (
                             <tr key={order._id}>
-                                <td>
+                                <td className="stay-cell" data-label="Stay">
                                     <div className="stay-info">
                                         <img
                                             src={order.stay.imgUrl || "/img/stays/default.jpg"}
@@ -100,20 +100,20 @@ export function Trips() {
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                <td data-label="Dates">
                                     {order.startDate} - {order.endDate}
                                 </td>
-                                <td>
+                                <td data-label="Guests">
                                     {(order.guests?.adults || 0) + (order.guests?.children || 0)}{" "}
                                     guests
                                 </td>
-                                <td>${order.totalPrice}</td>
-                                <td>
+                                <td data-label="Total Price">${order.totalPrice}</td>
+                                <td data-label="Status">
                                     <span className={`status ${order.status}`}>
                                         {order.status}
                                     </span>
                                 </td>
-                                <td>
+                                <td className="actions" data-label="Actions">
                                     <button
                                         className="cancel-btn"
                                         onClick={() => onRemoveOrder(order._id)}

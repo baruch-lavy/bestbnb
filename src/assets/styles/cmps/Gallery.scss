@@ -8,8 +8,14 @@
 .gallery-page {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 680px 1fr;
+    grid-template-columns: 1fr minmax(auto, 680px) 1fr;
     margin-top: 100px;
+
+    @include for-mobile-layout {
+        display: block;
+        margin-top: 60px;
+        padding: 0 16px;
+    }
 
     .stay-header-gallery {
         position: fixed;
@@ -19,15 +25,20 @@
         background: white;
         z-index: 10;
         padding: 10px 0;
-        // border-bottom: 1px solid #dddddd;
         grid-column: 1 / 4;
 
         .header-content {
-            width: 680px;
+            width: 100%;
+            max-width: 680px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 20px;
+
+            @include for-mobile-layout {
+                max-width: 100%;
+            }
 
             .back-btn {
                 img {
@@ -79,7 +90,6 @@
         height: 32px;
         
         img {
-            // position: fixed;
             left: 430px;
             top: 148px;
             width: 25px;
@@ -96,14 +106,20 @@
 
     .gallery-imgs {
         grid-column: 2;
-        margin-top: 150px;
+        margin-top: 50px; 
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-gap: 10px;
+        grid-gap: 8px;
         list-style-type: none;
         padding: 0;
         margin: 0 auto;
         width: 100%;
+        padding-bottom: 24px;
+
+        @include for-mobile-layout {
+            margin-top: 20px;
+            gap: 16px; 
+        }
 
         li {
             width: 100%;
@@ -123,29 +139,21 @@
 
 .big {
     grid-column: span 2;
-    /* Big images span 2 columns */
     grid-row: span 2;
-    /* Big images span 2 rows */
 }
 
 .small {
     grid-column: span 1;
-    /* Small images span 1 column */
     grid-row: span 1;
-    /* Small images span 1 row */
 }
 
-/* Make it responsive */
 @media (max-width: 768px) {
     .gallery-imgs {
         grid-template-columns: repeat(2, 1fr);
-        /* 2 columns on smaller screens */
     }
 
     .big {
         grid-column: span 2;
-        /* Big images span 2 columns */
         grid-row: span 1;
-        /* Big images take 1 row */
     }
 }

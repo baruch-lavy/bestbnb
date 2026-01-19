@@ -5,10 +5,20 @@
     margin-top: 0;
     margin-bottom: 0;
 
+    @media (max-width: 768px) {
+        margin-top: 20px;
+        padding: 16px;
+    }
+
     h1 {
         font-size: 32px;
         margin-bottom: 24px;
         color: #222;
+
+        @media (max-width: 768px) {
+             font-size: 24px;
+             margin-bottom: 16px;
+        }
     }
 
     .orders-table {
@@ -17,9 +27,45 @@
         box-shadow: 0 2px 16px rgba(0,0,0,0.08);
         overflow: hidden;
 
+        @media (max-width: 768px) {
+            background: transparent;
+            box-shadow: none;
+            border-radius: 0;
+            overflow: visible;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
+
+            @media (max-width: 768px) {
+                display: block; 
+            }
+
+            thead {
+                @media (max-width: 768px) {
+                    display: none;
+                }
+            }
+
+            tbody {
+                @media (max-width: 768px) {
+                    display: block;
+                }
+            }
+
+            tr {
+                @media (max-width: 768px) {
+                    display: flex;
+                    flex-direction: column;
+                    background: white;
+                    margin-bottom: 16px;
+                    border-radius: 8px;
+                    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+                    padding: 16px;
+                    border-bottom: none !important;
+                }
+            }
 
             th, td {
                 padding: 12px;
@@ -27,7 +73,37 @@
                 border-bottom: 1px solid #ebebeb;
                 font-size: 14px;
                 vertical-align: middle;
+
+                @media (max-width: 768px) {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 8px 0;
+                    border-bottom: 1px solid #f0f0f0;
+                    
+                    &:last-child {
+                        border-bottom: none;
+                    }
+
+                    &::before {
+                        content: attr(data-label);
+                        font-weight: 600;
+                        color: #717171;
+                        margin-right: 12px;
+                    }
+
+                    &.stay-cell {
+                         display: block;
+                    }
+                }
             }
+            
+            td .stay-info {
+                @media (max-width: 768px) {
+                     width: 100%;
+                }
+            }
+
 
             th {
                 background: #f7f7f7;
@@ -35,9 +111,8 @@
                 color: #222;
             }
 
-            .actions{
-              padding-left: 28px;
-            }
+
+
 
             .stay-info {
                 display: flex;
@@ -114,7 +189,7 @@
     
     .cancel-btn {
         background: none;
-        border: none;
+        border: 1px solid #cccaca;
         color: #717171;
         cursor: pointer;
         padding: 6px 12px;
@@ -122,6 +197,7 @@
         transition: all 0.2s;
         font-size: 13px;
         white-space: nowrap;
+        margin: 0;
         
         &:hover:not(:disabled) {
             background: #96969634;

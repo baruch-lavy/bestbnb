@@ -210,20 +210,6 @@ export const AppHeader = () => {
           />
         </div>
       )}
-      <div className="dashboard-header">
-        <NavLink to={'/'} onClick={resetSearch}>
-          <div className="logo-wrapper">
-
-            <FaAirbnb className="logo" />
-          </div>
-        </NavLink>
-        <div className="user-info-dashboard">
-          <FaBars className="menu-icon-dashboard" />
-          <div className="user-icon-container">
-            <img src="/img/stays/user-host.jpg" className="user-img-dashboard" ></img>
-          </div>
-        </div>
-      </div>
     </>
   )
 }
