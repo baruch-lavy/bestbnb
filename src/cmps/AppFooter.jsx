@@ -11,7 +11,7 @@ export function AppFooter() {
 
 	if (isDashboardPage || isTripsPage) {
 		return (
-			<footer className={`app-footer ${isTripsPage ? 'trips-footer' : 'dashboard-footer'}`}>
+			<footer className="app-footer trips-footer">
 				<div className="footer-wrapper">
 					<div className="footer-bottom">
 						<div className="footer-bottom-left">
