@@ -345,6 +345,18 @@ body {
     display: flex !important; // Ensure flex
     justify-content: space-between;
     width: 100%;
+    flex-direction: row;
+    align-items: center;
+    
+    .left-section {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .logo-text {
+      display: none;
+    }
   }
 }
 
@@ -387,6 +399,12 @@ body {
     padding: 12px 20px !important;
     display: flex !important;
     justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+
+    .left-section {
+      margin-bottom: 0;
+    }
 
     &.header.trips-page {
       display: flex;
@@ -457,12 +475,28 @@ body {
   .search-container,
   .full-search-bar,
   .nav-links,
-  .host {
+  .host,
+  .icon {
     display: none !important;
   }
 
   @media (max-width: 768px) {
-     padding: 12px 20px;
+    padding: 12px 20px !important;
+    display: flex !important;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    
+    .left-section {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .logo-text {
+      display: none;
+    }
   }
 }
 
