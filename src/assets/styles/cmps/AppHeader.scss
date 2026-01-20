@@ -279,18 +279,44 @@ body {
 
 @media (max-width: 768px) {
   .header {
-    flex-direction: column;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
+    padding: 12px 20px !important;
+    height: auto !important;
 
     .left-section {
-      margin-bottom: 10px;
+      order: 1;
+      margin-bottom: 0;
+
+      .nav-links {
+        display: none !important;
+      }
+    }
+
+    .right-section {
+      order: 2;
+      .host,
+      .icon {
+        display: none !important;
+      }
     }
 
     .sticky-search-wrapper {
+      order: 3;
+      width: 100%;
+      margin-top: 8px;
       position: static;
       transform: none;
-      width: 100%;
-      padding: 0 20px;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      
+      .sticky-search-bar {
+        width: 100%;
+        max-width: 100%;
+      }
     }
 
     .search-container {
