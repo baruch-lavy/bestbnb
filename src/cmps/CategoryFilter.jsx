@@ -68,7 +68,7 @@ export function CategoryFilter({ onSelectCategory, selectedCategory }) {
       {/* Filters Button */}
       <button className="filters-btn" onClick={() => setIsFilterModalOpen(true)}>
         <img src="/img/stays/icons/filter-icon.svg" alt="icon-filter" />
-        Filters
+        <span className="filters-text">Filters</span>
       </button>
 
       {/* Filters Modal */}

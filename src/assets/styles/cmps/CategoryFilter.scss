@@ -2,6 +2,9 @@
     display: grid;
     grid-template-columns: 1fr auto;
     top: 35px;
+    @include for-mobile-layout {
+        top: 66px;
+    }
     overflow: hidden;
     position: sticky;
     background-color: white;
@@ -12,7 +15,7 @@
 
     .filters-btn {
         height: 48px;
-        width: 92px;
+        // width: 92px;
         position: absolute;
         right: -5px;
         top: 47%;
@@ -42,12 +45,21 @@
             width: 16px;
             height: 16px;
         }
+
+        .filters-text {
+            @include for-mobile-layout {
+                display: none;
+            }
+        }
         
     }
 
     .category-filter {
         position: relative;
         width: 93%;
+        @include for-mobile-layout {
+            width: 88%;
+        }
         padding: 10px 0 0;
         margin-top: 0.5em;
         overflow: hidden;
