@@ -10,11 +10,12 @@ function Marker() {
   )
 }
 
-const API_KEY =
-  import.meta.env.GOOGLE_MAP_API || 'AIzaSyDMZRuz51lshuCi8Jkp3-RLZdYL_NJ6dzU'
+const API_KEY = import.meta.env.VITE_GOOGLE_MAP_API
 
 export function Map({loc}) {
-  const [coordinates, setCoordinates] = useState({ lat: 40.782388, lng:  -73.957528 })
+  const [coordinates, setCoordinates] = useState(
+    loc ? { lat: loc.lan, lng: loc.lat } : { lat: 40.782388, lng: -73.957528 }
+  )
   const [zoom, setZoom] = useState(13)
 
   function handleClick({ lat, lng }) {
