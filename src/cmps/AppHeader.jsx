@@ -7,6 +7,7 @@ import { StickySearchBar } from "./StickySearchBar.jsx";
 import { Link, NavLink, useLocation, useSearchParams, useNavigate } from "react-router-dom"; // ✅ Import useLocation
 import { UserModal } from './UserModal';
 import { FaAirbnb } from 'react-icons/fa'
+import { showErrorMsg } from '../services/event-bus.service'
 
 
 export const AppHeader = () => {
@@ -18,6 +19,7 @@ export const AppHeader = () => {
   const isTripsPage = location.pathname === '/trips';
   const isGalleryPage = /^\/stay\/gallery\/[^/]+$/.test(location.pathname);
   const isBookPage = /^\/stay\/book\/[^/]+$/.test(location.pathname);
+  const isEditPage = location.pathname === '/stay/new' || /^\/stay\/edit\/[^/]+$/.test(location.pathname);
 
   const [showSticky, setShowSticky] = useState(isDetailsPage);
   const [forceExpand, setForceExpand] = useState(false); // ✅ Track if manually expanded
@@ -160,7 +162,7 @@ export const AppHeader = () => {
           </nav>
         </div>
         {/* Fix: Only show sticky search when showSticky is true AND not on dashboard */}
-        {showSticky && !forceExpand && !isDashboardPage && (
+        {showSticky && !forceExpand && !isDashboardPage && !isEditPage && (
           <div className="sticky-search-wrapper" onClick={handleStickyClick}>
             <StickySearchBar
               openDropdown={openDropdown}
@@ -171,7 +173,10 @@ export const AppHeader = () => {
         )}
 
         <div className="right-section">
-          <span className="host">Bestbnb your home</span>
+          <span className="host" onClick={() => {
+            if (!user) { showErrorMsg('Please login to list your home'); return }
+            navigate('/stay/new')
+          }}>Bestbnb your home</span>
           {/* <FaGlobe className="icon" /> */}
           <img src="/img/stays/footer/footer 1.svg" className="icon" />
           <div className="profile-menu" onClick={handleUserIconClick}>
@@ -217,7 +222,7 @@ export const AppHeader = () => {
 
 
       {/* Add mobile menu button for small screens */}
-      {!isDashboardPage && !isTripsPage && (
+      {!isDashboardPage && !isTripsPage && !isEditPage && (
         <div className={`full-search-bar ${showSticky && !forceExpand ? "hidden" : ""}`}>
           <SearchBar
             openDropdown={openDropdown}

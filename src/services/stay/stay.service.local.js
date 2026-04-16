@@ -78,12 +78,12 @@ async function save(stay) {
             capacity: stay.capacity,
             amenities: stay.amenities,
             labels: stay.labels,
-            // Later, host is set by the backend
-            host: userService.getLoggedinUser(),
-            // loc : stay.loc,
-            // reviews : stay.reviews,
-            // likedByUsers: stay.likedByUsers,
-            // msgs: []
+            bedrooms: stay.bedrooms,
+            bathrooms: stay.bathrooms,
+            host: stay.host,
+            loc: stay.loc,
+            reviews: stay.reviews || [],
+            likedByUsers: stay.likedByUsers || [],
         }
         savedStay = await storageService.put(STORAGE_KEY, stayToSave)
     } else {
@@ -96,12 +96,12 @@ async function save(stay) {
             capacity: stay.capacity,
             amenities: stay.amenities,
             labels: stay.labels,
-            // Later, host is set by the backend
-            host: userService.getLoggedinUser(),
-            // loc : stay.loc,
-            // reviews : stay.reviews,
-            // likedByUsers: stay.likedByUsers,
-            // msgs: []
+            bedrooms: stay.bedrooms,
+            bathrooms: stay.bathrooms,
+            host: stay.host,
+            loc: stay.loc,
+            reviews: stay.reviews || [],
+            likedByUsers: stay.likedByUsers || [],
         }
         savedStay = await storageService.post(STORAGE_KEY, stayToSave)
     }

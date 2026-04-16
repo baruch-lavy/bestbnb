@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { loadStay, clearStay } from '../store/actions/stay.actions'
@@ -19,6 +19,8 @@ export function StayDetails() {
 
   const { stayId } = useParams()
   const stay = useSelector(storeState => storeState.stayModule.stay)
+  const user = useSelector(storeState => storeState.userModule.user)
+  const navigate = useNavigate()
   const [isImgLoading, setImgLoading] = useState(true)
   const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false)
   const searchData = useSelector((state) => state.search)
@@ -89,6 +91,11 @@ export function StayDetails() {
               <img src="/img/stays/heart.svg" alt="" />
               Save
             </button>
+            {user && stay.host && user._id === stay.host._id && (
+              <button className="share-like-btn edit-listing-btn" onClick={() => navigate(`/stay/edit/${stay._id}`)}>
+                ✏️ Edit listing
+              </button>
+            )}
           </div>
         </div>
 

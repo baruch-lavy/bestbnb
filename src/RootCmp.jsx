@@ -22,6 +22,7 @@ import { Dashboard } from './pages/Dashboard.jsx'
 import { SearchResults } from './pages/SearchResults.jsx';
 import { Trips } from './pages/Trips'
 import { StayGallery } from './pages/StayGallery.jsx'
+import { StayEdit } from './pages/StayEdit.jsx'
 // import { OrderConfirmation } from './cmps/OrderConfirmation'
 
 export function RootCmp() {
@@ -49,6 +50,8 @@ export function RootCmp() {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/search-results" element={<SearchResults />} />
                     <Route path="/trips" element={<Trips />} />
+                    <Route path="/stay/new" element={<StayEdit />} />
+                    <Route path="/stay/edit/:stayId" element={<StayEdit />} />
                 </Routes>
             </main>
             <AppFooter />
