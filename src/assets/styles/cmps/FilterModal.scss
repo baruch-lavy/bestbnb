@@ -391,6 +391,12 @@
                 border-color: blue;
             }
 
+            &.selected {
+                border-color: #222;
+                background-color: #f7f7f7;
+                font-weight: 600;
+            }
+
             .amenity-icon {
                 width: 24px;
                 height: 24px;

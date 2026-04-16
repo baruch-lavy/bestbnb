@@ -1,9 +1,13 @@
 import { stayService } from '../../services/stay'
 import { store } from '../store'
-import { ADD_STAY, REMOVE_STAY, SET_STAYS, SET_STAY, UPDATE_STAY, ADD_STAY_MSG } from '../reducers/stay.reducer'
+import { ADD_STAY, REMOVE_STAY, SET_STAYS, SET_STAY, UPDATE_STAY, ADD_STAY_MSG, SET_MODAL_FILTER } from '../reducers/stay.reducer'
 import { getDefaultFilter } from "../../services/stay/index"
 
 export const SET_SEARCH_DATA = "SET_SEARCH_DATA"
+
+export function setModalFilter(modalFilter) {
+  store.dispatch({ type: SET_MODAL_FILTER, modalFilter })
+}
 
 export async function setSearchData(data) {
   try {

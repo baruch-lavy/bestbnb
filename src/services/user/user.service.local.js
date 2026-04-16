@@ -12,6 +12,9 @@ export const userService = {
     update,
     getLoggedinUser,
     saveLoggedinUser,
+    addToWishlist,
+    removeFromWishlist,
+    getWishlist,
 }
 
 async function getUsers() {
@@ -62,6 +65,30 @@ async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
 }
 
+async function addToWishlist(stayId) {
+    const user = getLoggedinUser()
+    if (!user) throw new Error('Not logged in')
+    if (!user.wishlist) user.wishlist = []
+    if (!user.wishlist.includes(stayId)) user.wishlist.push(stayId)
+    saveLoggedinUser(user)
+    return user
+}
+
+async function removeFromWishlist(stayId) {
+    const user = getLoggedinUser()
+    if (!user) throw new Error('Not logged in')
+    user.wishlist = (user.wishlist || []).filter(id => id !== stayId)
+    saveLoggedinUser(user)
+    return user
+}
+
+async function getWishlist() {
+    const user = getLoggedinUser()
+    if (!user || !user.wishlist || !user.wishlist.length) return []
+    // Local: return wishlist IDs as-is (no full stay objects available)
+    return []
+}
+
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
 }
@@ -72,7 +99,8 @@ function saveLoggedinUser(user) {
         fullname: user.fullname, 
         imgUrl: user.imgUrl, 
         score: user.score, 
-        isAdmin: user.isAdmin 
+        isAdmin: user.isAdmin,
+        wishlist: user.wishlist || [],
     }
 	sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
 	return user

@@ -12,6 +12,9 @@ export const userService = {
 	update,
     getLoggedinUser,
     saveLoggedinUser,
+    addToWishlist,
+    removeFromWishlist,
+    getWishlist,
 }
 
 function getUsers() {
@@ -55,6 +58,30 @@ async function logout() {
 	return await httpService.post('auth/logout')
 }
 
+async function addToWishlist(stayId) {
+    const updatedUser = await httpService.post('user/wishlist/add', { stayId })
+    const loggedinUser = getLoggedinUser()
+    if (loggedinUser) {
+        loggedinUser.wishlist = updatedUser.wishlist || []
+        saveLoggedinUser(loggedinUser)
+    }
+    return updatedUser
+}
+
+async function removeFromWishlist(stayId) {
+    const updatedUser = await httpService.post('user/wishlist/remove', { stayId })
+    const loggedinUser = getLoggedinUser()
+    if (loggedinUser) {
+        loggedinUser.wishlist = updatedUser.wishlist || []
+        saveLoggedinUser(loggedinUser)
+    }
+    return updatedUser
+}
+
+async function getWishlist() {
+    return httpService.get('user/wishlist/mine')
+}
+
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
 }
@@ -65,8 +92,9 @@ function saveLoggedinUser(user) {
         fullname: user.fullname, 
         imgUrl: user.imgUrl, 
         score: user.score, 
-        isAdmin: user.isAdmin ,
+        isAdmin: user.isAdmin,
 		orders: user.orders || [],
+        wishlist: user.wishlist || [],
     }
 	sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
 	return user

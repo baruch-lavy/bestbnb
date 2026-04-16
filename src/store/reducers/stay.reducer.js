@@ -4,6 +4,7 @@ export const REMOVE_STAY = "REMOVE_STAY"
 export const ADD_STAY = "ADD_STAY"
 export const UPDATE_STAY = "UPDATE_STAY"
 export const ADD_STAY_MSG = "ADD_STAY_MSG"
+export const SET_MODAL_FILTER = "SET_MODAL_FILTER"
 
 import { SET_SEARCH_DATA } from "../actions/stay.actions"
 
@@ -11,11 +12,21 @@ import { SET_SEARCH_DATA } from "../actions/stay.actions"
 const initialState = {
   stays: [],
   stay: null,
+  staysLoaded: false,
  
   destination: "Anywhere",
   startDate: null,
   endDate: null,
   guests: "Add guests",
+  modalFilter: {
+    minPrice: 0,
+    maxPrice: Infinity,
+    propertyType: '',
+    amenities: [],
+    minBedrooms: 0,
+    minBeds: 0,
+    minBathrooms: 0,
+  },
 }
 
 export const searchReducer = (state = initialState, action) => {
@@ -32,7 +43,7 @@ export function stayReducer(state = initialState, action) {
   var stays
   switch (action.type) {
     case SET_STAYS:
-      newState = { ...state, stays: action.stays }
+      newState = { ...state, stays: action.stays, staysLoaded: true }
       break
     case SET_STAY:
       newState = { ...state, stay: action.stay }
@@ -52,6 +63,9 @@ export function stayReducer(state = initialState, action) {
         stay._id === action.stay._id ? action.stay : stay
       )
       newState = { ...state, stays }
+      break
+    case SET_MODAL_FILTER:
+      newState = { ...state, modalFilter: action.modalFilter }
       break
     // case ADD_STAY_MSG:
     //     newState = { ...state, stay: { ...state.stay, msgs: [...state.stay.msgs || [], action.msg] } }

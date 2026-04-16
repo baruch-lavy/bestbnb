@@ -34,8 +34,11 @@ export function getDefaultFilter() {
         guests: 0,
         startDate: null,
         endDate: null,
-        // sortField: '',
-        // sortDir: '',
+        amenities: [],
+        propertyType: '',
+        minBedrooms: 0,
+        minBeds: 0,
+        minBathrooms: 0,
     }
 }
 

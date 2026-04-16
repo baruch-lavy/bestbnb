@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { WishlistModal } from './WishlistModal'
 import { SuccessMessage } from './SuccessMessage'
+import { userService } from '../services/user'
 
 function generateRandomData(stay) {
     const rating = (Math.random() * (5 - 4) + 4).toFixed(2)
@@ -20,11 +21,16 @@ function generateRandomData(stay) {
     }
 }
 
-export function StayPreview({ stay, queryParams }) {
-    const location = useLocation() // ✅ Get current query params from URL
-    const [searchParams] = useSearchParams() // ✅ Use this instead of `useLocation()`
+export function StayPreview({ stay, queryParams, wishlistIds = [] }) {
+    const location = useLocation()
+    const [searchParams] = useSearchParams()
     const [currentImgIdx, setCurrentImgIdx] = useState(0)
-    const [isLiked, setIsLiked] = useState(false)
+    const loggedinUser = userService.getLoggedinUser()
+    const [isLiked, setIsLiked] = useState(() => {
+        if (wishlistIds.length) return wishlistIds.includes(String(stay._id))
+        if (!loggedinUser?.wishlist) return false
+        return loggedinUser.wishlist.map(String).includes(String(stay._id))
+    })
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [showSuccess, setShowSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState('')
@@ -59,7 +65,13 @@ export function StayPreview({ stay, queryParams }) {
 
 
     useEffect(() => {
-    }, [location.search, searchParams]) // ✅ Logs query param changes
+        if (wishlistIds.length > 0) {
+            setIsLiked(wishlistIds.includes(String(stay._id)))
+        }
+    }, [wishlistIds, stay._id])
+
+    useEffect(() => {
+    }, [location.search, searchParams])
 
     const randomData = useMemo(() => generateRandomData(stay), [stay._id])
 
@@ -92,16 +104,30 @@ export function StayPreview({ stay, queryParams }) {
         }, 4700)
     }
 
-    const handleWishlistSave = () => {
-        setIsLiked(true)
-        setIsModalOpen(false)
-        showSuccessMessage('Saved to Countryside 2025')
+    const handleWishlistSave = async () => {
+        try {
+            await userService.addToWishlist(stay._id)
+            setIsLiked(true)
+            setIsModalOpen(false)
+            showSuccessMessage('Saved to wishlist')
+        } catch (err) {
+            console.error('Failed to add to wishlist', err)
+        }
     }
 
-    const handleLikeClick = () => {
+    const handleLikeClick = async () => {
+        if (!loggedinUser) {
+            setIsModalOpen(true)
+            return
+        }
         if (isLiked) {
-            setIsLiked(false)
-            showSuccessMessage('Removed from Countryside 2025')
+            try {
+                await userService.removeFromWishlist(stay._id)
+                setIsLiked(false)
+                showSuccessMessage('Removed from wishlist')
+            } catch (err) {
+                console.error('Failed to remove from wishlist', err)
+            }
         } else {
             setIsModalOpen(true)
         }

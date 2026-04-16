@@ -39,7 +39,24 @@
             border: 1px solid #222222;
             background-color: #f1f1f1;
         }
-        
+
+        &.has-active {
+            border-color: #222;
+            background-color: #f7f7f7;
+        }
+
+        .filter-badge {
+            background-color: #222;
+            color: #fff;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
 
         img {
             width: 16px;

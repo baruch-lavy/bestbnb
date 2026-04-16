@@ -3,7 +3,7 @@ import { categories } from '../services/categories.service'
 import { FiSliders } from 'react-icons/fi'
 import { FilterModal } from './FilterModal'
 
-export function CategoryFilter({ onSelectCategory, selectedCategory }) {
+export function CategoryFilter({ onSelectCategory, selectedCategory, modalFilter, onApplyModalFilter }) {
   const [showLeftButton, setShowLeftButton] = useState(false)
   const [showRightButton, setShowRightButton] = useState(true)
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false)
@@ -63,16 +63,31 @@ export function CategoryFilter({ onSelectCategory, selectedCategory }) {
     });
   };
 
+  const activeFilterCount =
+    (modalFilter?.minPrice ? 1 : 0) +
+    (modalFilter?.maxPrice && modalFilter.maxPrice !== Infinity ? 1 : 0) +
+    (modalFilter?.propertyType ? 1 : 0) +
+    (modalFilter?.amenities?.length || 0) +
+    (modalFilter?.minBedrooms > 0 ? 1 : 0) +
+    (modalFilter?.minBeds > 0 ? 1 : 0) +
+    (modalFilter?.minBathrooms > 0 ? 1 : 0)
+
   return (
     <div className="filter-container">
       {/* Filters Button */}
-      <button className="filters-btn" onClick={() => setIsFilterModalOpen(true)}>
+      <button className={`filters-btn ${activeFilterCount > 0 ? 'has-active' : ''}`} onClick={() => setIsFilterModalOpen(true)}>
         <img src="/img/stays/icons/filter-icon.svg" alt="icon-filter" />
         <span className="filters-text">Filters</span>
+        {activeFilterCount > 0 && <span className="filter-badge">{activeFilterCount}</span>}
       </button>
 
       {/* Filters Modal */}
-      <FilterModal isOpen={isFilterModalOpen} onClose={() => setIsFilterModalOpen(false)} />
+      <FilterModal
+        isOpen={isFilterModalOpen}
+        onClose={() => setIsFilterModalOpen(false)}
+        filterBy={modalFilter}
+        onApply={onApplyModalFilter}
+      />
 
       {/* Category List */}
       <div className="category-filter">
