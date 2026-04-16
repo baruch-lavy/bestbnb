@@ -16,6 +16,7 @@ import { AppHeader } from './cmps/AppHeader'
 import { AppFooter } from './cmps/AppFooter'
 import { FloatingMap } from './cmps/FloatingMap'
 import { UserMsg } from './cmps/UserMsg.jsx'
+import { AiSearchButton } from './cmps/AiSearchButton'
 import { BookOrder } from './pages/BookOrder.jsx'
 import { Dashboard } from './pages/Dashboard.jsx'
 import { SearchResults } from './pages/SearchResults.jsx';
@@ -28,6 +29,7 @@ export function RootCmp() {
         <div className="main-container">
             <AppHeader className="app" />
             <UserMsg />
+            <AiSearchButton />
 
             <main>
                 <Routes>

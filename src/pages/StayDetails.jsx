@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
-import { loadStay } from '../store/actions/stay.actions'
+import { loadStay, clearStay } from '../store/actions/stay.actions'
 import { StayAmenities } from '../cmps/StayAmenities.jsx'
 import { ReviewList } from '../cmps/ReviewList.jsx'
 import { Map } from '../cmps/Map.jsx'
@@ -36,6 +36,7 @@ export function StayDetails() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
+    clearStay()
     loadStay(stayId)
   }, [stayId])
 

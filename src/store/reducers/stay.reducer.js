@@ -1,5 +1,6 @@
 export const SET_STAYS = "SET_STAYS"
 export const SET_STAY = "SET_STAY"
+export const CLEAR_STAY = "CLEAR_STAY"
 export const REMOVE_STAY = "REMOVE_STAY"
 export const ADD_STAY = "ADD_STAY"
 export const UPDATE_STAY = "UPDATE_STAY"
@@ -47,6 +48,9 @@ export function stayReducer(state = initialState, action) {
       break
     case SET_STAY:
       newState = { ...state, stay: action.stay }
+      break
+    case CLEAR_STAY:
+      newState = { ...state, stay: null }
       break
     case REMOVE_STAY:
       const lastRemovedStay = state.stays.find(
