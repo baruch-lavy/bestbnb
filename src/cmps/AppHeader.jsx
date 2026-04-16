@@ -201,8 +201,9 @@ export const AppHeader = () => {
                     </div>
                   )
                 ) : (
-                  <img src="/img/stays/user-guest.jpg" className="user-icon" />
-                )}
+                    <div className="user-icon user-initial-icon">
+                      B
+                    </div>                )}
               </div>
             </div>
 
