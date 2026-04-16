@@ -1,43 +1,83 @@
 .user-msg {
     position: fixed;
-    top: 300px;
-    right: 20px;
+    bottom: 32px;
+    right: 24px;
 
     display: flex;
     align-items: center;
+    gap: 12px;
 
-    padding: .2em;
-    padding-inline: 20px;
-    background-color: grey;
-    border-radius: 0.5rem;
+    min-width: 280px;
+    max-width: 360px;
+    padding: 14px 16px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.14), 0 1px 4px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid #aaa;
 
-    color: white;
-    font-size: .9em;
+    color: #222;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.4;
 
     opacity: 0;
-    translate: 150%;
-    transition: 600ms;
+    translate: 0 80px;
+    transition: opacity 400ms ease, translate 400ms ease;
 
-    z-index: 20;
+    z-index: 9999;
+
+    .user-msg-icon {
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .user-msg-text {
+        flex: 1;
+    }
+
+    button {
+        flex-shrink: 0;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        color: #717171;
+        font-size: 16px;
+        line-height: 1;
+        padding: 2px 4px;
+        border-radius: 4px;
+        transition: color 200ms;
+
+        &:hover {
+            color: #222;
+        }
+    }
 }
 
 .user-msg.visible {
     opacity: 1;
-    translate: 0;
-}
-
-.user-msg button {
-    background-color: $gray1;
-    padding: 1px 6px;
-    border: 0;
-    border-radius: 50%;
-    color: $gray4;
+    translate: 0 0;
 }
 
 .user-msg.success {
-    background-color: rgba(54, 167, 78, 0.815);
+    border-left-color: #00a699;
+
+    .user-msg-icon {
+        background-color: #00a699;
+    }
 }
 
 .user-msg.error {
-    background-color: rgb(216, 59, 59);
+    border-left-color: #ff385c;
+
+    .user-msg-icon {
+        background-color: #ff385c;
+    }
 }

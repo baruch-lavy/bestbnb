@@ -1,24 +1,26 @@
 // Calendar.js
-import React, { useState , useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import DatePicker from 'react-datepicker'
 import { DayPicker } from 'react-day-picker'
-import 'react-datepicker/dist/react-datepicker.css'
+import { setSearchData } from '../store/actions/stay.actions'
 import 'react-day-picker/style.css'
 
 export function Calendar({ stay }) {
 
   const searchData = useSelector((state) => state.search)
-  const [selectedRange, setSelectedRange] = useState({ from: searchData.startDate, to: searchData.endDate })
-  const [startDate, setStartDate] = useState(new Date(searchData.startDate)) 
-  const [endDate, setEndDate] = useState(new Date(searchData.endDate)) 
+  const [selectedRange, setSelectedRange] = useState({
+    from: searchData.startDate ? new Date(searchData.startDate) : undefined,
+    to: searchData.endDate ? new Date(searchData.endDate) : undefined,
+  })
 
-  function handleDayClick(date) {
-    if (!startDate || endDate) {
-      setStartDate(date)
-      setEndDate(null)
-    } else if (startDate && !endDate) {
-      setEndDate(date)
+  function handleSelect(range) {
+    setSelectedRange(range || { from: undefined, to: undefined })
+    if (range?.from && range?.to) {
+      setSearchData({
+        ...searchData,
+        startDate: range.from.toString(),
+        endDate: range.to.toString(),
+      })
     }
   }
 
@@ -28,7 +30,6 @@ export function Calendar({ stay }) {
   const stayLength = timeDifference ? Math.ceil(timeDifference / (1000 * 3600 * 24)) : ''
 
   function formatDate(date) {
-    // Ensure the date is a valid Date object before calling toLocaleDateString
     if (date instanceof Date && !isNaN(date)) {
       return date.toLocaleDateString('en-US', {
         year: 'numeric',
@@ -37,10 +38,6 @@ export function Calendar({ stay }) {
       })
     }
   }
-
-  useEffect(() => {
-  }, [startDate, endDate])
-
 
   return (
     <div className="details-calendar-container">
@@ -56,7 +53,7 @@ export function Calendar({ stay }) {
           defaultMonth={selectedRange.from}
           numberOfMonths={2}
           showOutsideDays
-          onDayClick={handleDayClick}/>
+          onSelect={handleSelect}/>
       </div>
     </div>
   )

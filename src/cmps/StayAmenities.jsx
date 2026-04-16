@@ -1,15 +1,18 @@
+import { useState, useMemo } from 'react'
 import { gAmenities } from '../services/amenities.service'
+import { AmenitiesModal } from './AmenitiesModal.jsx'
 
 export function StayAmenities({ amenities }) {
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const shuffleArray = (array) => {
         return array.sort(() => Math.random() - 0.5)
     }
 
-    const shuffledAmenities = [...gAmenities]
-    shuffleArray(shuffledAmenities)
-
-    const selectedAmenities = shuffledAmenities.slice(0, amenities.length) 
+    const selectedAmenities = useMemo(() => {
+        const shuffled = [...gAmenities].sort(() => Math.random() - 0.5)
+        return shuffled.slice(0, amenities.length)
+    }, [amenities.length])
 
     return (
         <article className="amenities">
@@ -27,7 +30,14 @@ export function StayAmenities({ amenities }) {
                     )
                 }
             </ul>
-            <button>Show all {amenities.length} {amenities.length > 1 ? 'amenities' : 'amenity'}</button>
+            <button onClick={() => setIsModalOpen(true)}>
+                Show all {amenities.length} {amenities.length > 1 ? 'amenities' : 'amenity'}
+            </button>
+            <AmenitiesModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                amenities={selectedAmenities}
+            />
         </article>
     )
 }

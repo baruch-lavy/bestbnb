@@ -350,6 +350,19 @@ body {
   height: 32px;
 }
 
+.user-initial-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #222;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
 .header.dashboard-page {
   position: relative !important;
   grid-column: 1 / -1 !important;

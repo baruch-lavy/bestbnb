@@ -1,13 +1,22 @@
 
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
+import { DayPicker } from 'react-day-picker'
 import { setSearchData, loadStays } from "../store/actions/stay.actions.js"
+import 'react-day-picker/style.css'
 
 export function StayOrder({ stay }) {
     const location = useLocation() 
     const searchData = useSelector((state) => state.search)
     const [openDropdown, setOpenDropdown] = useState(null)
+    const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
+    const [selectedRange, setSelectedRange] = useState({
+        from: searchData.startDate ? new Date(searchData.startDate) : undefined,
+        to: searchData.endDate ? new Date(searchData.endDate) : undefined,
+    })
+    const datePickerModalRef = useRef(null)
+    const guestDropdownContainerRef = useRef(null)
 
     const dropdownRef = useRef(null)
     const datePickerRef = useRef(null)
@@ -15,8 +24,57 @@ export function StayOrder({ stay }) {
     const cleanFee = 0.095
     const airbnbFee = 0.13
 
+    useEffect(() => {
+        function handleClickOutside(e) {
+            if (datePickerModalRef.current && !datePickerModalRef.current.contains(e.target)) {
+                setIsDatePickerOpen(false)
+            }
+        }
+        if (isDatePickerOpen) {
+            document.addEventListener('mousedown', handleClickOutside)
+        }
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [isDatePickerOpen])
+
+    useEffect(() => {
+        function handleGuestClickOutside(e) {
+            if (guestDropdownContainerRef.current && !guestDropdownContainerRef.current.contains(e.target)) {
+                setOpenDropdown(null)
+            }
+        }
+        if (openDropdown === 'who') {
+            document.addEventListener('mousedown', handleGuestClickOutside)
+        }
+        return () => document.removeEventListener('mousedown', handleGuestClickOutside)
+    }, [openDropdown])
+
+    function handleDateSelect(range) {
+        const newRange = range || { from: undefined, to: undefined }
+        setSelectedRange(newRange)
+        if (newRange.from && newRange.to) {
+            setSearchData({
+                ...searchData,
+                startDate: newRange.from.toString(),
+                endDate: newRange.to.toString(),
+            })
+            setIsDatePickerOpen(false)
+        }
+    }
+
     const handleDropdownOpen = (dropdown) => {
         setOpenDropdown((prev) => (prev === dropdown ? null : dropdown))
+    }
+
+    function handleGuestChange(key, delta) {
+        const current = searchData.guests?.[key] || 0
+        const next = Math.max(0, current + delta)
+        setSearchData({
+            ...searchData,
+            guests: {
+                ...searchData.guests,
+                [key]: next,
+            },
+        })
     }
 
     function handleMouseMove(e) {
@@ -39,8 +97,8 @@ export function StayOrder({ stay }) {
                 </h2>
 
                 {/* Check-in & Check-out Dates */}
-                <div className="form-order">
-                    <div className="order-dates-in">
+                <div className="form-order" ref={datePickerModalRef}>
+                    <div className="order-dates-in" onClick={() => setIsDatePickerOpen(true)}>
                         <label className="order-dates-label">CHECK-IN</label>
                         <input
                             type="text"
@@ -54,8 +112,7 @@ export function StayOrder({ stay }) {
                         />
                     </div>
 
-
-                    <div className="order-dates-out">
+                    <div className="order-dates-out" onClick={() => setIsDatePickerOpen(true)}>
                         <label className="order-dates-label">CHECK-OUT</label>
                         <input
                             type="text"
@@ -69,8 +126,22 @@ export function StayOrder({ stay }) {
                         />
                     </div>
 
+                    {isDatePickerOpen && (
+                        <div className="order-date-picker-modal">
+                            <DayPicker
+                                mode="range"
+                                selected={selectedRange}
+                                onSelect={handleDateSelect}
+                                defaultMonth={selectedRange.from}
+                                numberOfMonths={2}
+                                showOutsideDays
+                                min={1}
+                            />
+                        </div>
+                    )}
+
                     {/* Guest Selection */}
-                    <div className="order-guests">
+                    <div className="order-guests" ref={guestDropdownContainerRef}>
                         <label className="order-guests-label">GUESTS</label>
                         <input
                             placeholder="1 guest"
@@ -84,7 +155,8 @@ export function StayOrder({ stay }) {
                             onClick={() => handleDropdownOpen("who")}
                         />
                         {openDropdown === "who" && (
-                            <div className="guest-dropdown">
+                            <div className="guest-dropdown order-guest-dropdown">
+                                <button className="guest-dropdown-close" onClick={() => setOpenDropdown(null)}>✕</button>
                                 {["adults", "children", "infants", "pets"].map((key) => (
                                     <div className="guest-row" key={key}>
                                         <div className="guest-info">

@@ -38,6 +38,7 @@
             border: 0.2px solid #2222228a;
             border-radius: rem(8px);
             margin-bottom: rem(16px);
+            position: relative;
 
 
             input,
@@ -55,6 +56,12 @@
                 border-right: 0.2px solid #2222228a;
                 display: flex;
                 flex-direction: column;
+                cursor: pointer;
+
+                &:hover {
+                    border-radius: rem(8px) 0 0 0;
+                    background-color: #f7f7f7;
+                }
             }
 
             .order-dates-out {
@@ -63,6 +70,54 @@
                 padding: rem(7px) rem(12px);
                 display: flex;
                 flex-direction: column;
+                cursor: pointer;
+
+                &:hover {
+                    border-radius: 0 rem(8px) 0 0;
+                    background-color: #f7f7f7;
+                }
+            }
+
+            .order-date-picker-modal {
+                position: absolute;
+                top: calc(100% + 8px);
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 100;
+                background: white;
+                border-radius: rem(16px);
+                box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+                padding: rem(16px);
+
+                .rdp {
+                    --rdp-accent-color: #ff385c;
+                    --rdp-accent-background-color: #fff0f3;
+                }
+            }
+
+            .order-guest-dropdown {
+                position: absolute;
+                top: calc(100% + 4px);
+                left: 0;
+                right: 0;
+                z-index: 100;
+
+                .guest-dropdown-close {
+                    position: absolute;
+                    top: rem(12px);
+                    right: rem(12px);
+                    background: none;
+                    border: none;
+                    font-size: rem(14px);
+                    color: #717171;
+                    cursor: pointer;
+                    line-height: 1;
+                    padding: rem(4px);
+
+                    &:hover {
+                        color: #222;
+                    }
+                }
             }
 
             .order-guests {
@@ -72,6 +127,7 @@
                 padding: rem(7px) rem(12px);
                 display: flex;
                 flex-direction: column;
+                position: relative;
 
                 input {
                     width: auto;

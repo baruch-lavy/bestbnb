@@ -1,9 +1,12 @@
+import { useState } from 'react'
 import { userService } from '../services/user'
 
 import { ReviewPreview } from './ReviewPreview.jsx'
+import { ReviewAllModal } from './ReviewAllModal.jsx'
 
 export function ReviewList({ reviews, onRemoveReview }) {
-    
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
     function shouldShowActionBtns(review) {
         const user = userService.getLoggedinUser()
         
@@ -23,6 +26,13 @@ export function ReviewList({ reviews, onRemoveReview }) {
                 </li>)
             }
         </ul>
-        <button className="reviw-all-btn">Show all {reviews.length} reviews</button>
+        <button className="reviw-all-btn" onClick={() => setIsModalOpen(true)}>
+            Show all {reviews.length} reviews
+        </button>
+        <ReviewAllModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            reviews={reviews}
+        />
     </section>
 }

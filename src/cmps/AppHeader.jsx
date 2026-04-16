@@ -187,7 +187,17 @@ export const AppHeader = () => {
 
             <div className="user-info">
               <div className="user-icon-container">
-                <img src="/img/stays/user-guest.jpg" className="user-icon" />
+                {user ? (
+                  user.imgUrl ? (
+                    <img src={user.imgUrl} className="user-icon" alt={user.fullname} />
+                  ) : (
+                    <div className="user-icon user-initial-icon">
+                      {user.fullname.charAt(0).toUpperCase()}
+                    </div>
+                  )
+                ) : (
+                  <img src="/img/stays/user-guest.jpg" className="user-icon" />
+                )}
               </div>
             </div>
 

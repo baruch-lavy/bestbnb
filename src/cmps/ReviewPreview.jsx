@@ -26,15 +26,13 @@ export function ReviewPreview({ review }) {
     const isLongText = review.txt.length > length
 
     return <article className="review-preview">
-        <div className="review-by flex">
-            <Link to={`/user/${by._id}`}>
-                <img src={by.imgUrl} alt=""
-                /></Link>
+        <Link to={`/user/${by._id}`} className="review-by flex">
+            <img src={by.imgUrl} alt="" />
             <div className="reviewer-details">
                 <h5>{by.fullname}</h5>
                 <h6>{yearsOnBestbnbRef.current} years on Bestbnb</h6>
             </div>
-        </div>
+        </Link>
         <div className="review-contant flex">
             <div className="review-rate">
                 ★★★★★ · <span>{randomDateRef.current}</span> · Stayed a few nights

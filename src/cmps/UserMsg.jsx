@@ -35,6 +35,8 @@ export function UserMsg() {
 	function msgClass() {
 		return msg ? 'visible' : ''
 	}
+	const icon = msg?.type === 'success' ? '✓' : '✕'
+
 	return (
 		<>
 			{statusModal ? (
@@ -44,8 +46,9 @@ export function UserMsg() {
 				/>
 			) : (
 				<section className={`user-msg ${msg?.type} ${msgClass()}`}>
-					<button onClick={closeMsg}>x</button>
-					{msg?.txt}
+					{msg && <span className="user-msg-icon">{icon}</span>}
+					<span className="user-msg-text">{msg?.txt}</span>
+					<button onClick={closeMsg}>✕</button>
 				</section>
 			)}
 		</>)
