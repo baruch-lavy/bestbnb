@@ -4,11 +4,20 @@ import { httpService } from '../services/http.service'
 import { loadStays, setSearchData } from '../store/actions/stay.actions'
 import { getDefaultFilter } from '../services/stay'
 
+const LIMIT_KEY = 'ai_limit_reset'
+
+function isLimitActive() {
+    const resetAt = localStorage.getItem(LIMIT_KEY)
+    if (!resetAt) return false
+    return new Date(resetAt) > new Date()
+}
+
 export function AiSearchButton() {
     const [isOpen, setIsOpen] = useState(false)
     const [query, setQuery] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null)
+    const [limited, setLimited] = useState(isLimitActive)
     const panelRef = useRef(null)
     const btnRef = useRef(null)
     const navigate = useNavigate()
@@ -29,7 +38,7 @@ export function AiSearchButton() {
     }, [])
 
     async function onSubmit() {
-        if (!query.trim() || isLoading) return
+        if (!query.trim() || isLoading || limited) return
         setIsLoading(true)
         setError(null)
         try {
@@ -64,7 +73,14 @@ export function AiSearchButton() {
             setQuery('')
             navigate('/', { state: { aiFilter: filter } })
         } catch (err) {
-            setError('משהו השתבש, נסה שוב')
+            if (err?.response?.status === 429) {
+                const resetAt = err.response.data?.resetAt
+                if (resetAt) localStorage.setItem(LIMIT_KEY, resetAt)
+                setLimited(true)
+                setError('נגמרו לך הקרדיטים, נסה שוב מחר')
+            } else {
+                setError('משהו השתבש, נסה שוב')
+            }
         } finally {
             setIsLoading(false)
         }
@@ -103,32 +119,37 @@ export function AiSearchButton() {
                             כתוב כאן מה אתה מחפש בדירה שלך ואנחנו כבר נמצא לך את הדירה המתאימה
                         </p>
                     </div>
-                    <div className="ai-panel-body">
-                        <textarea
-                            className="ai-search-input"
-                            value={query}
-                            onChange={e => setQuery(e.target.value)}
-                            onKeyDown={onKeyDown}
-                            placeholder="דירה בלב מנהטן עם 2 חדרים ו4 מיטות עבור 2 מבוגרים וכלב מ-20/8 עד 24/8"
-                            rows={3}
-                            dir="rtl"
-                            autoFocus
-                            disabled={isLoading}
-                        />
-                        <button
-                            className={`ai-search-submit${isLoading ? ' loading' : ''}`}
-                            disabled={!query.trim() || isLoading}
-                            onClick={onSubmit}
-                        >
-                            {isLoading
-                                ? <span className="ai-spinner" />
-                                : <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
-                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                  </svg>
-                            }
-                        </button>
-                    </div>
-                    {error && <p className="ai-panel-error">{error}</p>}
+                    {limited
+                        ? <p className="ai-panel-error ai-panel-limit">נגמרו לך הקרדיטים, נסה שוב מחר 🙏</p>
+                        : <>
+                            <div className="ai-panel-body">
+                                <textarea
+                                    className="ai-search-input"
+                                    value={query}
+                                    onChange={e => setQuery(e.target.value)}
+                                    onKeyDown={onKeyDown}
+                                    placeholder="דירה בלב מנהטן עם 2 חדרים ו4 מיטות עבור 2 מבוגרים וכלב מ-20/8 עד 24/8"
+                                    rows={3}
+                                    dir="rtl"
+                                    autoFocus
+                                    disabled={isLoading}
+                                />
+                                <button
+                                    className={`ai-search-submit${isLoading ? ' loading' : ''}`}
+                                    disabled={!query.trim() || isLoading}
+                                    onClick={onSubmit}
+                                >
+                                    {isLoading
+                                        ? <span className="ai-spinner" />
+                                        : <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+                                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                          </svg>
+                                    }
+                                </button>
+                            </div>
+                            {error && <p className="ai-panel-error">{error}</p>}
+                        </>
+                    }
                 </div>
             )}
         </div>

@@ -7,5 +7,9 @@
     overflow: visible; 
 }
 
+.details-page .full-search-bar:not(.hidden) ~ main {
+    padding-top: 80px;
+}
+
 
 

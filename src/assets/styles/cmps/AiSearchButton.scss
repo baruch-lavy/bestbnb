@@ -168,6 +168,14 @@
         color: $clr1;
         text-align: right;
         direction: rtl;
+
+        &.ai-panel-limit {
+            padding: 16px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            direction: rtl;
+        }
     }
 }
 

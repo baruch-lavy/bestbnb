@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSearchData, loadStays } from "../store/actions/stay.actions.js";
 import { SearchBar } from "./SearchBar.jsx";
 import { StickySearchBar } from "./StickySearchBar.jsx";
-import { Link, NavLink, useLocation, useSearchParams } from "react-router-dom"; // ✅ Import useLocation
+import { Link, NavLink, useLocation, useSearchParams, useNavigate } from "react-router-dom"; // ✅ Import useLocation
 import { UserModal } from './UserModal';
 import { FaAirbnb } from 'react-icons/fa'
 
@@ -13,6 +13,7 @@ export const AppHeader = () => {
   const location = useLocation(); // ✅ Get current page URL
   const [searchParams] = useSearchParams();
   const isDetailsPage = /^\/stay\/[^/]+$/.test(location.pathname); // ✅ Match /stay/:stayId
+  const isReviewerPage = /^\/reviewer\/[^/]+$/.test(location.pathname);
   const isDashboardPage = location.pathname === '/dashboard'; // Add dashboard page check
   const isTripsPage = location.pathname === '/trips';
   const isGalleryPage = /^\/stay\/gallery\/[^/]+$/.test(location.pathname);
@@ -22,6 +23,7 @@ export const AppHeader = () => {
   const [forceExpand, setForceExpand] = useState(false); // ✅ Track if manually expanded
   const [openDropdown, setOpenDropdown] = useState(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const searchData = useSelector((state) => state.search);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const user = useSelector((state) => state.userModule.user);
@@ -99,13 +101,16 @@ export const AppHeader = () => {
 
     loadStays(filterBy);
 
-    const newUrl = `${window.location.origin}${window.location.pathname}?${new URLSearchParams(filterBy).toString()}`;
-
-    window.history.pushState({}, "", newUrl);
-
     // Close any open dropdowns
     setForceExpand(false);
     setShowSticky(true);
+
+    if (isDetailsPage || isReviewerPage) {
+      navigate(`/?${new URLSearchParams(filterBy).toString()}`);
+    } else {
+      const newUrl = `${window.location.origin}${window.location.pathname}?${new URLSearchParams(filterBy).toString()}`;
+      window.history.pushState({}, "", newUrl);
+    }
   };
 
 
