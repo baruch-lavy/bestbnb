@@ -26,7 +26,7 @@ export function ReviewPreview({ review }) {
     const isLongText = review.txt.length > length
 
     return <article className="review-preview">
-        <Link to={`/user/${by._id}`} className="review-by flex">
+        <Link to={`/reviewer/${by._id}`} className="review-by flex">
             <img src={by.imgUrl} alt="" />
             <div className="reviewer-details">
                 <h5>{by.fullname}</h5>

@@ -1,0 +1,264 @@
+.reviewer-profile {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+    margin-top: 80px;
+
+    .reviewer-profile-layout {
+        display: flex;
+        gap: 3rem;
+        align-items: flex-start;
+
+        @include for-mobile-layout {
+            flex-direction: column;
+        }
+    }
+
+    // LEFT CARD
+    .reviewer-card {
+        flex-shrink: 0;
+        width: 270px;
+        border: 1px solid #ddd;
+        border-radius: 16px;
+        padding: 2rem 1.5rem;
+        text-align: center;
+        position: sticky;
+        top: 100px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+        @include for-mobile-layout {
+            width: 100%;
+            position: static;
+        }
+
+        .reviewer-avatar-wrap {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .reviewer-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .superhost-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #222;
+            margin-top: 0.5rem;
+
+            img {
+                width: 14px;
+                height: 14px;
+            }
+        }
+
+        .reviewer-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .reviewer-about {
+            font-size: 0.875rem;
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .reviewer-stats {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+            margin-bottom: 1rem;
+
+            .stat {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                strong {
+                    font-size: 1.25rem;
+                    font-weight: 700;
+                }
+
+                span {
+                    font-size: 0.75rem;
+                    color: #777;
+                }
+            }
+        }
+
+        .reviewer-response {
+            font-size: 0.8rem;
+            color: #666;
+        }
+    }
+
+    // RIGHT CONTENT
+    .reviewer-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .reviewer-section {
+        margin-bottom: 2.5rem;
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.75rem;
+
+            .section-count {
+                background: #f0f0f0;
+                color: #444;
+                font-size: 0.8rem;
+                font-weight: 600;
+                padding: 2px 8px;
+                border-radius: 20px;
+            }
+        }
+    }
+
+    // HOSTED STAYS GRID
+    .hosted-stays-list {
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1rem;
+        padding: 0;
+
+        .hosted-stay-card {
+            display: flex;
+            flex-direction: column;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            text-decoration: none;
+            color: inherit;
+            transition: box-shadow 0.2s;
+
+            &:hover {
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+            }
+
+            .hosted-stay-img {
+                width: 100%;
+                height: 150px;
+                object-fit: cover;
+            }
+
+            .hosted-stay-info {
+                padding: 0.75rem;
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+
+                .hosted-stay-type {
+                    font-size: 0.72rem;
+                    color: #888;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+
+                .hosted-stay-name {
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .hosted-stay-loc {
+                    font-size: 0.8rem;
+                    color: #666;
+                }
+
+                .hosted-stay-price {
+                    font-size: 0.85rem;
+                    font-weight: 600;
+                    margin-top: 4px;
+                }
+            }
+        }
+    }
+
+    // REVIEWS LIST
+    .reviewer-reviews-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0;
+
+        .reviewer-review-card {
+            display: flex;
+            gap: 1rem;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: box-shadow 0.2s;
+
+            &:hover {
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            }
+
+            .reviewer-review-stay-img {
+                width: 110px;
+                height: 90px;
+                object-fit: cover;
+                flex-shrink: 0;
+            }
+
+            .reviewer-review-info {
+                padding: 0.75rem;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+
+                .reviewer-review-stay-name {
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                }
+
+                .reviewer-review-txt {
+                    font-size: 0.85rem;
+                    color: #555;
+                    line-height: 1.4;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+
+    .reviewer-empty {
+        color: #888;
+        font-size: 0.95rem;
+    }
+
+    .reviewer-profile-error {
+        text-align: center;
+        padding: 4rem;
+        color: #666;
+    }
+}

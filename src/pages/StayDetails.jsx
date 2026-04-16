@@ -108,13 +108,13 @@ export function StayDetails() {
             <h4 className="rate">★ {stayRateRef.current} · {stay.reviews.length} {(stay.reviews.length > 1) ? 'reviews' : 'review'}</h4>
           </div>
 
-          <div className="host-short-info">
-            <img src={stay.host.pictureUrl} alt="Host" className="host-avatar" style={{ borderRadius: '50%', width: '2rem', height: '2rem', objectFit: 'cover' }} />
+          <Link to={`/reviewer/${stay.host._id}`} className="host-short-info">
+            <img src={stay.host.pictureUrl || stay.host.imgUrl} alt="Host" className="host-avatar" style={{ borderRadius: '50%', width: '2rem', height: '2rem', objectFit: 'cover' }} />
             <div className="host-short-details">
               <h4>Hosted by {stay.host.fullname}</h4>
               <span className="superhost">{stay.host.isSuperhost && 'Superhost ·'}  {yearsOnBestbnbRef.current} years hosting</span>
             </div>
-          </div>
+          </Link>
 
           <article className="stay-summary">
             <p>{stay.summary}</p>

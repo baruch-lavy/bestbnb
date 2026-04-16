@@ -10,6 +10,7 @@ import { AdminIndex } from './pages/AdminIndex.jsx'
 
 import { StayDetails } from './pages/StayDetails'
 import { UserDetails } from './pages/UserDetails'
+import { ReviewerProfile } from './pages/ReviewerProfile'
 
 import { AppHeader } from './cmps/AppHeader'
 import { AppFooter } from './cmps/AppFooter'
@@ -38,6 +39,7 @@ export function RootCmp() {
                     </Route>
                     <Route path="stay/:stayId" element={<StayDetails />} />
                     <Route path="user/:id" element={<UserDetails />} />
+                    <Route path="reviewer/:personId" element={<ReviewerProfile />} />
                     <Route path="/stay/book/:stayId" element={<BookOrder />} />
                     <Route path="/stay/gallery/:stayId" element={<StayGallery />} />
                     <Route path="review" element={<ReviewIndex />} />
