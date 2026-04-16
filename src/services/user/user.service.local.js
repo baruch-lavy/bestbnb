@@ -46,7 +46,7 @@ async function update({ _id, score }) {
 }
 
 async function login(userCred) {
-    console.log('userCred',userCred)
+    // console.log('userCred',userCred)
         const users = await storageService.query('user')
     const user = users.find(user => user.username === userCred.username)
 
