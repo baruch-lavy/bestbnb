@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { FaBars, FaUserCircle, FaGlobe } from "react-icons/fa";
+import { FaBars, FaUserCircle, FaGlobe, FaSearch } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { setSearchData, loadStays } from "../store/actions/stay.actions.js";
 import { SearchBar } from "./SearchBar.jsx";
 import { StickySearchBar } from "./StickySearchBar.jsx";
+import { MobileSearchModal } from "./MobileSearchModal.jsx";
 import { Link, NavLink, useLocation, useSearchParams, useNavigate } from "react-router-dom"; // ✅ Import useLocation
 import { UserModal } from './UserModal';
 import { FaAirbnb } from 'react-icons/fa'
@@ -24,6 +25,7 @@ export const AppHeader = () => {
   const [showSticky, setShowSticky] = useState(isDetailsPage);
   const [forceExpand, setForceExpand] = useState(false); // ✅ Track if manually expanded
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const searchData = useSelector((state) => state.search);
@@ -172,6 +174,17 @@ export const AppHeader = () => {
           </div>
         )}
 
+        {/* Mobile-only search pill */}
+        {!isDashboardPage && !isTripsPage && !isEditPage && (
+          <div
+            className="mobile-search-pill"
+            onClick={() => setIsMobileSearchOpen(true)}
+          >
+            <FaSearch className="pill-search-icon" />
+            <span>Start your search</span>
+          </div>
+        )}
+
         <div className="right-section">
           <span className="host" onClick={() => {
             if (!user) { showErrorMsg('Please login to list your home'); return }
@@ -230,6 +243,17 @@ export const AppHeader = () => {
             handleSearch={handleSearch}
           />
         </div>
+      )}
+
+      {/* Mobile full-screen search modal */}
+      {isMobileSearchOpen && (
+        <MobileSearchModal
+          onClose={() => setIsMobileSearchOpen(false)}
+          onSearch={() => {
+            handleSearch();
+            setIsMobileSearchOpen(false);
+          }}
+        />
       )}
     </>
   )

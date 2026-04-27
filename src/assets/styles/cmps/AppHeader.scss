@@ -305,20 +305,9 @@ body {
       }
     }
 
+    // Hide desktop sticky search wrapper on mobile
     .sticky-search-wrapper {
-      order: 3;
-      width: 100%;
-      margin-top: 8px;
-      position: static;
-      transform: none;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      
-      .sticky-search-bar {
-        width: 100%;
-        max-width: 100%;
-      }
+      display: none !important;
     }
 
     .search-container {
@@ -332,6 +321,18 @@ body {
       width: 100%;
       justify-content: space-between;
     }
+
+    // Show mobile search pill on mobile
+    .mobile-search-pill {
+      display: flex !important;
+      order: 3;
+      margin: 8px auto 4px;
+    }
+  }
+
+  // Hide desktop full-search-bar on mobile
+  .full-search-bar {
+    display: none !important;
   }
 }
 
